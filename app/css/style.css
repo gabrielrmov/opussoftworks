@@ -50,6 +50,20 @@
   --animate-aurora-1: aurora-1 18s ease-in-out infinite;
   --animate-aurora-2: aurora-2 22s ease-in-out infinite;
   --animate-aurora-3: aurora-3 26s ease-in-out infinite;
+  --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1
+    var(--delay, 0ms);
+
+  @keyframes cell-ripple {
+    0% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0.4;
+    }
+  }
 
   @keyframes aurora-1 {
     0%,

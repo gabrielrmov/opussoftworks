@@ -32,9 +32,36 @@ const nacelle = localFont({
 });
 
 export const metadata = {
-  title: "ELEVION — Tráfego, gestão e sites para empresas",
+  title: {
+    default: "ELEVION — Tráfego, gestão e sites para empresas",
+    template: "%s · ELEVION",
+  },
   description:
     "A ELEVION une tráfego pago, sistemas de gestão e sites profissionais para empresas que querem crescer com processo, responsabilidade e prazo cumprido.",
+  keywords: [
+    "tráfego pago",
+    "gestão empresarial",
+    "sites para empresas",
+    "marketing digital",
+    "Goiânia",
+  ],
+  openGraph: {
+    title: "ELEVION — Tráfego, gestão e sites para empresas",
+    description:
+      "Tráfego pago, sistemas de gestão e sites profissionais em um único processo, com entrega, responsabilidade e assertividade.",
+    locale: "pt_BR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "ELEVION — Tráfego, gestão e sites para empresas",
+    description:
+      "Tráfego pago, sistemas de gestão e sites profissionais em um único processo.",
+  },
+};
+
+export const viewport = {
+  themeColor: "#030712",
 };
 
 export default function RootLayout({

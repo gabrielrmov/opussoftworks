@@ -57,6 +57,14 @@ export default function Footer() {
               <li>
                 <a
                   className="text-indigo-200/65 transition hover:text-indigo-500"
+                  href="#sobre"
+                >
+                  Sobre
+                </a>
+              </li>
+              <li>
+                <a
+                  className="text-indigo-200/65 transition hover:text-indigo-500"
                   href="#principios"
                 >
                   Princípios
@@ -68,6 +76,14 @@ export default function Footer() {
                   href="#como-trabalhamos"
                 >
                   Como trabalhamos
+                </a>
+              </li>
+              <li>
+                <a
+                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  href="#faq"
+                >
+                  FAQ
                 </a>
               </li>
               <li>

@@ -63,8 +63,11 @@ export default function About() {
               </p>
               <div className="space-y-4">
                 {pillars.map((pillar) => (
-                  <div key={pillar.label} className="flex items-center gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400">
+                  <div
+                    key={pillar.label}
+                    className="group flex items-center gap-4 rounded-xl p-2 transition-colors duration-300 hover:bg-indigo-500/5"
+                  >
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400 transition-all duration-300 group-hover:scale-110 group-hover:bg-indigo-500/20 group-hover:text-indigo-300">
                       <svg
                         width="22"
                         height="22"
@@ -78,7 +81,7 @@ export default function About() {
                         {pillar.icon}
                       </svg>
                     </div>
-                    <span className="font-nacelle font-semibold text-gray-100">
+                    <span className="font-nacelle font-semibold text-gray-100 transition-colors duration-300 group-hover:text-indigo-200">
                       {pillar.label}
                     </span>
                   </div>

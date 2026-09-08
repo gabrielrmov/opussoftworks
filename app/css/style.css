@@ -47,6 +47,37 @@
 
   --animate-shine: shine 5s ease-in-out 500ms infinite;
   --animate-gradient: gradient 6s linear infinite;
+  --animate-aurora-1: aurora-1 18s ease-in-out infinite;
+  --animate-aurora-2: aurora-2 22s ease-in-out infinite;
+  --animate-aurora-3: aurora-3 26s ease-in-out infinite;
+
+  @keyframes aurora-1 {
+    0%,
+    100% {
+      transform: translate(-70%, 0) scale(1);
+    }
+    50% {
+      transform: translate(-55%, 8%) scale(1.15);
+    }
+  }
+  @keyframes aurora-2 {
+    0%,
+    100% {
+      transform: translate(-15%, 0) scale(1);
+    }
+    50% {
+      transform: translate(-30%, -8%) scale(1.1);
+    }
+  }
+  @keyframes aurora-3 {
+    0%,
+    100% {
+      transform: translate(-115%, 0) scale(1);
+    }
+    50% {
+      transform: translate(-95%, 6%) scale(1.2);
+    }
+  }
 
   @keyframes shine {
     0% {

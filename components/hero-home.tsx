@@ -1,6 +1,26 @@
+"use client";
+
+import { useRef } from "react";
+import HeroBackground from "./hero-background";
+
 export default function HeroHome() {
+  const heroRef = useRef<HTMLElement>(null);
+
+  function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
+    const el = heroRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    el.style.setProperty("--mouse-x", `${x}px`);
+    el.style.setProperty("--mouse-y", `${y}px`);
+    el.style.setProperty("--mouse-x-ratio", `${x / rect.width}`);
+    el.style.setProperty("--mouse-y-ratio", `${y / rect.height}`);
+  }
+
   return (
-    <section>
+    <section ref={heroRef} onMouseMove={handleMouseMove} className="relative">
+      <HeroBackground />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Hero content */}
         <div className="py-12 md:py-20">

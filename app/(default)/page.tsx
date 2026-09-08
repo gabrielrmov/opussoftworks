@@ -4,7 +4,6 @@ export const metadata = {
     "A ELEVION une tráfego pago, sistemas de gestão e sites profissionais para empresas que querem crescer com processo, responsabilidade e prazo cumprido.",
 };
 
-import PageIllustration from "@/components/page-illustration";
 import Hero from "@/components/hero-home";
 import About from "@/components/about";
 import Services from "@/components/services";
@@ -16,7 +15,6 @@ import Cta from "@/components/cta";
 export default function Home() {
   return (
     <>
-      <PageIllustration />
       <Hero />
       <About />
       <Services />

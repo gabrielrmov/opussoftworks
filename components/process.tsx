@@ -49,8 +49,8 @@ export default function Process() {
               aria-hidden="true"
             />
             {steps.map((step, index) => (
-              <div key={step.title} className="relative text-center">
-                <div className="relative z-10 mx-auto mb-5 flex h-11 w-11 items-center justify-center rounded-full border-2 border-indigo-500 bg-gray-950 font-nacelle text-base font-semibold text-indigo-400">
+              <div key={step.title} className="group relative text-center">
+                <div className="relative z-10 mx-auto mb-5 flex h-11 w-11 items-center justify-center rounded-full border-2 border-indigo-500 bg-gray-950 font-nacelle text-base font-semibold text-indigo-400 transition-all duration-300 group-hover:scale-110 group-hover:border-indigo-400 group-hover:bg-indigo-500/10 group-hover:text-indigo-300 group-hover:shadow-[0_0_20px_-2px_rgba(99,102,241,0.7)]">
                   {index + 1}
                 </div>
                 <h3 className="mb-2 font-nacelle text-[1.0625rem] font-semibold text-gray-200">

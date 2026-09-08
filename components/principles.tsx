@@ -81,8 +81,11 @@ export default function Principles() {
           {/* Items */}
           <div className="mx-auto grid max-w-sm gap-12 sm:max-w-none sm:grid-cols-3 md:gap-x-10">
             {principles.map((principle) => (
-              <article key={principle.title}>
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400">
+              <article
+                key={principle.title}
+                className="group rounded-2xl p-2 transition-transform duration-300 hover:-translate-y-1"
+              >
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400 transition-all duration-300 group-hover:scale-110 group-hover:bg-indigo-500/20 group-hover:text-indigo-300 group-hover:shadow-[0_0_24px_-4px_rgba(99,102,241,0.6)]">
                   <svg
                     width="24"
                     height="24"

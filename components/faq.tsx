@@ -30,9 +30,12 @@ export default function Faq() {
   return (
     <section id="faq">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="border-t py-12 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-20">
+        <div className="border-t py-16 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-24">
           {/* Section header */}
-          <div className="mx-auto max-w-3xl pb-12 text-center md:pb-16">
+          <div
+            className="mx-auto max-w-3xl pb-14 text-center md:pb-20"
+            data-aos="fade-up"
+          >
             <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-gray-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-gray-200/50">
               <span className="inline-flex bg-linear-to-r from-white to-gray-400 bg-clip-text text-transparent">
                 Perguntas frequentes
@@ -44,8 +47,13 @@ export default function Faq() {
           </div>
 
           <div className="mx-auto max-w-3xl divide-y divide-gray-800 rounded-2xl border border-gray-800">
-            {faqs.map((faq) => (
-              <details key={faq.question} className="group p-5 md:p-6">
+            {faqs.map((faq, index) => (
+              <details
+                key={faq.question}
+                className="group p-5 md:p-6"
+                data-aos="fade-up"
+                data-aos-delay={index * 80}
+              >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-nacelle text-[1.0625rem] font-semibold text-gray-100 marker:content-none">
                   {faq.question}
                   <svg

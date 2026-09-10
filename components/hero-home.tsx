@@ -5,9 +5,9 @@ export default function HeroHome() {
     <section className="relative">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Hero content */}
-        <div className="py-12 md:py-20">
+        <div className="py-16 md:py-28">
           {/* Section header */}
-          <div className="pb-8 text-center md:pb-12">
+          <div className="pb-10 text-center md:pb-14">
             <div
               className="mb-5 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-indigo-300"
               data-aos="fade-up"
@@ -26,8 +26,8 @@ export default function HeroHome() {
                 data-aos="fade-up"
                 data-aos-delay={200}
               >
-                A ELEVION une tráfego pago, sistemas de gestão e sites
-                profissionais para empresas que querem crescer com processo,
+                Tráfego pago, sistemas de gestão e sites profissionais em um
+                único processo — para empresas que querem crescer com
                 responsabilidade e prazo cumprido.
               </p>
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">

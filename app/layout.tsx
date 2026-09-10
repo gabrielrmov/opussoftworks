@@ -70,7 +70,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className="scroll-smooth">
       <body
         className={`${nacelle.variable} bg-gray-950 font-inter text-base text-gray-200 antialiased`}
       >

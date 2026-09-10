@@ -46,9 +46,12 @@ export default function Services() {
   return (
     <section id="servicos">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="pb-12 md:pb-20">
+        <div className="pb-16 md:pb-24">
           {/* Section header */}
-          <div className="mx-auto max-w-3xl pb-12 text-center md:pb-20">
+          <div
+            className="mx-auto max-w-3xl pb-14 text-center md:pb-20"
+            data-aos="fade-up"
+          >
             <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-gray-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-gray-200/50">
               <span className="inline-flex bg-linear-to-r from-white to-gray-400 bg-clip-text text-transparent">
                 O que fazemos
@@ -63,8 +66,8 @@ export default function Services() {
             </p>
           </div>
           {/* Spotlight items */}
-          <Spotlight className="group mx-auto grid max-w-sm items-start gap-6 lg:max-w-none lg:grid-cols-3">
-            {services.map((service) => (
+          <Spotlight className="group mx-auto grid max-w-sm items-start gap-6 lg:max-w-none lg:grid-cols-3 lg:gap-8">
+            {services.map((service, index) => (
               <ServiceCard
                 key={service.tag}
                 tag={service.tag}
@@ -72,6 +75,8 @@ export default function Services() {
                 description={service.description}
                 icon={service.icon}
                 accent={service.accent}
+                data-aos="fade-up"
+                data-aos-delay={index * 150}
               />
             ))}
           </Spotlight>

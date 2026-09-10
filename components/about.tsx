@@ -41,15 +41,15 @@ export default function About() {
         aria-hidden="true"
       />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="border-t py-12 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-20">
-          <div className="grid gap-10 md:grid-cols-2 md:items-center md:gap-16">
-            <div>
+        <div className="border-t py-16 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-24">
+          <div className="grid gap-12 md:grid-cols-2 md:items-center md:gap-20">
+            <div data-aos="fade-right">
               <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-emerald-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-emerald-200/50">
                 <span className="inline-flex bg-linear-to-r from-emerald-500 to-emerald-200 bg-clip-text text-transparent">
                   Sobre a ELEVION
                 </span>
               </div>
-              <h2 className="mb-4 font-nacelle text-3xl font-semibold text-gray-100 md:text-4xl">
+              <h2 className="mb-5 font-nacelle text-3xl font-semibold text-gray-100 md:text-4xl">
                 Um parceiro só, em vez de três fornecedores
               </h2>
               <div className="space-y-4 text-indigo-200/65">
@@ -67,15 +67,21 @@ export default function About() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-gray-800 bg-gray-900/40 p-6 md:p-8">
-              <p className="mb-5 text-sm font-medium uppercase tracking-wide text-gray-500">
-                O que fica sob o mesmo teto
+            <div
+              className="rounded-2xl border border-gray-800 bg-gray-900/40 p-7 md:p-9"
+              data-aos="fade-left"
+              data-aos-delay={100}
+            >
+              <p className="mb-6 text-sm font-medium uppercase tracking-wide text-gray-500">
+                Tudo sob o mesmo teto
               </p>
               <div className="space-y-4">
-                {pillars.map((pillar) => (
+                {pillars.map((pillar, index) => (
                   <div
                     key={pillar.label}
-                    className="group flex items-center gap-4 rounded-xl p-2 transition-colors duration-300 hover:bg-white/5"
+                    className="group flex items-center gap-4 rounded-xl p-2 transition-all duration-300 hover:translate-x-1 hover:bg-white/5"
+                    data-aos="fade-up"
+                    data-aos-delay={150 + index * 100}
                   >
                     <div
                       className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110 ${pillar.iconBg} ${pillar.iconText}`}

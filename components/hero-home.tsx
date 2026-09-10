@@ -58,7 +58,7 @@ export default function HeroHome() {
 
           {/* Trust badges */}
           <div
-            className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 border-y border-gray-800 py-6"
+            className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 py-6"
             data-aos="fade-up"
             data-aos-delay={200}
           >

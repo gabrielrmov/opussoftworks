@@ -33,8 +33,8 @@ export default function Faq() {
         <div className="border-t py-12 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-20">
           {/* Section header */}
           <div className="mx-auto max-w-3xl pb-12 text-center md:pb-16">
-            <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-indigo-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-indigo-200/50">
-              <span className="inline-flex bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
+            <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-gray-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-gray-200/50">
+              <span className="inline-flex bg-linear-to-r from-white to-gray-400 bg-clip-text text-transparent">
                 Perguntas frequentes
               </span>
             </div>
@@ -49,7 +49,7 @@ export default function Faq() {
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-nacelle text-[1.0625rem] font-semibold text-gray-100 marker:content-none">
                   {faq.question}
                   <svg
-                    className="shrink-0 text-indigo-400 transition-transform duration-200 group-open:rotate-45"
+                    className="shrink-0 text-gray-400 transition-transform duration-200 group-open:rotate-45"
                     width="18"
                     height="18"
                     viewBox="0 0 24 24"

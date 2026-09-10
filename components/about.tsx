@@ -1,12 +1,16 @@
 const pillars = [
   {
     label: "Tráfego pago",
+    iconBg: "bg-violet-500/10 group-hover:bg-violet-500/20",
+    iconText: "text-violet-400 group-hover:text-violet-300",
     icon: (
       <path d="M3 17 L9.5 10.5 L13.5 14.5 L21 6 M15 6 L21 6 L21 12" />
     ),
   },
   {
     label: "Sistemas de gestão",
+    iconBg: "bg-emerald-500/10 group-hover:bg-emerald-500/20",
+    iconText: "text-emerald-400 group-hover:text-emerald-300",
     icon: (
       <>
         <rect x="3" y="3" width="7.5" height="7.5" rx="1.2" />
@@ -18,6 +22,8 @@ const pillars = [
   },
   {
     label: "Sites para empresas",
+    iconBg: "bg-white/10 group-hover:bg-white/20",
+    iconText: "text-gray-100 group-hover:text-white",
     icon: (
       <>
         <rect x="3" y="4.5" width="18" height="12" rx="1.5" />
@@ -29,13 +35,17 @@ const pillars = [
 
 export default function About() {
   return (
-    <section id="sobre">
+    <section className="relative overflow-hidden" id="sobre">
+      <div
+        className="pointer-events-none absolute -right-24 top-10 -z-10 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl"
+        aria-hidden="true"
+      />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="border-t py-12 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-20">
           <div className="grid gap-10 md:grid-cols-2 md:items-center md:gap-16">
             <div>
-              <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-indigo-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-indigo-200/50">
-                <span className="inline-flex bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
+              <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-emerald-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-emerald-200/50">
+                <span className="inline-flex bg-linear-to-r from-emerald-500 to-emerald-200 bg-clip-text text-transparent">
                   Sobre a ELEVION
                 </span>
               </div>
@@ -65,9 +75,11 @@ export default function About() {
                 {pillars.map((pillar) => (
                   <div
                     key={pillar.label}
-                    className="group flex items-center gap-4 rounded-xl p-2 transition-colors duration-300 hover:bg-indigo-500/5"
+                    className="group flex items-center gap-4 rounded-xl p-2 transition-colors duration-300 hover:bg-white/5"
                   >
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400 transition-all duration-300 group-hover:scale-110 group-hover:bg-indigo-500/20 group-hover:text-indigo-300">
+                    <div
+                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110 ${pillar.iconBg} ${pillar.iconText}`}
+                    >
                       <svg
                         width="22"
                         height="22"
@@ -81,7 +93,7 @@ export default function About() {
                         {pillar.icon}
                       </svg>
                     </div>
-                    <span className="font-nacelle font-semibold text-gray-100 transition-colors duration-300 group-hover:text-indigo-200">
+                    <span className="font-nacelle font-semibold text-gray-100 transition-colors duration-300 group-hover:text-gray-50">
                       {pillar.label}
                     </span>
                   </div>

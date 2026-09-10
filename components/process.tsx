@@ -28,8 +28,8 @@ export default function Process() {
         <div className="border-t py-12 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-20">
           {/* Section header */}
           <div className="mx-auto max-w-3xl pb-12 text-center md:pb-16">
-            <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-indigo-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-indigo-200/50">
-              <span className="inline-flex bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
+            <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-emerald-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-emerald-200/50">
+              <span className="inline-flex bg-linear-to-r from-emerald-500 to-emerald-200 bg-clip-text text-transparent">
                 Como funciona
               </span>
             </div>
@@ -45,12 +45,12 @@ export default function Process() {
           {/* Steps */}
           <div className="relative mx-auto grid max-w-sm gap-10 sm:max-w-none sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
             <div
-              className="pointer-events-none absolute left-[12.5%] right-[12.5%] top-[22px] hidden h-px bg-gray-800 lg:block"
+              className="pointer-events-none absolute left-[12.5%] right-[12.5%] top-[22px] hidden h-px bg-linear-to-r from-transparent via-emerald-500/30 to-transparent lg:block"
               aria-hidden="true"
             />
             {steps.map((step, index) => (
               <div key={step.title} className="group relative text-center">
-                <div className="relative z-10 mx-auto mb-5 flex h-11 w-11 items-center justify-center rounded-full border-2 border-indigo-500 bg-gray-950 font-nacelle text-base font-semibold text-indigo-400 transition-all duration-300 group-hover:scale-110 group-hover:border-indigo-400 group-hover:bg-indigo-500/10 group-hover:text-indigo-300 group-hover:shadow-[0_0_20px_-2px_rgba(99,102,241,0.7)]">
+                <div className="relative z-10 mx-auto mb-5 flex h-11 w-11 items-center justify-center rounded-full border-2 border-emerald-500 bg-gray-950 font-nacelle text-base font-semibold text-emerald-400 transition-all duration-300 group-hover:scale-110 group-hover:border-emerald-400 group-hover:bg-emerald-500/10 group-hover:text-emerald-300 group-hover:shadow-[0_0_20px_-2px_rgba(52,211,153,0.7)]">
                   {index + 1}
                 </div>
                 <h3 className="mb-2 font-nacelle text-[1.0625rem] font-semibold text-gray-200">

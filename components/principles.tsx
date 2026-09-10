@@ -38,13 +38,17 @@ const principles = [
 
 export default function Principles() {
   return (
-    <section className="relative" id="principios">
+    <section className="relative overflow-hidden" id="principios">
+      <div
+        className="pointer-events-none absolute -left-24 top-1/3 -z-10 h-96 w-96 rounded-full bg-violet-500/10 blur-3xl"
+        aria-hidden="true"
+      />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="border-t py-12 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-20">
           {/* Section header */}
           <div className="mx-auto max-w-3xl pb-12 text-center md:pb-16">
-            <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-indigo-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-indigo-200/50">
-              <span className="inline-flex bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
+            <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-violet-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-violet-200/50">
+              <span className="inline-flex bg-linear-to-r from-violet-500 to-violet-200 bg-clip-text text-transparent">
                 Nossos princípios
               </span>
             </div>
@@ -63,7 +67,7 @@ export default function Principles() {
                 key={principle.title}
                 className="group rounded-2xl p-2 transition-transform duration-300 hover:-translate-y-1"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400 transition-all duration-300 group-hover:scale-110 group-hover:bg-indigo-500/20 group-hover:text-indigo-300 group-hover:shadow-[0_0_24px_-4px_rgba(99,102,241,0.6)]">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400 transition-all duration-300 group-hover:scale-110 group-hover:bg-violet-500/20 group-hover:text-violet-300 group-hover:shadow-[0_0_24px_-4px_rgba(167,139,250,0.6)]">
                   <svg
                     width="24"
                     height="24"

@@ -103,7 +103,7 @@ export default function ServiceCard({
         />
         <div className="mb-5 flex items-start justify-between">
           <div
-            className={`flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300 group-hover/card:scale-110 ${styles.iconWrap}`}
+            className={`flex h-12 w-12 items-center justify-center rounded-xl ring-1 ring-white/5 transition-all duration-300 group-hover/card:scale-110 ${styles.iconWrap}`}
           >
             <svg
               width="24"

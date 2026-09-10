@@ -78,7 +78,7 @@ export default function HeroHome() {
                   style={{ animationDelay: "0s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400 ring-1 ring-white/5">
                       <svg
                         width="15"
                         height="15"
@@ -116,7 +116,7 @@ export default function HeroHome() {
                   style={{ animationDelay: "0.6s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400 ring-1 ring-white/5">
                       <svg
                         width="15"
                         height="15"
@@ -165,7 +165,7 @@ export default function HeroHome() {
                   style={{ animationDelay: "1.2s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/10 text-gray-100">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/10 text-gray-100 ring-1 ring-white/10">
                       <svg
                         width="15"
                         height="15"

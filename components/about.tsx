@@ -68,7 +68,7 @@ export default function About() {
             </div>
 
             <div
-              className="rounded-2xl border border-gray-800 bg-gray-900/40 p-7 md:p-9"
+              className="rounded-2xl border border-gray-800 bg-gray-900/40 p-7 shadow-xl shadow-black/20 md:p-9"
               data-aos="fade-left"
               data-aos-delay={100}
             >
@@ -84,7 +84,7 @@ export default function About() {
                     data-aos-delay={150 + index * 100}
                   >
                     <div
-                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110 ${pillar.iconBg} ${pillar.iconText}`}
+                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ring-1 ring-white/5 transition-all duration-300 group-hover:scale-110 ${pillar.iconBg} ${pillar.iconText}`}
                     >
                       <svg
                         width="22"

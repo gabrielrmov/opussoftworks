@@ -55,8 +55,8 @@ export default function Principles() {
                 Nossos princípios
               </span>
             </div>
-            <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl">
-              As bases de cada entrega
+            <h2 className="pb-4 font-nacelle text-3xl font-semibold text-gray-100 md:text-4xl">
+              As bases de cada <span className="text-violet-400">entrega</span>
             </h2>
             <p className="text-lg text-indigo-200/65">
               Três compromissos que guiam qualquer projeto que a ELEVION
@@ -73,7 +73,7 @@ export default function Principles() {
                 data-aos-delay={index * 150}
               >
                 <div className="mb-4 flex items-start justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400 transition-all duration-300 group-hover:scale-110 group-hover:bg-violet-500/20 group-hover:text-violet-300 group-hover:shadow-[0_0_24px_-4px_rgba(167,139,250,0.6)]">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400 ring-1 ring-white/5 transition-all duration-300 group-hover:scale-110 group-hover:bg-violet-500/20 group-hover:text-violet-300 group-hover:shadow-[0_0_24px_-4px_rgba(167,139,250,0.6)]">
                     <svg
                       width="24"
                       height="24"

@@ -61,12 +61,12 @@ export default function Guarantees() {
               </span>
             </div>
             <h2 className="font-nacelle text-3xl font-semibold text-gray-100 md:text-4xl">
-              O que você pode esperar da ELEVION
+              Compromissos que você pode cobrar da gente
             </h2>
           </div>
 
           {/* Items */}
-          <div className="mx-auto grid max-w-sm gap-8 rounded-2xl border border-gray-800 bg-gray-900/30 p-6 sm:max-w-none sm:grid-cols-3 md:p-10">
+          <div className="mx-auto grid max-w-sm gap-8 rounded-2xl border border-gray-800 bg-gray-900/30 p-6 shadow-xl shadow-black/20 sm:max-w-none sm:grid-cols-3 md:p-10">
             {guarantees.map((item, index) => (
               <div
                 key={item.title}
@@ -75,7 +75,7 @@ export default function Guarantees() {
                 data-aos-delay={index * 150}
               >
                 <div
-                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${accentStyles[item.accent]}`}
+                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ring-1 ring-white/5 ${accentStyles[item.accent]}`}
                 >
                   <svg
                     width="22"

@@ -1,13 +1,8 @@
 "use client";
 
-import GatewayFlow from "@/components/ui/gateway-flow";
-
 export default function HeroHome() {
   return (
     <section className="relative">
-      <div className="absolute inset-0 -z-10">
-        <GatewayFlow className="h-full w-full" />
-      </div>
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Hero content */}
         <div className="py-12 md:py-20">

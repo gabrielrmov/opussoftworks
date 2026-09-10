@@ -11,10 +11,14 @@ import Principles from "@/components/principles";
 import Process from "@/components/process";
 import Faq from "@/components/faq";
 import Cta from "@/components/cta";
+import GatewayFlow from "@/components/ui/gateway-flow";
 
 export default function Home() {
   return (
-    <>
+    <div className="relative">
+      <div className="fixed inset-0 -z-10">
+        <GatewayFlow className="h-full w-full" />
+      </div>
       <Hero />
       <About />
       <Services />
@@ -22,6 +26,6 @@ export default function Home() {
       <Process />
       <Faq />
       <Cta />
-    </>
+    </div>
   );
 }

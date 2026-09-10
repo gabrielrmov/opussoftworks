@@ -401,6 +401,13 @@ const GATEWAY_FLOW_DEFINITION: EffectDefinition = {
       .replace(
         "ctx.lineWidth = 1.2;",
         `ctx.lineWidth = ${Number((1.2 * size).toFixed(2))};`,
+      )
+      // Spread the curves' endpoint instead of collapsing every path into the
+      // exact same pixel — a single convergence point reads as a bright glowing
+      // spotlight sitting behind whatever content scrolls to screen-center.
+      .replace(
+        "const p3 = { x: centerX, y: centerY };",
+        "const p3 = { x: centerX, y: centerY + (path.startY - centerY) * 0.6 };",
       );
     if (mode === "light") {
       next = next

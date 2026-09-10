@@ -26,7 +26,7 @@ const guarantees = [
   {
     title: "Contato direto com quem executa",
     description:
-      "Sem camadas de atendimento no meio do caminho — você fala com quem está de fato tocando o seu projeto.",
+      "Nada de suporte terceirizado lendo script. Você fala com quem está de fato mexendo na sua campanha, sistema ou site.",
     accent: "white" as const,
     icon: (
       <>

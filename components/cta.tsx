@@ -1,6 +1,6 @@
 export default function Cta() {
   return (
-    <section className="relative overflow-hidden" id="contato">
+    <section className="relative isolate" id="contato">
       <div
         className="pointer-events-none absolute -left-20 -top-16 -z-10 h-96 w-96 rounded-full bg-violet-500/30 blur-3xl"
         aria-hidden="true"
@@ -27,8 +27,8 @@ export default function Cta() {
               data-aos="fade-up"
               data-aos-delay={100}
             >
-              Fale com a ELEVION e receba um diagnóstico gratuito da sua
-              presença digital e da sua operação.
+              Diagnóstico gratuito, sem compromisso. Você decide se faz
+              sentido depois de ver, na prática, onde dá pra melhorar.
             </p>
             <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
               <div data-aos="fade-up" data-aos-delay={400}>

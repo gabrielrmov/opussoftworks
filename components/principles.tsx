@@ -2,7 +2,7 @@ const principles = [
   {
     title: "Entrega",
     description:
-      "Prazos definidos e cumpridos. Cada etapa do projeto tem data, responsável e checkpoint — sem enrolação.",
+      "Prazo combinado é prazo cumprido. Cada etapa tem data e responsável — se atrasar, você sabe antes de perguntar.",
     icon: (
       <>
         <path d="M12 3 L21 7.5 L21 16.5 L12 21 L3 16.5 L3 7.5 Z" />
@@ -14,7 +14,7 @@ const principles = [
   {
     title: "Responsabilidade",
     description:
-      "Comunicação direta em cada etapa. Você sabe exatamente o que está sendo feito, por que e com que resultado esperado.",
+      "Sem terceirizar seu projeto pra quem você nunca falou. Quem assina o contrato é quem responde pelo que sai errado.",
     icon: (
       <>
         <path d="M12 3 L20 6 V11 C20 16 16.5 19.5 12 21 C7.5 19.5 4 16 4 11 V6 Z" />
@@ -25,7 +25,7 @@ const principles = [
   {
     title: "Assertividade",
     description:
-      "Decisões baseadas em dados, não em achismo. Cada ação tem um objetivo claro por trás.",
+      "Achismo não entra em relatório. Toda decisão de campanha, sistema ou site parte de dado — e é revisada quando o dado muda.",
     icon: (
       <>
         <circle cx="12" cy="12" r="9" />
@@ -38,7 +38,7 @@ const principles = [
 
 export default function Principles() {
   return (
-    <section className="relative overflow-hidden" id="principios">
+    <section className="relative isolate" id="principios">
       <div
         className="pointer-events-none absolute -left-32 top-1/3 -z-10 h-[32rem] w-[32rem] rounded-full bg-violet-500/25 blur-3xl"
         aria-hidden="true"
@@ -63,8 +63,8 @@ export default function Principles() {
               As bases de cada <span className="text-violet-400">entrega</span>
             </h2>
             <p className="text-lg text-indigo-200/65">
-              Três compromissos que guiam qualquer projeto que a ELEVION
-              assume — do primeiro contato ao relatório final.
+              Não são valores de parede. São o que você pode cobrar da gente
+              se o projeto sair do combinado.
             </p>
           </div>
           {/* Items */}

@@ -6,7 +6,7 @@ const services = [
     tag: "Tráfego pago",
     title: "Campanhas que trazem gente pronta pra comprar",
     description:
-      "Campanhas em Google Ads e Meta Ads focadas em geração de leads e vendas, com acompanhamento constante de métricas.",
+      "Google Ads e Meta Ads configurados pra gerar lead qualificado, não clique barato. Métrica acompanhada toda semana, não só no relatório mensal.",
     accent: "violet" as const,
     icon: (
       <path d="M3 17 L9.5 10.5 L13.5 14.5 L21 6 M15 6 L21 6 L21 12" />
@@ -16,7 +16,7 @@ const services = [
     tag: "Sistemas de gestão",
     title: "Sua operação organizada em um só lugar",
     description:
-      "Ferramentas sob medida para organizar vendas, estoque, financeiro e contratos em um só lugar.",
+      "Sistema construído pro seu processo real, não uma planilha genérica adaptada. Vendas, estoque, financeiro e contrato num só painel.",
     accent: "emerald" as const,
     icon: (
       <>
@@ -31,7 +31,7 @@ const services = [
     tag: "Sites para empresas",
     title: "Um site que converte visita em cliente",
     description:
-      "Sites institucionais e comerciais rápidos, profissionais e prontos para converter visitantes em clientes.",
+      "Rápido, responsivo e construído pra guiar quem chega até o contato — não só bonito de olhar, funcional pra vender.",
     accent: "white" as const,
     icon: (
       <>
@@ -61,8 +61,8 @@ export default function Services() {
               Três frentes, um resultado só
             </h2>
             <p className="text-lg text-indigo-200/65">
-              Fazer sua empresa vender mais e operar melhor — com tráfego,
-              gestão e presença digital trabalhando juntos.
+              Cada frente resolve um gargalo diferente. Juntas, tiram o
+              crescimento da sua empresa da sorte e colocam no processo.
             </p>
           </div>
           {/* Spotlight items */}

@@ -35,7 +35,7 @@ const pillars = [
 
 export default function About() {
   return (
-    <section className="relative overflow-hidden" id="sobre">
+    <section className="relative isolate" id="sobre">
       <div
         className="pointer-events-none absolute -right-32 top-0 -z-10 h-[28rem] w-[28rem] rounded-full bg-emerald-500/25 blur-3xl"
         aria-hidden="true"
@@ -58,15 +58,15 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-indigo-200/65">
                 <p>
-                  A ELEVION nasceu em Goiânia com uma ideia simples: empresas
-                  não deveriam precisar contratar uma agência de tráfego, um
-                  desenvolvedor e um sistema de gestão separados — e ainda
-                  torcer para que os três conversem entre si.
+                  A ELEVION nasceu em Goiânia com uma constatação simples:
+                  agência de tráfego, desenvolvedor e sistema de gestão
+                  raramente falam a mesma língua — e quem paga o preço disso
+                  é a empresa, no meio do fogo cruzado.
                 </p>
                 <p>
-                  Unimos essas três frentes em um único processo, com um
-                  único ponto de contato. Menos atrito, mais controle sobre o
-                  que está sendo feito e por quê.
+                  Por isso colocamos as três frentes debaixo do mesmo teto,
+                  com um único ponto de contato. Você não gerencia
+                  fornecedores — gerencia resultado.
                 </p>
               </div>
             </div>

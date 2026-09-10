@@ -26,9 +26,9 @@ export default function HeroHome() {
                 data-aos="fade-up"
                 data-aos-delay={200}
               >
-                Tráfego pago, sistemas de gestão e sites profissionais em um
-                único processo — para empresas que querem crescer com
-                responsabilidade e prazo cumprido.
+                Uma operação só: tráfego que traz lead, sistema que organiza
+                a venda, site que fecha negócio. Sem contratar três
+                fornecedores e torcer pra eles conversarem entre si.
               </p>
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>

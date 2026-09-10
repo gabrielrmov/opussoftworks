@@ -11,6 +11,10 @@ const navLinks = [
   { href: "#faq", id: "faq", label: "FAQ" },
 ];
 
+const WHATSAPP_URL = `https://wa.me/5562994106910?text=${encodeURIComponent(
+  "Olá! Quero saber mais sobre a ELEVION.",
+)}`;
+
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -93,12 +97,14 @@ export default function Header() {
 
         {/* CTA (desktop) */}
         <div className="hidden flex-1 items-center justify-end md:flex">
-          <Link
-            href="#contato"
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-bioluminescent rounded-md px-5 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-[#0a1414] transition-opacity hover:opacity-90"
           >
             Fale com a gente
-          </Link>
+          </a>
         </div>
 
         {/* Mobile menu toggle */}
@@ -135,13 +141,15 @@ export default function Header() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="#contato"
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
                 className="bg-bioluminescent mt-2 rounded-md px-5 py-2.5 text-center text-xs font-medium uppercase tracking-[0.1em] text-[#0a1414]"
               >
                 Fale com a gente
-              </Link>
+              </a>
             </nav>
           </div>
         </div>

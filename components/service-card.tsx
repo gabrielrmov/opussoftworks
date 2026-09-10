@@ -13,6 +13,8 @@ const accentStyles: Record<
     tag: string;
     link: string;
     topBar: string;
+    border: string;
+    ambientGlow: string;
   }
 > = {
   violet: {
@@ -23,6 +25,8 @@ const accentStyles: Record<
     tag: "text-violet-300",
     link: "text-violet-400",
     topBar: "bg-violet-500",
+    border: "bg-linear-to-br from-violet-500/50 via-gray-800 to-gray-800",
+    ambientGlow: "bg-violet-500/25",
   },
   emerald: {
     iconWrap:
@@ -32,6 +36,8 @@ const accentStyles: Record<
     tag: "text-emerald-300",
     link: "text-emerald-400",
     topBar: "bg-emerald-500",
+    border: "bg-linear-to-br from-emerald-500/50 via-gray-800 to-gray-800",
+    ambientGlow: "bg-emerald-500/25",
   },
   white: {
     iconWrap:
@@ -41,6 +47,8 @@ const accentStyles: Record<
     tag: "text-gray-300",
     link: "text-gray-200",
     topBar: "bg-white",
+    border: "bg-linear-to-br from-white/40 via-gray-800 to-gray-800",
+    ambientGlow: "bg-white/20",
   },
 };
 
@@ -93,10 +101,14 @@ export default function ServiceCard({
       onMouseLeave={handleMouseLeave}
       data-aos={dataAos}
       data-aos-delay={dataAosDelay}
-      className={`group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px [transform:perspective(900px)_rotateX(var(--tilt-x,0deg))_rotateY(var(--tilt-y,0deg))_scale(1)] transition-transform duration-200 ease-out will-change-transform hover:[transform:perspective(900px)_rotateX(var(--tilt-x,0deg))_rotateY(var(--tilt-y,0deg))_scale(1.02)] before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:opacity-0 after:blur-3xl after:transition-opacity after:duration-500 hover:after:opacity-20 group-hover:before:opacity-100 ${styles.glowBefore} ${styles.glowAfter}`}
+      className={`group/card relative h-full overflow-hidden rounded-2xl p-px shadow-lg shadow-black/30 [transform:perspective(900px)_rotateX(var(--tilt-x,0deg))_rotateY(var(--tilt-y,0deg))_scale(1)] transition-transform duration-200 ease-out will-change-transform hover:[transform:perspective(900px)_rotateX(var(--tilt-x,0deg))_rotateY(var(--tilt-y,0deg))_scale(1.02)] before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:opacity-0 after:blur-3xl after:transition-opacity after:duration-500 hover:after:opacity-20 group-hover:before:opacity-100 ${styles.glowBefore} ${styles.glowAfter} ${styles.border}`}
       href="#contato"
     >
       <div className="relative z-20 flex h-full flex-col overflow-hidden rounded-[inherit] bg-gray-950 p-7 after:absolute after:inset-0 after:-z-10 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50">
+        <span
+          className={`pointer-events-none absolute -right-8 -top-8 -z-10 h-32 w-32 rounded-full blur-2xl ${styles.ambientGlow}`}
+          aria-hidden="true"
+        />
         <span
           className={`absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 transition-transform duration-500 group-hover/card:scale-x-100 ${styles.topBar}`}
           aria-hidden="true"

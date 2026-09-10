@@ -15,7 +15,7 @@ export default function HeroHome() {
               Tráfego · Gestão · Sites
             </div>
             <h1
-              className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-5 font-nacelle text-4xl font-semibold text-transparent md:text-5xl"
+              className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-5 font-nacelle text-4xl font-semibold tracking-tight text-transparent sm:text-5xl md:text-6xl lg:text-7xl"
               data-aos="fade-up"
             >
               Resultado não é sorte. É entrega.
@@ -33,7 +33,7 @@ export default function HeroHome() {
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>
                   <a
-                    className="btn group mb-4 w-full bg-linear-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16)] hover:bg-[length:100%_150%] sm:mb-0 sm:w-auto"
+                    className="btn group mb-4 w-full scale-100 bg-linear-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] px-6 py-3.5 text-base text-white shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16),0_0_32px_-6px_rgba(99,102,241,0.7)] transition-transform hover:scale-[1.03] hover:bg-[length:100%_150%] sm:mb-0 sm:w-auto"
                     href="#contato"
                   >
                     <span className="relative inline-flex items-center">
@@ -46,7 +46,7 @@ export default function HeroHome() {
                 </div>
                 <div data-aos="fade-up" data-aos-delay={600}>
                   <a
-                    className="btn w-full border border-gray-700 bg-linear-to-b from-gray-800 to-gray-800/60 bg-[length:100%_100%] bg-[bottom] text-gray-300 hover:border-gray-600 hover:bg-[length:100%_150%] sm:ml-4 sm:w-auto"
+                    className="btn w-full border border-gray-700 bg-linear-to-b from-gray-800 to-gray-800/60 bg-[length:100%_100%] bg-[bottom] px-6 py-3.5 text-base text-gray-300 transition-transform hover:scale-[1.03] hover:border-gray-600 hover:bg-[length:100%_150%] sm:ml-4 sm:w-auto"
                     href="#servicos"
                   >
                     Ver serviços
@@ -63,18 +63,18 @@ export default function HeroHome() {
             data-aos-delay={300}
           >
             <div
-              className="pointer-events-none absolute -left-10 -top-10 -z-10 h-40 w-40 rounded-full bg-violet-500/20 blur-3xl"
+              className="pointer-events-none absolute -left-16 -top-16 -z-10 h-64 w-64 rounded-full bg-violet-500/30 blur-3xl"
               aria-hidden="true"
             />
             <div
-              className="pointer-events-none absolute -bottom-10 -right-10 -z-10 h-40 w-40 rounded-full bg-emerald-500/20 blur-3xl"
+              className="pointer-events-none absolute -bottom-16 -right-16 -z-10 h-64 w-64 rounded-full bg-emerald-500/30 blur-3xl"
               aria-hidden="true"
             />
-            <div className="rounded-2xl border border-gray-800 bg-gray-900/50 p-4 shadow-2xl shadow-black/40 backdrop-blur-md md:p-6">
+            <div className="rounded-2xl border border-gray-700/80 bg-gray-900/50 p-4 shadow-2xl shadow-black/50 ring-1 ring-white/5 backdrop-blur-md md:p-6">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 {/* Tráfego pago: mini bar chart */}
                 <div
-                  className="animate-float rounded-xl border border-gray-800 bg-gray-950/60 p-4"
+                  className="animate-float rounded-xl border border-violet-500/30 bg-gray-950/60 p-4"
                   style={{ animationDelay: "0s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
@@ -112,7 +112,7 @@ export default function HeroHome() {
 
                 {/* Sistemas de gestão: mini checklist */}
                 <div
-                  className="animate-float rounded-xl border border-gray-800 bg-gray-950/60 p-4"
+                  className="animate-float rounded-xl border border-emerald-500/30 bg-gray-950/60 p-4"
                   style={{ animationDelay: "0.6s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
@@ -161,7 +161,7 @@ export default function HeroHome() {
 
                 {/* Sites: mini browser mockup */}
                 <div
-                  className="animate-float rounded-xl border border-gray-800 bg-gray-950/60 p-4"
+                  className="animate-float rounded-xl border border-white/20 bg-gray-950/60 p-4"
                   style={{ animationDelay: "1.2s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">

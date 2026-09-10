@@ -40,7 +40,11 @@ export default function Principles() {
   return (
     <section className="relative overflow-hidden" id="principios">
       <div
-        className="pointer-events-none absolute -left-24 top-1/3 -z-10 h-96 w-96 rounded-full bg-violet-500/10 blur-3xl"
+        className="pointer-events-none absolute -left-32 top-1/3 -z-10 h-[32rem] w-[32rem] rounded-full bg-violet-500/25 blur-3xl"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute -right-20 bottom-0 -z-10 h-72 w-72 rounded-full bg-emerald-500/15 blur-3xl"
         aria-hidden="true"
       />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -55,7 +59,7 @@ export default function Principles() {
                 Nossos princípios
               </span>
             </div>
-            <h2 className="pb-4 font-nacelle text-3xl font-semibold text-gray-100 md:text-4xl">
+            <h2 className="pb-4 font-nacelle text-3xl font-semibold tracking-tight text-gray-100 md:text-5xl">
               As bases de cada <span className="text-violet-400">entrega</span>
             </h2>
             <p className="text-lg text-indigo-200/65">

@@ -2,18 +2,18 @@ export default function Cta() {
   return (
     <section className="relative overflow-hidden" id="contato">
       <div
-        className="pointer-events-none absolute -left-16 -top-10 -z-10 h-72 w-72 rounded-full bg-violet-500/10 blur-3xl"
+        className="pointer-events-none absolute -left-20 -top-16 -z-10 h-96 w-96 rounded-full bg-violet-500/30 blur-3xl"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -bottom-10 -right-16 -z-10 h-72 w-72 rounded-full bg-emerald-500/10 blur-3xl"
+        className="pointer-events-none absolute -bottom-16 -right-20 -z-10 h-96 w-96 rounded-full bg-emerald-500/30 blur-3xl"
         aria-hidden="true"
       />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="py-20 md:py-28">
           <div className="mx-auto max-w-3xl text-center">
             <h2
-              className="pb-5 font-nacelle text-3xl font-semibold text-gray-100 md:text-5xl"
+              className="pb-5 font-nacelle text-3xl font-semibold tracking-tight text-gray-100 md:text-5xl lg:text-6xl"
               data-aos="fade-up"
             >
               Pronto para parar de deixar{" "}
@@ -33,7 +33,7 @@ export default function Cta() {
             <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
               <div data-aos="fade-up" data-aos-delay={400}>
                 <a
-                  className="btn group mb-4 w-full bg-linear-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16)] hover:bg-[length:100%_150%] hover:shadow-[0_0_28px_-4px_rgba(255,255,255,0.35)] sm:mb-0 sm:w-auto"
+                  className="btn group mb-4 w-full scale-100 bg-linear-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] px-6 py-3.5 text-base text-white shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16),0_0_32px_-6px_rgba(99,102,241,0.7)] transition-transform hover:scale-[1.03] hover:bg-[length:100%_150%] hover:shadow-[0_0_36px_-4px_rgba(255,255,255,0.4)] sm:mb-0 sm:w-auto"
                   href="mailto:SEU-EMAIL@elevion.com.br"
                 >
                   <span className="relative inline-flex items-center">

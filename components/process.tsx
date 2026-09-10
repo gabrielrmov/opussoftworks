@@ -23,7 +23,11 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="como-trabalhamos">
+    <section className="relative overflow-hidden" id="como-trabalhamos">
+      <div
+        className="pointer-events-none absolute -right-32 top-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-emerald-500/25 blur-3xl"
+        aria-hidden="true"
+      />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="border-t py-16 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-24">
           {/* Section header */}
@@ -36,7 +40,7 @@ export default function Process() {
                 Como funciona
               </span>
             </div>
-            <h2 className="pb-4 font-nacelle text-3xl font-semibold text-gray-100 md:text-4xl">
+            <h2 className="pb-4 font-nacelle text-3xl font-semibold tracking-tight text-gray-100 md:text-5xl">
               Do diagnóstico ao <span className="text-emerald-400">resultado</span>
             </h2>
             <p className="text-lg text-indigo-200/65">

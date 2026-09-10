@@ -37,7 +37,11 @@ export default function About() {
   return (
     <section className="relative overflow-hidden" id="sobre">
       <div
-        className="pointer-events-none absolute -right-24 top-10 -z-10 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl"
+        className="pointer-events-none absolute -right-32 top-0 -z-10 h-[28rem] w-[28rem] rounded-full bg-emerald-500/25 blur-3xl"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute -bottom-20 -left-20 -z-10 h-72 w-72 rounded-full bg-violet-500/15 blur-3xl"
         aria-hidden="true"
       />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -49,7 +53,7 @@ export default function About() {
                   Sobre a ELEVION
                 </span>
               </div>
-              <h2 className="mb-5 font-nacelle text-3xl font-semibold text-gray-100 md:text-4xl">
+              <h2 className="mb-5 font-nacelle text-3xl font-semibold tracking-tight text-gray-100 md:text-5xl">
                 Um parceiro só, em vez de três fornecedores
               </h2>
               <div className="space-y-4 text-indigo-200/65">

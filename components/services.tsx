@@ -57,7 +57,7 @@ export default function Services() {
                 O que fazemos
               </span>
             </div>
-            <h2 className="pb-4 font-nacelle text-3xl font-semibold text-gray-100 md:text-4xl">
+            <h2 className="pb-4 font-nacelle text-3xl font-semibold tracking-tight text-gray-100 md:text-5xl">
               Três frentes, um resultado só
             </h2>
             <p className="text-lg text-indigo-200/65">

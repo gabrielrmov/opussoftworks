@@ -60,7 +60,7 @@ export default function Guarantees() {
                 Garantias
               </span>
             </div>
-            <h2 className="font-nacelle text-3xl font-semibold text-gray-100 md:text-4xl">
+            <h2 className="font-nacelle text-3xl font-semibold tracking-tight text-gray-100 md:text-5xl">
               Compromissos que você pode cobrar da gente
             </h2>
           </div>

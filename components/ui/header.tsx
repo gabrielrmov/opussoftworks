@@ -50,7 +50,7 @@ export default function Header() {
           {/* Shine highlight */}
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-0 h-2 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/70 blur-[6px]"
+            className="pointer-events-none absolute left-1/2 top-0 h-px w-14 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-transparent via-white/90 to-transparent blur-[1px]"
           />
           {navLinks.map((link) => {
             const isActive = activeId === link.id;

@@ -12,6 +12,7 @@ const accentStyles: Record<
     glowAfter: string;
     tag: string;
     link: string;
+    topBar: string;
   }
 > = {
   violet: {
@@ -21,6 +22,7 @@ const accentStyles: Record<
     glowAfter: "after:bg-violet-500",
     tag: "text-violet-300",
     link: "text-violet-400",
+    topBar: "bg-violet-500",
   },
   emerald: {
     iconWrap:
@@ -29,6 +31,7 @@ const accentStyles: Record<
     glowAfter: "after:bg-emerald-500",
     tag: "text-emerald-300",
     link: "text-emerald-400",
+    topBar: "bg-emerald-500",
   },
   white: {
     iconWrap:
@@ -37,6 +40,7 @@ const accentStyles: Record<
     glowAfter: "after:bg-white/90",
     tag: "text-gray-300",
     link: "text-gray-200",
+    topBar: "bg-white",
   },
 };
 
@@ -46,6 +50,7 @@ type ServiceCardProps = {
   description: string;
   icon: React.ReactNode;
   accent?: Accent;
+  index?: number;
   "data-aos"?: string;
   "data-aos-delay"?: number;
 };
@@ -56,6 +61,7 @@ export default function ServiceCard({
   description,
   icon,
   accent = "violet",
+  index,
   "data-aos": dataAos,
   "data-aos-delay": dataAosDelay,
 }: ServiceCardProps) {
@@ -91,21 +97,32 @@ export default function ServiceCard({
       href="#contato"
     >
       <div className="relative z-20 flex h-full flex-col overflow-hidden rounded-[inherit] bg-gray-950 p-7 after:absolute after:inset-0 after:-z-10 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50">
-        <div
-          className={`mb-5 flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300 group-hover/card:scale-110 ${styles.iconWrap}`}
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+        <span
+          className={`absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 transition-transform duration-500 group-hover/card:scale-x-100 ${styles.topBar}`}
+          aria-hidden="true"
+        />
+        <div className="mb-5 flex items-start justify-between">
+          <div
+            className={`flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300 group-hover/card:scale-110 ${styles.iconWrap}`}
           >
-            {icon}
-          </svg>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {icon}
+            </svg>
+          </div>
+          {typeof index === "number" && (
+            <span className="font-nacelle text-sm font-semibold tracking-widest text-gray-700">
+              0{index + 1}
+            </span>
+          )}
         </div>
         <span
           className={`mb-3 inline-flex w-fit rounded-full bg-gray-800/60 px-2.5 py-0.5 text-xs font-medium ${styles.tag}`}

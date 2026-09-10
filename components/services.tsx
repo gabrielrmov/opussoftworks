@@ -75,6 +75,7 @@ export default function Services() {
                 description={service.description}
                 icon={service.icon}
                 accent={service.accent}
+                index={index}
                 data-aos="fade-up"
                 data-aos-delay={index * 150}
               />

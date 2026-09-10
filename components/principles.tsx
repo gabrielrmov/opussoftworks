@@ -72,19 +72,24 @@ export default function Principles() {
                 data-aos="fade-up"
                 data-aos-delay={index * 150}
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400 transition-all duration-300 group-hover:scale-110 group-hover:bg-violet-500/20 group-hover:text-violet-300 group-hover:shadow-[0_0_24px_-4px_rgba(167,139,250,0.6)]">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    {principle.icon}
-                  </svg>
+                <div className="mb-4 flex items-start justify-between">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400 transition-all duration-300 group-hover:scale-110 group-hover:bg-violet-500/20 group-hover:text-violet-300 group-hover:shadow-[0_0_24px_-4px_rgba(167,139,250,0.6)]">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      {principle.icon}
+                    </svg>
+                  </div>
+                  <span className="font-nacelle text-sm font-semibold tracking-widest text-gray-700">
+                    0{index + 1}
+                  </span>
                 </div>
                 <h3 className="mb-1 font-nacelle text-[1.0625rem] font-semibold text-gray-200">
                   {principle.title}

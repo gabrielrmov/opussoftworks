@@ -14,6 +14,7 @@ const navLinks = [
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const sections = navLinks
@@ -37,29 +38,54 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-30">
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+    <header
+      className={`sticky top-0 z-30 transition-colors duration-300 ${
+        scrolled
+          ? "border-b border-white/10 bg-liquid-abyss/80 backdrop-blur-md"
+          : "border-b border-transparent"
+      }`}
+    >
+      <div className="relative mx-auto flex h-20 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         {/* Site branding */}
         <div className="flex flex-1">
           <Logo />
         </div>
 
-        {/* Nav links (desktop) */}
-        <nav className="hidden shrink-0 items-center gap-6 md:flex">
+        {/* Nav links (desktop) — centered independently of logo/CTA width */}
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
           {navLinks.map((link) => {
             const isActive = activeId === link.id;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-xs font-medium uppercase tracking-[0.12em] transition ${
-                  isActive
-                    ? "text-platinum"
-                    : "text-silver-mist hover:text-platinum"
-                }`}
+                className="group relative py-2 text-xs font-medium uppercase tracking-[0.12em] transition"
               >
-                {link.label}
+                <span
+                  className={
+                    isActive
+                      ? "text-platinum"
+                      : "text-silver-mist transition-colors group-hover:text-platinum"
+                  }
+                >
+                  {link.label}
+                </span>
+                <span
+                  className={`absolute inset-x-0 -bottom-0.5 h-px bg-liquid-mist transition-transform duration-300 ${
+                    isActive
+                      ? "scale-x-100"
+                      : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                  aria-hidden="true"
+                />
               </Link>
             );
           })}
@@ -96,7 +122,7 @@ export default function Header() {
 
       {/* Mobile menu panel */}
       {mobileOpen && (
-        <div className="mx-auto mt-2 max-w-6xl px-4 sm:px-6 md:hidden">
+        <div className="mx-auto mt-2 max-w-6xl px-4 pb-4 sm:px-6 md:hidden">
           <div className="rounded-2xl bg-liquid-kelp p-4">
             <nav className="flex flex-col gap-1">
               {navLinks.map((link) => (

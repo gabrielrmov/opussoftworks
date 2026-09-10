@@ -38,30 +38,25 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-30 pt-4 md:pt-6">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+    <header className="sticky top-0 z-30">
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         {/* Site branding */}
         <div className="flex flex-1">
           <Logo />
         </div>
 
-        {/* Nav pill (desktop) */}
-        <nav className="relative hidden shrink-0 items-center gap-1 rounded-full border border-gray-700/60 bg-gray-900/80 p-1.5 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.6)] backdrop-blur-md md:flex">
-          {/* Shine highlight */}
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-0 h-px w-14 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-transparent via-white/90 to-transparent blur-[1px]"
-          />
+        {/* Nav links (desktop) */}
+        <nav className="hidden shrink-0 items-center gap-6 md:flex">
           {navLinks.map((link) => {
             const isActive = activeId === link.id;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative rounded-full px-4 py-1.5 text-sm font-medium transition ${
+                className={`text-xs font-medium uppercase tracking-[0.12em] transition ${
                   isActive
-                    ? "bg-gray-100/10 text-gray-100"
-                    : "text-gray-400 hover:text-gray-200"
+                    ? "text-platinum"
+                    : "text-silver-mist hover:text-platinum"
                 }`}
               >
                 {link.label}
@@ -74,7 +69,7 @@ export default function Header() {
         <div className="hidden flex-1 items-center justify-end md:flex">
           <Link
             href="#contato"
-            className="btn-sm bg-linear-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] py-[5px] text-white shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16)] hover:bg-[length:100%_150%]"
+            className="bg-bioluminescent rounded-md px-5 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-[#0a1414] transition-opacity hover:opacity-90"
           >
             Fale com a gente
           </Link>
@@ -82,7 +77,7 @@ export default function Header() {
 
         {/* Mobile menu toggle */}
         <button
-          className="flex items-center justify-center rounded-lg p-2 text-gray-300 transition hover:text-gray-100 md:hidden"
+          className="flex items-center justify-center rounded-md p-2 text-silver-mist transition hover:text-platinum md:hidden"
           aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((v) => !v)}
@@ -102,14 +97,14 @@ export default function Header() {
       {/* Mobile menu panel */}
       {mobileOpen && (
         <div className="mx-auto mt-2 max-w-6xl px-4 sm:px-6 md:hidden">
-          <div className="rounded-2xl border border-gray-800 bg-gray-900/95 p-4 backdrop-blur-md">
+          <div className="rounded-2xl bg-liquid-kelp p-4">
             <nav className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-300 transition hover:bg-gray-800/60 hover:text-gray-100"
+                  className="rounded-md px-3 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-silver-mist transition hover:bg-liquid-abyss hover:text-platinum"
                 >
                   {link.label}
                 </Link>
@@ -117,7 +112,7 @@ export default function Header() {
               <Link
                 href="#contato"
                 onClick={() => setMobileOpen(false)}
-                className="btn-sm mt-2 bg-linear-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] py-[5px] text-center text-white shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16)] hover:bg-[length:100%_150%]"
+                className="bg-bioluminescent mt-2 rounded-md px-5 py-2.5 text-center text-xs font-medium uppercase tracking-[0.1em] text-[#0a1414]"
               >
                 Fale com a gente
               </Link>

@@ -1,63 +1,10 @@
 "use client";
 
-import { useRef } from "react";
-
-type Accent = "violet" | "emerald" | "white";
-
-const accentStyles: Record<
-  Accent,
-  {
-    iconWrap: string;
-    glowBefore: string;
-    glowAfter: string;
-    tag: string;
-    link: string;
-    topBar: string;
-    border: string;
-    ambientGlow: string;
-  }
-> = {
-  violet: {
-    iconWrap:
-      "bg-violet-500/10 text-violet-400 group-hover/card:bg-violet-500/20 group-hover/card:text-violet-300",
-    glowBefore: "before:bg-violet-500/80",
-    glowAfter: "after:bg-violet-500",
-    tag: "text-violet-300",
-    link: "text-violet-400",
-    topBar: "bg-violet-500",
-    border: "bg-linear-to-br from-violet-500/50 via-gray-800 to-gray-800",
-    ambientGlow: "bg-violet-500/25",
-  },
-  emerald: {
-    iconWrap:
-      "bg-emerald-500/10 text-emerald-400 group-hover/card:bg-emerald-500/20 group-hover/card:text-emerald-300",
-    glowBefore: "before:bg-emerald-500/80",
-    glowAfter: "after:bg-emerald-500",
-    tag: "text-emerald-300",
-    link: "text-emerald-400",
-    topBar: "bg-emerald-500",
-    border: "bg-linear-to-br from-emerald-500/50 via-gray-800 to-gray-800",
-    ambientGlow: "bg-emerald-500/25",
-  },
-  white: {
-    iconWrap:
-      "bg-white/10 text-gray-100 group-hover/card:bg-white/20 group-hover/card:text-white",
-    glowBefore: "before:bg-white/70",
-    glowAfter: "after:bg-white/90",
-    tag: "text-gray-300",
-    link: "text-gray-200",
-    topBar: "bg-white",
-    border: "bg-linear-to-br from-white/40 via-gray-800 to-gray-800",
-    ambientGlow: "bg-white/20",
-  },
-};
-
 type ServiceCardProps = {
   tag: string;
   title: string;
   description: string;
   icon: React.ReactNode;
-  accent?: Accent;
   index?: number;
   "data-aos"?: string;
   "data-aos-delay"?: number;
@@ -68,102 +15,56 @@ export default function ServiceCard({
   title,
   description,
   icon,
-  accent = "violet",
   index,
   "data-aos": dataAos,
   "data-aos-delay": dataAosDelay,
 }: ServiceCardProps) {
-  const cardRef = useRef<HTMLAnchorElement>(null);
-  const styles = accentStyles[accent];
-
-  function handleMouseMove(e: React.MouseEvent<HTMLAnchorElement>) {
-    const el = cardRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width;
-    const py = (e.clientY - rect.top) / rect.height;
-    const maxTilt = 7;
-    el.style.setProperty("--tilt-x", `${(0.5 - py) * maxTilt}deg`);
-    el.style.setProperty("--tilt-y", `${(px - 0.5) * maxTilt}deg`);
-  }
-
-  function handleMouseLeave() {
-    const el = cardRef.current;
-    if (!el) return;
-    el.style.setProperty("--tilt-x", "0deg");
-    el.style.setProperty("--tilt-y", "0deg");
-  }
-
   return (
     <a
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       data-aos={dataAos}
       data-aos-delay={dataAosDelay}
-      className={`group/card relative h-full overflow-hidden rounded-2xl p-px shadow-lg shadow-black/30 [transform:perspective(900px)_rotateX(var(--tilt-x,0deg))_rotateY(var(--tilt-y,0deg))_scale(1)] transition-transform duration-200 ease-out will-change-transform hover:[transform:perspective(900px)_rotateX(var(--tilt-x,0deg))_rotateY(var(--tilt-y,0deg))_scale(1.02)] before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:opacity-0 after:blur-3xl after:transition-opacity after:duration-500 hover:after:opacity-20 group-hover:before:opacity-100 ${styles.glowBefore} ${styles.glowAfter} ${styles.border}`}
+      className="group/card relative flex h-full flex-col rounded-2xl bg-liquid-kelp p-9"
       href="#contato"
     >
-      <div className="relative z-20 flex h-full flex-col overflow-hidden rounded-[inherit] bg-gray-950 p-7 after:absolute after:inset-0 after:-z-10 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50">
-        <span
-          className={`pointer-events-none absolute -right-8 -top-8 -z-10 h-32 w-32 rounded-full blur-2xl ${styles.ambientGlow}`}
-          aria-hidden="true"
-        />
-        <span
-          className={`absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 transition-transform duration-500 group-hover/card:scale-x-100 ${styles.topBar}`}
-          aria-hidden="true"
-        />
-        <div className="mb-5 flex items-start justify-between">
-          <div
-            className={`flex h-12 w-12 items-center justify-center rounded-xl ring-1 ring-white/5 transition-all duration-300 group-hover/card:scale-110 ${styles.iconWrap}`}
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              {icon}
-            </svg>
-          </div>
-          {typeof index === "number" && (
-            <span className="font-nacelle text-sm font-semibold tracking-widest text-gray-700">
-              0{index + 1}
-            </span>
-          )}
-        </div>
-        <span
-          className={`mb-3 inline-flex w-fit rounded-full bg-gray-800/60 px-2.5 py-0.5 text-xs font-medium ${styles.tag}`}
-        >
-          {tag}
-        </span>
-        <h3 className="mb-2 font-nacelle text-lg font-semibold text-gray-100">
-          {title}
-        </h3>
-        <p className="text-indigo-200/65">{description}</p>
-        <span
-          className={`mt-4 inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover/card:gap-2.5 group-hover/card:opacity-100 ${styles.link}`}
-        >
-          Saiba mais
+      <div className="mb-6 flex items-start justify-between">
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-liquid-abyss text-liquid-mist transition-transform duration-300 group-hover/card:scale-110">
           <svg
-            width="13"
-            height="13"
+            width="22"
+            height="22"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2.6"
+            strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <path d="M5 12 L19 12" />
-            <path d="M13 6 L19 12 L13 18" />
+            {icon}
           </svg>
-        </span>
+        </div>
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[rgba(3,81,75,0.5)] text-platinum transition-transform duration-300 group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M7 17 L17 7 M9 7 L17 7 L17 15" />
+          </svg>
+        </div>
       </div>
+      {typeof index === "number" && (
+        <span className="mb-2 text-xs font-medium uppercase tracking-[0.1em] text-silver-mist">
+          0{index + 1} — {tag}
+        </span>
+      )}
+      <h3 className="mb-2 font-nacelle text-lg font-medium text-platinum">
+        {title}
+      </h3>
+      <p className="text-silver-mist">{description}</p>
     </a>
   );
 }

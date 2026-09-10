@@ -38,31 +38,21 @@ const principles = [
 
 export default function Principles() {
   return (
-    <section className="relative isolate" id="principios">
-      <div
-        className="pointer-events-none absolute -left-32 top-1/3 -z-10 h-[32rem] w-[32rem] rounded-full bg-violet-500/25 blur-3xl"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute -right-20 bottom-0 -z-10 h-72 w-72 rounded-full bg-emerald-500/15 blur-3xl"
-        aria-hidden="true"
-      />
+    <section className="relative" id="principios">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="border-t py-16 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-24">
+        <div className="border-t border-white/10 py-16 md:py-24">
           {/* Section header */}
           <div
             className="mx-auto max-w-3xl pb-14 text-center md:pb-20"
             data-aos="fade-up"
           >
-            <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-violet-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-violet-200/50">
-              <span className="inline-flex bg-linear-to-r from-violet-500 to-violet-200 bg-clip-text text-transparent">
-                Nossos princípios
-              </span>
+            <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
+              Nossos princípios
             </div>
-            <h2 className="pb-4 font-nacelle text-3xl font-semibold tracking-tight text-gray-100 md:text-5xl">
-              As bases de cada <span className="text-violet-400">entrega</span>
+            <h2 className="pb-4 font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl">
+              As bases de cada entrega
             </h2>
-            <p className="text-lg text-indigo-200/65">
+            <p className="text-lg text-silver-mist">
               Não são valores de parede. São o que você pode cobrar da gente
               se o projeto sair do combinado.
             </p>
@@ -77,7 +67,7 @@ export default function Principles() {
                 data-aos-delay={index * 150}
               >
                 <div className="mb-4 flex items-start justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400 ring-1 ring-white/5 transition-all duration-300 group-hover:scale-110 group-hover:bg-violet-500/20 group-hover:text-violet-300 group-hover:shadow-[0_0_24px_-4px_rgba(167,139,250,0.6)]">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-liquid-kelp text-liquid-mist transition-transform duration-300 group-hover:scale-110">
                     <svg
                       width="24"
                       height="24"
@@ -91,14 +81,14 @@ export default function Principles() {
                       {principle.icon}
                     </svg>
                   </div>
-                  <span className="font-nacelle text-sm font-semibold tracking-widest text-gray-700">
+                  <span className="font-nacelle text-sm font-medium tracking-widest text-slate-deep">
                     0{index + 1}
                   </span>
                 </div>
-                <h3 className="mb-1 font-nacelle text-[1.0625rem] font-semibold text-gray-200">
+                <h3 className="mb-1 font-nacelle text-[1.0625rem] font-medium text-platinum">
                   {principle.title}
                 </h3>
-                <p className="text-indigo-200/65">{principle.description}</p>
+                <p className="text-silver-mist">{principle.description}</p>
               </article>
             ))}
           </div>

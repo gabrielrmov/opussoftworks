@@ -27,27 +27,21 @@ const steps = [
 
 export default function Process() {
   return (
-    <section className="relative isolate" id="como-trabalhamos">
-      <div
-        className="pointer-events-none absolute -right-32 top-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-emerald-500/25 blur-3xl"
-        aria-hidden="true"
-      />
+    <section className="relative" id="como-trabalhamos">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="border-t py-16 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-24">
+        <div className="border-t border-white/10 py-16 md:py-24">
           {/* Section header */}
           <div
             className="mx-auto max-w-3xl pb-14 text-center md:pb-20"
             data-aos="fade-up"
           >
-            <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-emerald-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-emerald-200/50">
-              <span className="inline-flex bg-linear-to-r from-emerald-500 to-emerald-200 bg-clip-text text-transparent">
-                Como funciona
-              </span>
+            <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
+              Como funciona
             </div>
-            <h2 className="pb-4 font-nacelle text-3xl font-semibold tracking-tight text-gray-100 md:text-5xl">
-              Do diagnóstico ao <span className="text-emerald-400">resultado</span>
+            <h2 className="pb-4 font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl">
+              Do diagnóstico ao resultado
             </h2>
-            <p className="text-lg text-indigo-200/65">
+            <p className="text-lg text-silver-mist">
               Quatro etapas. Cada uma termina em algo concreto na sua mão —
               não numa promessa pra próxima reunião.
             </p>
@@ -56,7 +50,7 @@ export default function Process() {
           {/* Timeline */}
           <div className="relative mx-auto max-w-2xl">
             <div
-              className="pointer-events-none absolute left-[21px] top-3 bottom-3 w-px bg-linear-to-b from-emerald-500/50 via-emerald-500/15 to-transparent"
+              className="pointer-events-none absolute left-[21px] top-3 bottom-3 w-px bg-white/10"
               aria-hidden="true"
             />
             <div className="space-y-10">
@@ -67,17 +61,17 @@ export default function Process() {
                   data-aos="fade-up"
                   data-aos-delay={index * 130}
                 >
-                  <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-emerald-500 bg-gray-950 font-nacelle text-base font-semibold text-emerald-400 transition-all duration-300 group-hover:scale-110 group-hover:border-emerald-400 group-hover:bg-emerald-500/10 group-hover:text-emerald-300 group-hover:shadow-[0_0_20px_-2px_rgba(52,211,153,0.7)]">
+                  <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-liquid-kelp font-nacelle text-base font-medium text-platinum transition-transform duration-300 group-hover:scale-110">
                     {index + 1}
                   </div>
                   <div className="flex-1 pb-1 pt-1.5">
-                    <h3 className="mb-1.5 font-nacelle text-lg font-semibold text-gray-100">
+                    <h3 className="mb-1.5 font-nacelle text-lg font-medium text-platinum">
                       {step.title}
                     </h3>
-                    <p className="mb-3 text-indigo-200/65">
+                    <p className="mb-3 text-silver-mist">
                       {step.description}
                     </p>
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-300 ring-1 ring-emerald-500/20">
+                    <span className="inline-flex items-center gap-1.5 rounded-md bg-liquid-kelp px-2.5 py-1 text-xs font-medium text-liquid-mist">
                       <svg
                         width="12"
                         height="12"

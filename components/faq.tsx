@@ -30,24 +30,22 @@ export default function Faq() {
   return (
     <section id="faq">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="border-t py-16 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-24">
+        <div className="border-t border-white/10 py-16 md:py-24">
           <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] md:gap-16">
             {/* Left: heading + mini-CTA */}
             <div data-aos="fade-right">
-              <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-gray-200/50 md:before:hidden">
-                <span className="inline-flex bg-linear-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                  Perguntas frequentes
-                </span>
+              <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
+                Perguntas frequentes
               </div>
-              <h2 className="mb-4 font-nacelle text-3xl font-semibold text-gray-100 md:text-4xl">
+              <h2 className="mb-4 font-nacelle text-3xl font-medium text-platinum md:text-4xl">
                 Antes de você perguntar
               </h2>
-              <p className="mb-6 text-indigo-200/65">
+              <p className="mb-6 text-silver-mist">
                 Reunimos aqui o que mais perguntam antes de fechar. Não achou
                 a sua?
               </p>
               <a
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-200 transition-all hover:gap-2.5 hover:text-white"
+                className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.1em] text-platinum transition-all hover:gap-2.5"
                 href="#contato"
               >
                 Fale direto com a gente
@@ -68,7 +66,7 @@ export default function Faq() {
             </div>
 
             {/* Right: accordion */}
-            <div className="divide-y divide-gray-800 rounded-2xl border border-gray-800">
+            <div className="divide-y divide-white/10 rounded-2xl bg-liquid-kelp/40">
               {faqs.map((faq, index) => (
                 <details
                   key={faq.question}
@@ -76,10 +74,10 @@ export default function Faq() {
                   data-aos="fade-up"
                   data-aos-delay={index * 80}
                 >
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-nacelle text-[1.0625rem] font-semibold text-gray-100 marker:content-none">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-nacelle text-[1.0625rem] font-medium text-platinum marker:content-none">
                     {faq.question}
                     <svg
-                      className="shrink-0 text-gray-400 transition-transform duration-200 group-open:rotate-45"
+                      className="shrink-0 text-silver-mist transition-transform duration-200 group-open:rotate-45"
                       width="18"
                       height="18"
                       viewBox="0 0 24 24"
@@ -91,7 +89,7 @@ export default function Faq() {
                       <path d="M12 5 L12 19 M5 12 L19 12" />
                     </svg>
                   </summary>
-                  <p className="mt-3 text-indigo-200/65">{faq.answer}</p>
+                  <p className="mt-3 text-silver-mist">{faq.answer}</p>
                 </details>
               ))}
             </div>

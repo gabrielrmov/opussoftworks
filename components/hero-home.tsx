@@ -9,20 +9,20 @@ export default function HeroHome() {
           {/* Section header */}
           <div className="pb-10 text-center md:pb-14">
             <div
-              className="mb-5 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-indigo-300"
+              className="mb-6 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist"
               data-aos="fade-up"
             >
               Tráfego · Gestão · Sites
             </div>
             <h1
-              className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-5 font-nacelle text-4xl font-semibold tracking-tight text-transparent sm:text-5xl md:text-6xl lg:text-7xl"
+              className="pb-5 font-nacelle text-4xl font-medium tracking-tight text-platinum sm:text-5xl md:text-6xl lg:text-7xl"
               data-aos="fade-up"
             >
               Resultado não é sorte. É entrega.
             </h1>
             <div className="mx-auto max-w-3xl">
               <p
-                className="mb-8 text-xl text-indigo-200/65"
+                className="mb-8 text-xl text-silver-mist"
                 data-aos="fade-up"
                 data-aos-delay={200}
               >
@@ -33,20 +33,15 @@ export default function HeroHome() {
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>
                   <a
-                    className="btn group mb-4 w-full scale-100 bg-linear-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] px-6 py-3.5 text-base text-white shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16),0_0_32px_-6px_rgba(99,102,241,0.7)] transition-transform hover:scale-[1.03] hover:bg-[length:100%_150%] sm:mb-0 sm:w-auto"
+                    className="bg-bioluminescent mb-4 flex w-full items-center justify-center gap-2 rounded-md px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-[#0a1414] transition-opacity hover:opacity-90 sm:mb-0 sm:w-auto"
                     href="#contato"
                   >
-                    <span className="relative inline-flex items-center">
-                      Solicitar diagnóstico gratuito
-                      <span className="ml-1 tracking-normal text-white/50 transition-transform group-hover:translate-x-0.5">
-                        -&gt;
-                      </span>
-                    </span>
+                    Solicitar diagnóstico gratuito
                   </a>
                 </div>
                 <div data-aos="fade-up" data-aos-delay={600}>
                   <a
-                    className="btn w-full border border-gray-700 bg-linear-to-b from-gray-800 to-gray-800/60 bg-[length:100%_100%] bg-[bottom] px-6 py-3.5 text-base text-gray-300 transition-transform hover:scale-[1.03] hover:border-gray-600 hover:bg-[length:100%_150%] sm:ml-4 sm:w-auto"
+                    className="flex w-full items-center justify-center rounded-md border border-white/15 px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-silver-mist transition hover:border-white/30 hover:text-platinum sm:ml-4 sm:w-auto"
                     href="#servicos"
                   >
                     Ver serviços
@@ -62,23 +57,15 @@ export default function HeroHome() {
             data-aos="zoom-in-up"
             data-aos-delay={300}
           >
-            <div
-              className="pointer-events-none absolute -left-16 -top-16 -z-10 h-64 w-64 rounded-full bg-violet-500/30 blur-3xl"
-              aria-hidden="true"
-            />
-            <div
-              className="pointer-events-none absolute -bottom-16 -right-16 -z-10 h-64 w-64 rounded-full bg-emerald-500/30 blur-3xl"
-              aria-hidden="true"
-            />
-            <div className="rounded-2xl border border-gray-700/80 bg-gray-900/50 p-4 shadow-2xl shadow-black/50 ring-1 ring-white/5 backdrop-blur-md md:p-6">
+            <div className="rounded-2xl bg-liquid-kelp p-4 md:p-6">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 {/* Tráfego pago: mini bar chart */}
                 <div
-                  className="animate-float rounded-xl border border-violet-500/30 bg-gray-950/60 p-4"
+                  className="animate-float rounded-xl bg-liquid-abyss/60 p-4"
                   style={{ animationDelay: "0s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400 ring-1 ring-white/5">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/5 text-liquid-mist">
                       <svg
                         width="15"
                         height="15"
@@ -92,7 +79,7 @@ export default function HeroHome() {
                         <path d="M3 17 L9.5 10.5 L13.5 14.5 L21 6 M15 6 L21 6 L21 12" />
                       </svg>
                     </div>
-                    <span className="text-xs font-medium uppercase tracking-wide text-gray-500">
+                    <span className="text-[11px] font-medium uppercase tracking-[0.1em] text-silver-mist">
                       Tráfego pago
                     </span>
                   </div>
@@ -100,7 +87,7 @@ export default function HeroHome() {
                     {[38, 62, 48, 80, 58].map((h, i) => (
                       <div
                         key={i}
-                        className="animate-grow-bar w-full origin-bottom rounded-t-sm bg-violet-500/60"
+                        className="animate-grow-bar w-full origin-bottom rounded-t-sm bg-liquid-mist/60"
                         style={{
                           height: `${h}%`,
                           animationDelay: `${i * 0.2}s`,
@@ -112,11 +99,11 @@ export default function HeroHome() {
 
                 {/* Sistemas de gestão: mini checklist */}
                 <div
-                  className="animate-float rounded-xl border border-emerald-500/30 bg-gray-950/60 p-4"
+                  className="animate-float rounded-xl bg-liquid-abyss/60 p-4"
                   style={{ animationDelay: "0.6s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400 ring-1 ring-white/5">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/5 text-liquid-mist">
                       <svg
                         width="15"
                         height="15"
@@ -139,7 +126,7 @@ export default function HeroHome() {
                         />
                       </svg>
                     </div>
-                    <span className="text-xs font-medium uppercase tracking-wide text-gray-500">
+                    <span className="text-[11px] font-medium uppercase tracking-[0.1em] text-silver-mist">
                       Gestão
                     </span>
                   </div>
@@ -147,11 +134,11 @@ export default function HeroHome() {
                     {[100, 80, 60].map((w, i) => (
                       <div key={i} className="flex items-center gap-2">
                         <span
-                          className="animate-pulse-soft h-3.5 w-3.5 shrink-0 rounded-full bg-emerald-500/70"
+                          className="animate-pulse-soft h-3.5 w-3.5 shrink-0 rounded-full bg-liquid-mist/70"
                           style={{ animationDelay: `${i * 0.3}s` }}
                         />
                         <span
-                          className="h-2 rounded-full bg-gray-700/70"
+                          className="h-2 rounded-full bg-white/10"
                           style={{ width: `${w}%` }}
                         />
                       </div>
@@ -161,11 +148,11 @@ export default function HeroHome() {
 
                 {/* Sites: mini browser mockup */}
                 <div
-                  className="animate-float rounded-xl border border-white/20 bg-gray-950/60 p-4"
+                  className="animate-float rounded-xl bg-liquid-abyss/60 p-4"
                   style={{ animationDelay: "1.2s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/10 text-gray-100 ring-1 ring-white/10">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/5 text-liquid-mist">
                       <svg
                         width="15"
                         height="15"
@@ -180,20 +167,20 @@ export default function HeroHome() {
                         <path d="M3 8.5 L21 8.5 M9 21 L15 21 M12 16.5 L12 21" />
                       </svg>
                     </div>
-                    <span className="text-xs font-medium uppercase tracking-wide text-gray-500">
+                    <span className="text-[11px] font-medium uppercase tracking-[0.1em] text-silver-mist">
                       Site
                     </span>
                   </div>
-                  <div className="overflow-hidden rounded-lg border border-gray-800 bg-gray-900/60">
-                    <div className="flex items-center gap-1 border-b border-gray-800 px-2 py-1.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-gray-700" />
-                      <span className="h-1.5 w-1.5 rounded-full bg-gray-700" />
-                      <span className="h-1.5 w-1.5 rounded-full bg-gray-700" />
+                  <div className="overflow-hidden rounded-lg bg-liquid-deep/70">
+                    <div className="flex items-center gap-1 px-2 py-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-white/15" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-white/15" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-white/15" />
                     </div>
                     <div className="space-y-1.5 p-2.5">
                       <span className="block h-2 w-3/4 rounded-full bg-white/20" />
-                      <span className="block h-2 w-full rounded-full bg-gray-700/70" />
-                      <span className="block h-2 w-1/2 rounded-full bg-gray-700/70" />
+                      <span className="block h-2 w-full rounded-full bg-white/10" />
+                      <span className="block h-2 w-1/2 rounded-full bg-white/10" />
                     </div>
                   </div>
                 </div>
@@ -214,7 +201,7 @@ export default function HeroHome() {
             ].map((label) => (
               <div key={label} className="flex items-center gap-2">
                 <svg
-                  className="text-indigo-400"
+                  className="text-liquid-mist"
                   width="16"
                   height="16"
                   viewBox="0 0 24 24"
@@ -226,7 +213,7 @@ export default function HeroHome() {
                 >
                   <path d="M4 12.5 L9.5 18 L20 6" />
                 </svg>
-                <span className="text-sm font-medium uppercase tracking-wide text-gray-400">
+                <span className="text-xs font-medium uppercase tracking-[0.1em] text-silver-mist">
                   {label}
                 </span>
               </div>

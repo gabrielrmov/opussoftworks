@@ -1,32 +1,19 @@
 import Logo from "./logo";
-import Image from "next/image";
-import FooterIllustration from "@/public/images/footer-illustration.svg";
 
 export default function Footer() {
   return (
-    <footer>
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-        {/* Footer illustration */}
-        <div
-          className="pointer-events-none absolute bottom-0 left-1/2 -z-10 -translate-x-1/2"
-          aria-hidden="true"
-        >
-          <Image
-            className="max-w-none"
-            src={FooterIllustration}
-            width={1076}
-            height={378}
-            alt=""
-          />
-        </div>
-        <div className="grid grid-cols-2 justify-between gap-12 py-8 sm:grid-rows-[auto_auto] md:grid-cols-4 md:grid-rows-[auto_auto] md:py-12 lg:grid-cols-[repeat(3,minmax(0,140px))_1fr] lg:grid-rows-1 xl:gap-20">
+    <footer className="bg-liquid-deep">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="grid grid-cols-2 justify-between gap-12 py-16 sm:grid-rows-[auto_auto] md:grid-cols-4 md:grid-rows-[auto_auto] md:py-24 lg:grid-cols-[repeat(3,minmax(0,140px))_1fr] lg:grid-rows-1 xl:gap-20">
           {/* Serviços */}
-          <div className="space-y-2">
-            <h3 className="text-sm font-medium text-gray-200">Serviços</h3>
+          <div className="space-y-3">
+            <h3 className="text-xs font-medium uppercase tracking-[0.12em] text-slate-deep">
+              Serviços
+            </h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  className="text-silver-mist transition hover:text-platinum"
                   href="#servicos"
                 >
                   Tráfego pago
@@ -34,7 +21,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  className="text-silver-mist transition hover:text-platinum"
                   href="#servicos"
                 >
                   Sistemas de gestão
@@ -42,7 +29,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  className="text-silver-mist transition hover:text-platinum"
                   href="#servicos"
                 >
                   Sites para empresas
@@ -51,12 +38,14 @@ export default function Footer() {
             </ul>
           </div>
           {/* Empresa */}
-          <div className="space-y-2">
-            <h3 className="text-sm font-medium text-gray-200">Empresa</h3>
+          <div className="space-y-3">
+            <h3 className="text-xs font-medium uppercase tracking-[0.12em] text-slate-deep">
+              Empresa
+            </h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  className="text-silver-mist transition hover:text-platinum"
                   href="#sobre"
                 >
                   Sobre
@@ -64,7 +53,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  className="text-silver-mist transition hover:text-platinum"
                   href="#principios"
                 >
                   Princípios
@@ -72,7 +61,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  className="text-silver-mist transition hover:text-platinum"
                   href="#como-trabalhamos"
                 >
                   Como trabalhamos
@@ -80,7 +69,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  className="text-silver-mist transition hover:text-platinum"
                   href="#garantias"
                 >
                   Garantias
@@ -88,7 +77,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  className="text-silver-mist transition hover:text-platinum"
                   href="#faq"
                 >
                   FAQ
@@ -96,7 +85,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  className="text-silver-mist transition hover:text-platinum"
                   href="#contato"
                 >
                   Contato
@@ -105,12 +94,14 @@ export default function Footer() {
             </ul>
           </div>
           {/* Contato */}
-          <div className="space-y-2">
-            <h3 className="text-sm font-medium text-gray-200">Contato</h3>
+          <div className="space-y-3">
+            <h3 className="text-xs font-medium uppercase tracking-[0.12em] text-slate-deep">
+              Contato
+            </h3>
             <ul className="space-y-2 text-sm">
-              <li className="text-indigo-200/65">[SEU E-MAIL]</li>
-              <li className="text-indigo-200/65">[SEU TELEFONE / WHATSAPP]</li>
-              <li className="text-indigo-200/65">[SUA CIDADE, UF]</li>
+              <li className="text-silver-mist">[SEU E-MAIL]</li>
+              <li className="text-silver-mist">[SEU TELEFONE / WHATSAPP]</li>
+              <li className="text-silver-mist">[SUA CIDADE, UF]</li>
             </ul>
           </div>
           {/* Brand + social */}
@@ -119,13 +110,13 @@ export default function Footer() {
               <Logo />
             </div>
             <div className="text-sm">
-              <p className="mb-3 text-indigo-200/65">
+              <p className="mb-3 text-silver-mist">
                 © 2026 ELEVION. Todos os direitos reservados.
               </p>
               <ul className="inline-flex gap-3 lg:justify-end">
                 <li>
                   <a
-                    className="flex items-center justify-center text-indigo-500 transition hover:text-indigo-400"
+                    className="flex items-center justify-center text-silver-mist transition hover:text-platinum"
                     href="#"
                     aria-label="Instagram"
                   >
@@ -144,7 +135,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    className="flex items-center justify-center text-indigo-500 transition hover:text-indigo-400"
+                    className="flex items-center justify-center text-silver-mist transition hover:text-platinum"
                     href="#"
                     aria-label="LinkedIn"
                   >
@@ -164,7 +155,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    className="flex items-center justify-center text-indigo-500 transition hover:text-indigo-400"
+                    className="flex items-center justify-center text-silver-mist transition hover:text-platinum"
                     href="#"
                     aria-label="WhatsApp"
                   >

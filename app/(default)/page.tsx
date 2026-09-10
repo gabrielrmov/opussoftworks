@@ -19,7 +19,7 @@ export default function Home() {
     <div className="relative">
       <div className="fixed inset-0 -z-10">
         <GatewayFlow className="h-full w-full" opacity={0.35} density={0.6} />
-        <div className="absolute inset-0 bg-gray-950/70" />
+        <div className="absolute inset-0 bg-liquid-abyss/75" />
         <div
           className="absolute inset-0 opacity-[0.035] mix-blend-overlay"
           style={{

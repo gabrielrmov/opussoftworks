@@ -1,4 +1,3 @@
-import Spotlight from "@/components/spotlight";
 import ServiceCard from "@/components/service-card";
 
 const services = [
@@ -7,7 +6,6 @@ const services = [
     title: "Campanhas que trazem gente pronta pra comprar",
     description:
       "Google Ads e Meta Ads configurados pra gerar lead qualificado, não clique barato. Métrica acompanhada toda semana, não só no relatório mensal.",
-    accent: "violet" as const,
     icon: (
       <path d="M3 17 L9.5 10.5 L13.5 14.5 L21 6 M15 6 L21 6 L21 12" />
     ),
@@ -17,7 +15,6 @@ const services = [
     title: "Sua operação organizada em um só lugar",
     description:
       "Sistema construído pro seu processo real, não uma planilha genérica adaptada. Vendas, estoque, financeiro e contrato num só painel.",
-    accent: "emerald" as const,
     icon: (
       <>
         <rect x="3" y="3" width="7.5" height="7.5" rx="1.2" />
@@ -32,7 +29,6 @@ const services = [
     title: "Um site que converte visita em cliente",
     description:
       "Rápido, responsivo e construído pra guiar quem chega até o contato — não só bonito de olhar, funcional pra vender.",
-    accent: "white" as const,
     icon: (
       <>
         <rect x="3" y="4.5" width="18" height="12" rx="1.5" />
@@ -52,21 +48,19 @@ export default function Services() {
             className="mx-auto max-w-3xl pb-14 text-center md:pb-20"
             data-aos="fade-up"
           >
-            <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-gray-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-gray-200/50">
-              <span className="inline-flex bg-linear-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                O que fazemos
-              </span>
+            <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
+              O que fazemos
             </div>
-            <h2 className="pb-4 font-nacelle text-3xl font-semibold tracking-tight text-gray-100 md:text-5xl">
+            <h2 className="pb-4 font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl">
               Três frentes, um resultado só
             </h2>
-            <p className="text-lg text-indigo-200/65">
+            <p className="text-lg text-silver-mist">
               Cada frente resolve um gargalo diferente. Juntas, tiram o
               crescimento da sua empresa da sorte e colocam no processo.
             </p>
           </div>
-          {/* Spotlight items */}
-          <Spotlight className="group mx-auto grid max-w-sm items-start gap-6 lg:max-w-none lg:grid-cols-3 lg:gap-8">
+          {/* Service cards */}
+          <div className="mx-auto grid max-w-sm items-start gap-6 lg:max-w-none lg:grid-cols-3 lg:gap-8">
             {services.map((service, index) => (
               <ServiceCard
                 key={service.tag}
@@ -74,13 +68,12 @@ export default function Services() {
                 title={service.title}
                 description={service.description}
                 icon={service.icon}
-                accent={service.accent}
                 index={index}
                 data-aos="fade-up"
                 data-aos-delay={index * 150}
               />
             ))}
-          </Spotlight>
+          </div>
         </div>
       </div>
     </section>

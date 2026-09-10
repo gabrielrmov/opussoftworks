@@ -9,9 +9,25 @@
 }
 
 @theme {
-  --font-inter: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  --font-nacelle: var(--font-nacelle), sans-serif;
+  --font-inter: -apple-system, "SF Pro Display", ui-sans-serif, system-ui,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-nacelle: -apple-system, "SF Pro Display", ui-sans-serif, system-ui,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Auros-inspired palette: abyssal teal surfaces + bioluminescent accent */
+  --color-liquid-abyss: #012624;
+  --color-liquid-deep: #011d1c;
+  --color-liquid-kelp: #003734;
+  --color-liquid-mist: #edfffe;
+  --color-platinum: #ffffff;
+  --color-silver-mist: #bbc7c6;
+  --color-ash: #f2f2f2;
+  --color-slate-deep: #707777;
+  --color-lavender-phosphor: #fde9ff;
+
+  /* Medium-only weight strategy: no bold, no light at display sizes */
+  --font-weight-semibold: 500;
+  --font-weight-bold: 500;
 
   --text-xs: 0.8125rem;
   --text-xs--line-height: 1.5384;
@@ -167,4 +183,13 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+}
+
+/* Signature gradient — reserved for the primary CTA only */
+.bg-bioluminescent {
+  background-image: linear-gradient(
+    90deg,
+    rgb(0, 130, 124) 0%,
+    rgb(203, 255, 252) 100%
+  );
 }

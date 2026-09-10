@@ -3,7 +3,6 @@ const guarantees = [
     title: "Diagnóstico sem compromisso",
     description:
       "Você recebe uma análise real do seu negócio antes de decidir se fecha com a gente — sem pressão.",
-    accent: "violet" as const,
     icon: (
       <>
         <path d="M12 3 L20 6 V11 C20 16 16.5 19.5 12 21 C7.5 19.5 4 16 4 11 V6 Z" />
@@ -15,7 +14,6 @@ const guarantees = [
     title: "Escopo e prazo no contrato",
     description:
       "O que será feito, quando e por quem fica definido por escrito antes de qualquer trabalho começar.",
-    accent: "emerald" as const,
     icon: (
       <>
         <rect x="4" y="3" width="16" height="18" rx="1.5" />
@@ -27,7 +25,6 @@ const guarantees = [
     title: "Contato direto com quem executa",
     description:
       "Nada de suporte terceirizado lendo script. Você fala com quem está de fato mexendo na sua campanha, sistema ou site.",
-    accent: "white" as const,
     icon: (
       <>
         <circle cx="9" cy="8" r="3.5" />
@@ -39,44 +36,34 @@ const guarantees = [
   },
 ];
 
-const accentStyles = {
-  violet: "bg-violet-500/10 text-violet-400",
-  emerald: "bg-emerald-500/10 text-emerald-400",
-  white: "bg-white/10 text-gray-100",
-};
-
 export default function Guarantees() {
   return (
     <section className="relative" id="garantias">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="border-t py-16 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-24">
+        <div className="border-t border-white/10 py-16 md:py-24">
           {/* Section header */}
           <div
             className="mx-auto max-w-3xl pb-14 text-center md:pb-16"
             data-aos="fade-up"
           >
-            <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-gray-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-gray-200/50">
-              <span className="inline-flex bg-linear-to-r from-gray-100 to-gray-400 bg-clip-text text-transparent">
-                Garantias
-              </span>
+            <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
+              Garantias
             </div>
-            <h2 className="font-nacelle text-3xl font-semibold tracking-tight text-gray-100 md:text-5xl">
+            <h2 className="font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl">
               Compromissos que você pode cobrar da gente
             </h2>
           </div>
 
           {/* Items */}
-          <div className="mx-auto grid max-w-sm gap-8 rounded-2xl border border-gray-800 bg-gray-900/30 p-6 shadow-xl shadow-black/20 sm:max-w-none sm:grid-cols-3 md:p-10">
+          <div className="mx-auto grid max-w-sm gap-6 sm:max-w-none sm:grid-cols-3">
             {guarantees.map((item, index) => (
               <div
                 key={item.title}
-                className="flex flex-col items-start gap-3"
+                className="flex flex-col items-start gap-3 rounded-2xl bg-liquid-kelp p-8"
                 data-aos="fade-up"
                 data-aos-delay={index * 150}
               >
-                <div
-                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ring-1 ring-white/5 ${accentStyles[item.accent]}`}
-                >
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-liquid-abyss text-liquid-mist">
                   <svg
                     width="22"
                     height="22"
@@ -90,10 +77,10 @@ export default function Guarantees() {
                     {item.icon}
                   </svg>
                 </div>
-                <h3 className="font-nacelle text-base font-semibold text-gray-100">
+                <h3 className="font-nacelle text-base font-medium text-platinum">
                   {item.title}
                 </h3>
-                <p className="text-sm text-indigo-200/65">
+                <p className="text-sm text-silver-mist">
                   {item.description}
                 </p>
               </div>

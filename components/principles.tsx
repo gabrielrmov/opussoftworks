@@ -1,7 +1,3 @@
-import Image from "next/image";
-import BlurredShapeGray from "@/public/images/blurred-shape-gray.svg";
-import BlurredShape from "@/public/images/blurred-shape.svg";
-
 const principles = [
   {
     title: "Entrega",
@@ -43,24 +39,6 @@ const principles = [
 export default function Principles() {
   return (
     <section className="relative" id="principios">
-      <div
-        className="pointer-events-none absolute left-1/2 top-0 -z-10 -mt-20 -translate-x-1/2"
-        aria-hidden="true"
-      >
-        <Image
-          className="max-w-none"
-          src={BlurredShapeGray}
-          width={760}
-          height={668}
-          alt=""
-        />
-      </div>
-      <div
-        className="pointer-events-none absolute bottom-0 left-1/2 -z-10 -mb-80 -translate-x-[120%] opacity-50"
-        aria-hidden="true"
-      >
-        <Image className="max-w-none" src={BlurredShape} width={760} height={668} alt="" />
-      </div>
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="border-t py-12 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-20">
           {/* Section header */}

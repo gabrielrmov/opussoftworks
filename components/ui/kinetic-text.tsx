@@ -118,18 +118,34 @@ export default function KineticText({
         }
       >
         {resolvedSegments.map((segment, segIndex) =>
-          Array.from(segment.text).map((char) => {
-            const idx = letterIndex++;
+          // Divide em palavras/espaços preservando os espaços como texto real
+          // (não como span) — é isso que dá ao navegador um ponto de quebra de
+          // linha válido. Cada palavra vira um bloco atômico só de letras, sem
+          // quebra no meio.
+          segment.text.split(/(\s+)/).map((token, tokenIndex) => {
+            if (token === "") return null;
+            if (/^\s+$/.test(token)) {
+              return token;
+            }
             return (
               <span
-                key={`${segIndex}-${idx}`}
-                ref={(el) => {
-                  lettersRef.current[idx] = el;
-                }}
-                className={`kinetic-letter ${segment.className ?? ""}`}
-                style={char === " " ? { whiteSpace: "pre" } : undefined}
+                key={`${segIndex}-${tokenIndex}`}
+                className="inline-block"
               >
-                {char}
+                {Array.from(token).map((char) => {
+                  const idx = letterIndex++;
+                  return (
+                    <span
+                      key={idx}
+                      ref={(el) => {
+                        lettersRef.current[idx] = el;
+                      }}
+                      className={`kinetic-letter ${segment.className ?? ""}`}
+                    >
+                      {char}
+                    </span>
+                  );
+                })}
               </span>
             );
           }),

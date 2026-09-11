@@ -64,27 +64,27 @@ const globeArcs: Position[] = capitals.map((capital, index) => ({
 
 export default function GlobalReach() {
   return (
-    <div className="relative flex h-[36rem] w-full flex-col items-center justify-center overflow-hidden py-16 md:h-[40rem]">
-      <div className="relative z-20 mx-auto mb-6 w-full max-w-3xl px-4 md:mb-0">
+    <div className="relative w-full overflow-hidden py-8 md:py-12">
+      <div className="grid items-center gap-4 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-4">
         <motion.div
+          className="relative z-20 text-center md:text-left"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-center font-nacelle text-2xl font-medium tracking-tight text-platinum md:text-4xl">
+          <h2 className="font-nacelle text-2xl font-medium tracking-tight text-platinum md:text-4xl">
             Atendemos empresas em todo o Brasil
           </h2>
-          <p className="mx-auto mt-2 max-w-md text-center text-sm text-silver-mist md:text-base">
+          <p className="mx-auto mt-3 max-w-md text-sm text-silver-mist md:mx-0 md:text-base">
             Base em Goiânia, operação 100% remota: tráfego, sistema e site
             funcionam do mesmo jeito não importa em qual estado sua empresa
             esteja.
           </p>
         </motion.div>
-      </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-40 bg-gradient-to-b from-transparent to-liquid-abyss" />
-      <div className="absolute inset-x-0 -bottom-16 z-10 h-[26rem] w-full md:h-full">
-        <World data={globeArcs} globeConfig={globeConfig} />
+        <div className="relative -mx-4 h-[24rem] w-[calc(100%+2rem)] sm:h-[28rem] md:mx-0 md:-mr-16 md:h-[34rem] md:w-[calc(100%+4rem)] lg:-mr-24 lg:h-[38rem] lg:w-[calc(100%+6rem)]">
+          <World data={globeArcs} globeConfig={globeConfig} />
+        </div>
       </div>
     </div>
   );

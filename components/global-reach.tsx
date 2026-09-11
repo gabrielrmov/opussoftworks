@@ -64,7 +64,7 @@ const globeArcs: Position[] = capitals.map((capital, index) => ({
 
 export default function GlobalReach() {
   return (
-    <div className="relative flex h-[36rem] w-full flex-col items-center justify-center overflow-hidden rounded-2xl border-t border-white/10 bg-liquid-deep py-16 md:h-[40rem]">
+    <div className="relative flex h-[36rem] w-full flex-col items-center justify-center overflow-hidden py-16 md:h-[40rem]">
       <div className="relative z-20 mx-auto mb-6 w-full max-w-3xl px-4 md:mb-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -82,7 +82,7 @@ export default function GlobalReach() {
           </p>
         </motion.div>
       </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-40 bg-gradient-to-b from-transparent to-liquid-deep" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-40 bg-gradient-to-b from-transparent to-liquid-abyss" />
       <div className="absolute inset-x-0 -bottom-16 z-10 h-[26rem] w-full md:h-full">
         <World data={globeArcs} globeConfig={globeConfig} />
       </div>

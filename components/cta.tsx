@@ -10,7 +10,7 @@ export default function Cta() {
     <section className="relative" id="contato">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="py-16 md:py-24">
-          <div className="relative overflow-hidden rounded-2xl bg-liquid-deep px-6 py-16 text-center sm:px-12 md:py-[120px]">
+          <div className="relative overflow-hidden px-6 py-16 text-center sm:px-12 md:py-[120px]">
             <div
               aria-hidden="true"
               className="animate-glow-pulse pointer-events-none absolute left-1/2 top-0 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-indigo/25 blur-[100px]"

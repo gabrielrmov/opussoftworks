@@ -57,7 +57,7 @@ export default function Header() {
           : "border-b border-transparent"
       }`}
     >
-      <div className="relative mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6 md:h-20">
+      <div className="animate-fade-down relative mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6 md:h-20">
         {/* Site branding */}
         <div className="flex flex-1">
           <Logo />
@@ -101,7 +101,7 @@ export default function Header() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-bioluminescent rounded-md px-5 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-opacity hover:opacity-90"
+            className="bg-bioluminescent rounded-md px-5 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-[0_12px_30px_-10px_rgba(91,94,245,0.55)]"
           >
             Fale com a gente
           </a>
@@ -109,17 +109,17 @@ export default function Header() {
 
         {/* Mobile menu toggle */}
         <button
-          className="-mr-1 flex h-11 w-11 items-center justify-center rounded-md text-silver-mist transition hover:text-platinum md:hidden"
+          className="-mr-1 flex h-11 w-11 items-center justify-center rounded-md text-silver-mist transition hover:scale-110 hover:text-platinum active:scale-95 md:hidden"
           aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((v) => !v)}
         >
           {mobileOpen ? (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg className="transition-transform duration-300" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <path d="M6 6 L18 18 M6 18 L18 6" />
             </svg>
           ) : (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg className="transition-transform duration-300" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <path d="M4 7 L20 7 M4 12 L20 12 M4 17 L20 17" />
             </svg>
           )}
@@ -128,7 +128,7 @@ export default function Header() {
 
       {/* Mobile menu panel */}
       {mobileOpen && (
-        <div className="mx-auto mt-2 max-w-6xl px-4 pb-4 sm:px-6 md:hidden">
+        <div className="animate-fade-down mx-auto mt-2 max-w-6xl px-4 pb-4 sm:px-6 md:hidden">
           <div className="rounded-2xl bg-liquid-kelp p-4">
             <nav className="flex flex-col gap-1.5">
               {navLinks.map((link) => (
@@ -136,7 +136,7 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center rounded-md px-4 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-silver-mist transition hover:bg-liquid-abyss hover:text-platinum"
+                  className="flex items-center rounded-md px-4 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-silver-mist transition-all duration-200 hover:translate-x-1 hover:bg-liquid-abyss hover:text-platinum active:scale-[0.98]"
                 >
                   {link.label}
                 </Link>
@@ -146,7 +146,7 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
-                className="bg-bioluminescent mt-2 flex items-center justify-center rounded-md px-5 py-3.5 text-center text-xs font-medium uppercase tracking-[0.1em] text-white"
+                className="bg-bioluminescent mt-2 flex items-center justify-center rounded-md px-5 py-3.5 text-center text-xs font-medium uppercase tracking-[0.1em] text-white transition-transform duration-200 active:scale-95"
               >
                 Fale com a gente
               </a>

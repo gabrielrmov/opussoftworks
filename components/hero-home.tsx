@@ -33,7 +33,7 @@ export default function HeroHome() {
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>
                   <a
-                    className="bg-bioluminescent mb-4 flex w-full items-center justify-center gap-2 rounded-md px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-opacity hover:opacity-90 sm:mb-0 sm:w-auto"
+                    className="bg-bioluminescent mb-4 flex w-full items-center justify-center gap-2 rounded-md px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-[0_15px_40px_-12px_rgba(91,94,245,0.55)] active:translate-y-0 sm:mb-0 sm:w-auto"
                     href="#contato"
                   >
                     Solicitar diagnóstico gratuito
@@ -41,7 +41,7 @@ export default function HeroHome() {
                 </div>
                 <div data-aos="fade-up" data-aos-delay={600}>
                   <a
-                    className="flex w-full items-center justify-center rounded-md border border-white/15 px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-silver-mist transition hover:border-white/30 hover:text-platinum sm:ml-4 sm:w-auto"
+                    className="flex w-full items-center justify-center rounded-md border border-white/15 px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-silver-mist transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:text-platinum sm:ml-4 sm:w-auto"
                     href="#servicos"
                   >
                     Ver serviços
@@ -61,7 +61,7 @@ export default function HeroHome() {
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 {/* Tráfego pago: mini bar chart */}
                 <div
-                  className="animate-float rounded-xl bg-liquid-abyss/60 p-4"
+                  className="animate-float rounded-xl bg-liquid-abyss/60 p-4 transition-transform duration-300 hover:scale-[1.03] hover:bg-liquid-abyss/80"
                   style={{ animationDelay: "0s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
@@ -99,7 +99,7 @@ export default function HeroHome() {
 
                 {/* Sistemas de gestão: mini checklist */}
                 <div
-                  className="animate-float rounded-xl bg-liquid-abyss/60 p-4"
+                  className="animate-float rounded-xl bg-liquid-abyss/60 p-4 transition-transform duration-300 hover:scale-[1.03] hover:bg-liquid-abyss/80"
                   style={{ animationDelay: "0.6s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
@@ -148,7 +148,7 @@ export default function HeroHome() {
 
                 {/* Sites: mini browser mockup */}
                 <div
-                  className="animate-float rounded-xl bg-liquid-abyss/60 p-4"
+                  className="animate-float rounded-xl bg-liquid-abyss/60 p-4 transition-transform duration-300 hover:scale-[1.03] hover:bg-liquid-abyss/80"
                   style={{ animationDelay: "1.2s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">

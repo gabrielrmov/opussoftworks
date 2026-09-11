@@ -59,25 +59,31 @@ export default function Guarantees() {
             {guarantees.map((item, index) => (
               <div
                 key={item.title}
-                className="flex flex-col items-start gap-3 rounded-2xl bg-liquid-kelp p-8"
+                className="group flex flex-col items-start gap-3 rounded-2xl bg-liquid-kelp p-8 transition-all duration-300 hover:-translate-y-1.5 hover:bg-liquid-kelp/70 hover:shadow-[0_25px_60px_-25px_rgba(79,216,255,0.35)]"
                 data-aos="fade-up"
                 data-aos-delay={index * 150}
               >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-liquid-abyss text-liquid-mist">
-                  <svg
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    {item.icon}
-                  </svg>
+                <div className="relative">
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 scale-150 rounded-full bg-liquid-mist opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-40"
+                  />
+                  <div className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-liquid-abyss text-liquid-mist transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      {item.icon}
+                    </svg>
+                  </div>
                 </div>
-                <h3 className="font-nacelle text-base font-medium text-platinum">
+                <h3 className="font-nacelle text-base font-medium text-platinum transition-transform duration-300 group-hover:translate-x-1">
                   {item.title}
                 </h3>
                 <p className="text-sm text-silver-mist">

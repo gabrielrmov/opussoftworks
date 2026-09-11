@@ -3,8 +3,12 @@ export default function Cta() {
     <section className="relative" id="contato">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="py-16 md:py-24">
-          <div className="rounded-2xl bg-liquid-deep px-6 py-16 text-center sm:px-12 md:py-[120px]">
-            <div className="mx-auto max-w-3xl">
+          <div className="relative overflow-hidden rounded-2xl bg-liquid-deep px-6 py-16 text-center sm:px-12 md:py-[120px]">
+            <div
+              aria-hidden="true"
+              className="animate-glow-pulse pointer-events-none absolute left-1/2 top-0 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-indigo/25 blur-[100px]"
+            />
+            <div className="relative mx-auto max-w-3xl">
               <h2
                 className="pb-5 font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl lg:text-6xl"
                 data-aos="fade-up"
@@ -27,7 +31,7 @@ export default function Cta() {
                 data-aos-delay={400}
               >
                 <a
-                  className="bg-bioluminescent w-full rounded-md px-8 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-opacity hover:opacity-90 sm:w-auto"
+                  className="bg-bioluminescent w-full rounded-md px-8 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-1 hover:opacity-90 hover:shadow-[0_20px_50px_-15px_rgba(91,94,245,0.6)] active:translate-y-0 sm:w-auto"
                   href="mailto:SEU-EMAIL@elevion.com.br"
                 >
                   Quero meu diagnóstico

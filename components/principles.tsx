@@ -62,30 +62,36 @@ export default function Principles() {
             {principles.map((principle, index) => (
               <article
                 key={principle.title}
-                className="group rounded-2xl p-2 transition-transform duration-300 hover:-translate-y-1"
+                className="group rounded-2xl p-2 transition-all duration-300 hover:-translate-y-1.5"
                 data-aos="fade-up"
                 data-aos-delay={index * 150}
               >
                 <div className="mb-4 flex items-start justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-liquid-kelp text-liquid-mist transition-transform duration-300 group-hover:scale-110">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      {principle.icon}
-                    </svg>
+                  <div className="relative">
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 scale-150 rounded-full bg-liquid-mist opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-40"
+                    />
+                    <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-liquid-kelp text-liquid-mist transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        {principle.icon}
+                      </svg>
+                    </div>
                   </div>
-                  <span className="font-nacelle text-sm font-medium tracking-widest text-slate-deep">
+                  <span className="font-nacelle text-sm font-medium tracking-widest text-slate-deep transition-colors duration-300 group-hover:text-liquid-mist">
                     0{index + 1}
                   </span>
                 </div>
-                <h3 className="mb-1 font-nacelle text-[1.0625rem] font-medium text-platinum">
+                <h3 className="mb-1 font-nacelle text-[1.0625rem] font-medium text-platinum transition-transform duration-300 group-hover:translate-x-1">
                   {principle.title}
                 </h3>
                 <p className="text-silver-mist">{principle.description}</p>

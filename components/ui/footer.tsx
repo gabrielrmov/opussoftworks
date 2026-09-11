@@ -6,14 +6,14 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid grid-cols-2 justify-between gap-12 py-16 sm:grid-rows-[auto_auto] md:grid-cols-4 md:grid-rows-[auto_auto] md:py-24 lg:grid-cols-[repeat(3,minmax(0,140px))_1fr] lg:grid-rows-1 xl:gap-20">
           {/* Serviços */}
-          <div className="space-y-3">
+          <div className="space-y-3" data-aos="fade-up">
             <h3 className="text-xs font-medium uppercase tracking-[0.12em] text-slate-deep">
               Serviços
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  className="text-silver-mist transition hover:text-platinum"
+                  className="inline-block text-silver-mist transition-all duration-200 hover:translate-x-1 hover:text-platinum"
                   href="#servicos"
                 >
                   Tráfego pago
@@ -21,7 +21,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-silver-mist transition hover:text-platinum"
+                  className="inline-block text-silver-mist transition-all duration-200 hover:translate-x-1 hover:text-platinum"
                   href="#servicos"
                 >
                   Sistemas de gestão
@@ -29,7 +29,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-silver-mist transition hover:text-platinum"
+                  className="inline-block text-silver-mist transition-all duration-200 hover:translate-x-1 hover:text-platinum"
                   href="#servicos"
                 >
                   Sites para empresas
@@ -38,14 +38,14 @@ export default function Footer() {
             </ul>
           </div>
           {/* Empresa */}
-          <div className="space-y-3">
+          <div className="space-y-3" data-aos="fade-up" data-aos-delay={80}>
             <h3 className="text-xs font-medium uppercase tracking-[0.12em] text-slate-deep">
               Empresa
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  className="text-silver-mist transition hover:text-platinum"
+                  className="inline-block text-silver-mist transition-all duration-200 hover:translate-x-1 hover:text-platinum"
                   href="#sobre"
                 >
                   Sobre
@@ -53,7 +53,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-silver-mist transition hover:text-platinum"
+                  className="inline-block text-silver-mist transition-all duration-200 hover:translate-x-1 hover:text-platinum"
                   href="#principios"
                 >
                   Princípios
@@ -61,7 +61,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-silver-mist transition hover:text-platinum"
+                  className="inline-block text-silver-mist transition-all duration-200 hover:translate-x-1 hover:text-platinum"
                   href="#como-trabalhamos"
                 >
                   Como trabalhamos
@@ -69,7 +69,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-silver-mist transition hover:text-platinum"
+                  className="inline-block text-silver-mist transition-all duration-200 hover:translate-x-1 hover:text-platinum"
                   href="#garantias"
                 >
                   Garantias
@@ -77,7 +77,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-silver-mist transition hover:text-platinum"
+                  className="inline-block text-silver-mist transition-all duration-200 hover:translate-x-1 hover:text-platinum"
                   href="#faq"
                 >
                   FAQ
@@ -85,7 +85,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-silver-mist transition hover:text-platinum"
+                  className="inline-block text-silver-mist transition-all duration-200 hover:translate-x-1 hover:text-platinum"
                   href="#contato"
                 >
                   Contato
@@ -94,7 +94,7 @@ export default function Footer() {
             </ul>
           </div>
           {/* Contato */}
-          <div className="space-y-3">
+          <div className="space-y-3" data-aos="fade-up" data-aos-delay={160}>
             <h3 className="text-xs font-medium uppercase tracking-[0.12em] text-slate-deep">
               Contato
             </h3>
@@ -105,7 +105,11 @@ export default function Footer() {
             </ul>
           </div>
           {/* Brand + social */}
-          <div className="col-span-2 md:col-span-4 lg:col-span-1 lg:text-right">
+          <div
+            className="col-span-2 md:col-span-4 lg:col-span-1 lg:text-right"
+            data-aos="fade-up"
+            data-aos-delay={240}
+          >
             <div className="mb-3 lg:flex lg:justify-end">
               <Logo />
             </div>
@@ -116,7 +120,7 @@ export default function Footer() {
               <ul className="inline-flex gap-3 lg:justify-end">
                 <li>
                   <a
-                    className="flex items-center justify-center text-silver-mist transition hover:text-platinum"
+                    className="flex items-center justify-center text-silver-mist transition-all duration-300 hover:scale-110 hover:text-platinum"
                     href="#"
                     aria-label="Instagram"
                   >
@@ -135,7 +139,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    className="flex items-center justify-center text-silver-mist transition hover:text-platinum"
+                    className="flex items-center justify-center text-silver-mist transition-all duration-300 hover:scale-110 hover:text-platinum"
                     href="#"
                     aria-label="LinkedIn"
                   >
@@ -155,7 +159,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    className="flex items-center justify-center text-silver-mist transition hover:text-platinum"
+                    className="flex items-center justify-center text-silver-mist transition-all duration-300 hover:scale-110 hover:text-platinum"
                     href="#"
                     aria-label="WhatsApp"
                   >

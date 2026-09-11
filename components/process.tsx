@@ -51,17 +51,19 @@ export default function Process() {
           <div className="relative mx-auto max-w-2xl">
             <div
               className="pointer-events-none absolute left-[21px] top-3 bottom-3 w-px bg-white/10"
+              data-aos="fade-up"
+              data-aos-duration={900}
               aria-hidden="true"
             />
             <div className="space-y-10">
               {steps.map((step, index) => (
                 <div
                   key={step.title}
-                  className="group relative flex gap-5 sm:gap-6"
+                  className="group relative flex gap-5 transition-transform duration-300 hover:translate-x-1.5 sm:gap-6"
                   data-aos="fade-up"
                   data-aos-delay={index * 130}
                 >
-                  <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-liquid-kelp font-nacelle text-base font-medium text-platinum transition-transform duration-300 group-hover:scale-110">
+                  <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-liquid-kelp font-nacelle text-base font-medium text-platinum ring-2 ring-transparent transition-all duration-300 group-hover:scale-110 group-hover:bg-brand-indigo/20 group-hover:text-brand-indigo group-hover:ring-brand-indigo/40">
                     {index + 1}
                   </div>
                   <div className="flex-1 pb-1 pt-1.5">
@@ -71,7 +73,7 @@ export default function Process() {
                     <p className="mb-3 text-silver-mist">
                       {step.description}
                     </p>
-                    <span className="inline-flex items-center gap-1.5 rounded-md bg-liquid-kelp px-2.5 py-1 text-xs font-medium text-liquid-mist">
+                    <span className="inline-flex items-center gap-1.5 rounded-md bg-liquid-kelp px-2.5 py-1 text-xs font-medium text-liquid-mist transition-colors duration-300 group-hover:bg-brand-indigo/15">
                       <svg
                         width="12"
                         height="12"

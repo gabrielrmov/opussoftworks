@@ -70,14 +70,16 @@ export default function Faq() {
               {faqs.map((faq, index) => (
                 <details
                   key={faq.question}
-                  className="group p-5 md:p-6"
+                  className="group p-5 transition-colors duration-300 hover:bg-white/[0.03] md:p-6"
                   data-aos="fade-up"
                   data-aos-delay={index * 80}
                 >
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-nacelle text-[1.0625rem] font-medium text-platinum marker:content-none">
-                    {faq.question}
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">
+                      {faq.question}
+                    </span>
                     <svg
-                      className="shrink-0 text-silver-mist transition-transform duration-200 group-open:rotate-45"
+                      className="shrink-0 text-silver-mist transition-all duration-300 group-hover:text-liquid-mist group-open:rotate-45 group-open:text-liquid-mist"
                       width="18"
                       height="18"
                       viewBox="0 0 24 24"

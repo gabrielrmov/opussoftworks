@@ -62,7 +62,7 @@ export default function About() {
             </div>
 
             <div
-              className="rounded-2xl bg-liquid-kelp p-7 md:p-9"
+              className="rounded-2xl bg-liquid-kelp p-7 transition-shadow duration-500 hover:shadow-[0_25px_60px_-25px_rgba(91,94,245,0.35)] md:p-9"
               data-aos="fade-left"
               data-aos-delay={100}
             >
@@ -77,9 +77,14 @@ export default function About() {
                     data-aos="fade-up"
                     data-aos-delay={150 + index * 100}
                   >
-                    <div
-                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110 ${pillar.accentBg} ${pillar.accentText}`}
-                    >
+                    <div className="relative">
+                      <span
+                        aria-hidden="true"
+                        className={`absolute inset-0 scale-150 rounded-full opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-80 ${pillar.accentBg}`}
+                      />
+                      <div
+                        className={`relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110 ${pillar.accentBg} ${pillar.accentText}`}
+                      >
                       <svg
                         width="22"
                         height="22"
@@ -92,6 +97,7 @@ export default function About() {
                       >
                         {pillar.icon}
                       </svg>
+                      </div>
                     </div>
                     <span className="font-nacelle font-medium text-platinum">
                       {pillar.label}

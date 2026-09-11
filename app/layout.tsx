@@ -8,7 +8,7 @@ export const metadata = {
     template: "%s · ELEVION",
   },
   description:
-    "A ELEVION une tráfego pago, sistemas de gestão e sites profissionais para empresas que querem crescer com processo, responsabilidade e prazo cumprido.",
+    "Tráfego pago, sistemas de gestão e sites profissionais em um único parceiro. Diagnóstico gratuito e sem compromisso pela ELEVION, em Goiânia.",
   keywords: [
     "tráfego pago",
     "gestão empresarial",

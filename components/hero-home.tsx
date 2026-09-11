@@ -1,5 +1,11 @@
 "use client";
 
+import { getWhatsAppUrl } from "@/lib/whatsapp";
+
+const HERO_WHATSAPP_URL = getWhatsAppUrl(
+  "Olá! Quero solicitar meu diagnóstico gratuito com a ELEVION.",
+);
+
 export default function HeroHome() {
   return (
     <section className="relative">
@@ -37,7 +43,9 @@ export default function HeroHome() {
                 <div data-aos="fade-up" data-aos-delay={400}>
                   <a
                     className="bg-bioluminescent relative mb-4 flex w-full items-center justify-center gap-2 overflow-hidden rounded-md px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-[0_15px_40px_-12px_rgba(91,94,245,0.55)] active:translate-y-0 sm:mb-0 sm:w-auto"
-                    href="#contato"
+                    href={HERO_WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <span
                       aria-hidden="true"
@@ -55,6 +63,13 @@ export default function HeroHome() {
                   </a>
                 </div>
               </div>
+              <p
+                className="mt-5 text-xs uppercase tracking-[0.1em] text-slate-deep"
+                data-aos="fade-up"
+                data-aos-delay={700}
+              >
+                Resposta em poucas horas pelo WhatsApp · Sem compromisso
+              </p>
             </div>
           </div>
 

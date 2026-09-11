@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "./logo";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 const navLinks = [
   { href: "#sobre", id: "sobre", label: "Sobre" },
@@ -11,9 +12,9 @@ const navLinks = [
   { href: "#faq", id: "faq", label: "FAQ" },
 ];
 
-const WHATSAPP_URL = `https://wa.me/5562994106910?text=${encodeURIComponent(
-  "Olá! Quero saber mais sobre a ELEVION.",
-)}`;
+const WHATSAPP_URL = getWhatsAppUrl(
+  "Olá! Quero solicitar meu diagnóstico gratuito com a ELEVION.",
+);
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -103,7 +104,7 @@ export default function Header() {
             rel="noopener noreferrer"
             className="bg-bioluminescent rounded-md px-5 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-[0_12px_30px_-10px_rgba(91,94,245,0.55)]"
           >
-            Fale com a gente
+            Quero meu diagnóstico
           </a>
         </div>
 
@@ -148,7 +149,7 @@ export default function Header() {
                 onClick={() => setMobileOpen(false)}
                 className="bg-bioluminescent mt-2 flex items-center justify-center rounded-md px-5 py-3.5 text-center text-xs font-medium uppercase tracking-[0.1em] text-white transition-transform duration-200 active:scale-95"
               >
-                Fale com a gente
+                Quero meu diagnóstico
               </a>
             </nav>
           </div>

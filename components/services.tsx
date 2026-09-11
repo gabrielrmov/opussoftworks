@@ -5,7 +5,7 @@ const services = [
     tag: "Tráfego pago",
     title: "Campanhas que trazem gente pronta pra comprar",
     description:
-      "Google Ads e Meta Ads configurados pra gerar lead qualificado, não clique barato. Métrica acompanhada toda semana, não só no relatório mensal.",
+      "Google Ads e Meta Ads configurados pra gerar lead qualificado, não clique barato. Você acompanha CPL, conversão e ROAS toda semana — não só num relatório mensal genérico.",
     accentBg: "bg-brand-blue/15",
     accentText: "text-brand-blue",
     accentBar: "bg-brand-blue",
@@ -19,7 +19,7 @@ const services = [
     tag: "Sistemas de gestão",
     title: "Sua operação organizada em um só lugar",
     description:
-      "Sistema construído pro seu processo real, não uma planilha genérica adaptada. Vendas, estoque, financeiro e contrato num só painel.",
+      "Sistema construído pro seu processo real, não uma planilha genérica adaptada. Vendas, estoque, financeiro e contrato num só painel — sem mensalidade de ferramenta que você usa pela metade.",
     accentBg: "bg-brand-indigo/15",
     accentText: "text-brand-indigo",
     accentBar: "bg-brand-indigo",
@@ -38,7 +38,7 @@ const services = [
     tag: "Sites para empresas",
     title: "Um site que converte visita em cliente",
     description:
-      "Rápido, responsivo e construído pra guiar quem chega até o contato — não só bonito de olhar, funcional pra vender.",
+      "Rápido, responsivo e construído pra guiar quem chega até o WhatsApp ou o formulário — não só bonito de olhar, funcional pra vender.",
     accentBg: "bg-brand-cyan/15",
     accentText: "text-brand-cyan",
     accentBar: "bg-brand-cyan",

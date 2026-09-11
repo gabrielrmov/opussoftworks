@@ -1,3 +1,9 @@
+import { WHATSAPP_DISPLAY, getWhatsAppUrl } from "@/lib/whatsapp";
+
+const CTA_WHATSAPP_URL = getWhatsAppUrl(
+  "Olá! Quero solicitar meu diagnóstico gratuito com a ELEVION. Vim pelo site.",
+);
+
 export default function Cta() {
   return (
     <section className="relative" id="contato">
@@ -32,7 +38,9 @@ export default function Cta() {
               >
                 <a
                   className="bg-bioluminescent w-full rounded-md px-8 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-1 hover:opacity-90 hover:shadow-[0_20px_50px_-15px_rgba(91,94,245,0.6)] active:translate-y-0 sm:w-auto"
-                  href="mailto:SEU-EMAIL@elevion.com.br"
+                  href={CTA_WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Quero meu diagnóstico
                 </a>
@@ -42,7 +50,7 @@ export default function Cta() {
                 data-aos="fade-up"
                 data-aos-delay={500}
               >
-                [SEU E-MAIL] · [SEU WHATSAPP]
+                WhatsApp {WHATSAPP_DISPLAY} · Goiânia, GO
               </p>
             </div>
           </div>

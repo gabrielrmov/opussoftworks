@@ -1,4 +1,9 @@
 import Logo from "./logo";
+import { WHATSAPP_DISPLAY, getWhatsAppUrl } from "@/lib/whatsapp";
+
+const FOOTER_WHATSAPP_URL = getWhatsAppUrl(
+  "Olá! Quero solicitar meu diagnóstico gratuito com a ELEVION.",
+);
 
 export default function Footer() {
   return (
@@ -99,9 +104,17 @@ export default function Footer() {
               Contato
             </h3>
             <ul className="space-y-2 text-sm">
-              <li className="text-silver-mist">[SEU E-MAIL]</li>
-              <li className="text-silver-mist">[SEU TELEFONE / WHATSAPP]</li>
-              <li className="text-silver-mist">[SUA CIDADE, UF]</li>
+              <li>
+                <a
+                  className="inline-block text-silver-mist transition-all duration-200 hover:translate-x-1 hover:text-platinum"
+                  href={FOOTER_WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  WhatsApp {WHATSAPP_DISPLAY}
+                </a>
+              </li>
+              <li className="text-silver-mist">Goiânia, GO</li>
             </ul>
           </div>
           {/* Brand + social */}

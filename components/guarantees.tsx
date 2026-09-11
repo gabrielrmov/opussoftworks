@@ -40,7 +40,12 @@ const guarantees = [
 
 export default function Guarantees() {
   return (
-    <section className="relative" id="garantias">
+    <section className="relative overflow-hidden" id="garantias">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-liquid-deep/40" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-24 bottom-10 -z-10 h-[380px] w-[380px] rounded-full bg-brand-cyan/10 blur-[110px]"
+      />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="border-t border-white/10 py-16 md:py-24">
           {/* Section header */}

@@ -37,7 +37,8 @@ const pillars = [
 
 export default function About() {
   return (
-    <section className="relative" id="sobre">
+    <section className="relative overflow-hidden" id="sobre">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-liquid-deep/40" />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="border-t border-white/10 py-16 md:py-24">
           <div className="grid gap-12 md:grid-cols-2 md:items-center md:gap-20">

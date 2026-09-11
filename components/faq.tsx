@@ -1,3 +1,5 @@
+import KineticText from "@/components/ui/kinetic-text";
+
 const faqs = [
   {
     question: "Quanto tempo leva um projeto?",
@@ -37,9 +39,11 @@ export default function Faq() {
               <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
                 Perguntas frequentes
               </div>
-              <h2 className="mb-4 font-nacelle text-3xl font-medium text-platinum md:text-4xl">
-                Antes de você perguntar
-              </h2>
+              <KineticText
+                as="h2"
+                className="mb-4 font-nacelle text-3xl font-medium text-platinum md:text-4xl"
+                text="Antes de você perguntar"
+              />
               <p className="mb-6 text-silver-mist">
                 Reunimos aqui o que mais perguntam antes de fechar. Não achou
                 a sua?

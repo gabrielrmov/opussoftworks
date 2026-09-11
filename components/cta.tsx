@@ -1,4 +1,5 @@
 import { WHATSAPP_DISPLAY, getWhatsAppUrl } from "@/lib/whatsapp";
+import KineticText from "@/components/ui/kinetic-text";
 
 const CTA_WHATSAPP_URL = getWhatsAppUrl(
   "Olá! Quero solicitar meu diagnóstico gratuito com a ELEVION. Vim pelo site.",
@@ -15,14 +16,16 @@ export default function Cta() {
               className="animate-glow-pulse pointer-events-none absolute left-1/2 top-0 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-indigo/25 blur-[100px]"
             />
             <div className="relative mx-auto max-w-3xl">
-              <h2
+              <KineticText
+                as="h2"
                 className="pb-5 font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl lg:text-6xl"
                 data-aos="fade-up"
-              >
-                Pronto para parar de deixar{" "}
-                <span className="text-lavender-phosphor">resultado</span> na
-                mesa?
-              </h2>
+                segments={[
+                  { text: "Pronto para parar de deixar " },
+                  { text: "resultado", className: "text-lavender-phosphor" },
+                  { text: " na mesa?" },
+                ]}
+              />
               <p
                 className="mx-auto mb-8 max-w-xl text-lg text-silver-mist"
                 data-aos="fade-up"

@@ -1,3 +1,5 @@
+import KineticText from "@/components/ui/kinetic-text";
+
 const pillars = [
   {
     label: "Tráfego pago",
@@ -43,9 +45,11 @@ export default function About() {
               <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
                 Sobre a ELEVION
               </div>
-              <h2 className="mb-5 font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl">
-                Um parceiro só, em vez de três fornecedores
-              </h2>
+              <KineticText
+                as="h2"
+                className="mb-5 font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl"
+                text="Um parceiro só, em vez de três fornecedores"
+              />
               <div className="space-y-4 text-silver-mist">
                 <p>
                   A ELEVION nasceu em Goiânia com uma constatação simples:

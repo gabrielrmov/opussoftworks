@@ -1,3 +1,5 @@
+import KineticText from "@/components/ui/kinetic-text";
+
 const steps = [
   {
     title: "Diagnóstico",
@@ -38,9 +40,11 @@ export default function Process() {
             <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
               Como funciona
             </div>
-            <h2 className="pb-4 font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl">
-              Do diagnóstico ao resultado
-            </h2>
+            <KineticText
+              as="h2"
+              className="pb-4 font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl"
+              text="Do diagnóstico ao resultado"
+            />
             <p className="text-lg text-silver-mist">
               Quatro etapas. Cada uma termina em algo concreto na sua mão —
               não numa promessa pra próxima reunião.

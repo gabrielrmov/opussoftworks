@@ -1,4 +1,5 @@
 import ServiceCard from "@/components/service-card";
+import KineticText from "@/components/ui/kinetic-text";
 
 const services = [
   {
@@ -66,9 +67,11 @@ export default function Services() {
             <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
               O que fazemos
             </div>
-            <h2 className="pb-4 font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl">
-              Três frentes, um resultado só
-            </h2>
+            <KineticText
+              as="h2"
+              className="pb-4 font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl"
+              text="Três frentes, um resultado só"
+            />
             <p className="text-lg text-silver-mist">
               Cada frente resolve um gargalo diferente. Juntas, tiram o
               crescimento da sua empresa da sorte e colocam no processo.

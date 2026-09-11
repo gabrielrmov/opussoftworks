@@ -1,3 +1,5 @@
+import KineticText from "@/components/ui/kinetic-text";
+
 const guarantees = [
   {
     title: "Diagnóstico sem compromisso",
@@ -49,9 +51,11 @@ export default function Guarantees() {
             <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
               Garantias
             </div>
-            <h2 className="font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl">
-              Compromissos que você pode cobrar da gente
-            </h2>
+            <KineticText
+              as="h2"
+              className="font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl"
+              text="Compromissos que você pode cobrar da gente"
+            />
           </div>
 
           {/* Items */}

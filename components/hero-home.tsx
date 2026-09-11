@@ -1,6 +1,7 @@
 "use client";
 
 import { getWhatsAppUrl } from "@/lib/whatsapp";
+import KineticText from "@/components/ui/kinetic-text";
 
 const HERO_WHATSAPP_URL = getWhatsAppUrl(
   "Olá! Quero solicitar meu diagnóstico gratuito com a ELEVION.",
@@ -24,7 +25,7 @@ export default function HeroHome() {
               className="pb-5 font-nacelle text-4xl font-medium tracking-tight text-platinum sm:text-5xl md:text-6xl lg:text-7xl"
               data-aos="fade-up"
             >
-              Resultado não é sorte. É{" "}
+              <KineticText as="span" text="Resultado não é sorte. É " />
               <span className="animate-text-gradient bg-[length:200%_auto] bg-gradient-to-r from-brand-violet via-brand-indigo to-brand-blue bg-clip-text text-transparent">
                 entrega.
               </span>

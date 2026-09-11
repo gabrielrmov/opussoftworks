@@ -1,3 +1,5 @@
+import KineticText from "@/components/ui/kinetic-text";
+
 const principles = [
   {
     title: "Entrega",
@@ -49,9 +51,11 @@ export default function Principles() {
             <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
               Nossos princípios
             </div>
-            <h2 className="pb-4 font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl">
-              As bases de cada entrega
-            </h2>
+            <KineticText
+              as="h2"
+              className="pb-4 font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl"
+              text="As bases de cada entrega"
+            />
             <p className="text-lg text-silver-mist">
               Não são valores de parede. São o que você pode cobrar da gente
               se o projeto sair do combinado.

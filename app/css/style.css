@@ -242,6 +242,23 @@
   }
 }
 
+/* Lettering cinético (estilo Aerolab): cada letra reage à proximidade do
+   cursor via a custom property --kt (0 a 1), setada por JS em kinetic-text.tsx */
+.kinetic-letter {
+  display: inline-block;
+  transform: translateY(calc(var(--kt, 0) * var(--kt-lift, -10px)))
+    scale(calc(1 + var(--kt, 0) * var(--kt-scale, 0.16)));
+  color: color-mix(
+    in oklch,
+    currentColor,
+    var(--kt-color, var(--color-liquid-mist)) calc(var(--kt, 0) * 100%)
+  );
+  transition:
+    transform 160ms ease-out,
+    color 160ms ease-out;
+  will-change: transform;
+}
+
 /* Gradiente de assinatura da marca — reservado pro CTA principal */
 .bg-bioluminescent {
   background-image: linear-gradient(

@@ -6,6 +6,8 @@ type ServiceCardProps = {
   description: string;
   icon: React.ReactNode;
   index?: number;
+  accentBg?: string;
+  accentText?: string;
   "data-aos"?: string;
   "data-aos-delay"?: number;
 };
@@ -16,6 +18,8 @@ export default function ServiceCard({
   description,
   icon,
   index,
+  accentBg = "bg-liquid-abyss",
+  accentText = "text-liquid-mist",
   "data-aos": dataAos,
   "data-aos-delay": dataAosDelay,
 }: ServiceCardProps) {
@@ -27,7 +31,9 @@ export default function ServiceCard({
       href="#contato"
     >
       <div className="mb-6 flex items-start justify-between">
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-liquid-abyss text-liquid-mist transition-transform duration-300 group-hover/card:scale-110">
+        <div
+          className={`flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-300 group-hover/card:scale-110 ${accentBg} ${accentText}`}
+        >
           <svg
             width="22"
             height="22"
@@ -41,7 +47,7 @@ export default function ServiceCard({
             {icon}
           </svg>
         </div>
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[rgba(3,81,75,0.5)] text-platinum transition-transform duration-300 group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-white/10 text-platinum transition-transform duration-300 group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5">
           <svg
             width="14"
             height="14"

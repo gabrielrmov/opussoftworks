@@ -1,12 +1,16 @@
 const pillars = [
   {
     label: "Tráfego pago",
+    accentBg: "bg-brand-blue/15",
+    accentText: "text-brand-blue",
     icon: (
       <path d="M3 17 L9.5 10.5 L13.5 14.5 L21 6 M15 6 L21 6 L21 12" />
     ),
   },
   {
     label: "Sistemas de gestão",
+    accentBg: "bg-brand-indigo/15",
+    accentText: "text-brand-indigo",
     icon: (
       <>
         <rect x="3" y="3" width="7.5" height="7.5" rx="1.2" />
@@ -18,6 +22,8 @@ const pillars = [
   },
   {
     label: "Sites para empresas",
+    accentBg: "bg-brand-cyan/15",
+    accentText: "text-brand-cyan",
     icon: (
       <>
         <rect x="3" y="4.5" width="18" height="12" rx="1.5" />
@@ -71,7 +77,9 @@ export default function About() {
                     data-aos="fade-up"
                     data-aos-delay={150 + index * 100}
                   >
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-liquid-abyss text-liquid-mist transition-all duration-300 group-hover:scale-110">
+                    <div
+                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110 ${pillar.accentBg} ${pillar.accentText}`}
+                    >
                       <svg
                         width="22"
                         height="22"

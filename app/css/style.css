@@ -14,16 +14,22 @@
   --font-nacelle: -apple-system, "SF Pro Display", ui-sans-serif, system-ui,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  /* Auros-inspired palette: abyssal teal surfaces + bioluminescent accent */
-  --color-liquid-abyss: #012624;
-  --color-liquid-deep: #011d1c;
-  --color-liquid-kelp: #003734;
-  --color-liquid-mist: #edfffe;
-  --color-platinum: #ffffff;
-  --color-silver-mist: #bbc7c6;
+  /* Paleta oficial da marca ELEVION: tinta noturna + violeta/índigo/azul/ciano */
+  --color-liquid-abyss: #0b0f1f;
+  --color-liquid-deep: #06080f;
+  --color-liquid-kelp: #12162a;
+  --color-liquid-mist: #4fd8ff;
+  --color-platinum: #f5f6fb;
+  --color-silver-mist: #9ca3c4;
   --color-ash: #f2f2f2;
-  --color-slate-deep: #707777;
-  --color-lavender-phosphor: #fde9ff;
+  --color-slate-deep: #6b7390;
+  --color-lavender-phosphor: #c4b5fd;
+
+  /* Cores de marca por vertical */
+  --color-brand-violet: #7c3aed;
+  --color-brand-indigo: #5b5ef5;
+  --color-brand-blue: #2f8cff;
+  --color-brand-cyan: #4fd8ff;
 
   /* Medium-only weight strategy: no bold, no light at display sizes */
   --font-weight-semibold: 500;
@@ -185,11 +191,23 @@
   }
 }
 
-/* Signature gradient — reserved for the primary CTA only */
+/* Gradiente de assinatura da marca — reservado pro CTA principal */
 .bg-bioluminescent {
   background-image: linear-gradient(
     90deg,
-    rgb(0, 130, 124) 0%,
-    rgb(203, 255, 252) 100%
+    rgb(124, 58, 237) 0%,
+    rgb(91, 94, 245) 100%
   );
+}
+
+/* Acessibilidade: respeita quem pediu menos movimento no sistema */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -57,7 +57,7 @@ export default function Header() {
           : "border-b border-transparent"
       }`}
     >
-      <div className="relative mx-auto flex h-20 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+      <div className="relative mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6 md:h-20">
         {/* Site branding */}
         <div className="flex flex-1">
           <Logo />
@@ -101,7 +101,7 @@ export default function Header() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-bioluminescent rounded-md px-5 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-[#0a1414] transition-opacity hover:opacity-90"
+            className="bg-bioluminescent rounded-md px-5 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-opacity hover:opacity-90"
           >
             Fale com a gente
           </a>
@@ -109,7 +109,7 @@ export default function Header() {
 
         {/* Mobile menu toggle */}
         <button
-          className="flex items-center justify-center rounded-md p-2 text-silver-mist transition hover:text-platinum md:hidden"
+          className="-mr-1 flex h-11 w-11 items-center justify-center rounded-md text-silver-mist transition hover:text-platinum md:hidden"
           aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((v) => !v)}
@@ -130,13 +130,13 @@ export default function Header() {
       {mobileOpen && (
         <div className="mx-auto mt-2 max-w-6xl px-4 pb-4 sm:px-6 md:hidden">
           <div className="rounded-2xl bg-liquid-kelp p-4">
-            <nav className="flex flex-col gap-1">
+            <nav className="flex flex-col gap-1.5">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-md px-3 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-silver-mist transition hover:bg-liquid-abyss hover:text-platinum"
+                  className="flex items-center rounded-md px-4 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-silver-mist transition hover:bg-liquid-abyss hover:text-platinum"
                 >
                   {link.label}
                 </Link>
@@ -146,7 +146,7 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
-                className="bg-bioluminescent mt-2 rounded-md px-5 py-2.5 text-center text-xs font-medium uppercase tracking-[0.1em] text-[#0a1414]"
+                className="bg-bioluminescent mt-2 flex items-center justify-center rounded-md px-5 py-3.5 text-center text-xs font-medium uppercase tracking-[0.1em] text-white"
               >
                 Fale com a gente
               </a>

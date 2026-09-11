@@ -338,7 +338,7 @@ const gatewayFlowSource = `<!DOCTYPE html>
                     ctx.beginPath();
                     ctx.moveTo(p0.x, p0.y);
                     ctx.bezierCurveTo(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
-                    ctx.strokeStyle = 'rgba(203, 255, 252, 0.28)';
+                    ctx.strokeStyle = 'rgba(133, 221, 255, 0.28)';
                     ctx.lineWidth = 1.2;
                     ctx.setLineDash([1, 4]);
                     ctx.stroke();
@@ -368,7 +368,7 @@ const gatewayFlowSource = `<!DOCTYPE html>
                         pos.x += dxTotal;
                         pos.y += dyTotal;
 
-                        ctx.fillStyle = \`rgba(203, 255, 252, 0.75)\`;
+                        ctx.fillStyle = \`rgba(133, 221, 255, 0.75)\`;
                         ctx.fillRect(pos.x - 1.5, pos.y - 1.5, 3, 3);
                     });
                 });
@@ -386,7 +386,7 @@ const GATEWAY_FLOW_DEFINITION: EffectDefinition = {
   title: "Gateway Flow",
   source: gatewayFlowSource,
   supportsMode: true,
-  background: (mode) => (mode === "light" ? LIGHT_PAPER : "#012624"),
+  background: (mode) => (mode === "light" ? LIGHT_PAPER : "#0b0f1f"),
   targets: [{ selector: "#flow-canvas", role: "background" }],
   patch(source, { size, density, mode }) {
     let next = source

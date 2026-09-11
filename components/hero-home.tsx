@@ -33,7 +33,7 @@ export default function HeroHome() {
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>
                   <a
-                    className="bg-bioluminescent mb-4 flex w-full items-center justify-center gap-2 rounded-md px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-[#0a1414] transition-opacity hover:opacity-90 sm:mb-0 sm:w-auto"
+                    className="bg-bioluminescent mb-4 flex w-full items-center justify-center gap-2 rounded-md px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-opacity hover:opacity-90 sm:mb-0 sm:w-auto"
                     href="#contato"
                   >
                     Solicitar diagnóstico gratuito
@@ -65,7 +65,7 @@ export default function HeroHome() {
                   style={{ animationDelay: "0s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/5 text-liquid-mist">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-brand-blue/15 text-brand-blue">
                       <svg
                         width="15"
                         height="15"
@@ -87,7 +87,7 @@ export default function HeroHome() {
                     {[38, 62, 48, 80, 58].map((h, i) => (
                       <div
                         key={i}
-                        className="animate-grow-bar w-full origin-bottom rounded-t-sm bg-liquid-mist/60"
+                        className="animate-grow-bar w-full origin-bottom rounded-t-sm bg-brand-blue/60"
                         style={{
                           height: `${h}%`,
                           animationDelay: `${i * 0.2}s`,
@@ -103,7 +103,7 @@ export default function HeroHome() {
                   style={{ animationDelay: "0.6s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/5 text-liquid-mist">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-brand-indigo/15 text-brand-indigo">
                       <svg
                         width="15"
                         height="15"
@@ -134,7 +134,7 @@ export default function HeroHome() {
                     {[100, 80, 60].map((w, i) => (
                       <div key={i} className="flex items-center gap-2">
                         <span
-                          className="animate-pulse-soft h-3.5 w-3.5 shrink-0 rounded-full bg-liquid-mist/70"
+                          className="animate-pulse-soft h-3.5 w-3.5 shrink-0 rounded-full bg-brand-indigo/70"
                           style={{ animationDelay: `${i * 0.3}s` }}
                         />
                         <span
@@ -152,7 +152,7 @@ export default function HeroHome() {
                   style={{ animationDelay: "1.2s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/5 text-liquid-mist">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-brand-cyan/15 text-brand-cyan">
                       <svg
                         width="15"
                         height="15"

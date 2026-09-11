@@ -6,6 +6,8 @@ const services = [
     title: "Campanhas que trazem gente pronta pra comprar",
     description:
       "Google Ads e Meta Ads configurados pra gerar lead qualificado, não clique barato. Métrica acompanhada toda semana, não só no relatório mensal.",
+    accentBg: "bg-brand-blue/15",
+    accentText: "text-brand-blue",
     icon: (
       <path d="M3 17 L9.5 10.5 L13.5 14.5 L21 6 M15 6 L21 6 L21 12" />
     ),
@@ -15,6 +17,8 @@ const services = [
     title: "Sua operação organizada em um só lugar",
     description:
       "Sistema construído pro seu processo real, não uma planilha genérica adaptada. Vendas, estoque, financeiro e contrato num só painel.",
+    accentBg: "bg-brand-indigo/15",
+    accentText: "text-brand-indigo",
     icon: (
       <>
         <rect x="3" y="3" width="7.5" height="7.5" rx="1.2" />
@@ -29,6 +33,8 @@ const services = [
     title: "Um site que converte visita em cliente",
     description:
       "Rápido, responsivo e construído pra guiar quem chega até o contato — não só bonito de olhar, funcional pra vender.",
+    accentBg: "bg-brand-cyan/15",
+    accentText: "text-brand-cyan",
     icon: (
       <>
         <rect x="3" y="4.5" width="18" height="12" rx="1.5" />
@@ -69,6 +75,8 @@ export default function Services() {
                 description={service.description}
                 icon={service.icon}
                 index={index}
+                accentBg={service.accentBg}
+                accentText={service.accentText}
                 data-aos="fade-up"
                 data-aos-delay={index * 150}
               />

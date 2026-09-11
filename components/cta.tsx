@@ -27,7 +27,7 @@ export default function Cta() {
                 data-aos-delay={400}
               >
                 <a
-                  className="bg-bioluminescent w-full rounded-md px-8 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-[#0a1414] transition-opacity hover:opacity-90 sm:w-auto"
+                  className="bg-bioluminescent w-full rounded-md px-8 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-opacity hover:opacity-90 sm:w-auto"
                   href="mailto:SEU-EMAIL@elevion.com.br"
                 >
                   Quero meu diagnóstico

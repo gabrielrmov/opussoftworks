@@ -18,7 +18,10 @@ export default function HeroHome() {
               className="pb-5 font-nacelle text-4xl font-medium tracking-tight text-platinum sm:text-5xl md:text-6xl lg:text-7xl"
               data-aos="fade-up"
             >
-              Resultado não é sorte. É entrega.
+              Resultado não é sorte. É{" "}
+              <span className="animate-text-gradient bg-[length:200%_auto] bg-gradient-to-r from-brand-violet via-brand-indigo to-brand-blue bg-clip-text text-transparent">
+                entrega.
+              </span>
             </h1>
             <div className="mx-auto max-w-3xl">
               <p
@@ -33,10 +36,14 @@ export default function HeroHome() {
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>
                   <a
-                    className="bg-bioluminescent mb-4 flex w-full items-center justify-center gap-2 rounded-md px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-[0_15px_40px_-12px_rgba(91,94,245,0.55)] active:translate-y-0 sm:mb-0 sm:w-auto"
+                    className="bg-bioluminescent relative mb-4 flex w-full items-center justify-center gap-2 overflow-hidden rounded-md px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-[0_15px_40px_-12px_rgba(91,94,245,0.55)] active:translate-y-0 sm:mb-0 sm:w-auto"
                     href="#contato"
                   >
-                    Solicitar diagnóstico gratuito
+                    <span
+                      aria-hidden="true"
+                      className="animate-shimmer pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                    />
+                    <span className="relative">Solicitar diagnóstico gratuito</span>
                   </a>
                 </div>
                 <div data-aos="fade-up" data-aos-delay={600}>
@@ -57,7 +64,11 @@ export default function HeroHome() {
             data-aos="zoom-in-up"
             data-aos-delay={300}
           >
-            <div className="rounded-2xl bg-liquid-kelp p-4 md:p-6">
+            <div
+              aria-hidden="true"
+              className="animate-glow-pulse pointer-events-none absolute left-1/2 top-1/2 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-indigo/20 blur-[90px]"
+            />
+            <div className="relative rounded-2xl bg-liquid-kelp p-4 md:p-6">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 {/* Tráfego pago: mini bar chart */}
                 <div
@@ -189,17 +200,18 @@ export default function HeroHome() {
           </div>
 
           {/* Trust badges */}
-          <div
-            className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 py-6"
-            data-aos="fade-up"
-            data-aos-delay={200}
-          >
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 py-6">
             {[
               "Prazo cumprido",
               "Processo claro",
               "Resultado mensurável",
-            ].map((label) => (
-              <div key={label} className="flex items-center gap-2">
+            ].map((label, index) => (
+              <div
+                key={label}
+                className="flex items-center gap-2 transition-transform duration-300 hover:scale-105"
+                data-aos="fade-up"
+                data-aos-delay={200 + index * 100}
+              >
                 <svg
                   className="text-liquid-mist"
                   width="16"

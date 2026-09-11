@@ -102,7 +102,7 @@ export default function Header() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-bioluminescent rounded-md px-5 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-[0_12px_30px_-10px_rgba(91,94,245,0.55)]"
+            className="rounded-md border border-brand-cyan/40 px-5 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-brand-cyan transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-cyan hover:bg-brand-cyan/10"
           >
             Quero meu diagnóstico
           </a>
@@ -130,14 +130,14 @@ export default function Header() {
       {/* Mobile menu panel */}
       {mobileOpen && (
         <div className="animate-fade-down mx-auto mt-2 max-w-6xl px-4 pb-4 sm:px-6 md:hidden">
-          <div className="rounded-2xl bg-liquid-kelp p-4">
+          <div className="rounded-2xl border border-white/10 bg-liquid-abyss/95 p-4 backdrop-blur-md">
             <nav className="flex flex-col gap-1.5">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center rounded-md px-4 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-silver-mist transition-all duration-200 hover:translate-x-1 hover:bg-liquid-abyss hover:text-platinum active:scale-[0.98]"
+                  className="flex items-center rounded-md px-4 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-silver-mist transition-all duration-200 hover:translate-x-1 hover:bg-white/5 hover:text-platinum active:scale-[0.98]"
                 >
                   {link.label}
                 </Link>
@@ -147,7 +147,7 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
-                className="bg-bioluminescent mt-2 flex items-center justify-center rounded-md px-5 py-3.5 text-center text-xs font-medium uppercase tracking-[0.1em] text-white transition-transform duration-200 active:scale-95"
+                className="mt-2 flex items-center justify-center rounded-md border border-brand-cyan/40 px-5 py-3.5 text-center text-xs font-medium uppercase tracking-[0.1em] text-brand-cyan transition-transform duration-200 hover:bg-brand-cyan/10 active:scale-95"
               >
                 Quero meu diagnóstico
               </a>

@@ -77,11 +77,7 @@ export default function Principles() {
               >
                 <div className="mb-4 flex items-start justify-between">
                   <div className="relative">
-                    <span
-                      aria-hidden="true"
-                      className="absolute inset-0 scale-150 rounded-full bg-liquid-mist opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-40"
-                    />
-                    <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-liquid-kelp text-liquid-mist transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 text-liquid-mist transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
                       <svg
                         width="24"
                         height="24"

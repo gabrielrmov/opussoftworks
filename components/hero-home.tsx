@@ -21,13 +21,14 @@ export default function HeroHome() {
             >
               Tráfego · Gestão · Sites
             </div>
-            <h1
-              className="pb-5 font-nacelle text-4xl font-medium tracking-tight text-platinum sm:text-5xl md:text-6xl lg:text-7xl"
-              data-aos="fade-up"
-            >
-              <KineticText as="span" text="Resultado não é sorte. É " />
-              <span className="animate-text-gradient bg-[length:200%_auto] bg-gradient-to-r from-brand-violet via-brand-indigo to-brand-blue bg-clip-text text-transparent">
-                entrega.
+            <h1 className="pb-5" data-aos="fade-up">
+              <KineticText
+                as="span"
+                className="block font-nacelle text-xl font-medium tracking-tight text-platinum sm:text-2xl md:text-3xl"
+                text="Resultado não é sorte."
+              />
+              <span className="font-display block uppercase leading-[0.85] tracking-tight text-brand-cyan text-[3.25rem] sm:text-7xl md:text-8xl lg:text-9xl">
+                É entrega.
               </span>
             </h1>
             <div className="mx-auto max-w-3xl">
@@ -43,16 +44,12 @@ export default function HeroHome() {
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>
                   <a
-                    className="bg-bioluminescent relative mb-4 flex w-full items-center justify-center gap-2 overflow-hidden rounded-md px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-[0_15px_40px_-12px_rgba(91,94,245,0.55)] active:translate-y-0 sm:mb-0 sm:w-auto"
+                    className="mb-4 flex w-full items-center justify-center gap-2 rounded-md border border-brand-cyan/40 px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-brand-cyan transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-cyan hover:bg-brand-cyan/10 active:translate-y-0 sm:mb-0 sm:w-auto"
                     href={HERO_WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <span
-                      aria-hidden="true"
-                      className="animate-shimmer pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                    />
-                    <span className="relative">Solicitar diagnóstico gratuito</span>
+                    Solicitar diagnóstico gratuito
                   </a>
                 </div>
                 <div data-aos="fade-up" data-aos-delay={600}>

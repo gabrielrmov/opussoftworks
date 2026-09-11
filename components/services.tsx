@@ -10,8 +10,6 @@ const services = [
     accentBg: "bg-brand-blue/15",
     accentText: "text-brand-blue",
     accentBar: "bg-brand-blue",
-    accentShadow: "hover:shadow-[0_25px_60px_-20px_rgba(47,140,255,0.45)]",
-    glowRgb: "47,140,255",
     icon: (
       <path d="M3 17 L9.5 10.5 L13.5 14.5 L21 6 M15 6 L21 6 L21 12" />
     ),
@@ -24,8 +22,6 @@ const services = [
     accentBg: "bg-brand-indigo/15",
     accentText: "text-brand-indigo",
     accentBar: "bg-brand-indigo",
-    accentShadow: "hover:shadow-[0_25px_60px_-20px_rgba(91,94,245,0.45)]",
-    glowRgb: "91,94,245",
     icon: (
       <>
         <rect x="3" y="3" width="7.5" height="7.5" rx="1.2" />
@@ -43,8 +39,6 @@ const services = [
     accentBg: "bg-brand-cyan/15",
     accentText: "text-brand-cyan",
     accentBar: "bg-brand-cyan",
-    accentShadow: "hover:shadow-[0_25px_60px_-20px_rgba(79,216,255,0.45)]",
-    glowRgb: "79,216,255",
     icon: (
       <>
         <rect x="3" y="4.5" width="18" height="12" rx="1.5" />
@@ -90,8 +84,6 @@ export default function Services() {
                 accentBg={service.accentBg}
                 accentText={service.accentText}
                 accentBar={service.accentBar}
-                accentShadow={service.accentShadow}
-                glowRgb={service.glowRgb}
                 data-aos="fade-up"
                 data-aos-delay={index * 150}
               />

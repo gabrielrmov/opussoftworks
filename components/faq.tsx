@@ -71,7 +71,7 @@ export default function Faq() {
             </div>
 
             {/* Right: accordion */}
-            <div className="divide-y divide-white/10 rounded-2xl bg-liquid-kelp/40">
+            <div className="divide-y divide-white/10 rounded-2xl border border-white/10">
               {faqs.map((faq, index) => (
                 <details
                   key={faq.question}

@@ -31,7 +31,7 @@ export default function Process() {
   return (
     <section className="relative" id="como-trabalhamos">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="border-t border-white/10 py-16 md:py-24">
+        <div className="border-t border-white/10 py-20 md:py-32">
           {/* Section header */}
           <div
             className="mx-auto max-w-3xl pb-14 text-center md:pb-20"
@@ -67,7 +67,7 @@ export default function Process() {
                   data-aos="fade-up"
                   data-aos-delay={index * 130}
                 >
-                  <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-liquid-abyss font-nacelle text-base font-medium text-platinum transition-all duration-300 group-hover:scale-110 group-hover:border-brand-indigo/40 group-hover:text-brand-indigo">
+                  <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-liquid-abyss font-nacelle text-base font-medium text-platinum transition-all duration-300 group-hover:scale-105 group-hover:border-brand-indigo/40 group-hover:text-brand-indigo">
                     {index + 1}
                   </div>
                   <div className="flex-1 pb-1 pt-1.5">

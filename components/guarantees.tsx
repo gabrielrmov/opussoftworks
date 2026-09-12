@@ -42,12 +42,8 @@ export default function Guarantees() {
   return (
     <section className="relative overflow-hidden" id="garantias">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-liquid-kelp/50" />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-24 bottom-10 -z-10 h-[380px] w-[380px] rounded-full bg-brand-cyan/10 blur-[110px]"
-      />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="border-t border-white/10 py-16 md:py-24">
+        <div className="border-t border-white/10 py-20 md:py-32">
           {/* Section header */}
           <div
             className="mx-auto max-w-3xl pb-14 text-center md:pb-16"
@@ -73,7 +69,7 @@ export default function Guarantees() {
                 data-aos-delay={index * 150}
               >
                 <div className="relative">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 text-liquid-mist transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 text-liquid-mist transition-transform duration-300 group-hover:scale-105">
                     <svg
                       width="22"
                       height="22"

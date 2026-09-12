@@ -133,7 +133,7 @@ export default function Footer() {
               <ul className="inline-flex gap-3 lg:justify-end">
                 <li>
                   <a
-                    className="flex items-center justify-center text-silver-mist transition-all duration-300 hover:scale-110 hover:text-platinum"
+                    className="flex items-center justify-center text-silver-mist transition-all duration-300 hover:scale-105 hover:text-platinum"
                     href={FOOTER_WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"

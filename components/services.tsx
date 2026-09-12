@@ -52,7 +52,7 @@ export default function Services() {
   return (
     <section id="servicos">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="pb-16 md:pb-24">
+        <div className="pb-20 md:pb-32">
           {/* Section header */}
           <div
             className="mx-auto max-w-3xl pb-14 text-center md:pb-20"

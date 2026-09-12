@@ -40,7 +40,7 @@ export default function About() {
     <section className="relative overflow-hidden" id="sobre">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-liquid-kelp/50" />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="border-t border-white/10 py-16 md:py-24">
+        <div className="border-t border-white/10 py-20 md:py-32">
           <div className="grid gap-12 md:grid-cols-2 md:items-center md:gap-20">
             <div data-aos="fade-right">
               <div className="mb-3 font-mono-brand text-xs font-medium uppercase tracking-[0.18em] text-silver-mist">
@@ -84,7 +84,7 @@ export default function About() {
                   >
                     <div className="relative">
                       <div
-                        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110 ${pillar.accentBg} ${pillar.accentText}`}
+                        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-105 ${pillar.accentBg} ${pillar.accentText}`}
                       >
                       <svg
                         width="22"

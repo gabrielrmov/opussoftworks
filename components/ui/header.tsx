@@ -110,7 +110,7 @@ export default function Header() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-md bg-brand-cyan px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-liquid-abyss transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_12px_30px_-10px_rgba(79,216,255,0.55)]"
+            className="rounded-md bg-brand-cyan px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-liquid-abyss transition-all duration-300 hover:-translate-y-0.5 hover:bg-white"
           >
             Quero meu diagnóstico
           </a>
@@ -118,7 +118,7 @@ export default function Header() {
 
         {/* Mobile menu toggle */}
         <button
-          className="-mr-1 flex h-11 w-11 items-center justify-center rounded-md text-silver-mist transition hover:scale-110 hover:text-platinum active:scale-95 md:hidden"
+          className="-mr-1 flex h-11 w-11 items-center justify-center rounded-md text-silver-mist transition hover:scale-105 hover:text-platinum active:scale-95 md:hidden"
           aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((v) => !v)}

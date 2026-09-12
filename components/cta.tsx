@@ -9,7 +9,7 @@ export default function Cta() {
   return (
     <section className="relative" id="contato">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="py-16 md:py-24">
+        <div className="py-20 md:py-32">
           <div className="relative overflow-hidden px-6 text-center sm:px-12">
             <div className="relative mx-auto max-w-3xl">
               <KineticText
@@ -36,7 +36,7 @@ export default function Cta() {
                 data-aos-delay={400}
               >
                 <a
-                  className="w-full rounded-md bg-brand-cyan px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.1em] text-liquid-abyss transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_20px_50px_-15px_rgba(79,216,255,0.55)] active:translate-y-0 sm:w-auto"
+                  className="w-full rounded-md bg-brand-cyan px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.1em] text-liquid-abyss transition-all duration-300 hover:-translate-y-1 hover:bg-white active:translate-y-0 sm:w-auto"
                   href={CTA_WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"

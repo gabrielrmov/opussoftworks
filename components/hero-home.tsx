@@ -12,7 +12,7 @@ export default function HeroHome() {
     <section className="relative">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Hero content */}
-        <div className="py-16 md:py-28">
+        <div className="py-20 md:py-32">
           {/* Section header */}
           <div className="pb-10 text-center md:pb-14">
             <div
@@ -44,7 +44,7 @@ export default function HeroHome() {
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>
                   <a
-                    className="mb-4 flex w-full items-center justify-center gap-2 rounded-md bg-brand-cyan px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.1em] text-liquid-abyss transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_15px_40px_-12px_rgba(79,216,255,0.55)] active:translate-y-0 sm:mb-0 sm:w-auto"
+                    className="mb-4 flex w-full items-center justify-center gap-2 rounded-md bg-brand-cyan px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.1em] text-liquid-abyss transition-all duration-300 hover:-translate-y-0.5 hover:bg-white active:translate-y-0 sm:mb-0 sm:w-auto"
                     href={HERO_WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -77,10 +77,6 @@ export default function HeroHome() {
             data-aos="zoom-in-up"
             data-aos-delay={300}
           >
-            <div
-              aria-hidden="true"
-              className="animate-glow-pulse pointer-events-none absolute left-1/2 top-1/2 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-indigo/20 blur-[90px]"
-            />
             <div className="relative rounded-2xl bg-liquid-kelp p-4 md:p-6">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 {/* Tráfego pago: mini bar chart */}

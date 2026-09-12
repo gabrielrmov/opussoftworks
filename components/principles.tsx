@@ -42,12 +42,8 @@ export default function Principles() {
   return (
     <section className="relative overflow-hidden" id="principios">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-liquid-kelp/50" />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-24 top-24 -z-10 h-[380px] w-[380px] rounded-full bg-brand-indigo/10 blur-[110px]"
-      />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="border-t border-white/10 py-16 md:py-24">
+        <div className="border-t border-white/10 py-20 md:py-32">
           {/* Section header */}
           <div
             className="mx-auto max-w-3xl pb-14 text-center md:pb-20"
@@ -77,7 +73,7 @@ export default function Principles() {
               >
                 <div className="mb-4 flex items-start justify-between">
                   <div className="relative">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 text-liquid-mist transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 text-liquid-mist transition-transform duration-300 group-hover:scale-105">
                       <svg
                         width="24"
                         height="24"

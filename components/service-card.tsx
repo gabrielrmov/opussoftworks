@@ -45,7 +45,7 @@ export default function ServiceCard({
         <div
           data-aos="zoom-in"
           data-aos-delay={iconDelay}
-          className={`flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-300 ease-out group-hover/card:-rotate-6 group-hover/card:scale-110 ${accentBg} ${accentText}`}
+          className={`flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-300 ease-out group-hover/card:scale-105 ${accentBg} ${accentText}`}
         >
           <svg
             width="22"

@@ -32,7 +32,7 @@ export default function Faq() {
   return (
     <section id="faq">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="border-t border-white/10 py-16 md:py-24">
+        <div className="border-t border-white/10 py-20 md:py-32">
           <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] md:gap-16">
             {/* Left: heading + mini-CTA */}
             <div data-aos="fade-right">

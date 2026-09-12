@@ -50,6 +50,14 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Marca o <body> quando o menu mobile está aberto, pra outros elementos
+  // fixos na tela (como o botão flutuante de WhatsApp) poderem se esconder
+  // e não ficar flutuando por cima do painel do menu.
+  useEffect(() => {
+    document.body.classList.toggle("mobile-menu-open", mobileOpen);
+    return () => document.body.classList.remove("mobile-menu-open");
+  }, [mobileOpen]);
+
   return (
     <header
       className={`sticky top-0 z-30 transition-colors duration-300 ${

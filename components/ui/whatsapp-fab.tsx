@@ -17,7 +17,7 @@ export default function WhatsappFab() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Falar no WhatsApp: ${WHATSAPP_DISPLAY}`}
-      className="group fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.55)] transition-transform duration-300 hover:scale-110 active:scale-95 sm:bottom-8 sm:right-8"
+      className="group fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.55)] transition-all duration-300 hover:scale-110 active:scale-95 sm:bottom-8 sm:right-8 [.mobile-menu-open_&]:pointer-events-none [.mobile-menu-open_&]:scale-75 [.mobile-menu-open_&]:opacity-0"
     >
       <span
         aria-hidden="true"

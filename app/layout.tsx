@@ -8,6 +8,14 @@ export const metadata = {
     default: "ELEVION — Tráfego, gestão e sites para empresas",
     template: "%s · ELEVION",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/images/elevion-icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/images/elevion-icon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico",
+  },
   description:
     "Tráfego pago, sistemas de gestão e sites profissionais em um único parceiro. Diagnóstico gratuito e sem compromisso pela ELEVION, em Goiânia.",
   keywords: [

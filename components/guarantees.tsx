@@ -41,7 +41,7 @@ const guarantees = [
 export default function Guarantees() {
   return (
     <section className="relative overflow-hidden" id="garantias">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-liquid-deep/40" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-liquid-kelp/50" />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -left-24 bottom-10 -z-10 h-[380px] w-[380px] rounded-full bg-brand-cyan/10 blur-[110px]"
@@ -68,7 +68,7 @@ export default function Guarantees() {
             {guarantees.map((item, index) => (
               <div
                 key={item.title}
-                className="group flex flex-col items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.02] p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:bg-white/[0.04]"
+                className="group flex flex-col items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.035] p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:bg-white/[0.05]"
                 data-aos="fade-up"
                 data-aos-delay={index * 150}
               >

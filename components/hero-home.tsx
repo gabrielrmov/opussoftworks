@@ -221,7 +221,7 @@ export default function HeroHome() {
             ].map((label, index) => (
               <div
                 key={label}
-                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04]"
+                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05]"
                 data-aos="fade-up"
                 data-aos-delay={200 + index * 100}
               >

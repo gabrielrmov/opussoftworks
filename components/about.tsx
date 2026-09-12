@@ -38,7 +38,7 @@ const pillars = [
 export default function About() {
   return (
     <section className="relative overflow-hidden" id="sobre">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-liquid-deep/40" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-liquid-kelp/50" />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="border-t border-white/10 py-16 md:py-24">
           <div className="grid gap-12 md:grid-cols-2 md:items-center md:gap-20">
@@ -67,7 +67,7 @@ export default function About() {
             </div>
 
             <div
-              className="rounded-2xl border border-white/10 bg-white/[0.02] p-7 transition-all duration-500 hover:border-white/20 md:p-9"
+              className="rounded-2xl border border-white/10 bg-white/[0.035] p-7 transition-all duration-500 hover:border-white/20 md:p-9"
               data-aos="fade-left"
               data-aos-delay={100}
             >

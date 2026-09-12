@@ -65,7 +65,7 @@ const globeArcs: Position[] = capitals.map((capital, index) => ({
 export default function GlobalReach() {
   return (
     <section className="relative overflow-hidden" id="alcance">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-liquid-deep/40" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-liquid-kelp/50" />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="border-t border-white/10 py-16 md:py-24">
           <div className="grid items-center gap-8 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-4">

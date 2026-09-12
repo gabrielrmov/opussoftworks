@@ -149,7 +149,7 @@ export function World({ data, globeConfig }: WorldProps) {
       {
         lat: globeConfig.initialPosition?.lat ?? 0,
         lng: globeConfig.initialPosition?.lng ?? 0,
-        altitude: 2.2,
+        altitude: 1.7,
       },
       0,
     );

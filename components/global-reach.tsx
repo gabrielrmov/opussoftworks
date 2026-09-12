@@ -64,28 +64,36 @@ const globeArcs: Position[] = capitals.map((capital, index) => ({
 
 export default function GlobalReach() {
   return (
-    <div className="relative w-full overflow-hidden py-8 md:py-12">
-      <div className="grid items-center gap-4 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-4">
-        <motion.div
-          className="relative z-20 text-center md:text-left"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="font-nacelle text-2xl font-medium tracking-tight text-platinum md:text-4xl">
-            Atendemos empresas em todo o Brasil
-          </h2>
-          <p className="mx-auto mt-3 max-w-md text-sm text-silver-mist md:mx-0 md:text-base">
-            Base em Goiânia, operação 100% remota: tráfego, sistema e site
-            funcionam do mesmo jeito não importa em qual estado sua empresa
-            esteja.
-          </p>
-        </motion.div>
-        <div className="relative -mx-4 h-[24rem] w-[calc(100%+2rem)] sm:h-[28rem] md:mx-0 md:-mr-16 md:h-[34rem] md:w-[calc(100%+4rem)] lg:-mr-24 lg:h-[38rem] lg:w-[calc(100%+6rem)]">
-          <World data={globeArcs} globeConfig={globeConfig} />
+    <section className="relative overflow-hidden" id="alcance">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-liquid-deep/40" />
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="border-t border-white/10 py-16 md:py-24">
+          <div className="grid items-center gap-8 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-4">
+            <motion.div
+              className="relative z-20 text-center md:text-left"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
+                Alcance
+              </div>
+              <h2 className="font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl">
+                Atendemos empresas em todo o Brasil
+              </h2>
+              <p className="mx-auto mt-4 max-w-md text-silver-mist md:mx-0 md:text-lg">
+                Base em Goiânia, operação 100% remota: tráfego, sistema e site
+                funcionam do mesmo jeito não importa em qual estado sua
+                empresa esteja.
+              </p>
+            </motion.div>
+            <div className="relative -mx-4 h-[22rem] w-[calc(100%+2rem)] sm:h-[26rem] md:mx-0 md:-mr-16 md:h-[28rem] md:w-[calc(100%+4rem)] lg:-mr-24 lg:h-[30rem] lg:w-[calc(100%+6rem)]">
+              <World data={globeArcs} globeConfig={globeConfig} />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -1,5 +1,4 @@
 import KineticText from "@/components/ui/kinetic-text";
-import GlobalReach from "@/components/global-reach";
 
 const faqs = [
   {
@@ -100,11 +99,6 @@ export default function Faq() {
                 </details>
               ))}
             </div>
-          </div>
-
-          {/* Alcance: globo interativo mostrando a operação remota a partir de Goiânia */}
-          <div className="mt-16 md:mt-24" data-aos="fade-up">
-            <GlobalReach />
           </div>
         </div>
       </div>

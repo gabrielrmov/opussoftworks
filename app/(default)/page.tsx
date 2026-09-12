@@ -6,6 +6,7 @@ export const metadata = {
 
 import Hero from "@/components/hero-home";
 import About from "@/components/about";
+import GlobalReach from "@/components/global-reach";
 import Services from "@/components/services";
 import Principles from "@/components/principles";
 import Process from "@/components/process";
@@ -32,6 +33,7 @@ export default function Home() {
       </div>
       <Hero />
       <About />
+      <GlobalReach />
       <Services />
       <Principles />
       <Process />

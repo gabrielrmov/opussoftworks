@@ -63,7 +63,7 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
         />
       </head>
       <body className="bg-liquid-abyss font-inter text-base text-silver-mist antialiased">

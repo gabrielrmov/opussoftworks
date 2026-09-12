@@ -37,7 +37,7 @@ export default function Process() {
             className="mx-auto max-w-3xl pb-14 text-center md:pb-20"
             data-aos="fade-up"
           >
-            <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
+            <div className="mb-3 font-mono-brand text-xs font-medium uppercase tracking-[0.18em] text-silver-mist">
               Como funciona
             </div>
             <KineticText

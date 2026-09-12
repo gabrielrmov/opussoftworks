@@ -9,14 +9,19 @@
 }
 
 @theme {
-  --font-inter: -apple-system, "SF Pro Display", ui-sans-serif, system-ui,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-nacelle: -apple-system, "SF Pro Display", ui-sans-serif, system-ui,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  /* Fonte "poster" pro headline de destaque (estilo Air) — só no Hero.
-     Carregada via <link> no <head> (app/layout.tsx), não next/font/google,
+  /* Fontes oficiais do manual de marca ELEVION (Sora / Manrope / JetBrains Mono).
+     Carregadas via <link> no <head> (app/layout.tsx), não next/font/google,
      pra não depender de fetch em build time. */
-  --font-display: "Anton", Impact, "Arial Narrow", sans-serif;
+  --font-inter: "Manrope", -apple-system, ui-sans-serif, system-ui, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-nacelle: "Sora", -apple-system, ui-sans-serif, system-ui, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Headline de destaque do Hero: mesma família (Sora), peso leve —
+     autoridade "sussurrada" em vez de peso/poster. */
+  --font-display: "Sora", -apple-system, ui-sans-serif, system-ui, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono-brand: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
 
   /* Paleta oficial da marca ELEVION: tinta noturna + violeta/índigo/azul/ciano */
   --color-liquid-abyss: #0b0f1f;

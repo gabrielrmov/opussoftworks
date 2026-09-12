@@ -16,7 +16,7 @@ export default function HeroHome() {
           {/* Section header */}
           <div className="pb-10 text-center md:pb-14">
             <div
-              className="mb-6 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist"
+              className="mb-6 font-mono-brand text-xs font-medium uppercase tracking-[0.18em] text-silver-mist"
               data-aos="fade-up"
             >
               Tráfego · Gestão · Sites
@@ -27,7 +27,7 @@ export default function HeroHome() {
                 className="block font-nacelle text-xl font-medium tracking-tight text-platinum sm:text-2xl md:text-3xl"
                 text="Resultado não é sorte."
               />
-              <span className="font-display block uppercase leading-[0.85] tracking-tight text-brand-cyan text-[3.25rem] sm:text-7xl md:text-8xl lg:text-9xl">
+              <span className="font-display mt-2 block font-light leading-[1.05] tracking-tight text-brand-cyan text-6xl sm:text-7xl md:text-8xl lg:text-9xl">
                 É entrega.
               </span>
             </h1>

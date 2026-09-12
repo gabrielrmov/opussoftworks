@@ -36,7 +36,7 @@ export default function Faq() {
           <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] md:gap-16">
             {/* Left: heading + mini-CTA */}
             <div data-aos="fade-right">
-              <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
+              <div className="mb-3 font-mono-brand text-xs font-medium uppercase tracking-[0.18em] text-silver-mist">
                 Perguntas frequentes
               </div>
               <KineticText

@@ -43,7 +43,7 @@ export default function About() {
         <div className="border-t border-white/10 py-16 md:py-24">
           <div className="grid gap-12 md:grid-cols-2 md:items-center md:gap-20">
             <div data-aos="fade-right">
-              <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
+              <div className="mb-3 font-mono-brand text-xs font-medium uppercase tracking-[0.18em] text-silver-mist">
                 Sobre a ELEVION
               </div>
               <KineticText

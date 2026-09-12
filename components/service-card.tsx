@@ -82,7 +82,7 @@ export default function ServiceCard({
         <span
           data-aos="fade-up"
           data-aos-delay={titleDelay}
-          className="relative mb-2 text-xs font-medium uppercase tracking-[0.1em] text-silver-mist transition-transform duration-300 group-hover/card:translate-x-1"
+          className="font-mono-brand relative mb-2 text-xs font-medium uppercase tracking-[0.1em] text-silver-mist transition-transform duration-300 group-hover/card:translate-x-1"
         >
           0{index + 1} — {tag}
         </span>

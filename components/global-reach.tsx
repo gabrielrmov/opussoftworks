@@ -76,7 +76,7 @@ export default function GlobalReach() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
+              <div className="mb-3 font-mono-brand text-xs font-medium uppercase tracking-[0.18em] text-silver-mist">
                 Alcance
               </div>
               <h2 className="font-nacelle text-3xl font-medium tracking-tight text-platinum md:text-5xl">

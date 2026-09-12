@@ -53,7 +53,7 @@ export default function Principles() {
             className="mx-auto max-w-3xl pb-14 text-center md:pb-20"
             data-aos="fade-up"
           >
-            <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-silver-mist">
+            <div className="mb-3 font-mono-brand text-xs font-medium uppercase tracking-[0.18em] text-silver-mist">
               Nossos princípios
             </div>
             <KineticText
@@ -92,7 +92,7 @@ export default function Principles() {
                       </svg>
                     </div>
                   </div>
-                  <span className="font-nacelle text-sm font-medium tracking-widest text-slate-deep transition-colors duration-300 group-hover:text-liquid-mist">
+                  <span className="font-mono-brand text-sm font-medium tracking-widest text-slate-deep transition-colors duration-300 group-hover:text-liquid-mist">
                     0{index + 1}
                   </span>
                 </div>

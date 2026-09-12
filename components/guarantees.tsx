@@ -68,7 +68,7 @@ export default function Guarantees() {
             {guarantees.map((item, index) => (
               <div
                 key={item.title}
-                className="group flex flex-col items-start gap-3 rounded-2xl border border-white/10 p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/25"
+                className="group flex flex-col items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.02] p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:bg-white/[0.04]"
                 data-aos="fade-up"
                 data-aos-delay={index * 150}
               >

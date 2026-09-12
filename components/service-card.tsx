@@ -32,7 +32,7 @@ export default function ServiceCard({
     <a
       data-aos={dataAos}
       data-aos-delay={dataAosDelay}
-      className="group/card relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 p-9 transition-colors duration-300 ease-out hover:border-white/25"
+      className="group/card relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-9 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.04]"
       href="#contato"
     >
       {/* Barra de destaque no topo, cresce da esquerda no hover */}

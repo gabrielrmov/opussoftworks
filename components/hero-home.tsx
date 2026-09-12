@@ -44,7 +44,7 @@ export default function HeroHome() {
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>
                   <a
-                    className="mb-4 flex w-full items-center justify-center gap-2 rounded-md border border-brand-cyan/40 px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-brand-cyan transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-cyan hover:bg-brand-cyan/10 active:translate-y-0 sm:mb-0 sm:w-auto"
+                    className="mb-4 flex w-full items-center justify-center gap-2 rounded-md bg-brand-cyan px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.1em] text-liquid-abyss transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_15px_40px_-12px_rgba(79,216,255,0.55)] active:translate-y-0 sm:mb-0 sm:w-auto"
                     href={HERO_WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -221,7 +221,7 @@ export default function HeroHome() {
             ].map((label, index) => (
               <div
                 key={label}
-                className="flex items-center gap-2 transition-transform duration-300 hover:scale-105"
+                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04]"
                 data-aos="fade-up"
                 data-aos-delay={200 + index * 100}
               >

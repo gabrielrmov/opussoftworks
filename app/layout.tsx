@@ -3,6 +3,7 @@ import "./css/style.css";
 import Header from "@/components/ui/header";
 
 export const metadata = {
+  metadataBase: new URL("https://elevion-site.pages.dev"),
   title: {
     default: "ELEVION — Tráfego, gestão e sites para empresas",
     template: "%s · ELEVION",
@@ -22,12 +23,21 @@ export const metadata = {
       "Tráfego pago, sistemas de gestão e sites profissionais em um único processo, com entrega, responsabilidade e assertividade.",
     locale: "pt_BR",
     type: "website",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "ELEVION — Tráfego, gestão e sites para empresas",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "ELEVION — Tráfego, gestão e sites para empresas",
     description:
       "Tráfego pago, sistemas de gestão e sites profissionais em um único processo.",
+    images: ["/images/og-image.png"],
   },
 };
 

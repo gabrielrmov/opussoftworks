@@ -36,7 +36,7 @@ export default function Cta() {
                 data-aos-delay={400}
               >
                 <a
-                  className="w-full rounded-md border border-brand-cyan/40 px-8 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-brand-cyan transition-all duration-300 hover:-translate-y-1 hover:border-brand-cyan hover:bg-brand-cyan/10 active:translate-y-0 sm:w-auto"
+                  className="w-full rounded-md bg-brand-cyan px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.1em] text-liquid-abyss transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_20px_50px_-15px_rgba(79,216,255,0.55)] active:translate-y-0 sm:w-auto"
                   href={CTA_WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"

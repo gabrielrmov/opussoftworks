@@ -102,7 +102,7 @@ export default function Header() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-md border border-brand-cyan/40 px-5 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-brand-cyan transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-cyan hover:bg-brand-cyan/10"
+            className="rounded-md bg-brand-cyan px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-liquid-abyss transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_12px_30px_-10px_rgba(79,216,255,0.55)]"
           >
             Quero meu diagnóstico
           </a>
@@ -147,7 +147,7 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
-                className="mt-2 flex items-center justify-center rounded-md border border-brand-cyan/40 px-5 py-3.5 text-center text-xs font-medium uppercase tracking-[0.1em] text-brand-cyan transition-transform duration-200 hover:bg-brand-cyan/10 active:scale-95"
+                className="mt-2 flex items-center justify-center rounded-md bg-brand-cyan px-5 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.1em] text-liquid-abyss transition-transform duration-200 active:scale-95"
               >
                 Quero meu diagnóstico
               </a>

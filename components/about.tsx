@@ -67,7 +67,7 @@ export default function About() {
             </div>
 
             <div
-              className="rounded-2xl border border-white/10 p-7 transition-colors duration-500 hover:border-white/25 md:p-9"
+              className="rounded-2xl border border-white/10 bg-white/[0.02] p-7 transition-all duration-500 hover:border-white/20 md:p-9"
               data-aos="fade-left"
               data-aos-delay={100}
             >

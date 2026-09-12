@@ -44,7 +44,7 @@ export const metadata = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0b0f1f",
+  themeColor: "#171721",
 };
 
 export default function RootLayout({
@@ -63,7 +63,7 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap"
         />
       </head>
       <body className="bg-liquid-abyss font-inter text-base text-silver-mist antialiased">

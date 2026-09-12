@@ -92,7 +92,7 @@ export default function Header() {
                   {link.label}
                 </span>
                 <span
-                  className={`absolute inset-x-0 -bottom-0.5 h-px bg-liquid-mist transition-transform duration-300 ${
+                  className={`absolute inset-x-0 -bottom-0.5 h-px bg-cobalt transition-transform duration-300 ${
                     isActive
                       ? "scale-x-100"
                       : "scale-x-0 group-hover:scale-x-100"
@@ -110,7 +110,7 @@ export default function Header() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-md bg-brand-cyan px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-liquid-abyss transition-all duration-300 hover:-translate-y-0.5 hover:bg-white"
+            className="rounded-full bg-brand-cyan px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110"
           >
             Quero meu diagnóstico
           </a>
@@ -155,7 +155,7 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
-                className="mt-2 flex items-center justify-center rounded-md bg-brand-cyan px-5 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.1em] text-liquid-abyss transition-transform duration-200 active:scale-95"
+                className="mt-2 flex items-center justify-center rounded-full bg-brand-cyan px-5 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.1em] text-white transition-transform duration-200 active:scale-95"
               >
                 Quero meu diagnóstico
               </a>

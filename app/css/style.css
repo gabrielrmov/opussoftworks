@@ -9,36 +9,57 @@
 }
 
 @theme {
-  /* Fontes oficiais do manual de marca ELEVION (Sora / Manrope / JetBrains Mono).
-     Carregadas via <link> no <head> (app/layout.tsx), não next/font/google,
-     pra não depender de fetch em build time. */
-  --font-inter: "Manrope", -apple-system, ui-sans-serif, system-ui, "Segoe UI",
+  /* Sistema de estilo "Mercury" (referência colada pelo usuário) — adotado
+     integralmente por pedido dele, substituindo a paleta anterior do manual
+     de marca ELEVION. Fontes carregadas via <link> no <head>
+     (app/layout.tsx), não next/font/google, pra não depender de fetch em
+     build time. Inter é o substituto indicado pra "arcadia" (corpo/UI);
+     Space Grotesk é o substituto pra "arcadiaDisplay" (headlines, peso
+     intermediário, tracking positivo, sem negrito). */
+  --font-inter: "Inter", -apple-system, ui-sans-serif, system-ui, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-nacelle: "Sora", -apple-system, ui-sans-serif, system-ui, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
-  /* Headline de destaque do Hero: mesma família (Sora), peso leve —
-     autoridade "sussurrada" em vez de peso/poster. */
-  --font-display: "Sora", -apple-system, ui-sans-serif, system-ui, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono-brand: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
-    Monaco, Consolas, monospace;
+  --font-nacelle: "Space Grotesk", -apple-system, ui-sans-serif, system-ui,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Space Grotesk", -apple-system, ui-sans-serif, system-ui,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Mercury não usa mono em lugar nenhum — rótulos uppercase (eyebrows) que
+     antes usavam JetBrains Mono agora caem na mesma família de UI (Inter). */
+  --font-mono-brand: "Inter", -apple-system, ui-sans-serif, system-ui,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  /* Paleta oficial da marca ELEVION: tinta noturna + violeta/índigo/azul/ciano */
-  --color-liquid-abyss: #0b0f1f;
-  --color-liquid-deep: #06080f;
-  --color-liquid-kelp: #12162a;
-  --color-liquid-mist: #4fd8ff;
-  --color-platinum: #f5f6fb;
-  --color-silver-mist: #9ca3c4;
-  --color-ash: #f2f2f2;
-  --color-slate-deep: #6b7390;
-  --color-lavender-phosphor: #c4b5fd;
+  /* Paleta Mercury — nomes de token novos, fiéis à referência */
+  --color-onyx-canvas: #171721;
+  --color-graphite-card: #1e1e2a;
+  --color-obsidian-button: #272735;
+  --color-slate-border: #70707d;
+  --color-mist-border: #e2e3ed;
+  --color-ash-text: #c3c3cc;
+  --color-ivory-text: #ededf3;
+  --color-cobalt: #5266eb;
+  --color-cobalt-hover: #6478f0;
+  --color-pure-white: #ffffff;
 
-  /* Cores de marca por vertical */
-  --color-brand-violet: #7c3aed;
-  --color-brand-indigo: #5b5ef5;
-  --color-brand-blue: #2f8cff;
-  --color-brand-cyan: #4fd8ff;
+  /* Tokens antigos (nomes mantidos pra não reescrever toda classe Tailwind)
+     repontados pros valores Mercury: onyx/graphite no lugar da tinta
+     noturna, ivory/ash no lugar de platinum/silver-mist, e o único accent
+     cromático (cobalt) no lugar do ciano — as demais cores de marca por
+     vertical (violeta/índigo/azul) viram neutro, já que a Mercury proíbe
+     mais de um accent cromático na mesma página. */
+  --color-liquid-abyss: #171721;
+  --color-liquid-deep: #1e1e2a;
+  --color-liquid-kelp: #1e1e2a;
+  --color-liquid-mist: #c3c3cc;
+  --color-platinum: #ededf3;
+  --color-silver-mist: #c3c3cc;
+  --color-ash: #c3c3cc;
+  --color-slate-deep: #70707d;
+  --color-lavender-phosphor: #c3c3cc;
+
+  /* Cores de marca por vertical — neutralizadas (accent único é o cobalt) */
+  --color-brand-violet: #70707d;
+  --color-brand-indigo: #70707d;
+  --color-brand-blue: #70707d;
+  --color-brand-cyan: #5266eb;
 
   /* Medium-only weight strategy: no bold, no light at display sizes */
   --font-weight-semibold: 500;

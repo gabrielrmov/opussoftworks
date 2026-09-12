@@ -17,9 +17,9 @@ export default function ServiceCard({
   description,
   icon,
   index,
-  accentBg = "bg-liquid-abyss",
-  accentText = "text-liquid-mist",
-  accentBar = "bg-liquid-mist",
+  accentBg = "bg-obsidian-button",
+  accentText = "text-ivory-text",
+  accentBar = "bg-mist-border/30",
   "data-aos": dataAos,
   "data-aos-delay": dataAosDelay,
 }: ServiceCardProps) {
@@ -32,7 +32,7 @@ export default function ServiceCard({
     <a
       data-aos={dataAos}
       data-aos-delay={dataAosDelay}
-      className="group/card relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-9 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.05]"
+      className="group/card relative flex h-full flex-col overflow-hidden rounded-xl border border-white/10 bg-graphite-card p-9 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:bg-obsidian-button"
       href="#contato"
     >
       {/* Barra de destaque no topo, cresce da esquerda no hover */}

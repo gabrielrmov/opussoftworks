@@ -18,7 +18,7 @@ export default function Cta() {
                 data-aos="fade-up"
                 segments={[
                   { text: "Pronto para parar de deixar " },
-                  { text: "resultado", className: "text-brand-cyan" },
+                  { text: "resultado", className: "text-ivory-text" },
                   { text: " na mesa?" },
                 ]}
               />
@@ -36,7 +36,7 @@ export default function Cta() {
                 data-aos-delay={400}
               >
                 <a
-                  className="w-full rounded-md bg-brand-cyan px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.1em] text-liquid-abyss transition-all duration-300 hover:-translate-y-1 hover:bg-white active:translate-y-0 sm:w-auto"
+                  className="w-full rounded-full bg-brand-cyan px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-1 hover:brightness-110 active:translate-y-0 sm:w-auto"
                   href={CTA_WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"

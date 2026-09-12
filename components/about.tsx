@@ -3,16 +3,16 @@ import KineticText from "@/components/ui/kinetic-text";
 const pillars = [
   {
     label: "Tráfego pago",
-    accentBg: "bg-brand-blue/15",
-    accentText: "text-brand-blue",
+    accentBg: "bg-obsidian-button",
+    accentText: "text-ivory-text",
     icon: (
       <path d="M3 17 L9.5 10.5 L13.5 14.5 L21 6 M15 6 L21 6 L21 12" />
     ),
   },
   {
     label: "Sistemas de gestão",
-    accentBg: "bg-brand-indigo/15",
-    accentText: "text-brand-indigo",
+    accentBg: "bg-obsidian-button",
+    accentText: "text-ivory-text",
     icon: (
       <>
         <rect x="3" y="3" width="7.5" height="7.5" rx="1.2" />
@@ -24,8 +24,8 @@ const pillars = [
   },
   {
     label: "Sites para empresas",
-    accentBg: "bg-brand-cyan/15",
-    accentText: "text-brand-cyan",
+    accentBg: "bg-obsidian-button",
+    accentText: "text-ivory-text",
     icon: (
       <>
         <rect x="3" y="4.5" width="18" height="12" rx="1.5" />
@@ -67,7 +67,7 @@ export default function About() {
             </div>
 
             <div
-              className="rounded-2xl border border-white/10 bg-white/[0.035] p-7 transition-all duration-500 hover:border-white/20 md:p-9"
+              className="rounded-xl border border-white/10 bg-graphite-card p-7 transition-all duration-500 hover:border-white/20 md:p-9"
               data-aos="fade-left"
               data-aos-delay={100}
             >

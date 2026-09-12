@@ -27,7 +27,7 @@ export default function HeroHome() {
                 className="block font-nacelle text-xl font-medium tracking-tight text-platinum sm:text-2xl md:text-3xl"
                 text="Resultado não é sorte."
               />
-              <span className="font-display mt-2 block font-light leading-[1.05] tracking-tight text-brand-cyan text-6xl sm:text-7xl md:text-8xl lg:text-9xl">
+              <span className="font-display mt-2 block font-light leading-[1.05] tracking-tight text-ivory-text text-6xl sm:text-7xl md:text-8xl lg:text-9xl">
                 É entrega.
               </span>
             </h1>
@@ -44,7 +44,7 @@ export default function HeroHome() {
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>
                   <a
-                    className="mb-4 flex w-full items-center justify-center gap-2 rounded-md bg-brand-cyan px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.1em] text-liquid-abyss transition-all duration-300 hover:-translate-y-0.5 hover:bg-white active:translate-y-0 sm:mb-0 sm:w-auto"
+                    className="mb-4 flex w-full items-center justify-center gap-2 rounded-full bg-brand-cyan px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.1em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0 sm:mb-0 sm:w-auto"
                     href={HERO_WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -54,7 +54,7 @@ export default function HeroHome() {
                 </div>
                 <div data-aos="fade-up" data-aos-delay={600}>
                   <a
-                    className="flex w-full items-center justify-center rounded-md border border-white/15 px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-silver-mist transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:text-platinum sm:ml-4 sm:w-auto"
+                    className="flex w-full items-center justify-center rounded-full border border-ivory-text px-7 py-3.5 text-xs font-medium uppercase tracking-[0.1em] text-ivory-text transition-all duration-300 hover:-translate-y-0.5 hover:bg-obsidian-button sm:ml-4 sm:w-auto"
                     href="#servicos"
                   >
                     Ver serviços
@@ -81,11 +81,11 @@ export default function HeroHome() {
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 {/* Tráfego pago: mini bar chart */}
                 <div
-                  className="animate-float rounded-xl bg-liquid-abyss/60 p-4 transition-transform duration-300 hover:scale-[1.03] hover:bg-liquid-abyss/80"
+                  className="animate-float rounded-xl bg-obsidian-button/70 p-4 transition-transform duration-300 hover:scale-[1.03] hover:bg-obsidian-button"
                   style={{ animationDelay: "0s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-brand-blue/15 text-brand-blue">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-graphite-card text-ivory-text">
                       <svg
                         width="15"
                         height="15"
@@ -119,11 +119,11 @@ export default function HeroHome() {
 
                 {/* Sistemas de gestão: mini checklist */}
                 <div
-                  className="animate-float rounded-xl bg-liquid-abyss/60 p-4 transition-transform duration-300 hover:scale-[1.03] hover:bg-liquid-abyss/80"
+                  className="animate-float rounded-xl bg-obsidian-button/70 p-4 transition-transform duration-300 hover:scale-[1.03] hover:bg-obsidian-button"
                   style={{ animationDelay: "0.6s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-brand-indigo/15 text-brand-indigo">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-graphite-card text-ivory-text">
                       <svg
                         width="15"
                         height="15"
@@ -168,11 +168,11 @@ export default function HeroHome() {
 
                 {/* Sites: mini browser mockup */}
                 <div
-                  className="animate-float rounded-xl bg-liquid-abyss/60 p-4 transition-transform duration-300 hover:scale-[1.03] hover:bg-liquid-abyss/80"
+                  className="animate-float rounded-xl bg-obsidian-button/70 p-4 transition-transform duration-300 hover:scale-[1.03] hover:bg-obsidian-button"
                   style={{ animationDelay: "1.2s" }}
                 >
                   <div className="mb-4 flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-brand-cyan/15 text-brand-cyan">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-graphite-card text-ivory-text">
                       <svg
                         width="15"
                         height="15"
@@ -217,7 +217,7 @@ export default function HeroHome() {
             ].map((label, index) => (
               <div
                 key={label}
-                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05]"
+                className="flex items-center gap-2 rounded-full border border-white/10 bg-graphite-card px-4 py-2 transition-all duration-300 hover:border-white/20 hover:bg-obsidian-button"
                 data-aos="fade-up"
                 data-aos-delay={200 + index * 100}
               >

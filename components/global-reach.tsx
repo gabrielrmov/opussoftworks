@@ -11,18 +11,18 @@ const World = dynamic(
 
 const globeConfig: GlobeConfig = {
   pointSize: 2,
-  globeColor: "#0b0f1f",
+  globeColor: "#171721",
   showAtmosphere: true,
-  atmosphereColor: "#4fd8ff",
+  atmosphereColor: "#5266eb",
   atmosphereAltitude: 0.12,
-  emissive: "#0b0f1f",
+  emissive: "#171721",
   emissiveIntensity: 0.15,
   shininess: 0.7,
-  polygonColor: "rgba(245, 246, 251, 0.55)",
-  ambientLight: "#5b5ef5",
+  polygonColor: "rgba(237, 237, 243, 0.55)",
+  ambientLight: "#70707d",
   directionalLeftLight: "#ffffff",
   directionalTopLight: "#ffffff",
-  pointLight: "#4fd8ff",
+  pointLight: "#5266eb",
   arcTime: 1200,
   arcLength: 0.85,
   rings: 2,
@@ -50,7 +50,7 @@ const capitals = [
   { name: "Belém", lat: -1.4558, lng: -48.4902 },
 ];
 
-const routeColors = ["#7c3aed", "#5b5ef5", "#2f8cff", "#4fd8ff"];
+const routeColors = ["#5266eb"];
 
 const globeArcs: Position[] = capitals.map((capital, index) => ({
   order: index + 1,

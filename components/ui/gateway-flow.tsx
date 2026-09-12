@@ -386,7 +386,7 @@ const GATEWAY_FLOW_DEFINITION: EffectDefinition = {
   title: "Gateway Flow",
   source: gatewayFlowSource,
   supportsMode: true,
-  background: (mode) => (mode === "light" ? LIGHT_PAPER : "#0b0f1f"),
+  background: (mode) => (mode === "light" ? LIGHT_PAPER : "#171721"),
   targets: [{ selector: "#flow-canvas", role: "background" }],
   patch(source, { size, density, mode }) {
     let next = source

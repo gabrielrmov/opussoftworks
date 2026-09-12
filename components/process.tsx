@@ -67,7 +67,7 @@ export default function Process() {
                   data-aos="fade-up"
                   data-aos-delay={index * 130}
                 >
-                  <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-liquid-abyss font-nacelle text-base font-medium text-platinum transition-all duration-300 group-hover:scale-105 group-hover:border-brand-indigo/40 group-hover:text-brand-indigo">
+                  <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-liquid-abyss font-nacelle text-base font-medium text-platinum transition-all duration-300 group-hover:scale-105 group-hover:border-white/30">
                     {index + 1}
                   </div>
                   <div className="flex-1 pb-1 pt-1.5">
@@ -77,7 +77,7 @@ export default function Process() {
                     <p className="mb-3 text-silver-mist">
                       {step.description}
                     </p>
-                    <span className="inline-flex items-center gap-1.5 rounded-md border border-white/10 px-2.5 py-1 text-xs font-medium text-liquid-mist transition-colors duration-300 group-hover:border-brand-indigo/40">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-2.5 py-1 text-xs font-medium text-ivory-text transition-colors duration-300 group-hover:border-white/30">
                       <svg
                         width="12"
                         height="12"

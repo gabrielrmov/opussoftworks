@@ -7,9 +7,9 @@ const services = [
     title: "Campanhas que trazem gente pronta pra comprar",
     description:
       "Google Ads e Meta Ads configurados pra gerar lead qualificado, não clique barato. Você acompanha CPL, conversão e ROAS toda semana — não só num relatório mensal genérico.",
-    accentBg: "bg-brand-blue/15",
-    accentText: "text-brand-blue",
-    accentBar: "bg-brand-blue",
+    accentBg: "bg-obsidian-button",
+    accentText: "text-ivory-text",
+    accentBar: "bg-mist-border/30",
     icon: (
       <path d="M3 17 L9.5 10.5 L13.5 14.5 L21 6 M15 6 L21 6 L21 12" />
     ),
@@ -19,9 +19,9 @@ const services = [
     title: "Sua operação organizada em um só lugar",
     description:
       "Sistema construído pro seu processo real, não uma planilha genérica adaptada. Vendas, estoque, financeiro e contrato num só painel — sem mensalidade de ferramenta que você usa pela metade.",
-    accentBg: "bg-brand-indigo/15",
-    accentText: "text-brand-indigo",
-    accentBar: "bg-brand-indigo",
+    accentBg: "bg-obsidian-button",
+    accentText: "text-ivory-text",
+    accentBar: "bg-mist-border/30",
     icon: (
       <>
         <rect x="3" y="3" width="7.5" height="7.5" rx="1.2" />
@@ -36,9 +36,9 @@ const services = [
     title: "Um site que converte visita em cliente",
     description:
       "Rápido, responsivo e construído pra guiar quem chega até o WhatsApp ou o formulário — não só bonito de olhar, funcional pra vender.",
-    accentBg: "bg-brand-cyan/15",
-    accentText: "text-brand-cyan",
-    accentBar: "bg-brand-cyan",
+    accentBg: "bg-obsidian-button",
+    accentText: "text-ivory-text",
+    accentBar: "bg-mist-border/30",
     icon: (
       <>
         <rect x="3" y="4.5" width="18" height="12" rx="1.5" />

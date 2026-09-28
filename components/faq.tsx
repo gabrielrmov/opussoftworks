@@ -13,7 +13,7 @@ const faqs = [
       "Sim. Tráfego pago, sistema de gestão ou site — separado ou combinado, o que fizer sentido pro momento da sua empresa.",
   },
   {
-    question: "Que tipo de empresa a ELEVION atende?",
+    question: "Que tipo de empresa a OPUS SOFTWORKS atende?",
     answer:
       "De pequenos negócios a empresas em expansão que precisam organizar a operação, gerar mais lead ou ter uma presença digital que converte de verdade.",
   },

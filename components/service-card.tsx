@@ -38,7 +38,7 @@ export default function ServiceCard({
       href="#contato"
     >
       {/* Pixels da marca "acendem" no hover/foco, atrás do conteúdo —
-          React Bits PixelCard, cores trocadas pro azul da Elevion. */}
+          React Bits PixelCard, cores trocadas pro laranja da Opus SoftWorks. */}
       <PixelCard noFocus className="flex h-full flex-col p-9">
       {/* Barra de destaque no topo, cresce da esquerda no hover */}
       <span

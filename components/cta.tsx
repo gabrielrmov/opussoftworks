@@ -4,7 +4,7 @@ import LiquidCarveButton from "@/components/ui/liquid-carve-button";
 import WebThreads from "@/components/ui/web-threads";
 
 const CTA_WHATSAPP_URL = getWhatsAppUrl(
-  "Olá! Quero solicitar meu diagnóstico gratuito com a ELEVION. Vim pelo site.",
+  "Olá! Quero solicitar meu diagnóstico gratuito com a OPUS SOFTWORKS. Vim pelo site.",
 );
 
 export default function Cta() {

@@ -59,7 +59,7 @@ export default function About() {
           <div className="grid gap-12 md:grid-cols-2 md:items-center md:gap-20">
             <div data-aos="fade-right">
               <div className="mb-3 font-mono-brand text-xs font-medium uppercase tracking-[0.18em] text-cobalt">
-                Sobre a ELEVION
+                Sobre a OPUS SOFTWORKS
               </div>
               <KineticText
                 as="h2"
@@ -68,7 +68,7 @@ export default function About() {
               />
               <div className="space-y-4 text-silver-mist">
                 <p>
-                  A ELEVION nasceu em Goiânia com uma constatação simples:
+                  A OPUS SOFTWORKS nasceu em Goiânia com uma constatação simples:
                   agência de tráfego, desenvolvedor e sistema de gestão
                   raramente falam a mesma língua — e quem paga o preço disso
                   é a empresa, no meio do fogo cruzado.

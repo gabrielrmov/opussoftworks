@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import logo from "@/public/images/elevion-logo-black.png";
+import logo from "@/public/images/opus-logo-black.png";
 
 const columns = [
   {
@@ -35,7 +35,7 @@ export default function SiteFooter() {
       <div className="mx-auto max-w-[960px] px-6 py-14 sm:px-11 sm:py-16">
         <div className="grid gap-10 sm:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <Image src={logo} alt="ELEVION" className="h-6 w-auto" />
+            <Image src={logo} alt="OPUS SOFTWORKS" className="h-6 w-auto" />
             <p className="mt-4 max-w-[220px] text-[13px] leading-relaxed text-landing-muted">
               Tráfego, sistemas e sites sob uma mesma estratégia.
             </p>
@@ -62,7 +62,7 @@ export default function SiteFooter() {
           ))}
         </div>
 
-        <p className="mt-12 text-xs text-landing-muted">© 2026 Elevion</p>
+        <p className="mt-12 text-xs text-landing-muted">© 2026 Opus SoftWorks</p>
       </div>
     </footer>
   );

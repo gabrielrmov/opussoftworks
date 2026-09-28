@@ -5,19 +5,19 @@ import ConditionalHeader from "@/components/ui/conditional-header";
 export const metadata = {
   metadataBase: new URL("https://elevion-site.pages.dev"),
   title: {
-    default: "ELEVION — Tráfego, gestão e sites para empresas",
-    template: "%s · ELEVION",
+    default: "OPUS SOFTWORKS — Tráfego, gestão e sites para empresas",
+    template: "%s · OPUS SOFTWORKS",
   },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/images/elevion-icon-192.png", type: "image/png", sizes: "192x192" },
-      { url: "/images/elevion-icon-512.png", type: "image/png", sizes: "512x512" },
+      { url: "/images/opus-icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/images/opus-icon-512.png", type: "image/png", sizes: "512x512" },
     ],
     shortcut: "/favicon.ico",
   },
   description:
-    "Tráfego pago, sistemas de gestão e sites profissionais em um único parceiro. Diagnóstico gratuito e sem compromisso pela ELEVION, em Goiânia.",
+    "Tráfego pago, sistemas de gestão e sites profissionais em um único parceiro. Diagnóstico gratuito e sem compromisso pela OPUS SOFTWORKS, em Goiânia.",
   keywords: [
     "tráfego pago",
     "gestão empresarial",
@@ -26,7 +26,7 @@ export const metadata = {
     "Goiânia",
   ],
   openGraph: {
-    title: "ELEVION — Tráfego, gestão e sites para empresas",
+    title: "OPUS SOFTWORKS — Tráfego, gestão e sites para empresas",
     description:
       "Tráfego pago, sistemas de gestão e sites profissionais em um único processo, com entrega, responsabilidade e assertividade.",
     locale: "pt_BR",
@@ -36,13 +36,13 @@ export const metadata = {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "ELEVION — Tráfego, gestão e sites para empresas",
+        alt: "OPUS SOFTWORKS — Tráfego, gestão e sites para empresas",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ELEVION — Tráfego, gestão e sites para empresas",
+    title: "OPUS SOFTWORKS — Tráfego, gestão e sites para empresas",
     description:
       "Tráfego pago, sistemas de gestão e sites profissionais em um único processo.",
     images: ["/images/og-image.png"],

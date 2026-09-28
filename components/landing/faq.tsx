@@ -6,13 +6,13 @@ import { motion } from "motion/react";
 const faqItems = [
   {
     id: "item-1",
-    question: "Como a Elevion se diferencia de uma agência comum?",
+    question: "Como a Opus SoftWorks se diferencia de uma agência comum?",
     answer:
       "A gente não entrega só anúncio ou só site. Olhamos aquisição, operação e presença digital como um sistema único, e medimos tudo pelo resultado que entra no caixa, não por métrica de vaidade.",
   },
   {
     id: "item-2",
-    question: "A Elevion atende empresas de qualquer tamanho?",
+    question: "A Opus SoftWorks atende empresas de qualquer tamanho?",
     answer:
       "Trabalhamos melhor com empresas que já faturam e querem crescer com processo. Se o momento for de validar a ideia, dizemos isso na primeira conversa, sem vender o que não faz sentido.",
   },

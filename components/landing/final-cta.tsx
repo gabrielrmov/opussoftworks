@@ -1,7 +1,7 @@
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 const WHATSAPP_URL = getWhatsAppUrl(
-  "Olá! Quero conversar sobre a ELEVION.",
+  "Olá! Quero conversar sobre a OPUS SOFTWORKS.",
 );
 
 export default function FinalCta() {

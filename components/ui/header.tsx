@@ -13,7 +13,7 @@ const navLinks = [
 ];
 
 const WHATSAPP_URL = getWhatsAppUrl(
-  "Olá! Quero solicitar meu diagnóstico gratuito com a ELEVION.",
+  "Olá! Quero solicitar meu diagnóstico gratuito com a OPUS SOFTWORKS.",
 );
 
 export default function Header() {

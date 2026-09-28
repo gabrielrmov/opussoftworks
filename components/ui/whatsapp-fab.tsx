@@ -1,7 +1,7 @@
 import { WHATSAPP_DISPLAY, getWhatsAppUrl } from "@/lib/whatsapp";
 
 const FAB_WHATSAPP_URL = getWhatsAppUrl(
-  "Olá! Quero solicitar meu diagnóstico gratuito com a ELEVION.",
+  "Olá! Quero solicitar meu diagnóstico gratuito com a OPUS SOFTWORKS.",
 );
 
 /**

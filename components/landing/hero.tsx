@@ -6,7 +6,7 @@ import SpecularButton from "@/components/ui/specular-button";
 import DotField from "@/components/ui/dot-field";
 
 const WHATSAPP_URL = getWhatsAppUrl(
-  "Olá! Quero falar com um especialista da ELEVION.",
+  "Olá! Quero falar com um especialista da OPUS SOFTWORKS.",
 );
 
 export default function Hero() {
@@ -34,8 +34,8 @@ export default function Hero() {
           Resultado não é sorte.{" "}
           <ShinyText
             text="É entrega."
-            color="#165dfc"
-            shineColor="#7fa8ff"
+            color="#ff6039"
+            shineColor="#ffb6a4"
             speed={2.4}
             className="font-intertight font-medium"
           />
@@ -51,7 +51,7 @@ export default function Hero() {
             tint="#171717"
             tintOpacity={1}
             textColor="#ffffff"
-            lineColor="#165dfc"
+            lineColor="#ff6039"
             baseColor="#171717"
             onClick={() => window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer")}
           >

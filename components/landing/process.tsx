@@ -36,7 +36,7 @@ export default function Process() {
     >
       <div className="pointer-events-none absolute inset-0 opacity-[0.05]" aria-hidden="true">
         <LetterGlitch
-          glitchColors={["#165dfc", "#7fa8ff", "#171717"]}
+          glitchColors={["#ff6039", "#ffb6a4", "#171717"]}
           glitchSpeed={60}
           smooth
           lightMode

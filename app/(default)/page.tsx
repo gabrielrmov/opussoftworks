@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "ELEVION — Tráfego, gestão e sites para empresas",
+  title: "OPUS SOFTWORKS — Tráfego, gestão e sites para empresas",
   description:
     "Estratégia, tecnologia e IA para empresas crescerem com decisões melhores. Tráfego pago, sistemas e automações e sites que convertem, sob uma mesma estratégia.",
 };

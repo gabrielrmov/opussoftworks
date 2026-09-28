@@ -1,4 +1,4 @@
-// Canal de contato oficial da ELEVION. Centralizado aqui pra todo botão de
+// Canal de contato oficial da OPUS SOFTWORKS. Centralizado aqui pra todo botão de
 // CTA do site apontar sempre pro mesmo número, com a mesma formatação.
 export const WHATSAPP_NUMBER = "5562994106910";
 export const WHATSAPP_DISPLAY = "(62) 99410-6910";

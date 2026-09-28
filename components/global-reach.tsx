@@ -32,7 +32,7 @@ const globeConfig: GlobeConfig = {
   arcLength: 0.85,
   rings: 2,
   maxRings: 3,
-  // Goiânia — sede da ELEVION
+  // Goiânia — sede da OPUS SOFTWORKS
   initialPosition: { lat: -16.6869, lng: -49.2648 },
   autoRotate: true,
   autoRotateSpeed: 0.4,

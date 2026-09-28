@@ -38,14 +38,14 @@ export default function Pillars() {
       `}</style>
       <div className="mx-auto max-w-2xl text-center">
         <p className="font-intertight text-xs font-medium uppercase tracking-[0.14em] text-landing-accent">
-          Onde a ELEVION entra
+          Onde a OPUS SOFTWORKS entra
         </p>
         <div className="pillars-truefocus mt-4 flex justify-center">
           <TrueFocus
             sentence="Tráfego Sistemas Sites"
             manualMode={false}
             blurAmount={4}
-            borderColor="#165dfc"
+            borderColor="#ff6039"
             glowColor="rgba(22, 93, 252, 0.5)"
             animationDuration={0.6}
             pauseBetweenAnimations={1.2}

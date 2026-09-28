@@ -2,7 +2,7 @@ import Logo from "./logo";
 import { WHATSAPP_DISPLAY, getWhatsAppUrl } from "@/lib/whatsapp";
 
 const FOOTER_WHATSAPP_URL = getWhatsAppUrl(
-  "Olá! Quero solicitar meu diagnóstico gratuito com a ELEVION.",
+  "Olá! Quero solicitar meu diagnóstico gratuito com a OPUS SOFTWORKS.",
 );
 
 export default function Footer() {
@@ -128,7 +128,7 @@ export default function Footer() {
             </div>
             <div className="text-sm">
               <p className="mb-3 text-silver-mist">
-                © 2026 ELEVION. Todos os direitos reservados.
+                © 2026 OPUS SOFTWORKS. Todos os direitos reservados.
               </p>
               <ul className="inline-flex gap-3 lg:justify-end">
                 <li>

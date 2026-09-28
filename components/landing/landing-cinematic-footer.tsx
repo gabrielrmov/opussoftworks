@@ -12,7 +12,7 @@ if (typeof window !== "undefined") {
 }
 
 const WHATSAPP_URL = getWhatsAppUrl(
-  "Olá! Quero falar com um especialista da ELEVION.",
+  "Olá! Quero falar com um especialista da OPUS SOFTWORKS.",
 );
 
 export default function LandingCinematicFooter() {
@@ -84,7 +84,7 @@ export default function LandingCinematicFooter() {
             ref={giantTextRef}
             className="footer-giant-bg-text absolute -bottom-[5vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none"
           >
-            ELEVION
+            OPUS SOFTWORKS
           </div>
 
           <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 mt-20 w-full max-w-5xl mx-auto">
@@ -123,7 +123,7 @@ export default function LandingCinematicFooter() {
 
           <div className="relative z-20 w-full pb-8 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-muted-foreground text-[10px] md:text-xs font-semibold tracking-widest uppercase order-2 md:order-1">
-              © 2026 Elevion. Todos os direitos reservados.
+              © 2026 Opus SoftWorks. Todos os direitos reservados.
             </div>
 
             <MagneticButton

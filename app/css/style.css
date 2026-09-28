@@ -58,7 +58,7 @@
 @theme {
   /* Sistema de estilo "Mercury" (referência colada pelo usuário) — adotado
      integralmente por pedido dele, substituindo a paleta anterior do manual
-     de marca ELEVION. Fontes carregadas via <link> no <head>
+     de marca OPUS SOFTWORKS. Fontes carregadas via <link> no <head>
      (app/layout.tsx), não next/font/google, pra não depender de fetch em
      build time. Inter é o substituto indicado pra "arcadia" (corpo/UI);
      Space Grotesk é o substituto pra "arcadiaDisplay" (headlines, peso
@@ -86,7 +86,7 @@
   --color-cobalt-hover: #5ca6ff;
   --color-pure-white: #ffffff;
 
-  /* Landing page ELEVION (a partir do PDF pronto do usuário) — paleta e
+  /* Landing page OPUS SOFTWORKS (a partir do PDF pronto do usuário) — paleta e
      fontes próprias dessa página, fiéis ao arquivo, sem reaproveitar os
      tokens Mercury acima (que são de outra direção visual). */
   --font-intertight: "Inter Tight", -apple-system, ui-sans-serif, system-ui,
@@ -96,7 +96,7 @@
   --color-landing-bg: #fafafa;
   --color-landing-ink: #171717;
   --color-landing-muted: #585858;
-  --color-landing-accent: #165dfc;
+  --color-landing-accent: #ff6039;
   --color-landing-card: #ededed;
   --color-landing-line: #171717;
 

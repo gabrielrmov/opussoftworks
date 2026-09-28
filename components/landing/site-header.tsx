@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import logoBlack from "@/public/images/elevion-logo-black.png";
-import logoWhite from "@/public/images/elevion-logo-white.png";
+import logoBlack from "@/public/images/opus-logo-black.png";
+import logoWhite from "@/public/images/opus-logo-white.png";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { GlowMenu } from "@/components/ui/glow-menu";
 
@@ -24,7 +24,7 @@ const THEME_MARKERS = [
   { id: "header-theme-dark-2", dark: true },
 ];
 
-const WHATSAPP_URL = getWhatsAppUrl("Olá! Quero falar com um especialista da ELEVION.");
+const WHATSAPP_URL = getWhatsAppUrl("Olá! Quero falar com um especialista da OPUS SOFTWORKS.");
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -139,10 +139,10 @@ export default function SiteHeader() {
             : "border border-landing-ink/10 bg-landing-bg/40"
         }`}
       >
-        <Link href="/" className="flex shrink-0 items-center" aria-label="ELEVION">
+        <Link href="/" className="flex shrink-0 items-center" aria-label="OPUS SOFTWORKS">
           <Image
             src={isDark ? logoWhite : logoBlack}
-            alt="ELEVION"
+            alt="OPUS SOFTWORKS"
             className="h-6 w-auto transition-opacity duration-500"
             priority
           />

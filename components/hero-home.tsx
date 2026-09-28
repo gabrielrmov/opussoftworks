@@ -4,7 +4,7 @@ import { getWhatsAppUrl } from "@/lib/whatsapp";
 import KineticText from "@/components/ui/kinetic-text";
 
 const HERO_WHATSAPP_URL = getWhatsAppUrl(
-  "Olá! Quero solicitar meu diagnóstico gratuito com a ELEVION.",
+  "Olá! Quero solicitar meu diagnóstico gratuito com a OPUS SOFTWORKS.",
 );
 
 export default function HeroHome() {

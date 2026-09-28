@@ -1,17 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import logoWhite from "@/public/images/elevion-logo-white.png";
+import logoWhite from "@/public/images/opus-logo-white.png";
 
 export default function Logo() {
   return (
     <Link
       href="/"
       className="inline-flex shrink-0 items-center transition-transform duration-300 hover:scale-105"
-      aria-label="ELEVION"
+      aria-label="OPUS SOFTWORKS"
     >
       <Image
         src={logoWhite}
-        alt="ELEVION"
+        alt="OPUS SOFTWORKS"
         className="h-7 w-auto"
         priority
       />

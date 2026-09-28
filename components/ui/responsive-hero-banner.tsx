@@ -6,7 +6,7 @@ import { motion, type Variants } from "motion/react";
 
 import { cn } from "@/lib/utils";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
-import logoWhite from "@/public/images/elevion-logo-white.png";
+import logoWhite from "@/public/images/opus-logo-white.png";
 import GlowCursor from "@/components/ui/glow-cursor";
 
 const EASE_OUT_EXPO: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -51,7 +51,7 @@ interface ResponsiveHeroBannerProps {
 }
 
 const DEFAULT_WHATSAPP_URL = getWhatsAppUrl(
-  "Olá! Quero solicitar meu diagnóstico gratuito com a ELEVION.",
+  "Olá! Quero solicitar meu diagnóstico gratuito com a OPUS SOFTWORKS.",
 );
 
 const DEFAULT_NAV_LINKS: NavLink[] = [
@@ -62,7 +62,7 @@ const DEFAULT_NAV_LINKS: NavLink[] = [
 ];
 
 // Azul #2F8CFF — já usado pra "Tráfego pago" no manual de marca antigo da
-// Elevion — no lugar do vermelho-fogo genérico da referência.
+// Opus SoftWorks — no lugar do vermelho-fogo genérico da referência.
 const ACCENT = "#2F8CFF";
 
 const ResponsiveHeroBanner: React.FC<ResponsiveHeroBannerProps> = ({
@@ -139,7 +139,7 @@ const ResponsiveHeroBanner: React.FC<ResponsiveHeroBannerProps> = ({
           initial="hidden"
           animate="show"
         >
-          <Image src={logoWhite} alt="ELEVION" className="h-6 w-auto" priority />
+          <Image src={logoWhite} alt="OPUS SOFTWORKS" className="h-6 w-auto" priority />
 
           <nav className="hidden items-center gap-1 rounded-full bg-white/5 px-1.5 py-1.5 ring-1 ring-white/10 backdrop-blur md:flex">
             {navLinks.map((link) => (

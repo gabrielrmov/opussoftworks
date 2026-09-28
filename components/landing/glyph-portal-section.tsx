@@ -5,7 +5,7 @@ import GlyphPortal from "@/components/ui/glyph-portal";
 export default function GlyphPortalSection() {
   return (
     <GlyphPortal
-      word="ELEVION"
+      word="OPUS SOFTWORKS"
       scrollLength={2.2}
       interactive={true}
       annotations={false}

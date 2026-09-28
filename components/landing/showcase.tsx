@@ -10,7 +10,7 @@ export default function Showcase() {
       <div className="relative mt-10 flex aspect-[16/9] w-full flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border border-landing-ink/10 bg-landing-card px-6 text-center">
         <div className="absolute inset-0 opacity-[0.12]">
           <LetterGlitch
-            glitchColors={["#165dfc", "#7fa8ff", "#171717"]}
+            glitchColors={["#ff6039", "#ffb6a4", "#171717"]}
             glitchSpeed={60}
             smooth
             lightMode

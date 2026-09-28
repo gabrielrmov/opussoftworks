@@ -19,7 +19,7 @@ export default function GlyphPortalSection() {
             inset: 0,
             transform: "scale(var(--gp-field-scale,1))",
             background:
-              "radial-gradient(circle at 18% 8%, rgba(22,93,252,.55), transparent 34%), radial-gradient(circle at 82% 20%, rgba(244,246,255,.10), transparent 28%), radial-gradient(circle at 48% 78%, rgba(9,15,45,.55), transparent 44%), linear-gradient(135deg,#0b1530 0%,#132049 48%,#080d24 100%)",
+              "radial-gradient(circle at 18% 8%, rgba(255,96,56,.45), transparent 34%), radial-gradient(circle at 82% 20%, rgba(244,246,255,.10), transparent 28%), radial-gradient(circle at 48% 78%, rgba(9,15,45,.55), transparent 44%), linear-gradient(135deg,#0b1530 0%,#132049 48%,#080d24 100%)",
           }}
         />
       }

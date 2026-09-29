@@ -2,6 +2,9 @@ import "./css/style.css";
 
 import ConditionalHeader from "@/components/ui/conditional-header";
 
+// Prefixo só existe no build do GitHub Pages (ver next.config.js).
+const base = process.env.PAGES_BASE_PATH || "";
+
 export const metadata = {
   metadataBase: new URL("https://elevion-site.pages.dev"),
   title: {
@@ -10,11 +13,11 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/images/opus-icon-192.png", type: "image/png", sizes: "192x192" },
-      { url: "/images/opus-icon-512.png", type: "image/png", sizes: "512x512" },
+      { url: `${base}/favicon.ico`, sizes: "any" },
+      { url: `${base}/images/opus-icon-192.png`, type: "image/png", sizes: "192x192" },
+      { url: `${base}/images/opus-icon-512.png`, type: "image/png", sizes: "512x512" },
     ],
-    shortcut: "/favicon.ico",
+    shortcut: `${base}/favicon.ico`,
   },
   description:
     "Tráfego pago, sistemas de gestão e sites profissionais em um único parceiro. Diagnóstico gratuito e sem compromisso pela OPUS SOFTWORKS, em Goiânia.",

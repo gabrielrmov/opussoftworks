@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
+  // Só definido no build do GitHub Pages (site em /<repo>/); vazio no
+  // Cloudflare Pages e local.
+  basePath: process.env.PAGES_BASE_PATH || "",
   images: {
     unoptimized: true,
   },

@@ -1,8 +1,8 @@
-# ELEVION — Site institucional
+# Opus SoftWorks — Site institucional
 
-Site institucional da ELEVION, construído em Next.js 15 + Tailwind CSS 4 a
+Site institucional da Opus SoftWorks, construído em Next.js 15 + Tailwind CSS 4 a
 partir do template [Open PRO](https://github.com/cruip/open-react-template)
-da Cruip, adaptado com a marca, o conteúdo e a proposta de valor da ELEVION.
+da Cruip, adaptado com a marca, o conteúdo e a proposta de valor da Opus SoftWorks.
 
 ## Como rodar localmente
 

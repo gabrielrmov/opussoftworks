@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export interface GlowMenuItem {
@@ -17,7 +17,7 @@ export interface GlowMenuProps extends React.HTMLAttributes<HTMLElement> {
   linkClassName?: string;
 }
 
-const glowVariants = {
+const glowVariants: Variants = {
   initial: { opacity: 0, scale: 0.85 },
   hover: {
     opacity: 1,
@@ -30,7 +30,7 @@ const glowVariants = {
 };
 
 const DEFAULT_GRADIENT =
-  "radial-gradient(circle, rgba(22,93,252,0.14) 0%, rgba(22,93,252,0.05) 55%, rgba(22,93,252,0) 100%)";
+  "radial-gradient(circle, rgba(255,96,57,0.14) 0%, rgba(255,96,57,0.05) 55%, rgba(255,96,57,0) 100%)";
 
 /**
  * Nav de links com um glow suave que segue o hover — adaptado do padrão

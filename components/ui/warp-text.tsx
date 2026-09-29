@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type CSSProperties } from "react";
-import { Renderer, Program, Mesh, Triangle, Texture } from "ogl";
+import { Renderer, Program, Mesh, Triangle, Texture, type OGLRenderingContext } from "ogl";
 import "./warp-text.css";
 
 const vertex = `#version 300 es
@@ -344,7 +344,7 @@ const WarpText = ({
     if (!container || typeof window === "undefined") return undefined;
 
     let renderer: Renderer | undefined;
-    let gl: WebGL2RenderingContext | undefined;
+    let gl: OGLRenderingContext | undefined;
     let program: Program | undefined;
     let geometry: Triangle | undefined;
     let mesh: Mesh | undefined;
@@ -370,7 +370,7 @@ const WarpText = ({
         antialias: true,
         dpr: Math.min(window.devicePixelRatio || 1, 2),
       });
-      gl = renderer.gl as unknown as WebGL2RenderingContext;
+      gl = renderer.gl;
     } catch (error) {
       console.warn("WarpText: WebGL could not be initialized.", error);
       return undefined;

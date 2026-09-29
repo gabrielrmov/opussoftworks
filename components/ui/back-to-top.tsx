@@ -5,7 +5,8 @@ import { useEffect, useRef, useState } from "react";
 /**
  * Botão flutuante de "voltar ao topo". Só aparece a partir da seção de
  * Perguntas frequentes (#faq) em diante — antes disso fica escondido.
- * Fica empilhado em cima do botão de WhatsApp, no mesmo canto.
+ * Fica empilhado em cima do botão de WhatsApp, no mesmo canto. Some perto do
+ * fim da página, onde o rodapé já traz o próprio botão de subir.
  */
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -27,7 +28,10 @@ export default function BackToTop() {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        setVisible(window.scrollY >= triggerYRef.current);
+        const nearEnd =
+          window.scrollY + window.innerHeight * 1.6 >=
+          document.documentElement.scrollHeight;
+        setVisible(window.scrollY >= triggerYRef.current && !nearEnd);
         ticking = false;
       });
     };
@@ -53,7 +57,7 @@ export default function BackToTop() {
       type="button"
       onClick={scrollToTop}
       aria-label="Voltar ao topo"
-      className={`fixed bottom-[max(6rem,calc(env(safe-area-inset-bottom)+5.5rem))] right-5 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-landing-ink text-white shadow-[0_10px_30px_-8px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-110 active:scale-95 sm:bottom-28 sm:right-8 [.mobile-menu-open_&]:pointer-events-none [.mobile-menu-open_&]:opacity-0 ${
+      className={`fixed bottom-[max(5.25rem,calc(env(safe-area-inset-bottom)+4.75rem))] right-4 z-40 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-landing-ink text-white shadow-[0_10px_30px_-8px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-110 active:scale-95 sm:bottom-28 sm:right-8 [.mobile-menu-open_&]:pointer-events-none [.mobile-menu-open_&]:opacity-0 ${
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-2 opacity-0"

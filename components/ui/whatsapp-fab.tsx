@@ -17,14 +17,14 @@ export default function WhatsappFab() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Falar no WhatsApp: ${WHATSAPP_DISPLAY}`}
-      className="group fixed bottom-[max(1.25rem,calc(env(safe-area-inset-bottom)+0.75rem))] right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.55)] transition-all duration-300 hover:scale-110 active:scale-95 sm:bottom-8 sm:right-8 [.mobile-menu-open_&]:pointer-events-none [.mobile-menu-open_&]:scale-75 [.mobile-menu-open_&]:opacity-0"
+      className="group fixed bottom-[max(1.25rem,calc(env(safe-area-inset-bottom)+0.75rem))] right-4 z-40 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.55)] transition-all duration-300 hover:scale-110 active:scale-95 sm:bottom-8 sm:right-8 [.mobile-menu-open_&]:pointer-events-none [.mobile-menu-open_&]:scale-75 [.mobile-menu-open_&]:opacity-0"
     >
       <span
         aria-hidden="true"
         className="animate-pulse-soft pointer-events-none absolute inset-0 -z-10 rounded-full bg-[#25D366] opacity-70 blur-md"
       />
       <svg
-        className="relative h-7 w-7"
+        className="relative h-6 w-6 sm:h-7 sm:w-7"
         viewBox="0 0 24 24"
         fill="currentColor"
         aria-hidden="true"

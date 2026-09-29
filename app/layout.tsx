@@ -18,7 +18,10 @@ export const metadata = {
       { url: `${base}/images/opus-icon-512.png`, type: "image/png", sizes: "512x512" },
     ],
     shortcut: `${base}/favicon.ico`,
+    apple: [{ url: `${base}/images/opus-apple-touch-icon.png`, sizes: "180x180", type: "image/png" }],
   },
+  manifest: `${base}/manifest.webmanifest`,
+  appleWebApp: { title: "Opus SoftWorks", capable: true },
   description:
     "Tráfego pago, sistemas de gestão e sites profissionais em um único parceiro. Diagnóstico gratuito e sem compromisso pela OPUS SOFTWORKS, em Goiânia.",
   keywords: [

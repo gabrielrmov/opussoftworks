@@ -1,0 +1,14 @@
+{
+  "name": "Opus SoftWorks",
+  "short_name": "Opus SoftWorks",
+  "start_url": ".",
+  "scope": ".",
+  "display": "browser",
+  "background_color": "#FAFAFA",
+  "theme_color": "#FF6039",
+  "icons": [
+    { "src": "images/opus-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "images/opus-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "images/opus-apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "maskable" }
+  ]
+}

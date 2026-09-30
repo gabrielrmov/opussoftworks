@@ -1,4 +1,5 @@
 import { faqItems } from "@/lib/landing-content";
+import { WHATSAPP_NUMBER } from "@/lib/whatsapp";
 
 export const SITE_URL = "https://opussoftworks.com.br";
 export const SITE_NAME = "Opus SoftWorks";
@@ -30,8 +31,7 @@ const services = [
   },
 ];
 
-// Só descreve o que está visível na home: sem telefone (o número do site ainda é provisório),
-// sem avaliações e sem dados que não apareçam na página.
+// Sem avaliações nem dados inventados: só o que o negócio informou (fundadores, telefone/WhatsApp, cidade).
 export function homeJsonLd() {
   return {
     "@context": "https://schema.org",
@@ -58,6 +58,18 @@ export function homeJsonLd() {
           addressRegion: "GO",
           addressCountry: "BR",
         },
+        telephone: `+${WHATSAPP_NUMBER}`,
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "customer service",
+          telephone: `+${WHATSAPP_NUMBER}`,
+          areaServed: "BR",
+          availableLanguage: "pt-BR",
+        },
+        founder: [
+          { "@type": "Person", name: "Gabriel Rodrigues" },
+          { "@type": "Person", name: "Rafael Streglio" },
+        ],
         areaServed: { "@type": "Country", name: "Brasil" },
         knowsAbout: [
           "Tráfego pago",

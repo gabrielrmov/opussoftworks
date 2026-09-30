@@ -1,0 +1,35 @@
+# Opus SoftWorks
+
+> Startup de Goiânia (GO) que une tráfego pago, sistemas de gestão empresarial e sites profissionais sob uma mesma estratégia. Atende empresas que já faturam e querem crescer com processo. Lema: "Resultado não é sorte. É entrega."
+
+O site é uma página única em português do Brasil. As seções abaixo são âncoras da home.
+
+## Páginas
+
+- [Home](https://opussoftworks.com.br/): apresentação da empresa, serviços, método de trabalho, depoimentos e perguntas frequentes.
+- [Soluções](https://opussoftworks.com.br/#solucoes): as três frentes de atuação — tráfego pago e aquisição, sistemas e automações, sites que convertem.
+- [Perguntas frequentes](https://opussoftworks.com.br/#faq): diferença para uma agência comum, porte de empresa atendido, ferramentas, prazo de resultado, acompanhamento e preço.
+
+## Serviços
+
+- Tráfego pago e aquisição: campanhas em Meta e Google guiadas por custo por cliente, taxa de fechamento e retorno sobre o investimento.
+- Sistemas e automações: mapeamento da operação, eliminação de tarefas repetitivas e centralização das informações.
+- Sites que convertem: sites rápidos e claros, pensados para vender.
+
+## Método
+
+1. Diagnóstico: entender operação, metas, números e gargalos.
+2. Estratégia: definir prioridades, onde investir e quais indicadores acompanhar.
+3. Implementação: colocar campanhas, sistemas e sites para funcionar de forma integrada.
+4. Otimização contínua: analisar resultados e ajustar, com reuniões periódicas e relatórios em linguagem simples.
+
+## Contato
+
+- Primeiro passo: diagnóstico gratuito e sem compromisso, solicitado pelo botão "Falar com um especialista" da home (abre o WhatsApp).
+- Localização: Goiânia, GO, Brasil.
+
+## Informações para agentes
+
+- Idioma do conteúdo: português (pt-BR).
+- Preços não são publicados: o valor depende do escopo e é definido em proposta fechada após o diagnóstico.
+- Não há blog, loja nem área de login.

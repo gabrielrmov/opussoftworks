@@ -2,27 +2,8 @@
 
 import TrueFocus from "@/components/ui/true-focus";
 import TiltedCard from "@/components/ui/tilted-card";
+import { pillars } from "@/lib/landing-content";
 
-const pillars = [
-  {
-    number: "01",
-    title: "Tráfego pago e aquisição",
-    text: "Campanhas em Meta e Google guiadas por números que importam: custo por cliente, taxa de fechamento e retorno sobre o investimento. Lead não é resultado. ",
-    emphasis: "Venda é.",
-  },
-  {
-    number: "02",
-    title: "Sistemas e automações",
-    text: "Entendemos como a operação funciona, eliminamos tarefas repetitivas e centralizamos as informações que hoje estão espalhadas. ",
-    emphasis: "Menos trabalho manual. Mais controle para decidir.",
-  },
-  {
-    number: "03",
-    title: "Sites que convertem",
-    text: "Sites rápidos, claros e pensados para vender. Em poucos segundos, o visitante entende o que a empresa faz, por que escolher você e ",
-    emphasis: "qual é o próximo passo.",
-  },
-];
 
 export default function Pillars() {
   return (

@@ -32,7 +32,9 @@ export const metadata = {
     "Goiânia",
   ],
   openGraph: {
-    title: "OPUS SOFTWORKS — Tráfego, gestão e sites para empresas",
+    url: "/",
+    siteName: "Opus SoftWorks",
+    title: "Opus SoftWorks | Tráfego pago, sistemas e sites em Goiânia",
     description:
       "Tráfego pago, sistemas de gestão e sites profissionais em um único processo, com entrega, responsabilidade e assertividade.",
     locale: "pt_BR",
@@ -42,13 +44,13 @@ export const metadata = {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "OPUS SOFTWORKS — Tráfego, gestão e sites para empresas",
+        alt: "Opus SoftWorks — Resultado não é sorte. É entrega.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "OPUS SOFTWORKS — Tráfego, gestão e sites para empresas",
+    title: "Opus SoftWorks | Tráfego pago, sistemas e sites em Goiânia",
     description:
       "Tráfego pago, sistemas de gestão e sites profissionais em um único processo.",
     images: ["/images/og-image.png"],
@@ -58,7 +60,7 @@ export const metadata = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0E0E13",
+  themeColor: "#FAFAFA",
 };
 
 export default function RootLayout({

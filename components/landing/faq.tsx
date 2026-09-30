@@ -2,45 +2,8 @@
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion } from "motion/react";
+import { faqItems } from "@/lib/landing-content";
 
-const faqItems = [
-  {
-    id: "item-1",
-    question: "Como a Opus SoftWorks se diferencia de uma agência comum?",
-    answer:
-      "A gente não entrega só anúncio ou só site. Olhamos aquisição, operação e presença digital como um sistema único, e medimos tudo pelo resultado que entra no caixa, não por métrica de vaidade.",
-  },
-  {
-    id: "item-2",
-    question: "A Opus SoftWorks atende empresas de qualquer tamanho?",
-    answer:
-      "Trabalhamos melhor com empresas que já faturam e querem crescer com processo. Se o momento for de validar a ideia, dizemos isso na primeira conversa, sem vender o que não faz sentido.",
-  },
-  {
-    id: "item-3",
-    question: "Preciso trocar as ferramentas que já uso?",
-    answer:
-      "Na maioria dos casos, não. Primeiro organizamos o que já existe; só indicamos uma ferramenta nova quando ela resolve um gargalo real e se paga.",
-  },
-  {
-    id: "item-4",
-    question: "Em quanto tempo vejo resultado?",
-    answer:
-      "Tráfego pago costuma dar sinais nas primeiras semanas; sistemas e automações dependem do escopo. No diagnóstico você recebe um plano com prazos e indicadores claros para cada etapa.",
-  },
-  {
-    id: "item-5",
-    question: "Como funciona o acompanhamento depois da entrega?",
-    answer:
-      "A otimização contínua faz parte do trabalho: reuniões periódicas, relatórios em linguagem simples e ajustes constantes. Nada de entregar e sumir.",
-  },
-  {
-    id: "item-6",
-    question: "Quanto custa?",
-    answer:
-      "Depende do escopo, por isso o primeiro passo é o diagnóstico. Você recebe uma proposta fechada, sem surpresa no meio do caminho.",
-  },
-];
 
 export default function Faq() {
   return (

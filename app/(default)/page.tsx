@@ -1,7 +1,11 @@
-export const metadata = {
-  title: "OPUS SOFTWORKS — Tráfego, gestão e sites para empresas",
+import type { Metadata } from "next";
+import { homeJsonLd, jsonLdString } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: { absolute: "Opus SoftWorks | Tráfego pago, sistemas e sites em Goiânia" },
   description:
-    "Estratégia, tecnologia e IA para empresas crescerem com decisões melhores. Tráfego pago, sistemas e automações e sites que convertem, sob uma mesma estratégia.",
+    "Tráfego pago, sistemas de gestão e sites que convertem, sob uma mesma estratégia. Diagnóstico gratuito para empresas, em Goiânia e todo o Brasil.",
+  alternates: { canonical: "/" },
 };
 
 import SiteHeader from "@/components/landing/site-header";
@@ -18,17 +22,23 @@ import LandingCinematicFooter from "@/components/landing/landing-cinematic-foote
 export default function Home() {
   return (
     <div className="bg-landing-bg text-landing-ink">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdString(homeJsonLd()) }}
+      />
       <SiteHeader />
-      <Hero />
-      <Divider />
-      <Pillars />
-      <Process />
-      <Testimonials />
-      <Faq />
-      <div id="header-theme-dark-1" aria-hidden="true" />
-      <GlyphPortalSection />
-      <div id="header-theme-light-1" aria-hidden="true" />
-      <FinalCta />
+      <main id="conteudo">
+        <Hero />
+        <Divider />
+        <Pillars />
+        <Process />
+        <Testimonials />
+        <Faq />
+        <div id="header-theme-dark-1" aria-hidden="true" />
+        <GlyphPortalSection />
+        <div id="header-theme-light-1" aria-hidden="true" />
+        <FinalCta />
+      </main>
       <div id="header-theme-dark-2" aria-hidden="true" />
       <LandingCinematicFooter />
     </div>

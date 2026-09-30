@@ -31,7 +31,12 @@ export default function DefaultLayout({
 
   return (
     <>
-      <main className="relative flex grow flex-col">{children}</main>
+      {isLandingHome ? (
+        // A home declara o próprio <main> (header e footer ficam fora dele).
+        <div className="relative flex grow flex-col">{children}</div>
+      ) : (
+        <main className="relative flex grow flex-col">{children}</main>
+      )}
 
       {!isLandingHome && <Footer />}
       <WhatsappFab />

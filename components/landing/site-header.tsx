@@ -150,6 +150,7 @@ export default function SiteHeader() {
 
         <GlowMenu
           items={navLinks}
+          aria-label="Principal"
           linkClassName={isDark ? "text-white/70 hover:text-white" : "text-landing-muted hover:text-landing-ink"}
           className="absolute left-1/2 hidden -translate-x-1/2 lg:flex"
         />
@@ -189,7 +190,7 @@ export default function SiteHeader() {
 
       {open && (
         <div className="mt-2 rounded-2xl border border-landing-ink/10 bg-landing-bg px-6 py-4 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.15)] lg:hidden">
-          <nav className="flex flex-col gap-1">
+          <nav aria-label="Menu principal" className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.href}

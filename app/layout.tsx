@@ -6,7 +6,7 @@ import ConditionalHeader from "@/components/ui/conditional-header";
 const base = process.env.PAGES_BASE_PATH || "";
 
 export const metadata = {
-  metadataBase: new URL("https://elevion-site.pages.dev"),
+  metadataBase: new URL("https://opussoftworks.com.br"),
   title: {
     default: "OPUS SOFTWORKS — Tráfego, gestão e sites para empresas",
     template: "%s · OPUS SOFTWORKS",

@@ -1,6 +1,6 @@
 import KineticText from "@/components/ui/kinetic-text";
 
-const faqs = [
+export const faqs = [
   {
     question: "Quanto tempo leva um projeto?",
     answer:

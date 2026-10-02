@@ -2,6 +2,49 @@ export const metadata = {
   title: "ELEVION — Tráfego, gestão e sites para empresas",
   description:
     "A ELEVION une tráfego pago, sistemas de gestão e sites profissionais para empresas que querem crescer com processo, responsabilidade e prazo cumprido.",
+  alternates: { canonical: "/" },
+};
+
+const SITE_URL = "https://elevion-site.pages.dev";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": `${SITE_URL}/#organization`,
+      name: "ELEVION",
+      url: `${SITE_URL}/`,
+      logo: `${SITE_URL}/images/elevion-icon-512.png`,
+      image: `${SITE_URL}/images/og-image.png`,
+      description:
+        "Tráfego pago, sistemas de gestão e sites profissionais para empresas, em um único parceiro.",
+      areaServed: { "@type": "Country", name: "Brasil" },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Goiânia",
+        addressRegion: "GO",
+        addressCountry: "BR",
+      },
+      knowsAbout: ["Tráfego pago", "Sistemas de gestão", "Criação de sites", "Marketing digital"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: `${SITE_URL}/`,
+      name: "ELEVION",
+      inLanguage: "pt-BR",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.question,
+        acceptedAnswer: { "@type": "Answer", text: f.answer },
+      })),
+    },
+  ],
 };
 
 import Hero from "@/components/hero-home";
@@ -11,13 +54,17 @@ import Services from "@/components/services";
 import Principles from "@/components/principles";
 import Process from "@/components/process";
 import Guarantees from "@/components/guarantees";
-import Faq from "@/components/faq";
+import Faq, { faqs } from "@/components/faq";
 import Cta from "@/components/cta";
 import GatewayFlow from "@/components/ui/gateway-flow";
 
 export default function Home() {
   return (
     <div className="relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="fixed inset-0 -z-10">
         <GatewayFlow
           className="h-full w-full"

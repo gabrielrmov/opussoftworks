@@ -2,6 +2,7 @@ import GatewayFlowDemo from "@/components/gateway-flow-demo";
 
 export const metadata = {
   title: "Preview — Gateway Flow",
+  robots: { index: false, follow: false },
 };
 
 export default function GatewayPreviewPage() {

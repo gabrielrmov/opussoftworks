@@ -8,6 +8,7 @@ export const metadata = {
     default: "ELEVION — Tráfego, gestão e sites para empresas",
     template: "%s · ELEVION",
   },
+  alternates: { canonical: "/" },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -31,6 +32,8 @@ export const metadata = {
       "Tráfego pago, sistemas de gestão e sites profissionais em um único processo, com entrega, responsabilidade e assertividade.",
     locale: "pt_BR",
     type: "website",
+    siteName: "ELEVION",
+    url: "/",
     images: [
       {
         url: "/images/og-image.png",

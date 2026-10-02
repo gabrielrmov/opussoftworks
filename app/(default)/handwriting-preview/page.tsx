@@ -2,6 +2,7 @@ import HandwritingTextDemo from "@/components/handwriting-text-demo";
 
 export const metadata = {
   title: "Preview — Handwriting Text",
+  robots: { index: false, follow: false },
 };
 
 export default function HandwritingPreviewPage() {

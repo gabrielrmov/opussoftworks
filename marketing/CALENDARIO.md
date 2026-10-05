@@ -2,23 +2,23 @@
 
 Feed do Instagram, 3 posts por semana (seg/qua/sex, às 12h), formato 4:5 (1080x1350).
 Linha visual puxada da referência: logo no topo, frase de abertura + título com palavra em itálico serifado
-e palavra-chave num bloco de destaque, objeto 3D no centro, bilhete de papel, adesivos em estrela e "Leia a legenda".
+e palavra-chave num bloco de destaque, objeto 3D em estúdio (luz de spot, sombra, profundidade de campo) como herói da peça, adesivos em estrela, bilhete de papel em 4 posts e "Leia a legenda".
 Identidade Opus SoftWorks (opussoftworks.com.br): coral `#ff6039`, preto `#171717`, claro `#fafafa`,
 Inter Tight + Instrument Serif itálico, símbolo do infinito. Alterna fundo escuro e claro pra formar o xadrez no grid.
 
 | # | Data | Pilar | Objeto | Texto da peça | Peça |
 |---|------|-------|--------|---------------|------|
 | 1 | Seg 12/10 | Tráfego pago | xadrez | Antes de aumentar a verba, — você paga por clique ou por cliente? | [post-01.png](posts/post-01.png) |
-| 2 | Qua 14/10 | Sites | celular com site | Não adianta ter visita — se o seu site não sabe vender. | [post-02.png](posts/post-02.png) |
+| 2 | Qua 14/10 | Sites | botão "Quero comprar" + cursor | Não adianta ter visita — se o seu site não sabe vender. | [post-02.png](posts/post-02.png) |
 | 3 | Sex 16/10 | Sistemas | quebra-cabeça | Planilha não é sistema. — Sua operação precisa encaixar. | [post-03.png](posts/post-03.png) |
 | 4 | Seg 19/10 | Autoridade | dados + caixa | O que move a Opus SoftWorks — Resultado não é sorte. É entrega. | [post-04.png](posts/post-04.png) |
 | 5 | Qua 21/10 | Tráfego pago | pilhas de moedas | Lead barato que não compra — CPL baixo não paga a conta. | [post-05.png](posts/post-05.png) |
 | 6 | Sex 23/10 | Método | escada 01–04 | Como trabalhamos — 4 etapas. Zero improviso. | [post-06.png](posts/post-06.png) |
 | 7 | Seg 26/10 | Sites | cronômetro | Rápido e claro — Seu site tem poucos segundos pra convencer. | [post-07.png](posts/post-07.png) |
-| 8 | Qua 28/10 | Sistemas | celular + gelo | Lead que espera, esfria. — Quem responde primeiro, fecha. | [post-08.png](posts/post-08.png) |
+| 8 | Qua 28/10 | Sistemas | balão congelado no gelo | Lead que espera, esfria. — Quem responde primeiro, fecha. | [post-08.png](posts/post-08.png) |
 | 9 | Sex 30/10 | Autoridade | calendário | Entrega com processo — Prazo cumprido é o mínimo. | [post-09.png](posts/post-09.png) |
 | 10 | Seg 02/11 | Autoridade | engrenagens | Tráfego, sistema e site — Três fornecedores. Zero conversa. | [post-10.png](posts/post-10.png) |
-| 11 | Qua 04/11 | Diagnóstico | diamante + lupa | Diagnóstico gratuito — Quanto vale o lead que você perdeu? | [post-11.png](posts/post-11.png) |
+| 11 | Qua 04/11 | Diagnóstico | diamante no pedestal | Diagnóstico gratuito — Quanto vale o lead que você perdeu? | [post-11.png](posts/post-11.png) |
 | 12 | Sex 06/11 | Conversão | infinito 3D | Vender mais. Operar melhor. — Crescer com muito mais clareza. | [post-12.png](posts/post-12.png) |
 
 **Mix de pilares:** tráfego pago (2), sites (2), sistemas (2), autoridade e método (4), diagnóstico e conversão (2).

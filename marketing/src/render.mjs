@@ -2,7 +2,7 @@
 // Uso (na pasta marketing/): npm i --no-save playwright-core three@0.169 && node src/render.mjs [n...]
 import { chromium } from 'playwright-core';
 import { createServer } from 'node:http';
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, extname } from 'node:path';
 import { posts } from './posts.mjs';
@@ -10,60 +10,56 @@ import { posts } from './posts.mjs';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const three = existsSync(join(root, 'node_modules/three')) ? '/node_modules/three' : '/src/node_modules/three';
 
+// Grid: 1080x1350, margem 72. Topo: marca + numeração. Título centralizado.
+// Objeto 3D em tela cheia (estúdio). Rodapé: texto curto à esquerda, pílula à direita.
 const themes = {
-  dark:  { bg:'#151515', fg:'#f5f5f5', mut:'#a8a8a8', logo:'opus-logo-white.png', pill:'#f5f5f5',
-           glow:'radial-gradient(900px 700px at 0% 0%, rgba(255,96,57,.32), transparent 70%), radial-gradient(700px 500px at 100% 100%, rgba(255,96,57,.10), transparent 70%)' },
-  light: { bg:'#fafafa', fg:'#171717', mut:'#585858', logo:'opus-logo-black.png', pill:'#171717',
-           glow:'radial-gradient(900px 700px at 50% 70%, #ffffff, transparent 70%), radial-gradient(600px 500px at 100% 0%, rgba(255,96,57,.10), transparent 70%)' },
-};
-
-const burst = ({ x, y, s, r }) => {
-  const pts = Array.from({ length: 24 }, (_, i) => { const a = i * Math.PI / 12, rad = i % 2 ? 30 : 50; return `${50 + Math.cos(a) * rad},${50 + Math.sin(a) * rad}`; }).join(' ');
-  return `<svg class="burst" style="left:${x - s / 2}px;top:${y - s / 2}px;width:${s}px;transform:rotate(${r}deg)" viewBox="0 0 100 100"><polygon points="${pts}" fill="#ff6039"/></svg>`;
+  dark:  { fg:'#f4f3f0', mut:'rgba(244,243,240,.62)', logo:'opus-logo-white.png', vig:'rgba(0,0,0,.55)' },
+  light: { fg:'#141414', mut:'rgba(20,20,20,.6)', logo:'opus-logo-black.png', vig:'rgba(60,50,40,.16)' },
 };
 
 const html = (p) => {
-  const t = themes[p.theme];
+  const t = themes[p.theme], num = String(p.n).padStart(2, '0');
   return `<!doctype html><html><head><meta charset="utf-8">
 <link rel="stylesheet" href="/src/fonts.css">
 <script type="importmap">{"imports":{"three":"${three}/build/three.module.js","three/addons/":"${three}/examples/jsm/"}}</script>
 <style>
 *{box-sizing:border-box;margin:0}
-body{width:1080px;height:1350px;background:${t.bg};color:${t.fg};font-family:'Inter Tight',sans-serif;position:relative;overflow:hidden}
-.glow{position:absolute;inset:0;background:${t.glow}}
-.grain{position:absolute;inset:0;opacity:${p.theme === 'dark' ? .06 : .04};background-image:radial-gradient(${t.fg} 1px, transparent 1.2px);background-size:22px 22px}
-canvas{position:absolute;left:0;width:1080px}
-header{position:absolute;top:0;left:0;right:0;padding:70px 90px 0;text-align:center;z-index:2}
-.brand{display:inline-flex;align-items:center;gap:6px}.brand .ic{height:78px;margin:-12px 0}.brand .wm{height:34px}
-.lead{margin-top:56px;font-size:34px;font-weight:400;color:${t.mut};letter-spacing:-.01em}
-h1{margin-top:14px;font-weight:300;font-size:86px;line-height:1.02;letter-spacing:-.035em}
-h1 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:1.14em;letter-spacing:-.01em}
-h1 mark{display:inline-block;background:#ff6039;color:#fff;font-family:'Instrument Serif',serif;font-style:italic;font-size:1.12em;letter-spacing:-.01em;
-  padding:0 .2em .04em;line-height:1.05;border-radius:6px;transform:rotate(-2deg);margin:.08em .05em 0;box-shadow:0 10px 30px rgba(255,96,57,.28)}
-footer{position:absolute;left:0;right:0;bottom:58px;text-align:center;z-index:2}
-.body{font-size:24px;color:${t.mut};margin-bottom:18px}
-.pill{display:inline-block;border:1.5px solid ${t.pill};border-radius:999px;padding:11px 26px;font-size:17px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
-.note{position:absolute;z-index:3;width:330px;padding:26px 28px 30px;background:#fff;color:#171717;font-size:25px;line-height:1.25;
-  box-shadow:0 18px 40px rgba(0,0,0,${p.theme === 'dark' ? .45 : .14});
+body{width:1080px;height:1350px;color:${t.fg};font-family:'Inter Tight',sans-serif;position:relative;overflow:hidden;background:${p.theme === 'dark' ? '#121212' : '#efeeeb'}}
+canvas{position:absolute;inset:0;width:1080px;height:1350px}
+.scrim{position:absolute;left:0;right:0;bottom:0;height:300px;background:linear-gradient(to top, ${p.theme === 'dark' ? 'rgba(14,14,14,.92)' : 'rgba(239,238,235,.94)'} 25%, transparent)}
+.vig{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 62%, transparent 55%, ${t.vig} 100%)}
+.grain{position:absolute;inset:0;opacity:${p.theme === 'dark' ? .09 : .07};mix-blend-mode:${p.theme === 'dark' ? 'screen' : 'multiply'}}
+.top{position:absolute;top:64px;left:72px;right:72px;display:flex;justify-content:space-between;align-items:center;font-size:17px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.brand{display:flex;align-items:center;gap:2px}.brand .ic{height:54px;margin:-10px -4px -10px -10px}.brand .wm{height:24px}
+.top .meta{color:${t.mut};display:flex;gap:18px;align-items:center}
+.top .meta i{width:28px;height:1.5px;background:currentColor;display:inline-block}
+header{position:absolute;top:186px;left:72px;right:72px;text-align:center}
+.lead{font-size:29px;font-weight:400;color:${t.mut};letter-spacing:-.01em}
+h1{margin-top:14px;font-weight:300;font-size:80px;line-height:1.06;letter-spacing:-.048em}
+h1 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:1.2em;letter-spacing:-.02em;line-height:.8}
+h1 mark{background:#ff6039;color:#fff;font-family:'Instrument Serif',serif;font-style:italic;font-size:1.18em;letter-spacing:-.015em;
+  padding:.02em .14em .06em .1em;border-radius:3px;line-height:.92;display:inline-block;margin-top:.1em}
+footer{position:absolute;left:72px;right:72px;bottom:64px;display:flex;justify-content:space-between;align-items:flex-end}
+.body{font-size:20px;line-height:1.36;color:${t.mut};max-width:330px;padding-top:16px;border-top:1.5px solid #ff6039}
+.pill{display:inline-flex;gap:10px;align-items:center;border:1.5px solid ${t.fg};border-radius:999px;padding:13px 24px;font-size:15px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.note{position:absolute;width:300px;padding:24px 26px 28px;background:#fdfdfb;color:#171717;font-size:22px;line-height:1.26;
+  box-shadow:0 22px 40px rgba(0,0,0,${p.theme === 'dark' ? .5 : .16}), 0 2px 4px rgba(0,0,0,.12);
   clip-path:polygon(0 3%,8% 0,20% 2%,33% 0,47% 3%,60% 0,74% 2%,88% 0,100% 2%,99% 30%,100% 62%,98% 100%,84% 97%,70% 100%,55% 98%,40% 100%,26% 97%,12% 100%,0 98%,1% 64%,0 33%)}
 .note b{font-weight:600;color:#ff6039}
-.burst{position:absolute;z-index:3;filter:drop-shadow(0 8px 16px rgba(255,96,57,.35))}
 </style></head><body>
-<div class="glow"></div><div class="grain"></div>
-<header><span class="brand"><img class="ic" src="/src/opus-icon-512.png"><img class="wm" src="/src/${t.logo}"></span><p class="lead">${p.lead}</p><h1>${p.title}</h1></header>
 <canvas id="c"></canvas>
+<div class="vig"></div><div class="scrim"></div>
+<svg class="grain" width="1080" height="1350"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+<div class="top"><span class="brand"><img class="ic" src="/src/opus-icon-512.png"><img class="wm" src="/src/${t.logo}"></span><span class="meta">${p.pilar}<i></i>${num}</span></div>
+<header><p class="lead">${p.lead}</p><h1>${p.title}</h1></header>
 ${p.note ? `<div class="note" style="left:${p.note.x}px;top:${p.note.y}px;transform:rotate(${p.note.r}deg)">${p.note.t}</div>` : ''}
-${p.bursts.map(burst).join('')}
-<footer><p class="body">${p.body}</p><span class="pill">Leia a legenda</span></footer>
+<footer><p class="body">${p.body}</p><span class="pill">Leia a legenda <span>→</span></span></footer>
 <script type="module">
 import { render } from '/src/scenes.js';
 await document.fonts.ready;
-const top = document.querySelector('h1').getBoundingClientRect().bottom - 30;
-const bottom = document.querySelector('footer').getBoundingClientRect().top - 8;
-const c = document.getElementById('c'); c.style.top = top + 'px'; c.style.height = (bottom - top) + 'px';
-c.width = 1080 * 2; c.height = Math.round((bottom - top) * 2);
+const c = document.getElementById('c'); c.width = 2160; c.height = 2700;
 try { render(c, ${JSON.stringify(p.scene)}, { dark: ${p.theme === 'dark'} }); window.__done = 'ok'; }
-catch (e) { window.__done = 'erro: ' + e.message; }
+catch (e) { window.__done = 'erro: ' + e.message + e.stack; }
 </script></body></html>`;
 };
 
@@ -87,7 +83,7 @@ for (const p of posts) {
   if (only.length && !only.includes(p.n)) continue;
   current = html(p);
   await page.goto(`http://localhost:${port}/post.html`);
-  await page.waitForFunction(() => window.__done, null, { timeout: 120000 });
+  await page.waitForFunction(() => window.__done, null, { timeout: 300000, polling: 500 });
   const status = await page.evaluate(() => window.__done);
   const out = join(root, 'posts', `post-${String(p.n).padStart(2,'0')}.png`);
   await page.screenshot({ path: out });

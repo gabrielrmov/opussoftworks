@@ -3,12 +3,12 @@ import { writeFileSync } from 'node:fs';
 import { posts } from './posts.mjs';
 const br = d => d.split('-').reverse().slice(0,2).join('/');
 const plain = p => `${p.lead} — ${p.title}`.replace(/<br>/g,' ').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
-const obj = { chess:'xadrez', phoneSite:'celular com site', puzzle:'quebra-cabeça', dice:'dados + caixa', coins:'pilhas de moedas', steps:'escada 01–04', stopwatch:'cronômetro', chat:'celular + gelo', calendar:'calendário', gears:'engrenagens', diamond:'diamante + lupa', infinity:'infinito 3D' };
+const obj = { chess:'xadrez', button:'botão "Quero comprar" + cursor', puzzle:'quebra-cabeça', dice:'dados + caixa', coins:'pilhas de moedas', steps:'escada 01–04', stopwatch:'cronômetro', frozen:'balão congelado no gelo', calendar:'calendário', gears:'engrenagens', diamond:'diamante no pedestal', infinity:'infinito 3D' };
 let md = `# Calendário de postagens — Opus SoftWorks (12/10 a 06/11/2026)
 
 Feed do Instagram, 3 posts por semana (seg/qua/sex, às 12h), formato 4:5 (1080x1350).
 Linha visual puxada da referência: logo no topo, frase de abertura + título com palavra em itálico serifado
-e palavra-chave num bloco de destaque, objeto 3D no centro, bilhete de papel, adesivos em estrela e "Leia a legenda".
+e palavra-chave num bloco de destaque, objeto 3D em estúdio (luz de spot, sombra, profundidade de campo) como herói da peça, adesivos em estrela, bilhete de papel em 4 posts e "Leia a legenda".
 Identidade Opus SoftWorks (opussoftworks.com.br): coral \`#ff6039\`, preto \`#171717\`, claro \`#fafafa\`,
 Inter Tight + Instrument Serif itálico, símbolo do infinito. Alterna fundo escuro e claro pra formar o xadrez no grid.
 

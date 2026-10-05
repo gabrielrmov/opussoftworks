@@ -1,0 +1,111 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0;background:transparent}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
+const o=new URLSearchParams(location.search).get('o');
+const S=1400;
+const r=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
+r.setSize(S,S);r.setPixelRatio(1);r.setClearColor(0,0);r.toneMapping=THREE.NoToneMapping;
+document.body.appendChild(r.domElement);
+const sc=new THREE.Scene();
+const pm=new THREE.PMREMGenerator(r);sc.environment=pm.fromScene(new RoomEnvironment(),0.03).texture;
+const cam=new THREE.PerspectiveCamera(26,1,.1,100);cam.position.set(5.2,4.2,7.2);cam.lookAt(0,0,0);
+const M=(c,ro=.28,me=0,cc=1,ei=.6)=>new THREE.MeshPhysicalMaterial({color:c,roughness:ro,metalness:me,clearcoat:cc,clearcoatRoughness:.08,envMapIntensity:ei});
+const coral=()=>M(0xFF4A1A,.28,0,1,.55), white=()=>M(0xf2f3f6,.3,0,1,.8), dark=()=>M(0x161616,.2,.6,1,.9), silver=()=>M(0xc9c9ce,.25,.9,1,1);
+const rb=(w,h,d,rad=.08)=>new RoundedBoxGeometry(w,h,d,6,rad);
+function mesh(g,m,x=0,y=0,z=0){const a=new THREE.Mesh(g,m);a.position.set(x,y,z);return a}
+function tex(draw,w=1024,h=640){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');draw(x,w,h);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t}
+function screenTex(){return tex((x,w,h)=>{x.fillStyle='#fff';x.fillRect(0,0,w,h);
+ x.fillStyle='#161616';x.fillRect(0,0,w,70);x.fillStyle='#FF6039';x.font='bold 34px sans-serif';x.fillText('Opus',30,46);
+ const g=x.createLinearGradient(0,70,w,330);g.addColorStop(0,'#FF6039');g.addColorStop(1,'#c8431f');x.fillStyle=g;x.fillRect(0,70,w,260);
+ x.fillStyle='#fff';x.font='bold 78px sans-serif';x.fillText('Seu negócio',50,170);x.fillText('no ar e vendendo.',50,255);
+ x.fillStyle='#fff';x.beginPath();x.roundRect(50,285,260,16,8);x.fill();
+ x.fillStyle='#F4F5F8';for(let i=0;i<3;i++){x.beginPath();x.roundRect(40+i*320,370,290,200,28);x.fill()}
+ x.fillStyle='#FF6039';x.beginPath();x.roundRect(40+2*320+30,520,150,18,9);x.fill();
+ x.fillStyle='#e3e4e8';for(let i=0;i<2;i++){x.beginPath();x.roundRect(40+i*320+30,520,150,18,9);x.fill()}
+ x.fillStyle='#161616';x.font='bold 40px sans-serif';['Rápido','Seguro','Converte'].forEach((t,i)=>x.fillText(t,40+i*320+30,430))})}
+const G=new THREE.Group();
+if(o==='rocket'){
+ const pts=[[0,-1.2],[.38,-1.15],[.62,-.8],[.7,-.1],[.62,.55],[.4,1.0]].map(p=>new THREE.Vector2(p[0],p[1]));
+ G.add(mesh(new THREE.LatheGeometry(pts,64),white()));
+ const nose=[[.4,1.0],[.3,1.35],[.14,1.7],[0,1.9]].map(p=>new THREE.Vector2(p[0],p[1]));
+ G.add(mesh(new THREE.LatheGeometry(nose,64),coral()));
+ const ring=mesh(new THREE.TorusGeometry(.26,.07,24,64),dark(),0,.25,.62);G.add(ring);
+ const glass=mesh(new THREE.SphereGeometry(.26,48,48),M(0x1c2a3a,.05,.2,1,1),0,.25,.66);glass.scale.z=.3;G.add(glass);
+ const band=mesh(new THREE.TorusGeometry(.66,.05,16,64),coral());band.rotation.x=Math.PI/2;band.position.y=-.6;G.add(band);
+ for(let i=0;i<3;i++){const sh=new THREE.Shape();sh.moveTo(0,0);sh.lineTo(.55,-.2);sh.lineTo(.85,-.75);sh.lineTo(.62,-.95);sh.lineTo(0,-.55);
+  const f=mesh(new THREE.ExtrudeGeometry(sh,{depth:.09,bevelEnabled:true,bevelSize:.03,bevelThickness:.03,bevelSegments:4}),coral());
+  const gr=new THREE.Group();f.position.set(.52,-.45,-.045);gr.add(f);gr.rotation.y=i*Math.PI*2/3;G.add(gr)}
+ G.add(mesh(new THREE.CylinderGeometry(.34,.28,.22,48),dark(),0,-1.3,0));
+ const fl=mesh(new THREE.ConeGeometry(.3,1.1,48),new THREE.MeshBasicMaterial({color:0xFF6039}),0,-1.95,0);fl.rotation.x=Math.PI;G.add(fl);
+ const fl2=mesh(new THREE.ConeGeometry(.17,.7,48),new THREE.MeshBasicMaterial({color:0xffe0cf}),0,-1.75,0);fl2.rotation.x=Math.PI;G.add(fl2);
+ G.rotation.set(-.62,-.3,-.7);
+}
+if(o==='monitor'){
+ G.add(mesh(rb(3.0,1.9,.16,.09),dark()));
+ const sc2=mesh(new THREE.PlaneGeometry(2.8,1.68),new THREE.MeshBasicMaterial({map:screenTex(),toneMapped:false}),0,0,.085);G.add(sc2);
+ G.add(mesh(new THREE.CylinderGeometry(.14,.2,.7,32),silver(),0,-1.25,-.05));
+ G.add(mesh(rb(1.3,.09,.8,.04),silver(),0,-1.62,0));
+ G.rotation.set(-.05,-.5,0);
+}
+if(o==='laptop'){
+ G.add(mesh(rb(3.0,.1,2.0,.05),silver(),0,0,0));
+ G.add(mesh(rb(2.6,.02,1.2,.02),M(0x2a2a2a,.6,.3,0,.3),0,.06,.1));
+ const lid=new THREE.Group();lid.add(mesh(rb(3.0,1.9,.08,.07),dark(),0,.95,0));
+ lid.add(mesh(new THREE.PlaneGeometry(2.8,1.7),new THREE.MeshBasicMaterial({map:screenTex(),toneMapped:false}),0,.95,.045));
+ lid.position.set(0,.05,-1.0);lid.rotation.x=-0.18;G.add(lid);
+ G.rotation.set(.0,-.55,0);
+}
+if(o==='chart'){
+ G.add(mesh(rb(3.2,.18,2.0,.06),white(),0,-.1,0));
+ const h=[.7,1.05,1.5,2.1];h.forEach((v,i)=>{G.add(mesh(rb(.5,v,.5,.07),i==3?coral():white(),-1.05+i*.7,v/2,0))});
+ const cv=new THREE.CatmullRomCurve3([new THREE.Vector3(-1.2,1.0,.55),new THREE.Vector3(-.3,1.6,.55),new THREE.Vector3(.5,1.5,.55),new THREE.Vector3(1.3,2.6,.55)]);
+ G.add(mesh(new THREE.TubeGeometry(cv,64,.07,16),dark()));
+ const cone=mesh(new THREE.ConeGeometry(.2,.45,32),dark(),1.3,2.78,.55);cone.rotation.z=-.5;G.add(cone);
+ for(let i=0;i<4;i++){G.add(mesh(new THREE.CylinderGeometry(.34,.34,.1,48),coral(),1.0+0*i,.09+i*.11,.85))}
+ G.rotation.set(0,-.55,0);
+}
+if(o==='coins'){
+ for(let s=0;s<3;s++){const n=[5,3,7][s];for(let i=0;i<n;i++){const c=mesh(new THREE.CylinderGeometry(.62,.62,.16,64),M(0xFF4A1A,.25,.6,1,1),[-.9,.5,.2][s]+(i%2?.02:0),.1+i*.17,[.2,.7,-.7][s]);G.add(c);
+  const rim=mesh(new THREE.TorusGeometry(.5,.025,12,64),M(0xffd2c2,.2,.8),c.position.x,c.position.y+.085,c.position.z);rim.rotation.x=Math.PI/2;G.add(rim)}}
+ const big=mesh(new THREE.CylinderGeometry(.8,.8,.16,64),M(0xFF4A1A,.25,.6,1,1),1.3,.95,.8);big.rotation.set(Math.PI/2,0,.4);G.add(big);
+ const brim=mesh(new THREE.TorusGeometry(.64,.03,12,64),M(0xffd2c2,.2,.8),1.3,.95,.89);brim.rotation.set(0,0,0);brim.rotation.z=0;G.add(brim);
+ G.rotation.set(.05,-.4,0);
+}
+if(o==='magnifier'){
+ G.add(mesh(new THREE.TorusGeometry(1.0,.14,32,96),dark()));
+ const gl=mesh(new THREE.CircleGeometry(.95,64),new THREE.MeshPhysicalMaterial({color:0xffffff,transparent:true,opacity:.22,roughness:0,clearcoat:1,envMapIntensity:1.5}),0,0,.01);G.add(gl);
+ const sw=mesh(new THREE.TorusGeometry(.7,.03,12,64,Math.PI*.6),new THREE.MeshBasicMaterial({color:0xffffff}),0,0,.02);sw.rotation.z=.9;G.add(sw);
+ const hd=mesh(new THREE.CylinderGeometry(.16,.2,1.5,32),coral());hd.position.set(1.05,-1.05,0);hd.rotation.z=Math.PI/4;G.add(hd);
+ const cap=mesh(new THREE.CylinderGeometry(.19,.19,.2,32),dark());cap.position.set(.78,-.78,0);cap.rotation.z=Math.PI/4;G.add(cap);
+ G.rotation.set(.15,-.5,0);
+}
+if(o==='gear'){
+ function gear(R,teeth,th,hole,mat){const sh=new THREE.Shape();const n=teeth*4;
+  for(let i=0;i<=n;i++){const a=i/n*Math.PI*2;const up=(i%4===1||i%4===2);const rr=up?R+.22:R;sh[i?'lineTo':'moveTo'](Math.cos(a)*rr,Math.sin(a)*rr)}
+  const h=new THREE.Path();h.absarc(0,0,hole,0,Math.PI*2,true);sh.holes.push(h);
+  return mesh(new THREE.ExtrudeGeometry(sh,{depth:th,bevelEnabled:true,bevelSize:.05,bevelThickness:.05,bevelSegments:4}),mat)}
+ const g1=gear(1.0,10,.35,.38,coral());g1.position.set(-.5,.3,0);G.add(g1);
+ const g2=gear(.65,7,.35,.25,white());g2.position.set(1.2,-.6,0);g2.rotation.z=.2;G.add(g2);
+ G.rotation.set(-.35,-.45,0);
+}
+if(o==='chat'){
+ const b1=mesh(rb(2.4,1.5,.5,.35),white(),.5,.4,-.5);G.add(b1);
+ const t1=mesh(new THREE.ConeGeometry(.28,.5,3),white(),1.3,-.55,-.5);t1.rotation.z=Math.PI;G.add(t1);
+ const b2=mesh(rb(2.4,1.5,.5,.35),coral(),-.4,-.2,.3);G.add(b2);
+ const t2=mesh(new THREE.ConeGeometry(.28,.5,3),coral(),-1.2,-1.15,.3);t2.rotation.z=Math.PI;G.add(t2);
+ for(let i=0;i<3;i++)G.add(mesh(new THREE.SphereGeometry(.14,32,32),white(),-.8+i*.4,-.2,.6));
+ for(let i=0;i<3;i++)G.add(mesh(new THREE.SphereGeometry(.12,32,32),M(0xFF4A1A,.3),.0+i*.35+.15,.4,-.2));
+ G.rotation.set(0,-.4,0);
+}
+// auto-fit
+const bb=new THREE.Box3().setFromObject(G);const c=bb.getCenter(new THREE.Vector3());const sz=bb.getSize(new THREE.Vector3());
+const k=(o==='chart'?2.8:3.5)/Math.max(sz.x,sz.y,sz.z);G.scale.setScalar(k);G.position.sub(c.multiplyScalar(k));
+sc.add(G);
+const rim=new THREE.PointLight(0xFF6039,70,0,2);rim.position.set(-4,3,-3);sc.add(rim);
+const key=new THREE.DirectionalLight(0xffffff,1.1);key.position.set(3,5,5);sc.add(key);
+r.render(sc,cam);document.title='done';
+</script>

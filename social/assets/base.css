@@ -70,3 +70,12 @@ body{background:#444;display:flex;flex-direction:column;gap:40px;padding:40px;al
   linear-gradient(rgba(255,255,255,.045) 1.5px,transparent 1.5px) 0 0/90px 90px,
   linear-gradient(90deg,rgba(255,255,255,.045) 1.5px,transparent 1.5px) 0 0/90px 90px;
   mask-image:radial-gradient(70% 60% at 50% 40%,#000,transparent 85%);-webkit-mask-image:radial-gradient(70% 60% at 50% 40%,#000,transparent 85%)}
+
+/* ===== v4: variante clara (alterna com posts escuros no feed) ===== */
+.on-light{color:var(--grafite)}
+.on-light .logo b{color:var(--coral)}.on-light .logo span{color:var(--grafite)}
+.on-light .meta{color:var(--txt2)}
+.on-light .lead{color:var(--grafite)}
+.on-light .copy{color:var(--txt2)}.on-light .copy b{color:var(--grafite)}
+.icn{filter:drop-shadow(0 14px 16px rgba(0,0,0,.35))}
+.slide.on-light .obj{filter:drop-shadow(0 30px 40px rgba(120,40,10,.28))}

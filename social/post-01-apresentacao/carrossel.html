@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Opus SoftWorks · Post 1 · Carrossel de apresentação</title>
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+  :root{
+    --coral:#FF6039; --grafite:#161616; --branco:#FFFFFF;
+    --txt2:#4A4A4A; --borda:#9C9C9C; --alt:#F4F5F8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#444;display:flex;flex-direction:column;gap:40px;padding:40px;align-items:center}
+  .slide{width:1080px;height:1350px;position:relative;overflow:hidden;padding:96px 88px;
+    font-family:'Rubik',sans-serif;display:flex;flex-direction:column}
+  .dark{background:var(--grafite);color:var(--branco)}
+  .light{background:var(--branco);color:var(--grafite)}
+  .alt{background:var(--alt);color:var(--grafite)}
+  .coral{background:var(--coral);color:var(--grafite)}
+
+  h1,h2,.exo{font-family:'Exo 2',sans-serif;font-weight:700;letter-spacing:-0.025em}
+  h1{font-size:132px;line-height:1.0}
+  h2{font-size:92px;line-height:1.04}
+  p.lead{font-family:'Rubik';font-weight:400;font-size:38px;line-height:1.4}
+  .dark p.lead{color:var(--branco)}
+  .light p.lead,.alt p.lead{color:var(--txt2)}
+  .accent{color:var(--coral)}
+  .eyebrow{font-family:'Rubik';font-weight:600;font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:var(--coral);margin-bottom:36px}
+  .coral .eyebrow{color:var(--grafite)}
+
+  /* rodapé */
+  .foot{position:absolute;left:88px;right:88px;bottom:72px;display:flex;justify-content:space-between;align-items:center}
+  .logo{font-family:'Exo 2';font-size:34px;letter-spacing:-0.04em;line-height:1}
+  .logo b{font-weight:700}.logo span{font-weight:400}
+  .dark .logo b{color:#fff}.dark .logo span{color:var(--coral)}
+  .light .logo b,.alt .logo b{color:var(--coral)}.light .logo span,.alt .logo span{color:var(--grafite)}
+  .coral .logo b{color:#fff}.coral .logo span{color:var(--grafite)}
+  .pg{font-family:'Rubik';font-weight:500;font-size:24px;letter-spacing:.08em}
+  .dark .pg{color:var(--borda)}.light .pg,.alt .pg{color:var(--borda)}.coral .pg{color:var(--grafite)}
+  .swipe{font-family:'Rubik';font-weight:500;font-size:24px}
+
+  .body{margin-top:auto;margin-bottom:150px}
+  .top{margin-top:0}
+
+  .sym{position:absolute;pointer-events:none}
+
+  /* slide 4 lista */
+  .fronts{display:flex;flex-direction:column;gap:28px;margin-top:64px}
+  .front{display:flex;align-items:center;gap:36px;background:var(--branco);border:2px solid #e3e4e8;border-radius:28px;padding:36px 44px}
+  .front .n{font-family:'Exo 2';font-weight:700;font-size:64px;color:var(--coral);letter-spacing:-0.03em;width:90px}
+  .front .t{font-family:'Exo 2';font-weight:700;font-size:56px;letter-spacing:-0.02em}
+  .front .d{font-size:28px;color:var(--txt2);margin-top:4px}
+
+  /* slide 5 princípios */
+  .pri{display:flex;flex-direction:column;gap:0;margin-top:70px}
+  .pri div{font-family:'Exo 2';font-weight:700;font-size:104px;letter-spacing:-0.03em;line-height:1.15;border-top:2px solid #3a3a3a;padding:18px 0}
+  .pri div:last-child{border-bottom:2px solid #3a3a3a}
+  .pri div i{font-style:normal;font-family:'Rubik';font-weight:500;font-size:26px;color:var(--coral);letter-spacing:.14em;margin-right:28px;vertical-align:middle}
+
+  /* slide 7 */
+  .btn{display:inline-block;background:var(--coral);color:#fff;font-family:'Exo 2';font-weight:700;font-size:48px;letter-spacing:-0.01em;padding:34px 64px;border-radius:24px;margin-top:56px}
+  .handle{font-family:'Rubik';font-weight:500;font-size:34px;margin-top:40px;color:var(--borda)}
+  .handle b{color:#fff;font-weight:600}
+</style>
+</head>
+<body>
+
+<!-- 1 · CAPA -->
+<section class="slide dark" id="s1">
+  <img class="sym" src="../assets/simbolo-coral.png" style="width:1500px;right:-640px;top:-170px;transform:rotate(-8deg)">
+  <div class="body" style="margin-bottom:210px">
+    <div class="eyebrow">Opus SoftWorks · Goiânia → Brasil</div>
+    <h1>Resultado<br>não é sorte.<br><span class="accent">É entrega.</span></h1>
+  </div>
+  <div class="foot"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="swipe" style="color:#fff">Arraste →</div></div>
+</section>
+
+<!-- 2 · QUEM SOMOS -->
+<section class="slide light" id="s2">
+  <div class="eyebrow">Quem somos</div>
+  <h2 style="font-size:104px">Somos a<br>Opus&nbsp;SoftWorks.</h2>
+  <p class="lead" style="margin-top:56px;max-width:820px">Nascemos em <b style="color:var(--grafite);font-weight:600">Goiânia</b>.<br>Atendemos o <b style="color:var(--grafite);font-weight:600">Brasil</b> inteiro.</p>
+  <img class="sym" src="../assets/simbolo-coral.png" style="width:1100px;right:-380px;bottom:70px;transform:rotate(6deg)">
+  <div class="foot"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="pg">02 / 07</div></div>
+</section>
+
+<!-- 3 · POR QUE EXISTIMOS -->
+<section class="slide dark" id="s3">
+  <div class="eyebrow">Por que existimos</div>
+  <h2>Agência, desenvolvedor e sistema raramente falam a <span class="accent">mesma língua.</span></h2>
+  <p class="lead" style="margin-top:64px;max-width:860px">E quem paga o preço é a empresa.</p>
+  <div style="margin-top:auto;margin-bottom:150px;display:flex;gap:28px;align-items:center">
+    <div style="flex:1;height:2px;background:#3a3a3a"></div>
+    <div style="font-family:'Exo 2';font-weight:700;font-size:30px;color:var(--borda);letter-spacing:.02em">3 fornecedores · 0 conversa</div>
+    <div style="flex:1;height:2px;background:#3a3a3a"></div>
+  </div>
+  <div class="foot"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="pg">03 / 07</div></div>
+</section>
+
+<!-- 4 · TRÊS FRENTES -->
+<section class="slide alt" id="s4">
+  <div class="eyebrow">Como resolvemos</div>
+  <h2>Três frentes.<br><span class="accent">Um teto só.</span></h2>
+  <div class="fronts">
+    <div class="front"><div class="n">01</div><div><div class="t">Tráfego pago</div><div class="d">Google e Meta Ads que trazem lead qualificado.</div></div></div>
+    <div class="front"><div class="n">02</div><div><div class="t">Sistemas</div><div class="d">Feitos sob medida para o seu processo.</div></div></div>
+    <div class="front"><div class="n">03</div><div><div class="t">Sites</div><div class="d">Que convertem visita em negócio.</div></div></div>
+  </div>
+  <div class="foot"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="pg">04 / 07</div></div>
+</section>
+
+<!-- 5 · PRINCÍPIOS -->
+<section class="slide dark" id="s5">
+  <div class="eyebrow">Nossos princípios</div>
+  <h2 style="font-size:72px;font-weight:500;color:var(--borda)">Não são valores de parede.</h2>
+  <div class="pri">
+    <div><i>01</i>Entrega</div>
+    <div><i>02</i>Responsabilidade</div>
+    <div><i>03</i><span class="accent">Assertividade</span></div>
+  </div>
+  <div class="foot"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="pg">05 / 07</div></div>
+</section>
+
+<!-- 6 · RESULTADO -->
+<section class="slide coral" id="s6">
+  <div class="eyebrow">Na prática</div>
+  <h1 style="font-size:124px;color:var(--grafite)">Você não gerencia fornecedores.</h1>
+  <h1 style="font-size:124px;color:#fff;margin-top:36px">Gerencia resultado.</h1>
+  <div class="foot"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="pg">06 / 07</div></div>
+</section>
+
+<!-- 7 · CTA -->
+<section class="slide dark" id="s7">
+  <img class="sym" src="../assets/simbolo-coral.png" style="width:760px;right:-120px;top:70px;transform:rotate(-6deg)">
+  <div class="body" style="margin-bottom:150px">
+    <h2 style="font-size:84px">Quer ver onde sua empresa deixa <span class="accent">dinheiro na mesa?</span></h2>
+    <div class="btn">Diagnóstico gratuito</div>
+    <div class="handle">Link na bio · <b>@opussoftworks</b></div>
+  </div>
+  <div class="foot"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="pg">07 / 07</div></div>
+</section>
+
+</body>
+</html>

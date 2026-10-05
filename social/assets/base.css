@@ -1,56 +1,54 @@
+/* Opus SoftWorks · sistema visual de social v2 (luz coral sobre grafite, vidro, 3D) */
 :root{
-    --coral:#FF6039; --grafite:#161616; --branco:#FFFFFF;
-    --txt2:#4A4A4A; --borda:#9C9C9C; --alt:#F4F5F8;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#444;display:flex;flex-direction:column;gap:40px;padding:40px;align-items:center}
-  .slide{width:1080px;height:1350px;position:relative;overflow:hidden;padding:96px 88px;
-    font-family:'Rubik',sans-serif;display:flex;flex-direction:column}
-  .dark{background:var(--grafite);color:var(--branco)}
-  .light{background:var(--branco);color:var(--grafite)}
-  .alt{background:var(--alt);color:var(--grafite)}
-  .coral{background:var(--coral);color:var(--grafite)}
+  --coral:#FF6039; --grafite:#161616; --branco:#FFFFFF;
+  --txt2:#4A4A4A; --borda:#9C9C9C; --alt:#F4F5F8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#444;display:flex;flex-direction:column;gap:40px;padding:40px;align-items:center}
 
-  h1,h2,.exo{font-family:'Exo 2',sans-serif;font-weight:700;letter-spacing:-0.025em}
-  h1{font-size:132px;line-height:1.0}
-  h2{font-size:92px;line-height:1.04}
-  p.lead{font-family:'Rubik';font-weight:400;font-size:38px;line-height:1.4}
-  .dark p.lead{color:var(--branco)}
-  .light p.lead,.alt p.lead{color:var(--txt2)}
-  .accent{color:var(--coral)}
-  .eyebrow{font-family:'Rubik';font-weight:600;font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:var(--coral);margin-bottom:36px}
-  .coral .eyebrow{color:var(--grafite)}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;color:#fff;
+  font-family:'Rubik',sans-serif;background:var(--grafite);isolation:isolate}
+.slide.tall{height:1920px}
 
-  /* rodapé */
-  .foot{position:absolute;left:88px;right:88px;bottom:72px;display:flex;justify-content:space-between;align-items:center}
-  .logo{font-family:'Exo 2';font-size:34px;letter-spacing:-0.04em;line-height:1}
-  .logo b{font-weight:700}.logo span{font-weight:400}
-  .dark .logo b{color:#fff}.dark .logo span{color:var(--coral)}
-  .light .logo b,.alt .logo b{color:var(--coral)}.light .logo span,.alt .logo span{color:var(--grafite)}
-  .coral .logo b{color:#fff}.coral .logo span{color:var(--grafite)}
-  .pg{font-family:'Rubik';font-weight:500;font-size:24px;letter-spacing:.08em}
-  .dark .pg{color:var(--borda)}.light .pg,.alt .pg{color:var(--borda)}.coral .pg{color:var(--grafite)}
-  .swipe{font-family:'Rubik';font-weight:500;font-size:24px}
+/* atmosfera: luz coral + vinheta + grão */
+.glow{position:absolute;inset:0;z-index:-3}
+.slide::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;opacity:.10;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.vig{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 40%,transparent 45%,rgba(0,0,0,.55) 100%)}
 
-  .body{margin-top:auto;margin-bottom:150px}
-  .top{margin-top:0}
+/* herói 3D */
+.hero{position:absolute;z-index:-1;pointer-events:none}
+.hero.blur{filter:blur(34px) saturate(1.2);opacity:.75}
+.hero.sharp{filter:drop-shadow(0 30px 60px rgba(255,96,57,.45)) drop-shadow(0 0 120px rgba(255,96,57,.35))}
 
-  .sym{position:absolute;pointer-events:none}
+/* barra superior e rodapé */
+.top{position:absolute;left:80px;right:80px;top:64px;display:flex;justify-content:space-between;align-items:center;z-index:3}
+.logo{font-family:'Exo 2';font-size:32px;letter-spacing:-0.04em;line-height:1}
+.logo b{font-weight:700;color:#fff}.logo span{font-weight:400;color:var(--coral)}
+.meta{font-family:'Rubik';font-weight:500;font-size:20px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.bot{position:absolute;left:80px;right:80px;bottom:64px;display:flex;justify-content:space-between;align-items:center;z-index:3}
 
-  /* slide 4 lista */
-  .fronts{display:flex;flex-direction:column;gap:28px;margin-top:64px}
-  .front{display:flex;align-items:center;gap:36px;background:var(--branco);border:2px solid #e3e4e8;border-radius:28px;padding:36px 44px}
-  .front .n{font-family:'Exo 2';font-weight:700;font-size:64px;color:var(--coral);letter-spacing:-0.03em;width:90px}
-  .front .t{font-family:'Exo 2';font-weight:700;font-size:56px;letter-spacing:-0.02em}
-  .front .d{font-size:28px;color:var(--txt2);margin-top:4px}
+/* texto */
+.txt{position:absolute;left:80px;right:80px;z-index:3}
+.lead{font-family:'Exo 2';font-weight:500;font-size:64px;letter-spacing:-0.025em;line-height:1.05;color:rgba(255,255,255,.92)}
+.big{font-family:'Exo 2';font-weight:700;font-size:150px;letter-spacing:-0.045em;line-height:.9;text-transform:uppercase}
+.accent{color:var(--coral)}
+.copy{font-family:'Rubik';font-weight:400;font-size:30px;line-height:1.4;color:rgba(255,255,255,.78)}
+.copy b{color:#fff;font-weight:600}
 
-  /* slide 5 princípios */
-  .pri{display:flex;flex-direction:column;gap:0;margin-top:70px}
-  .pri div{font-family:'Exo 2';font-weight:700;font-size:104px;letter-spacing:-0.03em;line-height:1.15;border-top:2px solid #3a3a3a;padding:18px 0}
-  .pri div:last-child{border-bottom:2px solid #3a3a3a}
-  .pri div i{font-style:normal;font-family:'Rubik';font-weight:500;font-size:26px;color:var(--coral);letter-spacing:.14em;margin-right:28px;vertical-align:middle}
+/* vidro */
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.05));
+  border:1.5px solid rgba(255,255,255,.22);border-radius:28px;
+  backdrop-filter:blur(26px) saturate(1.3);-webkit-backdrop-filter:blur(26px) saturate(1.3);
+  box-shadow:0 30px 60px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25);color:#fff}
+.chip{display:inline-flex;align-items:center;gap:14px;border-radius:999px;padding:16px 28px;
+  font-family:'Rubik';font-weight:500;font-size:26px;position:absolute;z-index:2}
+.chip i{width:14px;height:14px;border-radius:50%;background:var(--coral);box-shadow:0 0 18px var(--coral);display:block}
 
-  /* slide 7 */
-  .btn{display:inline-block;background:var(--coral);color:#fff;font-family:'Exo 2';font-weight:700;font-size:48px;letter-spacing:-0.01em;padding:34px 64px;border-radius:24px;margin-top:56px}
-  .handle{font-family:'Rubik';font-weight:500;font-size:34px;margin-top:40px;color:var(--borda)}
-  .handle b{color:#fff;font-weight:600}
+/* CTA em pílula */
+.pill{display:inline-flex;align-items:center;gap:22px;border-radius:999px;padding:14px 14px 14px 36px;
+  font-family:'Rubik';font-weight:600;font-size:26px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.pill .ar{width:56px;height:56px;border-radius:50%;background:var(--coral);display:flex;align-items:center;justify-content:center;font-size:30px;letter-spacing:0}
+.pill.solid{background:var(--coral);box-shadow:0 20px 50px rgba(255,96,57,.45)}
+.pill.solid .ar{background:#fff;color:var(--coral)}

@@ -6,31 +6,42 @@
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <link rel="stylesheet" href="../assets/base.css">
 <style>
-  .stack{display:flex;flex-direction:column;align-items:stretch;margin-top:56px}
-  .card{display:flex;align-items:center;gap:32px;background:var(--alt);border-radius:28px;padding:32px 44px}
-  .card .ic{width:72px;height:72px;border-radius:20px;background:var(--grafite);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Exo 2';font-weight:700;font-size:36px}
-  .card .t{font-family:'Exo 2';font-weight:700;font-size:52px;letter-spacing:-0.02em}
-  .gap{display:flex;align-items:center;gap:24px;height:78px;padding-left:80px}
-  .gap .ln{width:0;height:100%;border-left:4px dashed var(--coral)}
-  .gap .tx{font-family:'Rubik';font-weight:500;font-size:26px;color:var(--coral);letter-spacing:.04em}
-  .you{margin-top:28px;display:flex;align-items:center;gap:28px;border:4px solid var(--coral);border-radius:28px;padding:30px 44px}
-  .you .t{font-family:'Exo 2';font-weight:700;font-size:44px;letter-spacing:-0.02em}
-  .you .d{font-size:28px;color:var(--txt2);margin-top:6px}
+  .node{position:absolute;z-index:2;padding:26px 40px;font-family:'Exo 2';font-weight:700;font-size:50px;letter-spacing:-0.02em}
+  .node small{display:block;font-family:'Rubik';font-weight:500;font-size:19px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px}
+  .you{position:absolute;z-index:3;left:420px;top:760px;width:240px;height:240px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#ff8a6b,#FF6039 55%,#d9421f);
+    box-shadow:0 0 0 18px rgba(255,96,57,.18),0 0 120px rgba(255,96,57,.7);
+    display:flex;align-items:center;justify-content:center;flex-direction:column;
+    font-family:'Exo 2';font-weight:700;font-size:54px;letter-spacing:-0.03em;text-transform:uppercase}
+  .you small{font-family:'Rubik';font-weight:500;font-size:17px;letter-spacing:.16em;margin-top:4px}
 </style>
 </head>
 <body>
-<section class="slide light" id="s1">
-  <div class="eyebrow">O problema</div>
-  <h2 style="font-size:98px">3 fornecedores.<br><span class="accent">Ninguém se fala.</span></h2>
-  <div class="stack">
-    <div class="card"><div class="ic">A</div><div class="t">Agência</div></div>
-    <div class="gap"><div class="ln"></div><div class="tx">sem conversa</div></div>
-    <div class="card"><div class="ic">D</div><div class="t">Desenvolvedor</div></div>
-    <div class="gap"><div class="ln"></div><div class="tx">sem conversa</div></div>
-    <div class="card"><div class="ic">S</div><div class="t">Sistema</div></div>
-    <div class="you"><div><div class="t">E quem repassa o recado? <span class="accent">Você.</span></div><div class="d">Resultado não é sorte. É entrega.</div></div></div>
+<section class="slide" id="s1">
+  <div class="glow" style="background:radial-gradient(60% 40% at 50% 66%,rgba(255,96,57,.6),transparent 72%),radial-gradient(45% 30% at 0% 0%,rgba(255,96,57,.22),transparent 70%)"></div>
+  <div class="vig"></div>
+  <div class="top"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="meta">O problema</div></div>
+  <div class="txt" style="top:180px">
+    <div class="lead">3 fornecedores.</div>
+    <div class="big" style="font-size:150px;margin-top:12px">Ninguém<br><span class="accent">se fala.</span></div>
   </div>
-  <div class="foot"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="pg">@opussoftworks</div></div>
+
+  <svg style="position:absolute;left:0;top:0;width:1080px;height:1350px;z-index:1" viewBox="0 0 1080 1350" fill="none">
+    <g stroke="#FF6039" stroke-width="3" stroke-dasharray="3 14" stroke-linecap="round">
+      <path d="M280 700 C 330 770, 380 800, 430 840"/>
+      <path d="M800 740 C 740 790, 700 810, 650 850"/>
+      <path d="M540 1050 L 540 1010"/>
+    </g>
+  </svg>
+
+  <div class="node glass" style="left:80px;top:610px"><small>Fornecedor 1</small>Agência</div>
+  <div class="node glass" style="right:70px;top:650px"><small>Fornecedor 2</small>Desenvolvedor</div>
+  <div class="node glass" style="left:350px;top:1060px"><small>Fornecedor 3</small>Sistema</div>
+  <div class="you"><div>Você</div><small>no meio</small></div>
+  <div class="chip glass" style="left:60px;top:920px;font-size:22px;transform:rotate(-4deg)">“repassa pra agência”</div>
+  <div class="chip glass" style="right:60px;top:960px;font-size:22px;transform:rotate(3deg)">“avisa o dev”</div>
+
+  <div class="bot"><div class="copy" style="font-size:28px">Resultado não é sorte. <b>É entrega.</b></div><div class="meta">@opussoftworks</div></div>
 </section>
 </body>
 </html>

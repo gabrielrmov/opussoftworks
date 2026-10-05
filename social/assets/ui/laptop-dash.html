@@ -1,0 +1,61 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="ui.css">
+<style>
+body{width:1440px;height:900px;background:#F4F5F8;display:flex;overflow:hidden}
+.side{width:248px;background:#161616;color:#fff;padding:28px 18px;display:flex;flex-direction:column;gap:4px}
+.nav{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;font-size:15px;color:rgba(255,255,255,.62);font-weight:500}
+.nav.on{background:rgba(255,96,57,.14);color:#FF8A6B}
+.card{background:#fff;border-radius:20px;padding:22px}
+.k{font-size:13px;color:var(--b);font-weight:500}
+.v{font-family:'Exo 2';font-weight:700;font-size:34px;letter-spacing:-.03em;margin-top:6px}
+.up{color:#C8431F;background:#FFE9E2}
+td{padding:14px 0;border-bottom:1px solid var(--line);font-size:14px}
+th{text-align:left;font-size:12px;color:var(--b);font-weight:500;padding-bottom:8px}
+</style></head><body>
+<div class="side">
+  <div style="display:flex;align-items:center;gap:10px;padding:0 10px 26px"><div style="width:34px;height:34px;border-radius:10px;background:var(--c);display:flex;align-items:center;justify-content:center;font-family:'Exo 2';font-weight:700">G</div><div class="exo" style="font-weight:700;font-size:20px">Gestão<span style="color:var(--c)">+</span></div></div>
+  <div class="nav on"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Visão geral</div>
+  <div class="nav"><svg class="i" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Pedidos</div>
+  <div class="nav"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6"/></svg>Clientes</div>
+  <div class="nav"><svg class="i" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8"/></svg>Estoque</div>
+  <div class="nav"><svg class="i" viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Financeiro</div>
+  <div class="nav"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>Relatórios</div>
+  <div style="margin-top:auto;background:rgba(255,255,255,.06);border-radius:16px;padding:16px">
+    <div style="font-size:13px;font-weight:600">Suporte Opus</div><div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:4px">Fale direto com quem desenvolveu.</div></div>
+</div>
+<div style="flex:1;padding:28px 34px;display:flex;flex-direction:column;gap:18px">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <div><div class="k">Outubro de 2026</div><div class="exo" style="font-weight:700;font-size:32px;margin-top:2px">Visão geral</div></div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <div style="width:300px;height:44px;border-radius:12px;background:#fff;display:flex;align-items:center;gap:10px;padding:0 14px;color:var(--b);font-size:14px"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Buscar pedido, cliente…</div>
+      <div style="height:44px;border-radius:12px;background:var(--c);color:#fff;display:flex;align-items:center;gap:8px;padding:0 18px;font-weight:600;font-size:14px"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Novo pedido</div>
+      <div class="av" style="background:var(--g);color:#fff">MR</div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+    <div class="card" style="background:#161616;color:#fff"><div class="k" style="color:rgba(255,255,255,.55)">Faturamento do mês</div><div class="v">R$ 84.320</div><span class="chip" style="background:rgba(255,96,57,.18);color:#FF8A6B;margin-top:8px">↗ 12% vs. setembro</span></div>
+    <div class="card"><div class="k">Pedidos</div><div class="v">1.042</div><span class="chip up" style="margin-top:8px">↗ 8%</span></div>
+    <div class="card"><div class="k">Ticket médio</div><div class="v">R$ 80,90</div><span class="chip up" style="margin-top:8px">↗ 4%</span></div>
+    <div class="card"><div class="k">Clientes ativos</div><div class="v">386</div><span class="chip" style="background:var(--alt);color:var(--t2);margin-top:8px">+27 novos</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1.55fr 1fr;gap:16px;flex:1">
+    <div class="card" style="display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between"><div style="font-weight:600;font-size:16px">Faturamento mensal</div><div style="display:flex;gap:16px;font-size:12px;color:var(--b);font-weight:500"><span style="display:flex;gap:6px;align-items:center"><i style="width:10px;height:10px;border-radius:3px;background:var(--c)"></i>2026</span><span style="display:flex;gap:6px;align-items:center"><i style="width:10px;height:10px;border-radius:3px;background:#E3E4E8"></i>2025</span></div></div>
+      <div style="flex:1;display:flex;align-items:flex-end;gap:14px;padding-top:20px;border-bottom:1px solid var(--line)">
+        <script>const a=[38,44,41,52,49,58,61,57,66,74],b=[30,33,36,38,40,42,45,44,48,50];
+        a.forEach((v,i)=>document.write(`<div style="flex:1;display:flex;gap:4px;align-items:flex-end;height:100%"><div style="flex:1;height:${b[i]}%;background:#E3E4E8;border-radius:6px 6px 0 0"></div><div style="flex:1;height:${v}%;background:${i==9?'#FF6039':'#161616'};border-radius:6px 6px 0 0"></div></div>`))</script>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--b);margin-top:8px;padding:0 6px"><span>Jan</span><span>Fev</span><span>Mar</span><span>Abr</span><span>Mai</span><span>Jun</span><span>Jul</span><span>Ago</span><span>Set</span><span>Out</span></div>
+    </div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between"><div style="font-weight:600;font-size:16px">Pedidos recentes</div><div style="font-size:13px;color:var(--c);font-weight:600">Ver todos</div></div>
+      <table style="width:100%;border-collapse:collapse;margin-top:12px">
+        <tr><th>Pedido</th><th>Cliente</th><th style="text-align:right">Status</th></tr>
+        <tr><td style="font-weight:600">#1042</td><td>Rafael Costa</td><td style="text-align:right"><span class="chip" style="background:var(--c);color:#fff">Novo</span></td></tr>
+        <tr><td style="font-weight:600">#1041</td><td>Ana Ribeiro</td><td style="text-align:right"><span class="chip" style="background:var(--g);color:#fff">Em separação</span></td></tr>
+        <tr><td style="font-weight:600">#1040</td><td>Lucas Mendes</td><td style="text-align:right"><span class="chip" style="background:var(--alt);color:var(--t2)">Enviado</span></td></tr>
+        <tr><td style="font-weight:600">#1039</td><td>Júlia Prado</td><td style="text-align:right"><span class="chip" style="background:var(--alt);color:var(--t2)">Entregue</span></td></tr>
+        <tr><td style="font-weight:600;border:0">#1038</td><td style="border:0">Pedro Alves</td><td style="text-align:right;border:0"><span class="chip" style="background:var(--alt);color:var(--t2)">Entregue</span></td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+</body></html>

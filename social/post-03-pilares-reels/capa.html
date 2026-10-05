@@ -3,31 +3,35 @@
 <head>
 <meta charset="utf-8">
 <title>Opus SoftWorks · Post 3 · Capa do Reels</title>
-<link rel="stylesheet" href="../assets/fonts/fonts.css">
-<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/v5.css">
 <style>
-  /* 9:16. Zonas seguras do Reels: evitar 250px no topo e 340px na base */
-  .pr{position:absolute;left:80px;right:80px;z-index:3;display:flex;align-items:center;gap:36px;padding:28px 52px;height:128px}
-  .pr .n{font-family:'Exo 2';font-weight:700;font-size:56px;color:var(--coral);letter-spacing:-0.03em;width:96px}
-  .pr .t{font-family:'Exo 2';font-weight:700;font-size:74px;letter-spacing:-0.035em;text-transform:uppercase}
+  /* 9:16 · conteúdo entre y 285 e 1635 (recorte 4:5 do feed) e fora das zonas de UI do Reels */
+  .row{position:absolute;left:72px;right:72px;z-index:5;border-top:1px solid rgba(255,255,255,.14);padding-top:26px;display:grid;grid-template-columns:96px 1fr;column-gap:8px}
+  .row .n{font-family:'Exo 2';font-weight:700;font-size:30px;color:var(--c);padding-top:10px}
+  .row .t{font-family:'Exo 2';font-weight:700;font-size:72px;letter-spacing:-.035em;line-height:1}
+  .row .d{grid-column:2;font-size:25px;color:rgba(255,255,255,.6);margin-top:10px}
 </style>
 </head>
 <body>
-<section class="slide tall bg-hot2" id="capa">
-  <img class="obj farther" src="../assets/3d/pearl.png" style="width:560px;left:-190px;top:1000px">
-  <img class="obj far" src="../assets/3d/knot.png" style="width:440px;right:-80px;top:210px;transform:rotate(25deg)">
-  <img class="hero sharp" src="../assets/simbolo-coral.png" style="width:1030px;left:25px;top:340px;transform:rotate(-8deg)">
-  <img class="obj" src="../assets/3d/rock.png" style="width:330px;right:30px;top:640px">
-  <img class="obj" src="../assets/3d/coralpearl.png" style="width:190px;left:110px;top:330px">
-  <div class="vig"></div>
-  <div class="top" style="top:270px;justify-content:flex-start"><div class="pill glass" style="padding:10px 10px 10px 30px;font-size:22px">Reels · 30 segundos<span class="ar" style="width:44px;height:44px;font-size:22px">▶</span></div></div>
-  <div class="txt" style="top:800px">
-    <div class="lead">Os 3 pilares da Opus</div>
-    <div class="big" style="font-size:150px;margin-top:10px">em 30<br>segundos.</div>
+<section class="slide dark tall" id="capa">
+  <div class="light-c" style="width:900px;height:700px;right:-260px;top:300px;background:rgba(255,96,57,.38)"></div>
+  <div class="light-c" style="width:600px;height:500px;left:-260px;bottom:200px;background:rgba(255,96,57,.12)"></div>
+  <div class="grid"></div>
+  <img class="abs" src="../assets/simbolo-coral.png" style="width:860px;right:-250px;top:330px;transform:rotate(-12deg);z-index:2;filter:drop-shadow(0 40px 60px rgba(0,0,0,.5)) drop-shadow(0 0 80px rgba(255,96,57,.35))">
+
+  <div class="top" style="top:290px"><div class="sig"><img src="../assets/simbolo-coral.png"><div class="logo"><b>Opus</b><span>SoftWorks</span></div></div></div>
+
+  <div class="abs" style="left:72px;top:560px;z-index:5">
+    <div class="eyebrow">Nossos princípios</div>
+    <div class="h-sub dim" style="margin-top:30px">Os 3 pilares</div>
+    <div class="h1" style="margin-top:8px;font-size:156px">da Opus<span class="c">.</span></div>
   </div>
-  <div class="pr glass" style="top:1190px"><div class="n">01</div><div class="t">Entrega</div><img class="icn" src="../assets/3d/rocket.png" style="position:absolute;right:34px;top:50%;transform:translateY(-52%);width:112px"></div>
-  <div class="pr glass" style="top:1340px"><div class="n">02</div><div class="t" style="font-size:62px">Responsabilidade</div><img class="icn" src="../assets/3d/magnifier.png" style="position:absolute;right:44px;top:50%;transform:translateY(-50%);width:62px"></div>
-  <div class="pr glass" style="top:1490px;border-color:rgba(255,255,255,.7)"><div class="n" style="color:#fff">03</div><div class="t">Assertividade</div><img class="icn" src="../assets/3d/chart.png" style="position:absolute;right:30px;top:50%;transform:translateY(-52%);width:104px"></div>
+
+  <div class="row" style="top:930px"><div class="n">01</div><div class="t">Entrega</div><div class="d">Prazo e escopo no contrato.</div></div>
+  <div class="row" style="top:1120px"><div class="n">02</div><div class="t">Responsabilidade</div><div class="d">Você fala direto com quem executa.</div></div>
+  <div class="row" style="top:1310px"><div class="n">03</div><div class="t c">Assertividade</div><div class="d">Decisão com número, não com achismo.</div></div>
+
+  <div class="abs" style="left:72px;top:1500px;z-index:5"><div class="pill ghost"><span style="font-weight:600">Assista em 30 segundos</span><span class="ar">▶</span></div></div>
 </section>
 </body>
 </html>

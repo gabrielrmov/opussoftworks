@@ -2,103 +2,117 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Opus Softworks — Post de apresentação</title>
+<title>Opus SoftWorks — Post de apresentação</title>
 <style>
-  @font-face{font-family:"Space Grotesk";font-weight:500;src:url(fonts/sg500.ttf)}
-  @font-face{font-family:"Space Grotesk";font-weight:600;src:url(fonts/sg600.ttf)}
-  @font-face{font-family:"Inter";font-weight:500;src:url(fonts/inter500.ttf)}
-  /* Troque aqui a paleta quando a identidade oficial da Opus estiver definida */
+  @font-face{font-family:"Exo 2";font-weight:400;src:url(fonts/exo400.ttf)}
+  @font-face{font-family:"Exo 2";font-weight:600;src:url(fonts/exo600.ttf)}
+  @font-face{font-family:"Exo 2";font-weight:700;src:url(fonts/exo700.ttf)}
+  @font-face{font-family:"Rubik";font-weight:400;src:url(fonts/rubik400.ttf)}
+  @font-face{font-family:"Rubik";font-weight:500;src:url(fonts/rubik500.ttf)}
+
+  /* Paleta do brandboard — variante CORAL (padrão). Para a azul, abra com ?azul */
   :root{
-    --bg:#0c0c14;
-    --card:#171721;
-    --ink:#ededf3;
-    --muted:#c3c3cc;
-    --accent:#5266eb;
-    --accent-hi:#9aa8ff;
-    --accent-lo:#1b2160;
+    --bg:#161616;           /* grafite */
+    --bg-deep:#0b0b0b;
+    --card:#1f1f1f;
+    --ink:#ffffff;
+    --accent:#ff6039;
+    --accent-hi:#ffa98f;
+    --accent-lo:#7a1d08;
+    --symbol:url(opus-symbol-coral.png);
+  }
+  :root.azul{
+    --bg:#000000;
+    --bg-deep:#000000;
+    --card:#14141a;
+    --accent:#3b3dff;       /* #191BDF clareado p/ ter contraste no preto (aviso do brandboard) */
+    --accent-hi:#9fa4ff;
+    --accent-lo:#0a0b66;
+    --symbol:url(opus-symbol-blue.png);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{width:1080px;height:1350px;background:var(--bg)}
-  .post{position:relative;width:1080px;height:1350px;overflow:hidden;font-family:"Space Grotesk",sans-serif;color:var(--ink);
+  .post{position:relative;width:1080px;height:1350px;overflow:hidden;color:var(--ink);font-family:"Rubik",sans-serif;
     background:
-      radial-gradient(900px 600px at 50% 0%, #1d1d2b 0%, transparent 70%),
-      radial-gradient(900px 500px at 70% 105%, rgba(82,102,235,.28), transparent 70%),
-      var(--bg);}
-  .grain{position:absolute;inset:0;opacity:.35;mix-blend-mode:overlay;pointer-events:none;z-index:9}
+      radial-gradient(520px 700px at 0% 12%, rgba(255,255,255,.13), transparent 70%),
+      radial-gradient(700px 500px at 100% 0%, rgba(255,255,255,.05), transparent 70%),
+      linear-gradient(180deg,#171717 0%, var(--bg-deep) 100%);}
+  .grain{position:absolute;inset:0;opacity:.5;mix-blend-mode:overlay;pointer-events:none;z-index:9}
 
-  /* header */
-  .head{position:absolute;left:112px;right:112px;top:78px;display:flex;align-items:center;justify-content:space-between;
-    padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.18);z-index:5}
-  .brand{display:flex;align-items:center;gap:12px;font-size:30px;letter-spacing:.02em}
-  .brand b{font-weight:600;letter-spacing:.14em}
-  .brand span{font-weight:400;color:var(--muted);letter-spacing:.02em;font-size:24px}
-  .tiny{font-family:Inter,sans-serif;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#e9e9f2;line-height:1.7}
-  .tiny.r{text-align:right}
+  /* cabeçalho */
+  .head{position:absolute;left:112px;right:112px;top:76px;height:64px;border-bottom:1px solid rgba(255,255,255,.28);z-index:6}
+  .logo{position:absolute;left:0;top:0;display:flex;align-items:center;gap:10px;font-family:"Exo 2",sans-serif;font-size:27px;letter-spacing:-.03em;line-height:1}
+  .logo i{display:block;width:44px;height:30px;background:var(--symbol) center/contain no-repeat}
+  .logo b{font-weight:700}.logo span{font-weight:400;color:var(--accent)}
+  .mid{position:absolute;left:262px;top:12px;font-family:"Rubik",sans-serif;font-size:9px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;white-space:nowrap;color:#e8e8e8}
+  .rgt{position:absolute;right:0;top:0;text-align:right;font-family:"Rubik",sans-serif;font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;line-height:1.9;color:#fff}
 
   /* card */
-  .card{position:absolute;left:233px;top:236px;width:614px;height:700px;border-radius:64px;
-    background:linear-gradient(180deg,#1b1b27,#15151f);
-    box-shadow:0 0 0 1px rgba(255,255,255,.04) inset, 0 40px 90px rgba(0,0,0,.55);z-index:5}
-  .bars{position:absolute;left:93px;top:62px;display:flex;gap:26px}
-  .bars i{display:block;height:4px;border-radius:4px;background:#e9e9f2}
-  .bars i:nth-child(1){width:94px}.bars i:nth-child(2){width:94px;background:var(--accent)}.bars i:nth-child(3){width:94px}
-  h1{position:absolute;left:93px;top:132px;font-weight:500;font-size:98px;line-height:1.02;letter-spacing:-.045em}
+  .card{position:absolute;left:233px;top:236px;width:614px;height:700px;border-radius:66px;z-index:6;
+    background:linear-gradient(180deg,#232323,#1d1d1d);
+    box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .bars{position:absolute;left:93px;top:64px;display:flex;gap:26px}
+  .bars i{display:block;width:92px;height:4px;border-radius:4px;background:#f2f2f2}
+  .bars i:nth-child(2){background:var(--accent)}
+  h1{position:absolute;left:93px;top:122px;width:480px;font-family:"Exo 2",sans-serif;font-weight:600;font-size:74px;line-height:1.03;letter-spacing:-.045em}
   h1 em{font-style:normal;color:var(--accent)}
-  .pill{position:absolute;left:93px;bottom:70px;right:93px;height:108px;border-radius:30px;background:#0d0d14;
-    display:flex;align-items:center;gap:22px;padding:0 28px;font-size:23px;line-height:1.3;white-space:nowrap;letter-spacing:-.01em}
-  .pill b{font-weight:600;color:var(--accent)}
+  .pill{position:absolute;left:93px;bottom:62px;width:420px;height:98px;border-radius:30px;background:#0d0d0d;
+    display:flex;align-items:center;gap:20px;padding:0 24px;font-size:22px;line-height:1.25;letter-spacing:-.01em;font-weight:400}
+  .pill b{font-weight:500;color:var(--accent)}
   .pill svg{flex:none}
 
-  /* fan of glass blades */
-  .fan{position:absolute;left:0;top:0;width:1080px;height:1350px;z-index:2;pointer-events:none}
-  .blade{position:absolute;left:0;top:0;border-radius:40px;transform-origin:0 0;
+  /* leque de vidro */
+  .fan{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+  .blade{position:absolute;left:0;top:0;transform-origin:50% 0;border-radius:36px 36px 0 0;
     background:
-      linear-gradient(90deg, rgba(8,10,28,.95) 0%, var(--accent-lo) 14%, var(--accent) 40%, var(--accent-hi) 52%, var(--accent) 62%, var(--accent-lo) 86%, rgba(8,10,28,.95) 100%);
-    -webkit-mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.9) 35%,transparent 100%);
-            mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,.9) 35%,transparent 100%);
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
-  .floor{position:absolute;left:0;right:0;bottom:0;height:300px;z-index:3;
-    background:linear-gradient(to top, rgba(154,168,255,.55), rgba(82,102,235,.25) 40%, transparent);mix-blend-mode:screen}
-  .foot{position:absolute;left:0;right:0;bottom:44px;text-align:center;z-index:6;font-family:Inter,sans-serif;font-size:15px;
-    letter-spacing:.32em;text-transform:uppercase;color:#fff;font-weight:500;text-shadow:0 2px 12px rgba(0,0,40,.6)}
+      linear-gradient(90deg,
+        var(--accent-hi) 0%, var(--accent) 7%, rgba(0,0,0,.0) 17%,
+        rgba(0,0,0,.35) 45%, rgba(0,0,0,.0) 78%, var(--accent) 93%, var(--accent-hi) 100%),
+      linear-gradient(180deg, rgba(0,0,0,.0), var(--accent-lo));
+    box-shadow:inset 0 3px 6px rgba(255,255,255,.55), 0 0 18px rgba(0,0,0,.6)}
+  .glow{position:absolute;left:0;right:0;bottom:0;height:560px;z-index:3;pointer-events:none;
+    background:
+      radial-gradient(520px 330px at 38% 100%, var(--accent-hi), transparent 70%),
+      radial-gradient(760px 420px at 40% 100%, var(--accent), transparent 72%);
+    mix-blend-mode:screen;opacity:.95}
+  .shade{position:absolute;left:0;right:0;bottom:330px;height:300px;z-index:3;background:linear-gradient(to top,transparent,rgba(0,0,0,.0))}
 </style>
 </head>
 <body>
 <div class="post">
-  <svg class="grain" width="1080" height="1350"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .55 0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+  <svg class="grain" width="1080" height="1350"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .6  0 0 0 0 .6  0 0 0 0 .6  0 0 0 .5 0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
 
   <div class="head">
-    <div class="brand">
-      <svg width="34" height="34" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="12.5" stroke="#ededf3" stroke-width="5"/><path d="M17 4.5 A12.5 12.5 0 0 1 29.5 17" stroke="#5266eb" stroke-width="5" stroke-linecap="round"/></svg>
-      <b>OPUS</b><span>softworks</span>
-    </div>
-    <div class="tiny r">Sistemas. Sites. Automação.<br>Software sob medida.</div>
+    <div class="logo"><i></i><div><b>Opus</b><span>SoftWorks</span></div></div>
+    <div class="mid">Sites. Apps. SaaS. Ideias. Software.</div>
+    <div class="rgt">Menos ideia parada.<br>Mais software no ar.</div>
   </div>
 
   <div class="fan" id="fan"></div>
-  <div class="floor"></div>
+  <div class="glow"></div>
 
   <div class="card">
     <div class="bars"><i></i><i></i><i></i></div>
-    <h1>Prazer,<br>somos a<br><em>Opus.</em></h1>
+    <h1>Prazer,<br>somos a<br><em>Opus<br>SoftWorks.</em></h1>
     <div class="pill">
-      <svg width="52" height="52" viewBox="0 0 52 52" fill="#5266eb"><path d="M20 4 L24.5 17.5 L38 22 L24.5 26.5 L20 40 L15.5 26.5 L2 22 L15.5 17.5Z"/><path d="M39 28 L41.7 36.3 L50 39 L41.7 41.7 L39 50 L36.3 41.7 L28 39 L36.3 36.3Z"/></svg>
-      <div>Conheça a <b>Opus Softworks</b>.<br>Tecnologia <b>sob medida.</b></div>
+      <svg width="46" height="46" viewBox="0 0 52 52" fill="var(--accent)"><path d="M20 4 L24.5 17.5 L38 22 L24.5 26.5 L20 40 L15.5 26.5 L2 22 L15.5 17.5Z"/><path d="M39 28 L41.7 36.3 L50 39 L41.7 41.7 L39 50 L36.3 41.7 L28 39 L36.3 36.3Z"/></svg>
+      <div>Transformamos<br><b>ideias em software.</b></div>
     </div>
   </div>
-
-  <div class="foot">Bem-vindo ao nosso perfil</div>
 </div>
 <script>
-  // leque de lâminas de vidro, irradiando de um ponto abaixo do canvas
+  if(location.search.includes('azul')) document.documentElement.classList.add('azul');
+  // lâminas de vidro ao longo de um arco, inclinadas para a direita
   const fan=document.getElementById('fan');
-  const cx=720, cy=1720, R=470, L=330, W=64, N=34;
-  for(let i=0;i<N;i++){
-    const a=-178+ (i/(N-1))*160;           // graus
+  const W=58, H=640, step=46;
+  for(let x=-120;x<=1180;x+=step){
+    const dx=x-500;
+    const top=1010+(dx*dx)*(150/500/500);          // arco: crista em x≈500
+    const lean=17-(dx/500)*7;                       // inclinação (graus) levemente maior à esquerda
     const d=document.createElement('div');
     d.className='blade';
-    d.style.width=W+'px'; d.style.height=L+'px';
-    d.style.transform=`translate(${cx}px,${cy}px) rotate(${a+90}deg) translate(${-W/2}px,${-(R+L)}px)`;
+    d.style.width=W+'px'; d.style.height=H+'px';
+    d.style.transform=`translate(${x}px,${top}px) rotate(${lean}deg)`;
     fan.appendChild(d);
   }
 </script>

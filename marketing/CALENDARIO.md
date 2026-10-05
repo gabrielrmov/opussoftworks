@@ -1,182 +1,181 @@
-# Calendário de postagens — ELEVION (12/10 a 06/11/2026)
+# Calendário de postagens — Opus SoftWorks (12/10 a 06/11/2026)
 
 Feed do Instagram, 3 posts por semana (seg/qua/sex, às 12h), formato 4:5 (1080x1350).
-Linha visual inspirada na referência (gancho curto + palavra-chave destacada + objeto central + "Leia a legenda"),
-traduzida pra identidade ELEVION: onyx `#171721`, ivory `#ededf3`, cobalto `#5266eb`, Space Grotesk + Inter.
-Alterna fundo escuro e claro pra formar o xadrez no grid.
+Linha visual puxada da referência: logo no topo, frase de abertura + título com palavra em itálico serifado
+e palavra-chave num bloco de destaque, objeto 3D no centro, bilhete de papel, adesivos em estrela e "Leia a legenda".
+Identidade Opus SoftWorks (opussoftworks.com.br): coral `#ff6039`, preto `#171717`, claro `#fafafa`,
+Inter Tight + Instrument Serif itálico, símbolo do infinito. Alterna fundo escuro e claro pra formar o xadrez no grid.
 
-| # | Data | Pilar | Formato | Gancho | Peça |
-|---|------|-------|---------|--------|------|
-| 1 | Seg 12/10 | Tráfego pago | Imagem única | Você paga por clique ou por cliente? | [post-01.png](posts/post-01.png) |
-| 2 | Qua 14/10 | Sites | Imagem única | Visita não é venda. | [post-02.png](posts/post-02.png) |
-| 3 | Sex 16/10 | Sistemas de gestão | Imagem única | Planilha não é sistema. | [post-03.png](posts/post-03.png) |
-| 4 | Seg 19/10 | Autoridade | Imagem única | Resultado não é sorte. É entrega. | [post-04.png](posts/post-04.png) |
-| 5 | Qua 21/10 | Tráfego pago | Imagem única | CPL baixo não paga conta. | [post-05.png](posts/post-05.png) |
-| 6 | Sex 23/10 | Processo | Imagem única | 4 etapas. Zero improviso. | [post-06.png](posts/post-06.png) |
-| 7 | Seg 26/10 | Sites | Imagem única | Seu site tem poucos segundos pra convencer. | [post-07.png](posts/post-07.png) |
-| 8 | Qua 28/10 | Gestão | Imagem única | Seu lead esfriou no WhatsApp? | [post-08.png](posts/post-08.png) |
-| 9 | Sex 30/10 | Princípios | Imagem única | Prazo cumprido é o mínimo. | [post-09.png](posts/post-09.png) |
-| 10 | Seg 02/11 | Autoridade | Imagem única | Três fornecedores. Zero conversa. | [post-10.png](posts/post-10.png) |
-| 11 | Qua 04/11 | Diagnóstico | Imagem única | Quanto vale o lead que você perdeu? | [post-11.png](posts/post-11.png) |
-| 12 | Sex 06/11 | Conversão | Imagem única | Descubra onde sua operação vaza. | [post-12.png](posts/post-12.png) |
+| # | Data | Pilar | Objeto | Texto da peça | Peça |
+|---|------|-------|--------|---------------|------|
+| 1 | Seg 12/10 | Tráfego pago | xadrez | Antes de aumentar a verba, — você paga por clique ou por cliente? | [post-01.png](posts/post-01.png) |
+| 2 | Qua 14/10 | Sites | celular com site | Não adianta ter visita — se o seu site não sabe vender. | [post-02.png](posts/post-02.png) |
+| 3 | Sex 16/10 | Sistemas | quebra-cabeça | Planilha não é sistema. — Sua operação precisa encaixar. | [post-03.png](posts/post-03.png) |
+| 4 | Seg 19/10 | Autoridade | dados + caixa | O que move a Opus SoftWorks — Resultado não é sorte. É entrega. | [post-04.png](posts/post-04.png) |
+| 5 | Qua 21/10 | Tráfego pago | pilhas de moedas | Lead barato que não compra — CPL baixo não paga a conta. | [post-05.png](posts/post-05.png) |
+| 6 | Sex 23/10 | Método | escada 01–04 | Como trabalhamos — 4 etapas. Zero improviso. | [post-06.png](posts/post-06.png) |
+| 7 | Seg 26/10 | Sites | cronômetro | Rápido e claro — Seu site tem poucos segundos pra convencer. | [post-07.png](posts/post-07.png) |
+| 8 | Qua 28/10 | Sistemas | celular + gelo | Lead que espera, esfria. — Quem responde primeiro, fecha. | [post-08.png](posts/post-08.png) |
+| 9 | Sex 30/10 | Autoridade | calendário | Entrega com processo — Prazo cumprido é o mínimo. | [post-09.png](posts/post-09.png) |
+| 10 | Seg 02/11 | Autoridade | engrenagens | Tráfego, sistema e site — Três fornecedores. Zero conversa. | [post-10.png](posts/post-10.png) |
+| 11 | Qua 04/11 | Diagnóstico | diamante + lupa | Diagnóstico gratuito — Quanto vale o lead que você perdeu? | [post-11.png](posts/post-11.png) |
+| 12 | Sex 06/11 | Conversão | infinito 3D | Vender mais. Operar melhor. — Crescer com muito mais clareza. | [post-12.png](posts/post-12.png) |
 
-**Mix de pilares:** tráfego pago (2), sites (2), gestão (2), autoridade/processo/princípios (4), diagnóstico e conversão (2).
+**Mix de pilares:** tráfego pago (2), sites (2), sistemas (2), autoridade e método (4), diagnóstico e conversão (2).
 
 ## Legendas
 
-### 1. Seg 12/10 — Você paga por clique ou por cliente?
+### 1. Seg 12/10 — Antes de aumentar a verba, — você paga por clique ou por cliente?
 
 ![post 1](posts/post-01.png)
 
-Clique não paga boleto. Lead qualificado, sim.  
+Clique barato não paga boleto. Cliente, sim.  
   
-A gente configura Google Ads e Meta Ads pra trazer gente pronta pra comprar — e você acompanha CPL, conversão e ROAS toda semana.  
+Na Opus SoftWorks, as campanhas em Meta e Google são guiadas por custo por cliente, taxa de fechamento e retorno sobre o investimento — não por curtida nem clique.  
   
-Quer saber o que sua campanha está entregando de verdade? Chama no WhatsApp pelo link da bio.
+Quer saber o que a sua campanha entrega de verdade? Fala com um especialista pelo link da bio.
 
-#trafegopago #googleads #metaads #marketingdigital #elevion
+#trafegopago #metaads #googleads #marketingdigital #goiania #opussoftworks
 
-### 2. Qua 14/10 — Visita não é venda.
+### 2. Qua 14/10 — Não adianta ter visita — se o seu site não sabe vender.
 
 ![post 2](posts/post-02.png)
 
-Site bonito que ninguém usa pra fechar negócio é só cartão de visita caro.  
+Site bonito que não leva ninguém ao WhatsApp é cartão de visita caro.  
   
-A ELEVION faz sites pensados pra converter visita em cliente: caminho claro, chamada direta e contato a um toque.  
+A Opus SoftWorks faz sites rápidos e claros, com caminho direto até o contato — pensados pra converter visita em cliente.  
   
-Seu site hoje leva o visitante até o WhatsApp? Se não, vale conversar.
+Seu site hoje deixa óbvio qual é o próximo passo?
 
-#siteparaempresas #webdesign #conversao #elevion
+#siteprofissional #webdesign #conversao #goiania #opussoftworks
 
-### 3. Sex 16/10 — Planilha não é sistema.
+### 3. Sex 16/10 — Planilha não é sistema. — Sua operação precisa encaixar.
 
 ![post 3](posts/post-03.png)
 
-Planilha quebra quando a operação cresce.  
+Quando cada informação mora num lugar, a operação trava.  
   
-Criamos sistemas de gestão sob medida pra sua empresa: tudo organizado em um só lugar, do lead à entrega.  
+Com sistemas e automações, a Opus SoftWorks mapeia o seu processo, elimina tarefas repetitivas e centraliza tudo num lugar só.  
   
-Quantas abas você abre pra fechar uma venda? Conta pra gente nos comentários.
+Quantas planilhas você abre pra fechar uma venda? Conta aqui.
 
-#sistemadegestao #gestaoempresarial #automacao #elevion
+#sistemadegestao #automacao #processos #gestaoempresarial #opussoftworks
 
-### 4. Seg 19/10 — Resultado não é sorte. É entrega.
+### 4. Seg 19/10 — O que move a Opus SoftWorks — Resultado não é sorte. É entrega.
 
 ![post 4](posts/post-04.png)
 
 Resultado não é sorte. É entrega.  
   
-A ELEVION junta tráfego, gestão e site numa operação só — sem você ter que coordenar três fornecedores.  
+A Opus SoftWorks une tráfego pago, sistemas de gestão e sites sob uma mesma estratégia, pra empresas que já faturam e querem crescer com processo.  
   
-Salva esse post pra lembrar na hora de contratar.
+Salva esse post pra lembrar na hora de escolher um parceiro.
 
-#elevion #marketingdigital #trafegopago #sites #gestao
+#opussoftworks #marketingdigital #trafegopago #sistemas #sites #goiania
 
-### 5. Qua 21/10 — CPL baixo não paga conta.
+### 5. Qua 21/10 — Lead barato que não compra — CPL baixo não paga a conta.
 
 ![post 5](posts/post-05.png)
 
-Lead barato que não compra só enche o CRM.  
+Lead barato que não fecha só enche o CRM.  
   
-Por isso olhamos CPL, conversão e ROAS juntos — e mostramos isso toda semana, não só num relatório mensal genérico.  
+Por isso a gente acompanha custo por cliente, taxa de fechamento e retorno sobre o investimento — e explica tudo em linguagem simples, nas reuniões periódicas.  
   
 Qual métrica você acompanha hoje?
 
-#roas #cpl #trafegopago #performance #elevion
+#roas #cpl #trafegopago #performance #opussoftworks
 
-### 6. Sex 23/10 — 4 etapas. Zero improviso.
+### 6. Sex 23/10 — Como trabalhamos — 4 etapas. Zero improviso.
 
 ![post 6](posts/post-06.png)
 
-Do diagnóstico ao resultado, o caminho é sempre o mesmo e você sabe em que etapa está:  
+O método da Opus SoftWorks:  
   
-01 Diagnóstico  
-02 Plano de ação  
-03 Execução  
-04 Resultado  
+01 Diagnóstico: operação, metas, números e gargalos.  
+02 Estratégia: prioridades, onde investir e o que medir.  
+03 Implementação: campanhas, sistemas e sites funcionando juntos.  
+04 Otimização contínua: analisar, ajustar e repetir.  
   
-Quer começar pelo diagnóstico gratuito? Link na bio.
+O primeiro passo é o diagnóstico gratuito. Link na bio.
 
-#processo #metodo #gestao #elevion
+#metodo #processo #estrategia #opussoftworks
 
-### 7. Seg 26/10 — Seu site tem poucos segundos pra convencer.
+### 7. Seg 26/10 — Rápido e claro — Seu site tem poucos segundos pra convencer.
 
 ![post 7](posts/post-07.png)
 
 O visitante decide rápido se fica ou sai.  
   
-Por isso a primeira tela do seu site precisa dizer o que você faz, pra quem, e qual é o próximo passo.  
+Por isso a primeira tela precisa dizer o que você faz, pra quem e qual é o próximo passo — e carregar rápido, principalmente no celular.  
   
-Se quiser uma opinião sincera sobre o seu site, é só chamar.
+Quer uma opinião sincera sobre o seu site? Chama a gente.
 
-#site #ux #conversao #landingpage #elevion
+#site #ux #landingpage #conversao #opussoftworks
 
-### 8. Qua 28/10 — Seu lead esfriou no WhatsApp?
+### 8. Qua 28/10 — Lead que espera, esfria. — Quem responde primeiro, fecha.
 
 ![post 8](posts/post-08.png)
 
-Lead respondido rápido e acompanhado fecha mais.  
+Todo lead que fica sem resposta vira cliente de alguém.  
   
-Um sistema simples de gestão organiza quem chegou, em que etapa está e quem precisa de retorno.  
+Com automações e um processo comercial organizado, cada contato recebe retorno no tempo certo — sem depender da memória de ninguém.  
   
-Seu time sabe hoje quantos leads estão sem resposta?
+Quantos leads estão esperando resposta no seu WhatsApp agora?
 
-#vendas #crm #atendimento #whatsappbusiness #elevion
+#vendas #crm #automacao #whatsapp #opussoftworks
 
-### 9. Sex 30/10 — Prazo cumprido é o mínimo.
+### 9. Sex 30/10 — Entrega com processo — Prazo cumprido é o mínimo.
 
 ![post 9](posts/post-09.png)
 
-Três princípios guiam tudo o que fazemos: entrega, responsabilidade e assertividade.  
+Cumprir prazo não é diferencial, é obrigação.  
   
-Na prática: prazo cumprido, processo claro e resultado mensurável.  
+Na Opus SoftWorks você acompanha tudo em reuniões periódicas, com relatórios em linguagem simples — sem jargão e sem surpresa.  
   
-O que você mais valoriza num parceiro? Deixa aqui embaixo.
+O que você mais valoriza num parceiro? Deixa aqui.
 
-#valores #entrega #responsabilidade #elevion
+#entrega #processo #transparencia #opussoftworks
 
-### 10. Seg 02/11 — Três fornecedores. Zero conversa.
+### 10. Seg 02/11 — Tráfego, sistema e site — Três fornecedores. Zero conversa.
 
 ![post 10](posts/post-10.png)
 
 Agência de tráfego, desenvolvedor de site e fornecedor de sistema raramente conversam entre si.  
   
-Na ELEVION é uma operação só, com um responsável e uma meta.  
+Na Opus SoftWorks as três frentes ficam sob a mesma estratégia, com as mesmas metas.  
   
-Marca alguém que ainda está coordenando três fornecedores.
+Marca alguém que ainda coordena três fornecedores.
 
-#agencia #marketing #operacao #elevion
+#marketing #estrategia #integracao #opussoftworks
 
-### 11. Qua 04/11 — Quanto vale o lead que você perdeu?
+### 11. Qua 04/11 — Diagnóstico gratuito — Quanto vale o lead que você perdeu?
 
 ![post 11](posts/post-11.png)
 
 Todo negócio perde lead em algum ponto: no anúncio, no site ou no atendimento.  
   
-O diagnóstico gratuito da ELEVION aponta onde está o vazamento e o que fazer primeiro.  
+O diagnóstico gratuito da Opus SoftWorks olha sua operação, metas, números e gargalos e aponta o que fazer primeiro.  
   
 Sem compromisso. Link na bio.
 
-#diagnostico #vendas #marketing #elevion
+#diagnostico #vendas #marketing #goiania #opussoftworks
 
-### 12. Sex 06/11 — Descubra onde sua operação vaza.
+### 12. Sex 06/11 — Vender mais. Operar melhor. — Crescer com muito mais clareza.
 
 ![post 12](posts/post-12.png)
 
-Resultado não é sorte. É entrega.  
+Estratégia, tecnologia e IA para empresas que querem vender mais, operar melhor e crescer com clareza.  
   
-Solicite seu diagnóstico gratuito e receba resposta em poucas horas pelo WhatsApp.  
-  
-Link na bio.
+Fale com um especialista da Opus SoftWorks e peça seu diagnóstico gratuito: (62) 99410-6910, ou pelo link da bio.
 
-#elevion #diagnosticogratuito #trafegopago #sites #gestao
+#opussoftworks #diagnosticogratuito #trafegopago #sistemas #sites #goiania
 
 ## Como editar
 
-Texto e ilustrações ficam em `src/posts.mjs`. Depois de editar:
+Textos ficam em `src/posts.mjs` e os objetos 3D em `src/scenes.js`. Depois de editar:
 
 ```bash
-npm i --no-save playwright-core   # uma vez
-node src/render.mjs               # regera posts/*.png
+npm i --no-save playwright-core three@0.169   # uma vez
+node src/render.mjs [n...]                    # regera posts/*.png (todas ou só as indicadas)
 node src/calendario.mjs           # regera este arquivo
 ```

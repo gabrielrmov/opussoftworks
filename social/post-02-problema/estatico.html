@@ -5,43 +5,38 @@
 <title>Opus SoftWorks · Post 2 · O problema</title>
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <link rel="stylesheet" href="../assets/base.css">
-<style>
-  .node{position:absolute;z-index:2;padding:26px 40px;font-family:'Exo 2';font-weight:700;font-size:50px;letter-spacing:-0.02em}
-  .node small{display:block;font-family:'Rubik';font-weight:500;font-size:19px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px}
-  .you{position:absolute;z-index:3;left:420px;top:760px;width:240px;height:240px;border-radius:50%;
-    background:radial-gradient(circle at 35% 30%,#ff8a6b,#FF6039 55%,#d9421f);
-    box-shadow:0 0 0 18px rgba(255,96,57,.18),0 0 120px rgba(255,96,57,.7);
-    display:flex;align-items:center;justify-content:center;flex-direction:column;
-    font-family:'Exo 2';font-weight:700;font-size:54px;letter-spacing:-0.03em;text-transform:uppercase}
-  .you small{font-family:'Rubik';font-weight:500;font-size:17px;letter-spacing:.16em;margin-top:4px}
-</style>
+<link rel="stylesheet" href="../assets/mock.css">
 </head>
 <body>
-<section class="slide" id="s1">
-  <div class="glow" style="background:radial-gradient(60% 40% at 50% 66%,rgba(255,96,57,.6),transparent 72%),radial-gradient(45% 30% at 0% 0%,rgba(255,96,57,.22),transparent 70%)"></div>
+<section class="slide bg-hot2" id="s1">
+  <img class="obj farther" src="../assets/3d/rock.png" style="width:520px;left:-200px;top:700px">
+  <img class="obj" src="../assets/3d/knot.png" style="width:300px;right:-40px;top:360px;transform:rotate(20deg)">
   <div class="vig"></div>
-  <div class="top"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="meta">O problema</div></div>
-  <div class="txt" style="top:180px">
+  <div class="top"><div class="logo"><b>Opus</b><span style="color:#fff">SoftWorks</span></div><div class="meta" style="color:rgba(255,255,255,.85)">O problema</div></div>
+  <div class="txt" style="top:170px">
     <div class="lead">3 fornecedores.</div>
-    <div class="big" style="font-size:150px;margin-top:12px">Ninguém<br><span class="accent">se fala.</span></div>
+    <div class="big" style="font-size:150px;margin-top:10px">Ninguém<br>se fala.</div>
   </div>
 
-  <svg style="position:absolute;left:0;top:0;width:1080px;height:1350px;z-index:1" viewBox="0 0 1080 1350" fill="none">
-    <g stroke="#FF6039" stroke-width="3" stroke-dasharray="3 14" stroke-linecap="round">
-      <path d="M280 700 C 330 770, 380 800, 430 840"/>
-      <path d="M800 740 C 740 790, 700 810, 650 850"/>
-      <path d="M540 1050 L 540 1010"/>
-    </g>
-  </svg>
+  <div class="dev phone" style="left:330px;top:540px;width:340px;transform:perspective(1800px) rotateY(-10deg) rotateX(2deg) rotate(2deg)">
+    <div class="scr" style="height:640px">
+      <div class="sb"></div>
+      <div style="display:flex;align-items:center;gap:14px;padding:0 22px 14px;border-bottom:1.5px solid #eee">
+        <div style="width:46px;height:46px;border-radius:50%;background:#161616;color:#fff;font-family:'Exo 2';font-weight:700;display:flex;align-items:center;justify-content:center">3</div>
+        <div><div style="font-weight:600;font-size:19px">Projeto da empresa</div><div style="font-size:14px;color:#4A4A4A">Agência, Dev, Sistema, Você</div></div></div>
+      <div style="padding:20px 18px">
+        <div class="bubble in"><small>AGÊNCIA</small>O site precisa mudar pra campanha.</div>
+        <div class="bubble in"><small>DEV</small>Isso depende do sistema.</div>
+        <div class="bubble in"><small>SISTEMA</small>Fala com a agência primeiro.</div>
+        <div class="bubble out"><small>VOCÊ</small>Alguém me responde?</div>
+        <div class="bubble out"><small>VOCÊ</small>Faz 3 semanas.</div>
+      </div>
+    </div>
+  </div>
 
-  <div class="node glass" style="left:80px;top:610px"><small>Fornecedor 1</small>Agência</div>
-  <div class="node glass" style="right:70px;top:650px"><small>Fornecedor 2</small>Desenvolvedor</div>
-  <div class="node glass" style="left:350px;top:1060px"><small>Fornecedor 3</small>Sistema</div>
-  <div class="you"><div>Você</div><small>no meio</small></div>
-  <div class="chip glass" style="left:60px;top:920px;font-size:22px;transform:rotate(-4deg)">“repassa pra agência”</div>
-  <div class="chip glass" style="right:60px;top:960px;font-size:22px;transform:rotate(3deg)">“avisa o dev”</div>
-
-  <div class="bot"><div class="copy" style="font-size:28px">Resultado não é sorte. <b>É entrega.</b></div><div class="meta">@opussoftworks</div></div>
+  <div class="notif light" style="left:50px;top:1000px;z-index:5"><div class="ic">!</div><div><b>3 semanas sem resposta</b><span>Campanha parada</span></div></div>
+  <div class="notif light" style="right:40px;top:760px;z-index:5"><div class="ic" style="background:#161616">✕</div><div><b>Anúncio no ar</b><span>Site não acompanha</span></div></div>
+  <div class="bot"><div class="copy" style="color:#fff;font-size:28px">E quem repassa o recado? <b>Você.</b></div><div class="meta" style="color:rgba(255,255,255,.85)">@opussoftworks</div></div>
 </section>
 </body>
 </html>

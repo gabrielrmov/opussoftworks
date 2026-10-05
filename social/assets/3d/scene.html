@@ -1,0 +1,33 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0;background:transparent}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+const q=new URLSearchParams(location.search);const o=q.get('o');
+const S=1400;
+const r=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
+r.setSize(S,S);r.setPixelRatio(1);r.setClearColor(0x000000,0);
+r.toneMapping=THREE.NoToneMapping;
+document.body.appendChild(r.domElement);
+const sc=new THREE.Scene();
+const pm=new THREE.PMREMGenerator(r);sc.environment=pm.fromScene(new RoomEnvironment(),0.03).texture;
+const cam=new THREE.PerspectiveCamera(30,1,.1,100);cam.position.set(0,0,7);
+const coral=()=>new THREE.MeshPhysicalMaterial({color:0xFF4A1A,roughness:.28,metalness:.0,clearcoat:1,clearcoatRoughness:.06,envMapIntensity:.55});
+const dark=()=>new THREE.MeshPhysicalMaterial({color:0x161616,roughness:.2,metalness:.6,clearcoat:1,clearcoatRoughness:.05,envMapIntensity:.9});
+function blob(rad,amp,seed){const g=new THREE.IcosahedronGeometry(rad,48);const p=g.attributes.position;const v=new THREE.Vector3();
+ for(let i=0;i<p.count;i++){v.fromBufferAttribute(p,i);const n=v.clone().normalize();
+  const d=Math.sin(n.x*2.1+seed)*Math.cos(n.y*2.4-seed)*.5+Math.sin(n.z*3.1+seed*1.7)*.35+Math.sin((n.x+n.y)*4+seed)*.15;
+  v.copy(n).multiplyScalar(rad*(1+amp*d));p.setXYZ(i,v.x,v.y,v.z);}g.computeVertexNormals();return g;}
+let m;
+if(o==='knot'){m=new THREE.Mesh(new THREE.TorusKnotGeometry(1,.36,400,64,2,3),coral());m.rotation.set(.5,.3,.2);}
+if(o==='torus'){m=new THREE.Mesh(new THREE.TorusGeometry(1,.46,96,192),coral());m.rotation.set(1.05,.35,.2);}
+if(o==='pearl'){m=new THREE.Mesh(new THREE.SphereGeometry(1.2,128,128),dark());}
+if(o==='coralpearl'){m=new THREE.Mesh(new THREE.SphereGeometry(1.2,128,128),coral());}
+if(o==='blob'){m=new THREE.Mesh(blob(1.2,.34,1.3),coral());m.rotation.set(.3,.6,0);}
+if(o==='rock'){m=new THREE.Mesh(blob(1.2,.42,4.1),dark());m.rotation.set(.2,.9,.3);}
+sc.add(m);
+const rim=new THREE.PointLight(0xFF6039,90,0,2);rim.position.set(-3,2,-3);sc.add(rim);
+const key=new THREE.DirectionalLight(0xffffff,1.0);key.position.set(3,4,5);sc.add(key);
+r.render(sc,cam);document.title='done';
+</script>

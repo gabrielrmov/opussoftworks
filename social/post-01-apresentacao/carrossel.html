@@ -5,181 +5,206 @@
 <title>Opus SoftWorks · Post 1 · Carrossel de apresentação</title>
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/mock.css">
 <style>
-  .lg{font-size:120px}
-  /* slide 2: mapa de alcance */
-  .map{position:absolute;left:80px;right:80px;top:600px;height:400px;padding:0;z-index:2}
+  .node{position:absolute;z-index:3;padding:20px 34px;font-family:'Exo 2';font-weight:700;font-size:42px;letter-spacing:-0.02em}
+  .node small{display:block;font-family:'Rubik';font-weight:500;font-size:17px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:6px}
+  .map{position:absolute;left:80px;right:80px;top:560px;height:420px;z-index:2}
   .map svg{width:100%;height:100%}
-  .map .lbl{position:absolute;font-family:'Rubik';font-weight:500;font-size:24px}
-  /* slide 3: fornecedores soltos */
-  .node{position:absolute;z-index:2;padding:26px 38px;font-family:'Exo 2';font-weight:700;font-size:46px;letter-spacing:-0.02em}
-  .node small{display:block;font-family:'Rubik';font-weight:500;font-size:19px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px}
-  /* slide 4: mockups */
-  .mk{position:absolute;z-index:2;padding:30px}
-  .bar{height:14px;border-radius:7px;background:rgba(255,255,255,.22)}
-  .dot3{display:flex;gap:9px;margin-bottom:22px}.dot3 i{width:13px;height:13px;border-radius:50%;background:rgba(255,255,255,.35);display:block}
-  .tag{font-family:'Rubik';font-weight:500;font-size:19px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-  /* slide 5 */
-  .pr{position:absolute;left:80px;right:80px;z-index:3;display:flex;align-items:center;gap:36px;padding:34px 48px}
-  .pr .n{font-family:'Exo 2';font-weight:700;font-size:58px;color:var(--coral);letter-spacing:-0.03em;width:90px}
-  .pr .t{font-family:'Exo 2';font-weight:700;font-size:78px;letter-spacing:-0.035em;text-transform:uppercase}
+  .map .lbl{position:absolute;font-family:'Rubik';font-weight:600;font-size:24px}
+  .pr{position:absolute;left:80px;right:80px;z-index:3;display:flex;align-items:center;gap:36px;padding:30px 48px}
+  .pr .n{font-family:'Exo 2';font-weight:700;font-size:56px;color:var(--coral);letter-spacing:-0.03em;width:90px}
+  .pr .t{font-family:'Exo 2';font-weight:700;font-size:74px;letter-spacing:-0.035em;text-transform:uppercase}
+  .bar{height:14px;border-radius:7px;background:#e3e4e8}
+  .bar.c{background:var(--coral)}
 </style>
 </head>
 <body>
 
 <!-- 1 · CAPA -->
-<section class="slide" id="s1">
-  <div class="glow" style="background:radial-gradient(70% 55% at 62% 36%,rgba(255,96,57,.85),rgba(255,96,57,.28) 45%,transparent 72%),radial-gradient(60% 40% at 10% 100%,rgba(255,96,57,.35),transparent 70%)"></div>
-  <img class="hero blur" src="../assets/simbolo-coral.png" style="width:1250px;left:-140px;top:30px;transform:rotate(-10deg) scale(1.08)">
-  <img class="hero sharp" src="../assets/simbolo-coral.png" style="width:1180px;left:-90px;top:60px;transform:rotate(-10deg)">
+<section class="slide bg-hot2" id="s1">
+  <img class="obj farther" src="../assets/3d/pearl.png" style="width:520px;left:-170px;top:760px">
+  <img class="obj far" src="../assets/3d/knot.png" style="width:420px;right:-60px;top:120px;transform:rotate(25deg)">
+  <img class="hero sharp" src="../assets/simbolo-coral.png" style="width:1010px;left:35px;top:215px;transform:rotate(-8deg)">
+  <img class="obj" src="../assets/3d/rock.png" style="width:300px;right:20px;top:500px">
+  <img class="obj" src="../assets/3d/coralpearl.png" style="width:190px;left:120px;top:210px">
   <div class="vig"></div>
-  <div class="top"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="meta">Goiânia → Brasil</div></div>
-  <div class="chip glass" style="right:70px;top:330px"><i></i>Tráfego pago</div>
-  <div class="chip glass" style="left:70px;top:520px"><i></i>Sistemas</div>
-  <div class="chip glass" style="right:110px;top:640px"><i></i>Sites</div>
-  <div class="txt" style="bottom:200px">
+  <div class="top"><div class="logo"><b>Opus</b><span style="color:#fff">SoftWorks</span></div><div class="meta" style="color:rgba(255,255,255,.85)">Goiânia → Brasil</div></div>
+  <div class="chip glass" style="right:70px;top:440px"><i></i>Tráfego pago</div>
+  <div class="chip glass" style="left:60px;top:600px"><i></i>Sistemas</div>
+  <div class="chip glass" style="right:250px;top:745px;background:linear-gradient(160deg,rgba(255,255,255,.22),rgba(255,255,255,.08))"><i></i>Sites</div>
+  <div class="txt" style="bottom:190px">
     <div class="lead">Resultado não é sorte.</div>
-    <div class="big" style="font-size:168px;margin-top:10px;white-space:nowrap">É entrega.</div>
+    <div class="big" style="font-size:176px;margin-top:6px;white-space:nowrap">É entrega.</div>
   </div>
-  <div class="bot"><div class="pill glass">Arraste<span class="ar">→</span></div><div class="meta">01 / 07</div></div>
+  <div class="bot"><div class="pill glass">Arraste<span class="ar">→</span></div><div class="meta" style="color:rgba(255,255,255,.85)">01 / 07</div></div>
 </section>
 
 <!-- 2 · QUEM SOMOS -->
-<section class="slide" id="s2">
-  <div class="glow" style="background:radial-gradient(60% 45% at 85% 62%,rgba(255,96,57,.6),transparent 70%),radial-gradient(50% 35% at 0% 0%,rgba(255,96,57,.25),transparent 70%)"></div>
-  <img class="hero blur" src="../assets/simbolo-coral.png" style="width:900px;right:-300px;bottom:-60px;transform:rotate(20deg)">
+<section class="slide bg-hot" id="s2">
+  <img class="obj farther" src="../assets/3d/blob.png" style="width:600px;right:-230px;bottom:-110px">
+  <img class="obj" src="../assets/3d/pearl.png" style="width:230px;right:50px;top:345px">
   <div class="vig"></div>
-  <div class="top"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="meta">02 / 07</div></div>
+  <div class="top"><div class="logo"><b>Opus</b><span style="color:#fff">SoftWorks</span></div><div class="meta" style="color:rgba(255,255,255,.85)">02 / 07</div></div>
   <div class="txt" style="top:190px">
     <div class="lead">Nascemos em Goiânia.</div>
-    <div class="big" style="font-size:132px;margin-top:14px">Atendemos<br><span class="accent">o Brasil.</span></div>
+    <div class="big" style="font-size:128px;margin-top:12px">Atendemos<br>o Brasil.</div>
   </div>
   <div class="map glass">
-    <svg viewBox="0 0 920 430" fill="none">
-      <defs><radialGradient id="g" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FF6039" stop-opacity=".9"/><stop offset="1" stop-color="#FF6039" stop-opacity="0"/></radialGradient></defs>
-      <g fill="#fff" fill-opacity=".14">
-        <script>/*dots*/</script>
-      </g>
+    <svg viewBox="0 0 920 420" fill="none">
+      <defs><radialGradient id="g" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
       <g id="dots"></g>
-      <circle cx="170" cy="260" r="46" fill="url(#g)"/><circle cx="170" cy="260" r="12" fill="#FF6039"/>
-      <path d="M170 260 C 330 90, 560 80, 760 150" stroke="#FF6039" stroke-width="3" stroke-dasharray="3 12" stroke-linecap="round"/>
-      <path d="M170 260 C 380 280, 600 320, 800 300" stroke="#fff" stroke-opacity=".5" stroke-width="3" stroke-dasharray="3 12" stroke-linecap="round"/>
-      <path d="M170 260 C 300 190, 440 190, 520 230" stroke="#fff" stroke-opacity=".5" stroke-width="3" stroke-dasharray="3 12" stroke-linecap="round"/>
-      <g fill="#FF6039"><circle cx="760" cy="150" r="9"/><circle cx="800" cy="300" r="9"/><circle cx="520" cy="230" r="9"/></g>
+      <circle cx="170" cy="250" r="50" fill="url(#g)"/><circle cx="170" cy="250" r="13" fill="#fff"/>
+      <g stroke="#fff" stroke-width="3" stroke-dasharray="3 12" stroke-linecap="round">
+        <path d="M170 250 C 330 80, 560 70, 760 140"/><path d="M170 250 C 380 270, 600 310, 800 290"/><path d="M170 250 C 300 180, 440 180, 520 220"/></g>
+      <g fill="#161616" stroke="#fff" stroke-width="3"><circle cx="760" cy="140" r="10"/><circle cx="800" cy="290" r="10"/><circle cx="520" cy="220" r="10"/></g>
     </svg>
-    <div class="lbl" style="left:122px;top:322px;color:#fff">Goiânia</div>
-    <div class="lbl" style="right:60px;top:70px;color:rgba(255,255,255,.7)">Todo o Brasil</div>
+    <div class="lbl" style="left:120px;top:312px;color:#fff">Goiânia</div>
+    <div class="lbl" style="right:50px;top:50px;color:rgba(255,255,255,.85)">Todo o Brasil</div>
   </div>
-  <div class="bot"><div class="copy">Uma operação só para a sua empresa <b>crescer</b>.</div></div>
+  <div class="bot"><div class="copy" style="color:#fff">Uma operação só para a sua empresa <b>crescer</b>.</div></div>
 </section>
 
 <!-- 3 · PROBLEMA -->
-<section class="slide" id="s3">
-  <div class="glow" style="background:radial-gradient(55% 40% at 50% 38%,rgba(255,96,57,.45),transparent 70%)"></div>
+<section class="slide bg-dark" id="s3">
+  <svg style="position:absolute;left:0;top:0;width:1080px;height:1350px;z-index:1" viewBox="0 0 1080 1350" fill="none">
+    <g stroke="#fff" stroke-opacity=".5" stroke-width="3" stroke-dasharray="3 14" stroke-linecap="round">
+      <path d="M270 270 C 450 250, 600 330, 690 410"/><path d="M720 500 C 650 600, 480 640, 380 640"/><path d="M230 360 C 190 430, 190 500, 230 540"/></g>
+    <g stroke="#FF6039" stroke-width="6" stroke-linecap="round"><path d="M468 298l26 26M494 298l-26 26"/><path d="M548 590l26 26M574 590l-26 26"/><path d="M172 440l26 26M198 440l-26 26"/></g>
+  </svg>
+  <img class="obj" src="../assets/3d/pearl.png" style="width:330px;left:20px;top:100px">
+  <img class="obj" src="../assets/3d/rock.png" style="width:340px;right:10px;top:230px">
+  <img class="obj" src="../assets/3d/knot.png" style="width:290px;left:150px;top:470px;transform:rotate(-10deg)">
   <div class="vig"></div>
   <div class="top"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="meta">03 / 07</div></div>
-  <svg style="position:absolute;left:0;top:0;width:1080px;height:1350px;z-index:1" viewBox="0 0 1080 1350" fill="none">
-    <path d="M300 300 C 420 380, 520 330, 700 420" stroke="#fff" stroke-opacity=".45" stroke-width="3" stroke-dasharray="3 14" stroke-linecap="round"/>
-    <path d="M740 470 C 700 560, 520 560, 380 590" stroke="#fff" stroke-opacity=".45" stroke-width="3" stroke-dasharray="3 14" stroke-linecap="round"/>
-    <path d="M300 640 C 250 560, 240 430, 280 350" stroke="#fff" stroke-opacity=".45" stroke-width="3" stroke-dasharray="3 14" stroke-linecap="round"/>
-    <g stroke="#FF6039" stroke-width="5" stroke-linecap="round"><path d="M505 340l24 24M529 340l-24 24"/><path d="M555 540l24 24M579 540l-24 24"/><path d="M262 480l24 24M286 480l-24 24"/></g>
-  </svg>
-  <div class="node glass" style="left:100px;top:230px"><small>Fornecedor 1</small>Agência</div>
-  <div class="node glass" style="right:90px;top:400px"><small>Fornecedor 2</small>Desenvolvedor</div>
-  <div class="node glass" style="left:160px;top:580px"><small>Fornecedor 3</small>Sistema</div>
-  <div class="txt" style="bottom:200px">
+  <div class="node glass" style="left:80px;top:385px;padding:14px 28px;font-size:36px"><small>Fornecedor 1</small>Agência</div>
+  <div class="node glass" style="right:70px;top:545px;padding:14px 28px;font-size:36px"><small>Fornecedor 2</small>Desenvolvedor</div>
+  <div class="node glass" style="left:440px;top:700px;padding:14px 28px;font-size:36px"><small>Fornecedor 3</small>Sistema</div>
+  <div class="txt" style="bottom:190px">
     <div class="lead">Falam línguas diferentes.</div>
-    <div class="big" style="font-size:128px;margin-top:12px">Quem paga<br><span class="accent">é a empresa.</span></div>
+    <div class="big" style="font-size:124px;margin-top:10px">Quem paga<br><span class="accent">é a empresa.</span></div>
   </div>
   <div class="bot"><div class="meta">Agência · Dev · Sistema</div></div>
 </section>
 
 <!-- 4 · TRÊS FRENTES -->
-<section class="slide" id="s4">
-  <div class="glow" style="background:radial-gradient(65% 45% at 50% 62%,rgba(255,96,57,.7),transparent 72%),radial-gradient(50% 30% at 100% 0%,rgba(255,96,57,.3),transparent 70%)"></div>
+<section class="slide bg-hot" id="s4">
+  <img class="obj farther" src="../assets/3d/pearl.png" style="width:420px;left:-170px;top:900px">
+  <img class="obj" src="../assets/3d/torus.png" style="width:240px;right:-60px;top:290px;transform:rotate(15deg)">
   <div class="vig"></div>
-  <div class="top"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="meta">04 / 07</div></div>
+  <div class="top"><div class="logo"><b>Opus</b><span style="color:#fff">SoftWorks</span></div><div class="meta" style="color:rgba(255,255,255,.85)">04 / 07</div></div>
   <div class="txt" style="top:170px">
     <div class="lead">Três frentes.</div>
-    <div class="big" style="font-size:150px;margin-top:10px">Um teto <span class="accent">só.</span></div>
+    <div class="big" style="font-size:150px;margin-top:8px">Um teto só.</div>
   </div>
 
-  <!-- anúncio -->
-  <div class="mk glass" style="left:80px;top:470px;width:430px;transform:rotate(-3deg)">
-    <div class="tag" style="margin-bottom:18px">Tráfego pago</div>
-    <svg viewBox="0 0 370 150" width="100%" fill="none"><path d="M0 130 C60 120 80 90 130 95 S210 40 260 50 S330 10 370 8" stroke="#FF6039" stroke-width="5" stroke-linecap="round"/><path d="M0 130 C60 120 80 90 130 95 S210 40 260 50 S330 10 370 8 V150 H0Z" fill="#FF6039" fill-opacity=".18"/></svg>
-    <div style="display:flex;gap:12px;margin-top:20px"><div class="chip glass" style="position:static;padding:10px 20px;font-size:20px"><i></i>Lead</div><div class="chip glass" style="position:static;padding:10px 20px;font-size:20px">CPL</div><div class="chip glass" style="position:static;padding:10px 20px;font-size:20px">ROAS</div></div>
+  <!-- notebook: site -->
+  <div class="dev laptop" style="left:60px;top:500px;width:700px;transform:perspective(1800px) rotateY(10deg) rotateX(3deg) rotate(-2deg);transform-origin:left center">
+    <div class="lid"><div class="scr" style="height:400px">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 26px;border-bottom:1.5px solid #eee;font-size:15px;font-weight:500">
+        <b style="font-family:'Exo 2';font-size:20px;letter-spacing:-.03em">Sua<span style="color:#FF6039">Marca</span></b>
+        <span style="color:#4A4A4A">Serviços &nbsp;&nbsp; Sobre &nbsp;&nbsp; Contato</span></div>
+      <div style="display:flex;background:linear-gradient(135deg,#FF6039,#c8431f);height:240px;color:#fff;position:relative;overflow:hidden">
+        <div style="padding:30px 0 0 30px;width:58%">
+          <div style="font-family:'Exo 2';font-weight:700;font-size:40px;line-height:1;letter-spacing:-.035em">Seu negócio<br>no ar e<br>vendendo.</div>
+          <div style="margin-top:20px;background:#fff;color:#161616;border-radius:999px;padding:10px 22px;font-weight:600;font-size:15px;width:max-content">Pedir orçamento</div></div>
+        <img src="../assets/3d/coralpearl.png" style="position:absolute;right:-40px;top:-30px;width:300px;filter:drop-shadow(0 20px 20px rgba(0,0,0,.3))">
+        <img src="../assets/3d/pearl.png" style="position:absolute;right:150px;top:140px;width:120px"></div>
+      <div style="display:flex;gap:14px;padding:16px 26px">
+        <div style="flex:1;height:78px;border-radius:14px;background:#F4F5F8;padding:14px;font-size:14px;font-weight:600">Rápido<div class="bar" style="width:70%;margin-top:10px;height:8px"></div></div>
+        <div style="flex:1;height:78px;border-radius:14px;background:#F4F5F8;padding:14px;font-size:14px;font-weight:600">Seguro<div class="bar" style="width:55%;margin-top:10px;height:8px"></div></div>
+        <div style="flex:1;height:78px;border-radius:14px;background:#F4F5F8;padding:14px;font-size:14px;font-weight:600">Converte<div class="bar c" style="width:80%;margin-top:10px;height:8px"></div></div></div>
+    </div></div>
+    <div class="base"></div>
   </div>
-  <!-- sistema -->
-  <div class="mk glass" style="right:80px;top:550px;width:430px;transform:rotate(3deg)">
-    <div class="tag" style="margin-bottom:18px">Sistemas</div>
-    <div style="display:flex;gap:14px">
-      <div style="flex:1;display:flex;flex-direction:column;gap:12px"><div class="bar" style="width:60%"></div><div class="glass" style="height:58px;border-radius:14px"></div><div class="glass" style="height:58px;border-radius:14px"></div></div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:12px"><div class="bar" style="width:45%"></div><div class="glass" style="height:58px;border-radius:14px;border-color:#FF6039"></div><div class="glass" style="height:58px;border-radius:14px"></div></div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:12px"><div class="bar" style="width:70%"></div><div class="glass" style="height:58px;border-radius:14px"></div></div>
+
+  <!-- celular: sistema -->
+  <div class="dev phone" style="right:46px;top:640px;width:300px;transform:perspective(1800px) rotateY(-14deg) rotate(4deg)">
+    <div class="scr" style="height:620px">
+      <div class="sb"></div>
+      <div style="padding:6px 22px 0">
+        <div style="font-size:15px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#4A4A4A">Painel</div>
+        <div style="font-family:'Exo 2';font-weight:700;font-size:52px;letter-spacing:-.04em;margin-top:4px">24 <span style="font-size:18px;color:#FF6039;font-family:'Rubik';letter-spacing:0">novos leads</span></div>
+        <svg viewBox="0 0 250 90" width="100%" style="margin-top:6px"><g fill="#F4F5F8"><rect x="0" y="50" width="26" height="40" rx="6"/><rect x="36" y="38" width="26" height="52" rx="6"/><rect x="72" y="46" width="26" height="44" rx="6"/><rect x="108" y="28" width="26" height="62" rx="6"/></g><g fill="#FF6039"><rect x="144" y="18" width="26" height="72" rx="6"/><rect x="180" y="30" width="26" height="60" rx="6"/><rect x="216" y="6" width="26" height="84" rx="6"/></g></svg>
+        <div style="margin-top:18px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;background:#F4F5F8;border-radius:16px;padding:14px 16px;font-size:16px;font-weight:500">Pedido #1042<span style="background:#FF6039;color:#fff;border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600">novo</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;background:#F4F5F8;border-radius:16px;padding:14px 16px;font-size:16px;font-weight:500">Pedido #1041<span style="background:#e3e4e8;border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600">enviado</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;background:#F4F5F8;border-radius:16px;padding:14px 16px;font-size:16px;font-weight:500">Pedido #1040<span style="background:#e3e4e8;border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600">pago</span></div></div>
+      </div>
     </div>
   </div>
-  <!-- site -->
-  <div class="mk glass" style="left:230px;top:820px;width:620px">
-    <div class="dot3"><i></i><i></i><i></i></div>
-    <div class="tag" style="margin-bottom:18px">Sites</div>
-    <div style="display:flex;gap:30px;align-items:center">
-      <div style="flex:1;display:flex;flex-direction:column;gap:14px"><div class="bar" style="width:90%;height:20px"></div><div class="bar" style="width:70%"></div><div class="bar" style="width:55%"></div>
-        <div style="margin-top:8px;background:#FF6039;border-radius:999px;padding:12px 26px;font-family:'Rubik';font-weight:600;font-size:20px;width:max-content">Falar com a Opus</div></div>
-      <img src="../assets/simbolo-coral.png" style="width:190px;filter:drop-shadow(0 0 30px rgba(255,96,57,.6))">
-    </div>
-  </div>
-  <div class="bot"><div class="copy">Tudo no <b>mesmo time</b>. Tudo conversando.</div></div>
+
+  <!-- notificação: tráfego -->
+  <div class="notif glass" style="left:70px;top:1010px;width:470px;z-index:5"><div class="ic">+1</div><div><b>Novo lead · Google Ads</b><span>Orçamento de site · agora</span></div></div>
+  <div class="bot"><div class="copy" style="color:#fff">Tráfego, sistema e site no <b>mesmo time</b>.</div></div>
 </section>
 
 <!-- 5 · PRINCÍPIOS -->
-<section class="slide" id="s5">
-  <div class="glow" style="background:radial-gradient(60% 45% at 20% 70%,rgba(255,96,57,.55),transparent 70%),radial-gradient(50% 35% at 100% 10%,rgba(255,96,57,.3),transparent 70%)"></div>
-  <img class="hero blur" src="../assets/simbolo-coral.png" style="width:800px;right:-330px;top:80px;transform:rotate(30deg)">
+<section class="slide bg-dark" id="s5">
+  <img class="obj" src="../assets/3d/coralpearl.png" style="width:300px;right:-40px;top:70px">
+  <img class="obj far" src="../assets/3d/blob.png" style="width:380px;right:-130px;top:980px">
   <div class="vig"></div>
   <div class="top"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="meta">05 / 07</div></div>
   <div class="txt" style="top:190px">
     <div class="lead">Não são valores de parede.</div>
-    <div class="big" style="font-size:120px;margin-top:14px">São o jeito<br><span class="accent">de trabalhar.</span></div>
+    <div class="big" style="font-size:118px;margin-top:12px">São o jeito<br><span class="accent">de trabalhar.</span></div>
   </div>
-  <div class="pr glass" style="top:640px"><div class="n">01</div><div class="t">Entrega</div></div>
-  <div class="pr glass" style="top:820px"><div class="n">02</div><div class="t" style="font-size:66px">Responsabilidade</div></div>
-  <div class="pr glass" style="top:1000px;border-color:rgba(255,96,57,.8)"><div class="n">03</div><div class="t accent">Assertividade</div></div>
+  <div class="dev light-card" style="right:60px;top:535px;width:500px;padding:22px 28px;transform:rotate(2deg);z-index:4">
+    <div style="display:flex;justify-content:space-between;align-items:center"><div class="tg">Relatório semanal</div><div style="background:#FF6039;color:#fff;border-radius:999px;padding:5px 14px;font-size:15px;font-weight:600">no prazo</div></div>
+    <div style="display:flex;gap:26px;margin-top:16px;font-size:20px;font-weight:500">
+      <span><b style="color:#FF6039">✓</b> Escopo</span><span><b style="color:#FF6039">✓</b> Prazo</span><span><b style="color:#FF6039">✓</b> Entrega</span></div>
+  </div>
+  <div class="pr glass" style="top:690px"><div class="n">01</div><div class="t">Entrega</div></div>
+  <div class="pr glass" style="top:860px"><div class="n">02</div><div class="t" style="font-size:64px">Responsabilidade</div></div>
+  <div class="pr glass" style="top:1030px;border-color:rgba(255,96,57,.85)"><div class="n">03</div><div class="t accent">Assertividade</div></div>
   <div class="bot"><div class="meta">Opus SoftWorks · Princípios</div></div>
 </section>
 
 <!-- 6 · RESULTADO -->
-<section class="slide" id="s6">
-  <div class="glow" style="background:radial-gradient(90% 70% at 50% 50%,#FF6039 0%,#FF6039 30%,rgba(255,96,57,.55) 60%,transparent 90%)"></div>
-  <img class="hero" src="../assets/simbolo-coral.png" style="width:1500px;left:-210px;top:300px;filter:brightness(.35) contrast(1.3) drop-shadow(0 40px 80px rgba(0,0,0,.5));transform:rotate(-14deg)">
-  <div class="vig"></div>
-  <div class="top"><div class="logo"><b>Opus</b><span style="color:#fff">SoftWorks</span></div><div class="meta" style="color:rgba(255,255,255,.85)">06 / 07</div></div>
+<section class="slide bg-coral" id="s6">
+  <img class="obj" src="../assets/3d/rock.png" style="width:760px;right:-170px;top:640px">
+  <img class="obj" src="../assets/3d/pearl.png" style="width:430px;left:-110px;top:860px">
+  <img class="obj far" src="../assets/3d/pearl.png" style="width:240px;left:520px;top:520px">
+  <div class="top"><div class="logo"><b>Opus</b><span style="color:#fff">SoftWorks</span></div><div class="meta" style="color:rgba(255,255,255,.9)">06 / 07</div></div>
   <div class="txt" style="top:190px">
-    <div class="lead" style="color:var(--grafite);font-size:76px">Você não gerencia fornecedores.</div>
-    <div class="big" style="font-size:176px;margin-top:20px;color:#fff;text-shadow:0 20px 60px rgba(0,0,0,.35)">Gerencia<br>resultado.</div>
+    <div class="lead" style="color:var(--grafite);font-size:74px">Você não gerencia fornecedores.</div>
+    <div class="big" style="font-size:168px;margin-top:20px;color:#fff;text-shadow:0 20px 60px rgba(120,30,0,.35)">Gerencia<br>resultado.</div>
   </div>
-  <div class="bot"><div class="meta" style="color:rgba(255,255,255,.85)">Opus SoftWorks · Goiânia → Brasil</div></div>
+  <div class="bot"><div class="meta" style="color:rgba(255,255,255,.95)">Opus SoftWorks · Goiânia → Brasil</div></div>
 </section>
 
 <!-- 7 · CTA -->
-<section class="slide" id="s7">
-  <div class="glow" style="background:radial-gradient(70% 50% at 55% 32%,rgba(255,96,57,.85),rgba(255,96,57,.25) 50%,transparent 75%)"></div>
-  <img class="hero blur" src="../assets/simbolo-coral.png" style="width:1100px;left:-20px;top:20px;transform:rotate(-6deg) scale(1.06)">
-  <img class="hero sharp" src="../assets/simbolo-coral.png" style="width:1040px;left:10px;top:40px;transform:rotate(-6deg)">
+<section class="slide bg-hot2" id="s7">
+  <img class="obj farther" src="../assets/3d/knot.png" style="width:560px;left:-210px;top:640px;transform:rotate(-20deg)">
+  <img class="hero sharp" src="../assets/simbolo-coral.png" style="width:760px;left:-40px;top:110px;transform:rotate(-8deg)">
+  <img class="obj" src="../assets/3d/coralpearl.png" style="width:150px;left:80px;top:90px">
+  <div class="dev phone" style="right:50px;top:110px;width:290px;transform:perspective(1800px) rotateY(-16deg) rotate(5deg)">
+    <div class="scr" style="height:490px">
+      <div class="sb"></div>
+      <div style="padding:0 22px">
+        <div style="font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#FF6039">Diagnóstico gratuito</div>
+        <div style="font-family:'Exo 2';font-weight:700;font-size:34px;line-height:1;letter-spacing:-.035em;margin-top:8px">Onde sua empresa perde dinheiro?</div>
+        <div style="margin-top:18px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:10px;align-items:center;background:#F4F5F8;border-radius:14px;padding:12px 14px;font-size:16px;font-weight:500"><span style="width:22px;height:22px;border-radius:50%;background:#FF6039;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center">✓</span>Tráfego pago</div>
+          <div style="display:flex;gap:10px;align-items:center;background:#F4F5F8;border-radius:14px;padding:12px 14px;font-size:16px;font-weight:500"><span style="width:22px;height:22px;border-radius:50%;background:#FF6039;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center">✓</span>Sistemas</div>
+          <div style="display:flex;gap:10px;align-items:center;background:#F4F5F8;border-radius:14px;padding:12px 14px;font-size:16px;font-weight:500"><span style="width:22px;height:22px;border-radius:50%;background:#FF6039;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center">✓</span>Site</div></div>
+        <div style="margin-top:22px;background:#FF6039;color:#fff;border-radius:999px;padding:16px;text-align:center;font-weight:600;font-size:18px">Quero meu diagnóstico</div>
+      </div>
+    </div>
+  </div>
   <div class="vig"></div>
-  <div class="top"><div class="logo"><b>Opus</b><span>SoftWorks</span></div><div class="meta">07 / 07</div></div>
+  <div class="top"><div class="logo"><b>Opus</b><span style="color:#fff">SoftWorks</span></div><div class="meta" style="color:rgba(255,255,255,.85)">07 / 07</div></div>
   <div class="txt" style="bottom:300px">
     <div class="lead">Quer ver onde sua empresa deixa</div>
-    <div class="big" style="font-size:158px;margin-top:10px">dinheiro<br><span class="accent">na mesa?</span></div>
+    <div class="big" style="font-size:154px;margin-top:8px">dinheiro<br>na mesa?</div>
   </div>
-  <div class="bot" style="bottom:110px"><div class="pill solid">Diagnóstico gratuito<span class="ar">↗</span></div><div class="copy" style="font-size:26px">Link na bio<br><b>@opussoftworks</b></div></div>
+  <div class="bot" style="bottom:110px"><div class="pill solid">Diagnóstico gratuito<span class="ar">↗</span></div><div class="copy" style="font-size:26px;color:#fff">Link na bio<br><b>@opussoftworks</b></div></div>
 </section>
 
 <script>
-  // pontos do mapa (alcance)
   const g=document.getElementById('dots');let s='';
-  for(let x=0;x<=900;x+=30)for(let y=10;y<=420;y+=30){
-    const d=Math.hypot(x-170,y-260);const o=Math.max(.06,.34-d/1600);
+  for(let x=0;x<=900;x+=30)for(let y=10;y<=410;y+=30){
+    const d=Math.hypot(x-170,y-250);const o=Math.max(.10,.55-d/1300);
     s+=`<circle cx="${x}" cy="${y}" r="3" fill="#fff" fill-opacity="${o.toFixed(2)}"/>`;}
   g.innerHTML=s;
 </script>

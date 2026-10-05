@@ -1,0 +1,25 @@
+/* Opus SoftWorks · social v6 — editorial, cor chapada, tipografia protagonista */
+@import url("fonts/fonts.css");
+:root{--c:#FF6039;--g:#161616;--t2:#4A4A4A;--b:#9C9C9C;--alt:#F4F5F8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#2a2a2a;display:flex;flex-direction:column;gap:40px;padding:40px;align-items:center}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:'Rubik',sans-serif;-webkit-font-smoothing:antialiased;font-kerning:normal;text-rendering:optimizeLegibility}
+.slide.tall{height:1920px}
+.paper{background:#F4F5F8;color:var(--g)}
+.ink{background:var(--g);color:#fff}
+.coral{background:var(--c);color:var(--g)}
+.abs{position:absolute}
+.folio{position:absolute;left:80px;right:80px;display:flex;justify-content:space-between;align-items:baseline;font-size:22px;font-weight:500}
+.logo{font-family:'Exo 2';font-size:34px;letter-spacing:-.045em;line-height:1}
+.logo b{font-weight:700}.logo span{font-weight:400}
+.paper .logo b{color:var(--c)}.paper .logo span{color:var(--g)}
+.ink .logo b{color:#fff}.ink .logo span{color:var(--c)}
+.coral .logo b{color:#fff}.coral .logo span{color:var(--g)}
+.x{font-family:'Exo 2';font-weight:700;letter-spacing:-.05em;line-height:.86}
+.m{font-family:'Exo 2';font-weight:500;letter-spacing:-.03em;line-height:1.08}
+.txt{font-size:30px;line-height:1.38}
+.paper .muted{color:#6b6b6b}.ink .muted{color:rgba(255,255,255,.6)}.coral .muted{color:rgba(22,22,22,.7)}
+.c{color:var(--c)}
+.strike{position:relative;display:inline-block}
+.strike svg{position:absolute;left:-3%;top:34%;width:106%;height:40%;overflow:visible}
+.link{border-bottom:3px solid var(--c);padding-bottom:2px;font-weight:600}

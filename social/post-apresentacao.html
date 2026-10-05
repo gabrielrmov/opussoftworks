@@ -100,21 +100,65 @@
     </div>
   </div>
 </div>
-<script>
-  if(location.search.includes('azul')) document.documentElement.classList.add('azul');
-  // lâminas de vidro ao longo de um arco, inclinadas para a direita
-  const fan=document.getElementById('fan');
-  const W=58, H=640, step=46;
-  for(let x=-120;x<=1180;x+=step){
-    const dx=x-500;
-    const top=1010+(dx*dx)*(150/500/500);          // arco: crista em x≈500
-    const lean=17-(dx/500)*7;                       // inclinação (graus) levemente maior à esquerda
-    const d=document.createElement('div');
-    d.className='blade';
-    d.style.width=W+'px'; d.style.height=H+'px';
-    d.style.transform=`translate(${x}px,${top}px) rotate(${lean}deg)`;
-    fan.appendChild(d);
+<script type="module">
+  import * as THREE from './lib/three.module.js';
+  const root=document.documentElement;
+  if(location.search.includes('azul')) root.classList.add('azul');
+  const css=n=>getComputedStyle(root).getPropertyValue(n).trim();
+  const accent=new THREE.Color(css('--accent')), hi=new THREE.Color(css('--accent-hi')), lo=new THREE.Color(css('--accent-lo'));
+
+  const W=1080,H=1350;
+  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
+  renderer.setPixelRatio(1); renderer.setSize(W,H);
+  renderer.toneMapping=THREE.NoToneMapping;
+  renderer.setClearColor(0x000000,0);
+  document.getElementById('fan').appendChild(renderer.domElement);
+
+  const scene=new THREE.Scene();
+  const fov=28, camZ=(H/2)/Math.tan(THREE.MathUtils.degToRad(fov/2));
+  const camera=new THREE.PerspectiveCamera(fov,W/H,10,6000);
+  camera.position.set(W/2,-H/2,camZ);              // y para baixo => usamos y negativo
+  camera.lookAt(W/2,-H/2,0);
+
+  // ambiente: faixas de luz para criar os reflexos do vidro
+  const envScene=new THREE.Scene(); envScene.background=new THREE.Color(0x050505);
+  const strip=(c,k,w,h,x,y,z)=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color:c.clone().multiplyScalar(k),side:THREE.DoubleSide}));m.position.set(x,y,z);m.lookAt(0,0,0);envScene.add(m);};
+  strip(new THREE.Color(1,1,1),6,3,30,-14,6,6);
+  strip(new THREE.Color(1,1,1),3,2,30,14,4,8);
+  strip(hi,6,6,20,0,-12,6);
+  strip(accent,5,30,6,0,-6,-10);
+  strip(accent,4,4,30,-8,0,-12);
+  strip(new THREE.Color(1,1,1),2,30,3,0,16,0);
+  const pm=new THREE.PMREMGenerator(renderer);
+  scene.environment=pm.fromScene(envScene,0.02).texture;
+
+  // lâmina de vidro (retângulo arredondado extrudado com chanfro)
+  const sw=34, sh=900, r=17;
+  const shape=new THREE.Shape();
+  shape.moveTo(-sw/2,-sh/2+r); shape.lineTo(-sw/2,sh/2-r); shape.absarc(0,sh/2-r,sw/2,Math.PI,0,true);
+  shape.lineTo(sw/2,-sh/2+r); shape.absarc(0,-sh/2+r,sw/2,0,Math.PI,true);
+  const geo=new THREE.ExtrudeGeometry(shape,{depth:20,bevelEnabled:true,bevelThickness:9,bevelSize:8,bevelSegments:6,curveSegments:24});
+  geo.translate(0,0,-13);
+  const mat=new THREE.MeshPhysicalMaterial({color:new THREE.Color(0x0a0505).lerp(accent,.12),metalness:.85,roughness:.22,clearcoat:1,clearcoatRoughness:.04,envMapIntensity:1.3});
+
+  const step=58, group=new THREE.Group(); scene.add(group);
+  for(let x=-120;x<=1200;x+=step){
+    const dx=x-500, top=1030+(dx*dx)*(160/500/500);
+    const lean=THREE.MathUtils.degToRad(17-(dx/500)*7);
+    const m=new THREE.Mesh(geo,mat);
+    // topo da lâmina em (x, top); a lâmina gira em torno do próprio topo
+    const piv=new THREE.Group(); piv.position.set(x,-top,-Math.abs(dx)*0.18);
+    piv.rotation.z=-lean; piv.rotation.y=(dx/500)*0.35;
+    m.position.y=-sh/2+r; piv.add(m); group.add(piv);
   }
+
+  // luzes: brilho da base e brilho de borda
+  const base=new THREE.PointLight(hi,9e5,0,2); base.position.set(430,-H-60,260); scene.add(base);
+  const base2=new THREE.PointLight(accent,3e5,0,2); base2.position.set(900,-H+40,200); scene.add(base2);
+  const key=new THREE.DirectionalLight(0xffffff,2.2); key.position.set(-400,200,600); scene.add(key);
+
+  renderer.render(scene,camera);
+  document.body.dataset.ready='1';
 </script>
 </body>
 </html>

@@ -1,5 +1,10 @@
 # Opus SoftWorks — vídeo de apresentação (15s, 1080x1920)
 
+Visual e textos baseados no site opussoftworks.com.br: fundo pontilhado, seção de caracteres
+("Como trabalhamos"), bloco azul-marinho com brilho coral ("Um método, resultado visível."),
+palavras Tráfego / Sistemas / Sites com colchetes, menu em pílula e CTA escuro com "SOFTWORKS".
+Tipografia: Inter Tight (títulos e textos), Instrument Serif itálico (palavra de destaque), Exo 2 (logo).
+
 - `index.html` — o vídeo em HTML + GSAP. Abra num navegador e clique em **🔊 Assistir com som**
   (o navegador só libera áudio após um clique). Espaço pausa, R reinicia.
 - `opus-intro.mp4` — versão renderizada (30 fps, H.264 + AAC, com trilha).

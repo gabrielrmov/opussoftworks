@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opus SoftWorks — Apresentação 15s</title>
+<style>
+  @font-face { font-family: "Exo 2"; src: url(assets/fonts/exo2-latin.woff2) format("woff2"); font-weight: 100 900; font-display: block; }
+  @font-face { font-family: "Rubik"; src: url(assets/fonts/rubik-latin.woff2) format("woff2"); font-weight: 300 900; font-display: block; }
+  @font-face { font-family: "Instrument Serif"; src: url(assets/fonts/instrument-serif-italic-latin.woff2) format("woff2"); font-style: italic; font-weight: 400; font-display: block; }
+
+  :root {
+    --coral: #FF6039;
+    --coral-soft: #FF8A66;
+    --ink: #161616;
+    --ink-2: #4A4A4A;
+    --line: #9C9C9C;
+    --mist: #F4F5F8;
+    --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; background: #0d0d0d; overflow: hidden; }
+  body { display: grid; place-items: center; font-family: "Rubik", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* Palco fixo 1080x1920, escalado para caber na janela */
+  #viewport { position: relative; width: 1080px; height: 1920px; transform-origin: 50% 50%; flex: none; }
+  #stage { position: absolute; inset: 0; overflow: hidden; background: var(--white); }
+  .scene { position: absolute; inset: 0; overflow: hidden; visibility: hidden; }
+  .bg-white { background: var(--white); color: var(--ink); }
+  .bg-coral { background: var(--coral); color: var(--white); }
+
+  /* Cabeçalho / rodapé editoriais */
+  .hdr, .ftr { position: absolute; left: 90px; right: 90px; display: flex; justify-content: space-between; align-items: center; }
+  .hdr { top: 96px; }
+  .ftr { bottom: 96px; font: 500 28px/1 "Rubik"; letter-spacing: .04em; }
+  .mark { font: 400 40px/1 "Exo 2"; letter-spacing: -.01em; }
+  .mark b { font-weight: 700; }
+  .bg-white .mark b { color: var(--coral); }
+  .bg-white .ftr { color: var(--line); }
+  .bg-coral .ftr { color: rgba(255,255,255,.75); }
+  .pager { font: 500 28px/1 "Rubik"; letter-spacing: .12em; }
+  .bg-white .pager { color: var(--line); }
+  .bg-coral .pager { color: rgba(255,255,255,.75); }
+
+  /* Tipografia das frases */
+  .headline { position: absolute; left: 90px; right: 90px; font: 700 116px/1.02 "Exo 2"; letter-spacing: -.025em; }
+  .headline i { font: italic 400 1.2em/0.9 "Instrument Serif"; letter-spacing: -.01em; }
+  .bg-white .headline i { color: var(--coral); }
+  .bg-coral .headline i { color: var(--ink); }
+  .w { display: inline-block; clip-path: inset(-40% -18% -22% -18%); }
+  .w > span { display: inline-block; will-change: transform; }
+  .eyebrow { position: absolute; left: 90px; font: 600 30px/1 "Rubik"; letter-spacing: .22em; text-transform: uppercase; display: flex; align-items: center; gap: 22px; }
+  .eyebrow::before { content: ""; width: 56px; height: 4px; background: currentColor; border-radius: 4px; }
+  .bg-white .eyebrow { color: var(--coral); }
+  .bg-coral .eyebrow { color: var(--ink); }
+
+  /* Foto (placeholder de marca até existir assets/foto-1.jpg / foto-2.jpg) */
+  .photo { position: absolute; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 32% 26%, #2f2f2f 0%, #1c1c1c 45%, #111 100%); }
+  .photo .ph-img { position: absolute; inset: 0; background-size: cover; background-position: center; }
+  .photo .ph-mark { position: absolute; left: 50%; top: 50%; width: 66%; transform: translate(-50%, -50%); }
+  .photo .ph-grid { position: absolute; inset: 0; background:
+      repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.05) 0 2px, transparent 2px 64px); }
+  .photo.has-img .ph-mark, .photo.has-img .ph-grid { display: none; }
+
+  /* ---------- Cena 1 ---------- */
+  #wm { position: absolute; left: 0; width: 1080px; top: 930px; text-align: center; white-space: nowrap; font: 400 120px/1 "Exo 2"; letter-spacing: -.01em; color: var(--ink); }
+  #wm .o { font-weight: 700; color: transparent; }
+  #wm .rest { display: inline-block; }
+  #wm .rest b { font-weight: 700; color: var(--coral); }
+  #wm .bl { display: inline-block; width: 0; height: 0; vertical-align: baseline; }
+  #pill { position: absolute; left: 0; top: 0; width: 0; height: 12px; background: var(--coral); border-radius: 999px; }
+  #hole { position: absolute; left: 50%; top: 50%; width: 0; height: 0; background: var(--white); border-radius: 999px; }
+  #s1-symbol { position: absolute; left: 50%; top: 600px; width: 360px; margin-left: -180px; }
+  #s1-tag { position: absolute; left: 0; right: 0; top: 1110px; text-align: center; font: 400 38px/1.3 "Rubik"; color: var(--ink-2); }
+
+  /* ---------- Cena 2 ---------- */
+  #s2-photo { left: 240px; top: 400px; width: 600px; height: 600px; box-shadow: 0 0 0 12px rgba(255,255,255,.18); }
+  #s2-orbit { position: absolute; left: 140px; top: 300px; width: 800px; height: 800px; }
+  #s2-orbit text { font: 600 34px "Exo 2"; letter-spacing: .3em; fill: var(--white); text-transform: uppercase; }
+  #s2-head { top: 1200px; }
+
+  /* ---------- Cenas 3 ---------- */
+  .s3 .eyebrow { top: 300px; }
+  .s3 .headline { top: 370px; }
+  .stat { position: absolute; left: 90px; right: 90px; display: flex; align-items: flex-end; gap: 30px; }
+  .stat .num { font: 800 168px/.8 "Exo 2"; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+  .stat .lbl { font: 400 36px/1.25 "Rubik"; max-width: 520px; padding-bottom: 4px; }
+  .bg-white .stat .num { color: var(--coral); }
+  .bg-white .stat .lbl { color: var(--ink-2); }
+  .bg-coral .stat .num { color: var(--white); }
+  .bg-coral .stat .lbl { color: rgba(255,255,255,.9); }
+  svg.info { position: absolute; left: 90px; overflow: visible; }
+  svg text { font-family: "Rubik"; }
+
+  #s3a-stat { top: 1530px; }
+  #s3a-svg { top: 960px; }
+  #s3b-stat { top: 860px; }
+  #s3b-svg { top: 1080px; }
+  #s3c-svg { top: 860px; }
+
+  /* ---------- Cena 4 ---------- */
+  #s4-head { top: 300px; font-size: 112px; }
+  #card { position: absolute; left: 90px; top: 880px; width: 900px; height: 760px; background: var(--white); border-radius: 56px; box-shadow: 0 40px 80px -30px rgba(22,22,22,.45); color: var(--ink); }
+  #ring { position: absolute; left: 50%; top: 60px; width: 296px; height: 296px; margin-left: -148px; border-radius: 50%; background: conic-gradient(from 200deg, var(--coral), #FFB199, var(--coral-soft), var(--coral)); }
+  #s4-photo { left: 14px; top: 14px; width: 268px; height: 268px; box-shadow: 0 0 0 8px var(--white); }
+  #s4-name { position: absolute; left: 0; right: 0; top: 392px; text-align: center; font: 700 64px/1 "Exo 2"; letter-spacing: -.01em; }
+  #s4-handle { position: absolute; left: 0; right: 0; top: 472px; text-align: center; font: 500 38px/1 "Rubik"; color: var(--ink-2); }
+  #s4-bio { position: absolute; left: 0; right: 0; top: 530px; text-align: center; font: 400 32px/1 "Rubik"; color: var(--line); }
+  #btn { position: absolute; left: 90px; right: 90px; top: 604px; height: 116px; border-radius: 999px; background: var(--coral); color: var(--white); overflow: hidden; display: grid; place-items: center; font: 700 48px/1 "Exo 2"; letter-spacing: .01em; }
+  #btn .lab { position: absolute; display: flex; align-items: center; gap: 18px; }
+  #btn .lab svg { width: 44px; height: 44px; }
+  #ripple { position: absolute; left: 0; top: 0; width: 60px; height: 60px; margin: -30px 0 0 -30px; border-radius: 50%; background: rgba(255,255,255,.35); transform: scale(0); }
+  #burst { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+  #burst i { position: absolute; left: -4px; top: -40px; width: 8px; height: 26px; border-radius: 6px; background: var(--coral); transform-origin: 4px 40px; }
+  #cursor { position: absolute; left: 0; top: 0; width: 84px; height: 84px; filter: drop-shadow(0 10px 16px rgba(0,0,0,.3)); }
+
+  /* Transições (camadas extras de wipe) */
+  .sweep { position: absolute; inset: 0; visibility: hidden; }
+
+  /* UI de preview (fora do modo render) */
+  #ui { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; gap: 10px; font: 500 13px/1 "Rubik"; color: #bbb; z-index: 9; align-items: center; }
+  #ui button { all: unset; cursor: pointer; padding: 9px 14px; border-radius: 999px; background: #222; color: #eee; }
+  #ui button:hover { background: #333; }
+  #ui button:focus-visible { outline: 2px solid var(--coral); }
+  body.render #ui { display: none; }
+  body.render { background: transparent; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage">
+
+  <!-- CENA 1 · linha → pílula → "O" -->
+  <section class="scene bg-white" id="s1">
+    <img id="s1-symbol" src="assets/opus-simbolo.png" alt="">
+    <div id="wm"><span class="o">O</span><span class="bl"></span><span class="rest"><b>pus</b>SoftWorks</span></div>
+    <div id="pill"><div id="hole"></div></div>
+    <p id="s1-tag">Transformamos ideias em software.</p>
+  </section>
+
+  <!-- CENA 2 · foto + texto girando -->
+  <section class="scene bg-coral" id="s2">
+    <div class="hdr"><span class="mark"><b>Opus</b>SoftWorks</span><span class="pager">01 / 05</span></div>
+    <svg id="s2-orbit" viewBox="0 0 800 800" aria-hidden="true">
+      <defs><path id="orbitPath" d="M400,400 m-368,0 a368,368 0 1,1 736,0 a368,368 0 1,1 -736,0"/></defs>
+      <text><textPath href="#orbitPath" textLength="2300" lengthAdjust="spacing">Software sob medida • Opus SoftWorks • Entrega real • </textPath></text>
+    </svg>
+    <div class="photo" id="s2-photo" data-src="assets/foto-1.jpg"><div class="ph-grid"></div><img class="ph-mark" src="assets/opus-simbolo.png" alt=""><div class="ph-img"></div></div>
+    <h1 class="headline" id="s2-head">Resultado não é sorte. É <i>entrega.</i></h1>
+    <div class="ftr"><span>@opussoftworks</span><span>opussoftworks.com.br</span></div>
+  </section>
+
+  <!-- CENA 3a · Clareza -->
+  <section class="scene bg-white s3" id="s3a">
+    <div class="hdr"><span class="mark"><b>Opus</b>SoftWorks</span><span class="pager">02 / 05</span></div>
+    <p class="eyebrow">Princípio 01</p>
+    <h2 class="headline"><i>Clareza</i> antes de velocidade.</h2>
+    <svg class="info" id="s3a-svg" width="900" height="460" viewBox="0 0 900 460" aria-hidden="true">
+      <path id="mess" d="M40,250 C90,90 160,380 220,210 S300,60 340,250 S430,420 470,190 S560,40 600,260 S700,400 740,170 S820,120 860,250" fill="none" stroke="#9C9C9C" stroke-width="5" stroke-linecap="round"/>
+      <path id="straight" d="M40,250 L840,250" fill="none" stroke="#FF6039" stroke-width="14" stroke-linecap="round"/>
+      <path id="arrowHead" d="M812,222 L852,250 L812,278" fill="none" stroke="#FF6039" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle id="dotA" cx="40" cy="250" r="22" fill="#161616"/>
+      <circle id="dotB" cx="860" cy="250" r="22" fill="#FF6039"/>
+      <text id="lblA" x="40" y="330" font-size="32" fill="#4A4A4A" text-anchor="start">Ideia</text>
+      <text id="lblB" x="860" y="330" font-size="32" fill="#4A4A4A" text-anchor="end">Entrega</text>
+    </svg>
+    <div class="stat" id="s3a-stat"><span class="num"><span class="count" data-to="100">0</span>%</span><span class="lbl">do escopo definido antes da primeira linha de código</span></div>
+    <div class="ftr"><span>@opussoftworks</span><span>opussoftworks.com.br</span></div>
+  </section>
+
+  <!-- CENA 3b · Método -->
+  <section class="scene bg-coral s3" id="s3b">
+    <div class="sweep" style="background:var(--ink)" id="s3b-lead"></div>
+    <div class="hdr"><span class="mark"><b>Opus</b>SoftWorks</span><span class="pager">03 / 05</span></div>
+    <p class="eyebrow">Princípio 02</p>
+    <h2 class="headline">Um método, resultado <i>visível.</i></h2>
+    <div class="stat" id="s3b-stat"><span class="num"><span class="count" data-to="4" data-pad="2">00</span></span><span class="lbl">etapas claras, do diagnóstico à entrega</span></div>
+    <svg class="info" id="s3b-svg" width="900" height="560" viewBox="0 0 900 560" aria-hidden="true">
+      <line x1="0" y1="470" x2="900" y2="470" stroke="rgba(255,255,255,.45)" stroke-width="4"/>
+      <g id="bars">
+        <rect x="20"  y="330" width="170" height="140" rx="18" fill="rgba(255,255,255,.38)"/>
+        <rect x="250" y="250" width="170" height="220" rx="18" fill="rgba(255,255,255,.58)"/>
+        <rect x="480" y="160" width="170" height="310" rx="18" fill="rgba(255,255,255,.8)"/>
+        <rect x="710" y="40"  width="170" height="430" rx="18" fill="#FFFFFF"/>
+      </g>
+      <path id="trend" d="M105,300 L335,220 L565,130 L795,10" fill="none" stroke="#161616" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <g id="trendDots" fill="#161616"><circle cx="105" cy="300" r="13"/><circle cx="335" cy="220" r="13"/><circle cx="565" cy="130" r="13"/><circle cx="795" cy="10" r="16"/></g>
+      <g id="barLbls" font-size="28" fill="#FFFFFF" text-anchor="middle" font-weight="500">
+        <text x="105" y="522">Diagnóstico</text><text x="335" y="522">Plano</text><text x="565" y="522">Execução</text><text x="795" y="522">Entrega</text>
+      </g>
+    </svg>
+    <div class="ftr"><span>@opussoftworks</span><span>opussoftworks.com.br</span></div>
+  </section>
+
+  <!-- CENA 3c · Estratégia + Execução -->
+  <section class="scene bg-white s3" id="s3c">
+    <div class="hdr"><span class="mark"><b>Opus</b>SoftWorks</span><span class="pager">04 / 05</span></div>
+    <p class="eyebrow">Princípio 03</p>
+    <h2 class="headline">Estratégia, aliada à <i>execução.</i></h2>
+    <svg class="info" id="s3c-svg" width="900" height="820" viewBox="0 0 900 820" aria-hidden="true">
+      <circle cx="450" cy="330" r="270" fill="none" stroke="#F4F5F8" stroke-width="84"/>
+      <circle id="arcA" cx="450" cy="330" r="270" fill="none" stroke="#161616" stroke-width="84" transform="rotate(-90 450 330)"/>
+      <circle id="arcB" cx="450" cy="330" r="270" fill="none" stroke="#FF6039" stroke-width="84" transform="rotate(90 450 330)"/>
+      <text x="450" y="368" text-anchor="middle" font-family="Exo 2" font-weight="800" font-size="128" fill="#161616" letter-spacing="-4"><tspan class="count" data-to="100">0</tspan>%</text>
+      <text id="donutSub" x="450" y="430" text-anchor="middle" font-size="34" fill="#4A4A4A">no mesmo time</text>
+      <g id="legend" font-size="34" fill="#161616" font-weight="500">
+        <g id="legA"><circle cx="190" cy="740" r="16" fill="#161616"/><text x="220" y="752">Estratégia</text></g>
+        <g id="legB"><circle cx="520" cy="740" r="16" fill="#FF6039"/><text x="550" y="752">Execução</text></g>
+      </g>
+    </svg>
+    <div class="ftr"><span>@opussoftworks</span><span>opussoftworks.com.br</span></div>
+  </section>
+
+  <!-- CENA 4 · Seguir -->
+  <section class="scene bg-coral" id="s4">
+    <div class="hdr"><span class="mark"><b>Opus</b>SoftWorks</span><span class="pager">05 / 05</span></div>
+    <h2 class="headline" id="s4-head">Vamos <i>elevar</i> o próximo passo?</h2>
+    <div id="card">
+      <div id="ring"><div class="photo" id="s4-photo" data-src="assets/foto-2.jpg"><div class="ph-grid"></div><img class="ph-mark" src="assets/opus-simbolo.png" alt=""><div class="ph-img"></div></div></div>
+      <p id="s4-name">Opus SoftWorks</p>
+      <p id="s4-handle">@opussoftworks</p>
+      <p id="s4-bio">Transformamos ideias em software.</p>
+      <div id="btn">
+        <div id="ripple"></div>
+        <span class="lab" id="lab1">Seguir</span>
+        <span class="lab" id="lab2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Seguindo</span>
+      </div>
+      <div id="burst"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <div class="ftr"><span>@opussoftworks</span><span>opussoftworks.com.br</span></div>
+    <svg id="cursor" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 3 L6 25 L11.5 19.8 L15.2 28.2 L19 26.6 L15.4 18.4 L23 18.4 Z" fill="#fff" stroke="#161616" stroke-width="1.8" stroke-linejoin="round"/></svg>
+  </section>
+
+</div></div>
+
+<div id="ui">
+  <button id="bPlay" type="button">Pausar</button>
+  <button id="bRestart" type="button">Reiniciar</button>
+  <span id="clock">0.00s</span>
+</div>
+
+<script src="assets/gsap.min.js"></script>
+<script>
+(() => {
+  const RENDER = new URLSearchParams(location.search).has("render");
+  if (RENDER) document.body.classList.add("render");
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const W = 1080, H = 1920, DURATION = 15;
+
+  // Ajusta o palco 1080x1920 à janela (no modo render a janela já é 1080x1920)
+  const vp = $("#viewport");
+  const fit = () => { const s = Math.min(innerWidth / W, innerHeight / H); vp.style.transform = `scale(${s})`; };
+  addEventListener("resize", fit); fit();
+
+  // Envolve cada palavra de .headline numa máscara para o "rise" por palavra
+  $$(".headline").forEach(h => {
+    const wrap = node => {
+      [...node.childNodes].forEach(n => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(part => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.append(" "); return; }
+            const w = document.createElement("span"); w.className = "w";
+            const i = document.createElement("span"); i.textContent = part;
+            w.append(i); frag.append(w);
+          });
+          n.replaceWith(frag);
+        } else if (n.tagName === "I") {
+          const w = document.createElement("span"); w.className = "w";
+          const i = document.createElement("span"); n.replaceWith(w); i.append(n); w.append(i);
+        }
+      });
+    };
+    wrap(h);
+  });
+
+  // Fotos: usa assets/foto-1.jpg e foto-2.jpg se existirem; senão, placeholder da marca
+  const loadPhoto = el => new Promise(res => {
+    const img = new Image();
+    img.onload = () => { el.classList.add("has-img"); $(".ph-img", el).style.backgroundImage = `url(${el.dataset.src})`; res(); };
+    img.onerror = () => res();
+    img.src = el.dataset.src;
+  });
+
+  const imgsReady = Promise.all($$("img").map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
+  const ready = Promise.all([document.fonts.ready, imgsReady, ...$$(".photo[data-src]").map(loadPhoto),
+    document.fonts.load('700 120px "Exo 2"'), document.fonts.load('400 40px "Rubik"'), document.fonts.load('italic 400 120px "Instrument Serif"')])
+    .then(build);
+
+  function countUp(tl, el, at, dur) {
+    const to = +el.dataset.to, pad = +(el.dataset.pad || 0), o = { v: 0 };
+    tl.to(o, { v: to, duration: dur, ease: "power3.out",
+      onUpdate: () => { el.textContent = String(Math.round(o.v)).padStart(pad, "0"); } }, at);
+  }
+  const words = sel => $$(`${sel} .w > span`);
+  const show = (tl, sel, at) => tl.set(sel, { visibility: "visible" }, at);
+  const hide = (tl, sel, at) => tl.set(sel, { visibility: "hidden" }, at);
+
+  function build() {
+    // ---------- Geometria do "O" do logotipo ----------
+    const wm = $("#wm"), oSpan = $("#wm .o"), bl = $("#wm .bl");
+    const ctx = document.createElement("canvas").getContext("2d");
+    ctx.font = '700 120px "Exo 2"';
+    const m = ctx.measureText("O");
+    const baseY = wm.offsetTop + bl.offsetTop;
+    const x0 = wm.offsetLeft + oSpan.offsetLeft - m.actualBoundingBoxLeft;
+    const x1 = wm.offsetLeft + oSpan.offsetLeft + m.actualBoundingBoxRight;
+    const y0 = baseY - m.actualBoundingBoxAscent, y1 = baseY + m.actualBoundingBoxDescent;
+    const O = { cx: (x0 + x1) / 2, cy: (y0 + y1) / 2, w: x1 - x0, h: y1 - y0 };
+    const T = 18; // espessura do traço do "O"
+
+    gsap.set("#pill", { xPercent: -50, yPercent: -50, left: W / 2, top: H / 2, width: 0, height: 12 });
+    gsap.set("#hole", { xPercent: -50, yPercent: -50 });
+    gsap.set(".w > span", { yPercent: 140 });
+
+    const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+
+    // =========== CENA 1 (0 → 3.0s) · fundo branco ===========
+    show(tl, "#s1", 0);
+    tl.set("#wm .rest", { clipPath: "inset(-30% 100% -30% -2%)", x: -60 }, 0)
+      .set(["#s1-symbol", "#s1-tag"], { autoAlpha: 0 }, 0)
+      .to("#pill", { width: 760, duration: .55, ease: "expo.out" }, .1)                                // linha
+      .to("#pill", { width: 240, height: 128, duration: .45, ease: "back.out(1.6)" }, .62)              // pílula
+      .to("#pill", { left: O.cx, top: O.cy, width: O.w, height: O.h, duration: .5, ease: "power4.inOut" }, 1.05) // vira "O"
+      .to("#hole", { width: O.w - T * 2, height: O.h - T * 2, duration: .38, ease: "power3.out" }, 1.3)
+      .to("#wm .rest", { clipPath: "inset(-30% -4% -30% -2%)", x: 0, duration: .6, ease: "power3.out" }, 1.45)
+      .fromTo("#s1-symbol", { autoAlpha: 0, scale: .4, rotation: -25, y: 40 },
+                            { autoAlpha: 1, scale: 1, rotation: 0, y: 0, duration: .7, ease: "back.out(1.7)" }, 1.75)
+      .fromTo("#s1-tag", { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: .5 }, 2.0);
+
+    // Transição 1→2 · íris coral abrindo a partir do "O"
+    show(tl, "#s2", 2.75);
+    tl.fromTo("#s2", { clipPath: `circle(0px at ${O.cx}px ${O.cy}px)` },
+                     { clipPath: `circle(2300px at ${O.cx}px ${O.cy}px)`, duration: .7, ease: "power3.in" }, 2.75);
+    hide(tl, "#s1", 3.5);
+
+    // =========== CENA 2 (3.0 → 6.0s) · fundo coral ===========
+    tl.fromTo("#s2-photo", { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(50% at 50% 50%)", duration: .8, ease: "expo.out" }, 3.1)
+      .fromTo("#s2-photo .ph-img, #s2-photo .ph-mark", { scale: 1.35 }, { scale: 1, duration: 1.4, ease: "power2.out" }, 3.1)
+      .fromTo("#s2-orbit", { autoAlpha: 0, scale: .85 }, { autoAlpha: 1, scale: 1, duration: .8 }, 3.3)
+      .fromTo("#s2-orbit", { rotation: -20 }, { rotation: 130, duration: 3.4, ease: "none" }, 3.0)      // texto girando
+      .fromTo("#s2 .hdr, #s2 .ftr", { autoAlpha: 0 }, { autoAlpha: 1, duration: .5 }, 3.3)
+      .to(words("#s2-head"), { yPercent: 0, duration: .6, stagger: .07 }, 3.55);
+
+    // Transição 2→3a · wipe vertical (grafite na frente, branco atrás)
+    show(tl, "#s3a", 5.85);
+    tl.fromTo("#s3a", { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: .6, ease: "power4.inOut" }, 5.85);
+    hide(tl, "#s2", 6.5);
+
+    // =========== CENA 3a (6.0 → 8.4s) · Clareza · branco ===========
+    const lenMess = $("#mess").getTotalLength(), lenStr = $("#straight").getTotalLength();
+    tl.fromTo("#s3a .eyebrow", { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: .5 }, 6.25)
+      .to(words("#s3a .headline"), { yPercent: 0, duration: .6, stagger: .07 }, 6.3)
+      .fromTo(["#dotA", "#lblA"], { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" }, { autoAlpha: 1, scale: 1, duration: .4, ease: "back.out(2)" }, 6.55)
+      .fromTo("#mess", { strokeDasharray: `${lenMess} ${lenMess}`, strokeDashoffset: lenMess }, { strokeDashoffset: 0, duration: .7, ease: "power2.inOut" }, 6.6)
+      .to("#mess", { opacity: .35, duration: .4 }, 7.3)
+      .fromTo("#straight", { strokeDasharray: lenStr, strokeDashoffset: lenStr }, { strokeDashoffset: 0, duration: .55, ease: "power3.inOut" }, 7.2)
+      .fromTo("#arrowHead", { autoAlpha: 0, x: -20 }, { autoAlpha: 1, x: 0, duration: .3 }, 7.65)
+      .fromTo(["#dotB", "#lblB"], { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" }, { autoAlpha: 1, scale: 1, duration: .4, ease: "back.out(2)" }, 7.65)
+      .fromTo("#s3a-stat", { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .5 }, 6.9)
+      .fromTo("#s3a .hdr, #s3a .ftr", { autoAlpha: 0 }, { autoAlpha: 1, duration: .4 }, 6.3);
+    countUp(tl, $("#s3a .count"), 6.95, 1.2);
+
+    // Transição 3a→3b · wipe horizontal com faixa grafite
+    show(tl, "#s3b", 8.3);
+    tl.fromTo("#s3b", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: .6, ease: "power4.inOut" }, 8.3)
+      .set("#s3b-lead", { visibility: "visible" }, 8.3)
+      .fromTo("#s3b-lead", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 100%)", duration: .75, ease: "power3.inOut" }, 8.3);
+    hide(tl, "#s3a", 8.95); hide(tl, "#s3b-lead", 9.1);
+
+    // =========== CENA 3b (8.6 → 10.8s) · Método · coral ===========
+    const lenTrend = $("#trend").getTotalLength();
+    tl.fromTo("#s3b .eyebrow", { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: .5 }, 8.65)
+      .to(words("#s3b .headline"), { yPercent: 0, duration: .6, stagger: .07 }, 8.7)
+      .fromTo("#s3b .hdr, #s3b .ftr", { autoAlpha: 0 }, { autoAlpha: 1, duration: .4 }, 8.7)
+      .fromTo("#s3b-stat", { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .5 }, 9.0)
+      .fromTo("#bars rect", { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: .6, stagger: .12, ease: "back.out(1.3)" }, 9.05)
+      .fromTo("#barLbls text", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .12 }, 9.1)
+      .fromTo("#trend", { strokeDasharray: lenTrend, strokeDashoffset: lenTrend }, { strokeDashoffset: 0, duration: .7, ease: "power2.inOut" }, 9.55)
+      .fromTo("#trendDots circle", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: .35, stagger: .15, ease: "back.out(3)" }, 9.55);
+    countUp(tl, $("#s3b .count"), 9.05, 1.0);
+
+    // Transição 3b→3c · wipe diagonal
+    show(tl, "#s3c", 10.6);
+    tl.fromTo("#s3c", { clipPath: "polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%)" },
+                      { clipPath: "polygon(0% 0%, 200% 0%, 200% 0%, 0% 200%)", duration: .65, ease: "power3.inOut" }, 10.6);
+    hide(tl, "#s3b", 11.3);
+
+    // =========== CENA 3c (10.8 → 12.6s) · Estratégia + execução · branco ===========
+    const C = 2 * Math.PI * 270;
+    tl.fromTo("#s3c .eyebrow", { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: .5 }, 10.95)
+      .to(words("#s3c .headline"), { yPercent: 0, duration: .6, stagger: .07 }, 11.0)
+      .fromTo("#s3c .hdr, #s3c .ftr", { autoAlpha: 0 }, { autoAlpha: 1, duration: .4 }, 11.0)
+      .fromTo("#arcA", { strokeDasharray: `0 ${C}` }, { strokeDasharray: `${C / 2} ${C}`, duration: .8, ease: "power2.inOut" }, 11.2)
+      .fromTo("#arcB", { strokeDasharray: `0 ${C}` }, { strokeDasharray: `${C / 2} ${C}`, duration: .8, ease: "power2.inOut" }, 11.45)
+      .fromTo("#donutSub", { autoAlpha: 0 }, { autoAlpha: 1, duration: .4 }, 11.5)
+      .fromTo(["#legA", "#legB"], { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .2 }, 11.3);
+    countUp(tl, $("#s3c .count"), 11.2, 1.05);
+
+    // Transição 3c→4 · íris coral a partir do centro do donut
+    const DX = 90 + 450, DY = 860 + 330;
+    show(tl, "#s4", 12.35);
+    tl.fromTo("#s4", { clipPath: `circle(0px at ${DX}px ${DY}px)` }, { clipPath: `circle(2300px at ${DX}px ${DY}px)`, duration: .6, ease: "power3.in" }, 12.35);
+    hide(tl, "#s3c", 12.95);
+
+    // =========== CENA 4 (12.6 → 15s) · foto + nome + Seguir · coral ===========
+    tl.fromTo("#s4 .hdr, #s4 .ftr", { autoAlpha: 0 }, { autoAlpha: 1, duration: .4 }, 12.7)
+      .to(words("#s4-head"), { yPercent: 0, duration: .55, stagger: .05 }, 12.7)
+      .fromTo("#card", { y: 260, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .6, ease: "expo.out" }, 12.8)
+      .fromTo("#ring", { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: .6, ease: "back.out(1.6)" }, 12.95)
+      .fromTo(["#s4-name", "#s4-handle", "#s4-bio"], { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .07 }, 13.05)
+      .fromTo("#btn", { scale: .8, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .45, ease: "back.out(2)" }, 13.2);
+
+    // Cursor até o botão + clique
+    const BX = 90 + 90 + 360 + 40, BY = 880 + 604 + 58;     // ponto do clique no botão
+    gsap.set("#lab2", { autoAlpha: 0, y: 40 });
+    gsap.set("#ripple", { left: 360 + 40, top: 58 });
+    gsap.set("#burst", { left: 90 + 360 + 40, top: 604 + 58 });
+    $$("#burst i").forEach((el, i) => gsap.set(el, { rotation: i * 45, scaleY: 0, autoAlpha: 0 }));
+    tl.fromTo("#cursor", { x: 1000, y: 1960, rotation: 8 }, { x: BX - 16, y: BY - 8, rotation: 0, duration: .75, ease: "power3.out" }, 13.3)
+      .to("#cursor", { scale: .82, duration: .09, ease: "power2.in", transformOrigin: "20% 10%" }, 14.08)
+      .to("#btn", { scale: .94, duration: .09, ease: "power2.in" }, 14.08)
+      .to("#cursor", { scale: 1, duration: .25, ease: "back.out(3)" }, 14.18)
+      .to("#btn", { scale: 1, backgroundColor: "#161616", duration: .35, ease: "back.out(3)" }, 14.18)
+      .to("#ripple", { scale: 18, autoAlpha: 0, duration: .55, ease: "power2.out" }, 14.17)
+      .to("#lab1", { y: -40, autoAlpha: 0, duration: .25, ease: "power2.in" }, 14.17)
+      .to("#lab2", { y: 0, autoAlpha: 1, duration: .35, ease: "back.out(2)" }, 14.3)
+      .to("#burst i", { scaleY: 1, autoAlpha: 1, y: -30, duration: .2, ease: "power2.out" }, 14.17)
+      .to("#burst i", { autoAlpha: 0, y: -70, duration: .3, ease: "power1.in" }, 14.37)
+      .to("#cursor", { x: BX + 180, y: BY + 260, autoAlpha: 0, duration: .5, ease: "power2.in" }, 14.5)
+      .to({}, { duration: 0 }, DURATION);                   // fixa a duração total em 15s
+
+    // ---------- Reprodução ----------
+    window.__tl = tl;
+    window.__seek = t => { tl.seek(t, false); };
+    window.__duration = DURATION;
+    if (RENDER) { tl.seek(0); return; }
+
+    const clock = $("#clock"), bPlay = $("#bPlay");
+    tl.eventCallback("onUpdate", () => { clock.textContent = tl.time().toFixed(2) + "s"; });
+    tl.eventCallback("onComplete", () => gsap.delayedCall(1.2, () => tl.restart()));
+    bPlay.onclick = () => { tl.paused(!tl.paused()); bPlay.textContent = tl.paused() ? "Tocar" : "Pausar"; };
+    $("#bRestart").onclick = () => { tl.restart(); bPlay.textContent = "Pausar"; };
+    addEventListener("keydown", e => {
+      if (e.code === "Space") { e.preventDefault(); bPlay.click(); }
+      if (e.key === "r" || e.key === "R") $("#bRestart").click();
+    });
+    tl.play(0);
+  }
+  window.__ready = ready;
+})();
+</script>
+</body>
+</html>

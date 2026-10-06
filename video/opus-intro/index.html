@@ -29,7 +29,14 @@
   .bg-white { background: var(--white); color: var(--ink); }
   .bg-coral { background: var(--coral); color: var(--white); }
 
-  /* Cabeçalho / rodapé editoriais */
+  /* Luzes suaves ao fundo (profundidade) */
+  .blob { position: absolute; width: 1000px; height: 1000px; border-radius: 50%; pointer-events: none; }
+  .bg-white .blob { background: radial-gradient(circle, rgba(255,96,57,.11) 0%, rgba(255,96,57,0) 62%); }
+  .bg-coral .blob { background: radial-gradient(circle, rgba(255,255,255,.2) 0%, rgba(255,255,255,0) 62%); }
+  .blob.b1 { left: -420px; top: -300px; }
+  .blob.b2 { left: 520px; top: 1250px; }
+
+  /* Cabeçalho / rodapé editoriais (rodapé é decorativo: fica sob a UI do Reels) */
   .hdr, .ftr { position: absolute; left: 90px; right: 90px; display: flex; justify-content: space-between; align-items: center; }
   .hdr { top: 96px; }
   .ftr { bottom: 96px; font: 500 28px/1 "Rubik"; letter-spacing: .04em; }
@@ -65,6 +72,12 @@
   .bg-white .ghost { -webkit-text-stroke: 3px #ECEDF1; }
   .bg-coral .ghost { -webkit-text-stroke: 3px rgba(255,255,255,.22); }
 
+  /* Contador estilo odômetro */
+  .odo { display: inline-flex; vertical-align: top; }
+  .odo .col { display: inline-block; height: 1em; overflow: hidden; }
+  .odo .stk { display: flex; flex-direction: column; }
+  .odo .stk span { display: block; height: 1em; line-height: 1; text-align: center; }
+
   /* Chips */
   .chips { position: absolute; left: 90px; right: 90px; display: flex; flex-wrap: wrap; gap: 18px; }
   .chip { display: inline-flex; align-items: center; gap: 14px; height: 72px; padding: 0 30px; border-radius: 999px; font: 500 30px/1 "Rubik"; }
@@ -97,19 +110,19 @@
   #iris-ring { position: absolute; left: 0; top: 0; width: 0; height: 0; border: 18px solid var(--coral); border-radius: 50%; visibility: hidden; }
 
   /* ---------- Cena 2 ---------- */
-  #s2-photo { left: 250px; top: 410px; width: 580px; height: 580px; }
-  #s2-orbit, #s2-orbit2 { position: absolute; left: 140px; top: 300px; width: 800px; height: 800px; overflow: visible; }
+  #s2-photo { left: 260px; top: 380px; width: 560px; height: 560px; }
+  #s2-orbit, #s2-orbit2 { position: absolute; left: 140px; top: 260px; width: 800px; height: 800px; overflow: visible; }
   #s2-orbit text { font: 600 30px "Exo 2"; fill: var(--white); text-transform: uppercase; }
-  #s2-head { top: 1190px; }
-  #s2-chips { top: 1490px; }
+  #s2-head { top: 1110px; }
+  #s2-chips { top: 1385px; }
 
   /* ---------- Cenas 3 ---------- */
   .s3 .eyebrow { top: 300px; }
   .s3 .headline { top: 370px; }
-  .s3 .ghost { top: 980px; }
-  .stat { position: absolute; left: 90px; right: 90px; display: flex; align-items: flex-end; gap: 30px; }
-  .stat .num { font: 800 176px/.8 "Exo 2"; letter-spacing: -.04em; font-variant-numeric: tabular-nums; display: inline-block; }
-  .stat .lbl { font: 400 40px/1.25 "Rubik"; max-width: 520px; padding-bottom: 2px; }
+  .s3 .ghost { top: 900px; }
+  .stat { position: absolute; left: 90px; right: 90px; display: flex; align-items: center; gap: 30px; }
+  .stat .num { font: 800 176px/1 "Exo 2"; letter-spacing: -.04em; font-variant-numeric: tabular-nums; display: inline-flex; transform-origin: 0% 100%; }
+  .stat .lbl { font: 400 38px/1.25 "Rubik"; max-width: 400px; }
   .bg-white .stat .num { color: var(--coral); }
   .bg-white .stat .lbl { color: var(--ink-2); }
   .bg-coral .stat .num { color: var(--white); }
@@ -117,22 +130,24 @@
   svg.info { position: absolute; left: 90px; overflow: visible; }
   svg text { font-family: "Rubik"; }
 
-  #s3a-svg { top: 700px; }
-  #s3a-stat { top: 1320px; }
-  #s3a-chips { top: 1560px; }
-  #s3b-stat { top: 780px; }
-  #s3b-svg { top: 1020px; }
-  #s3c-svg { top: 800px; }
+  #s3a-svg { top: 650px; }
+  #s3a-stat { top: 1205px; }
+  #s3a-chips { top: 1415px; }
+  #s3b-stat { top: 665px; }
+  #s3b-svg { top: 860px; }
+  #s3c-svg { top: 700px; }
+  #donutNum { position: absolute; left: 0; width: 1080px; top: 962px; text-align: center; font: 800 128px/1 "Exo 2"; letter-spacing: -.04em; color: var(--ink); font-variant-numeric: tabular-nums; }
+  #donutNum > span { display: inline-flex; }
 
   /* ---------- Cena 4 ---------- */
   #s4-head { top: 290px; font-size: 112px; }
-  #card { position: absolute; left: 90px; top: 800px; width: 900px; height: 900px; background: var(--white); border-radius: 60px; box-shadow: 0 50px 90px -30px rgba(22,22,22,.5); color: var(--ink); }
-  #ring { position: absolute; left: 50%; top: 64px; width: 340px; height: 340px; margin-left: -170px; border-radius: 50%; background: conic-gradient(from 200deg, var(--coral), #FFB199, var(--coral-soft), var(--coral)); }
+  #card { position: absolute; left: 90px; top: 600px; width: 900px; height: 860px; background: var(--white); border-radius: 60px; box-shadow: 0 50px 90px -30px rgba(22,22,22,.5); color: var(--ink); }
+  #ring { position: absolute; left: 50%; top: 56px; width: 340px; height: 340px; margin-left: -170px; border-radius: 50%; background: conic-gradient(from 200deg, var(--coral), #FFB199, var(--coral-soft), var(--coral)); }
   #s4-photo { left: 14px; top: 14px; width: 312px; height: 312px; box-shadow: 0 0 0 9px var(--white); }
-  #s4-name { position: absolute; left: 0; right: 0; top: 446px; text-align: center; font: 700 72px/1 "Exo 2"; letter-spacing: -.01em; }
-  #s4-handle { position: absolute; left: 0; right: 0; top: 536px; text-align: center; font: 500 40px/1 "Rubik"; color: var(--ink-2); }
-  #s4-bio { position: absolute; left: 0; right: 0; top: 598px; text-align: center; font: 400 34px/1 "Rubik"; color: var(--line); }
-  #btn { position: absolute; left: 80px; right: 80px; top: 690px; height: 128px; border-radius: 999px; background: var(--coral); color: var(--white); overflow: hidden; display: grid; place-items: center; font: 700 52px/1 "Exo 2"; letter-spacing: .01em; }
+  #s4-name { position: absolute; left: 0; right: 0; top: 430px; text-align: center; font: 700 72px/1 "Exo 2"; letter-spacing: -.01em; }
+  #s4-handle { position: absolute; left: 0; right: 0; top: 518px; text-align: center; font: 500 40px/1 "Rubik"; color: var(--ink-2); }
+  #s4-bio { position: absolute; left: 0; right: 0; top: 578px; text-align: center; font: 400 34px/1 "Rubik"; color: var(--line); }
+  #btn { position: absolute; left: 80px; right: 80px; top: 660px; height: 128px; border-radius: 999px; background: var(--coral); color: var(--white); overflow: hidden; display: grid; place-items: center; font: 700 52px/1 "Exo 2"; letter-spacing: .01em; }
   #btn .lab { position: absolute; display: flex; align-items: center; gap: 18px; }
   #btn .lab svg { width: 46px; height: 46px; }
   #ripple { position: absolute; left: 0; top: 0; width: 60px; height: 60px; margin: -30px 0 0 -30px; border-radius: 50%; background: rgba(255,255,255,.35); transform: scale(0); }
@@ -144,8 +159,14 @@
 
   .sweep { position: absolute; inset: 0; visibility: hidden; }
 
+  /* Guias das áreas cobertas pela interface do Reels/Stories (só no preview) */
+  #guides { position: absolute; inset: 0; pointer-events: none; display: none; z-index: 5; }
+  #guides.on { display: block; }
+  #guides i { position: absolute; background: rgba(0,140,255,.22); outline: 2px dashed rgba(0,140,255,.8); outline-offset: -2px; }
+  #guides b { position: absolute; left: 20px; font: 600 24px/1 "Rubik"; color: #0a66c2; }
+
   /* UI de preview (fora do modo render) */
-  #ui { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; gap: 10px; font: 500 13px/1 "Rubik"; color: #bbb; z-index: 9; align-items: center; }
+  #ui { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; gap: 10px; font: 500 13px/1 "Rubik"; color: #bbb; z-index: 9; align-items: center; flex-wrap: wrap; justify-content: center; }
   #ui button { all: unset; cursor: pointer; padding: 9px 14px; border-radius: 999px; background: #222; color: #eee; }
   #ui button:hover { background: #333; }
   #ui button:focus-visible { outline: 2px solid var(--coral); }
@@ -157,7 +178,7 @@
 <div id="viewport"><div id="stage">
 
   <!-- CENA 1 · linha → pílula → "O" -->
-  <section class="scene bg-white" id="s1"><div id="s1-in">
+  <section class="scene bg-white" id="s1"><div class="blob b1"></div><div class="blob b2"></div><div id="s1-in">
     <img id="s1-symbol" src="assets/opus-simbolo.png" alt="">
     <div id="wm"><span class="o">O</span><span class="bl"></span><span class="rest"><b>pus</b>SoftWorks</span></div>
     <div id="pill"><div id="hole"></div></div>
@@ -166,8 +187,9 @@
 
   <!-- CENA 2 · foto + texto girando -->
   <section class="scene bg-coral" id="s2">
+    <div class="blob b1"></div><div class="blob b2"></div>
     <div class="hdr"><span class="mark"><b>Opus</b>SoftWorks</span><span class="pager"><span class="bar"><i></i></span>01 / 05</span></div>
-    <svg id="s2-orbit2" viewBox="0 0 800 800" aria-hidden="true"><circle cx="400" cy="400" r="320" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-dasharray="2 14" stroke-linecap="round"/><circle cx="400" cy="80" r="10" fill="#161616"/></svg>
+    <svg id="s2-orbit2" viewBox="0 0 800 800" aria-hidden="true"><circle cx="400" cy="400" r="318" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-dasharray="2 14" stroke-linecap="round"/><circle cx="400" cy="82" r="10" fill="#161616"/></svg>
     <svg id="s2-orbit" viewBox="0 0 800 800" aria-hidden="true">
       <defs><path id="orbitPath" d="M400,400 m-372,0 a372,372 0 1,1 744,0 a372,372 0 1,1 -744,0"/></defs>
       <text><textPath href="#orbitPath" textLength="2330" lengthAdjust="spacing">Software sob medida ✦ Resultado é entrega ✦ Software sob medida ✦ Resultado é entrega ✦ </textPath></text>
@@ -180,6 +202,7 @@
 
   <!-- CENA 3a · Clareza -->
   <section class="scene bg-white s3" id="s3a">
+    <div class="blob b1"></div><div class="blob b2"></div>
     <span class="ghost">01</span>
     <div class="hdr"><span class="mark"><b>Opus</b>SoftWorks</span><span class="pager"><span class="bar"><i></i></span>02 / 05</span></div>
     <p class="eyebrow">Princípio 01</p>
@@ -194,7 +217,7 @@
       <g id="lblA"><rect x="-6" y="470" width="128" height="50" rx="25" fill="#161616"/><text x="58" y="504" font-size="28" font-weight="500" fill="#fff" text-anchor="middle">Ideia</text></g>
       <g id="lblB"><rect x="736" y="470" width="164" height="50" rx="25" fill="#FF6039"/><text x="818" y="504" font-size="28" font-weight="500" fill="#fff" text-anchor="middle">Entrega</text></g>
     </svg>
-    <div class="stat" id="s3a-stat"><span class="num"><span class="count" data-to="100">0</span>%</span><span class="lbl">do escopo definido antes da primeira linha de código</span></div>
+    <div class="stat" id="s3a-stat"><span class="num"><span class="odo" data-to="100"></span>%</span><span class="lbl">do escopo definido antes da primeira linha de código</span></div>
     <div class="chips" id="s3a-chips">
       <span class="chip"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Objetivo</span>
       <span class="chip"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Escopo</span>
@@ -205,12 +228,13 @@
 
   <!-- CENA 3b · Método -->
   <section class="scene bg-coral s3" id="s3b">
+    <div class="blob b1"></div><div class="blob b2"></div>
     <div class="sweep" style="background:var(--ink)" id="s3b-lead"></div>
     <span class="ghost">02</span>
     <div class="hdr"><span class="mark"><b>Opus</b>SoftWorks</span><span class="pager"><span class="bar"><i></i></span>03 / 05</span></div>
     <p class="eyebrow">Princípio 02</p>
     <h2 class="headline">Um método, resultado <i>visível.</i></h2>
-    <div class="stat" id="s3b-stat"><span class="num"><span class="count" data-to="4" data-pad="2">00</span></span><span class="lbl">etapas claras, do diagnóstico à entrega</span></div>
+    <div class="stat" id="s3b-stat"><span class="num"><span class="odo" data-to="4" data-pad="2"></span></span><span class="lbl">etapas claras, do diagnóstico à entrega</span></div>
     <svg class="info" id="s3b-svg" width="900" height="600" viewBox="0 0 900 600" aria-hidden="true">
       <line x1="0" y1="500" x2="900" y2="500" stroke="rgba(255,255,255,.5)" stroke-width="4"/>
       <g id="bars">
@@ -233,27 +257,29 @@
 
   <!-- CENA 3c · Estratégia + Execução -->
   <section class="scene bg-white s3" id="s3c">
+    <div class="blob b1"></div><div class="blob b2"></div>
     <span class="ghost">03</span>
     <div class="hdr"><span class="mark"><b>Opus</b>SoftWorks</span><span class="pager"><span class="bar"><i></i></span>04 / 05</span></div>
     <p class="eyebrow">Princípio 03</p>
     <h2 class="headline">Estratégia, aliada à <i>execução.</i></h2>
-    <svg class="info" id="s3c-svg" width="900" height="820" viewBox="0 0 900 820" aria-hidden="true">
+    <svg class="info" id="s3c-svg" width="900" height="760" viewBox="0 0 900 760" aria-hidden="true">
       <circle id="outerRing" cx="450" cy="330" r="345" fill="none" stroke="#D9DADF" stroke-width="3" stroke-dasharray="2 14" stroke-linecap="round"/>
       <circle cx="450" cy="330" r="270" fill="none" stroke="#F4F5F8" stroke-width="84"/>
       <circle id="arcA" cx="450" cy="330" r="270" fill="none" stroke="#161616" stroke-width="84" transform="rotate(-90 450 330)"/>
       <circle id="arcB" cx="450" cy="330" r="270" fill="none" stroke="#FF6039" stroke-width="84" transform="rotate(90 450 330)"/>
-      <g id="donutNum"><text x="450" y="368" text-anchor="middle" font-family="Exo 2" font-weight="800" font-size="128" fill="#161616" letter-spacing="-4"><tspan class="count" data-to="100">0</tspan>%</text></g>
-      <text id="donutSub" x="450" y="430" text-anchor="middle" font-size="34" fill="#4A4A4A">no mesmo time</text>
+      <text id="donutSub" x="450" y="432" text-anchor="middle" font-size="34" fill="#4A4A4A">no mesmo time</text>
       <g id="legend" font-size="34" fill="#161616" font-weight="500">
-        <g id="legA"><circle cx="190" cy="760" r="16" fill="#161616"/><text x="220" y="772">Estratégia</text></g>
-        <g id="legB"><circle cx="520" cy="760" r="16" fill="#FF6039"/><text x="550" y="772">Execução</text></g>
+        <g id="legA"><circle cx="190" cy="728" r="16" fill="#161616"/><text x="220" y="740">Estratégia</text></g>
+        <g id="legB"><circle cx="520" cy="728" r="16" fill="#FF6039"/><text x="550" y="740">Execução</text></g>
       </g>
     </svg>
+    <div id="donutNum"><span><span class="odo" data-to="100"></span>%</span></div>
     <div class="ftr"><span>@opussoftworks</span><span>opussoftworks.com.br</span></div>
   </section>
 
   <!-- CENA 4 · Seguir -->
   <section class="scene bg-coral" id="s4">
+    <div class="blob b1"></div><div class="blob b2"></div>
     <div class="hdr"><span class="mark"><b>Opus</b>SoftWorks</span><span class="pager"><span class="bar"><i></i></span>05 / 05</span></div>
     <h2 class="headline" id="s4-head">Vamos <i>elevar</i> o próximo passo?</h2>
     <div id="confetti"></div>
@@ -274,12 +300,18 @@
   </section>
 
   <div id="iris-ring"></div>
+  <div id="guides">
+    <i style="left:0;top:0;width:1080px;height:220px"></i><b style="top:180px">topo · UI do Reels</b>
+    <i style="left:0;top:1500px;width:1080px;height:420px"></i><b style="top:1520px">base · legenda e botões</b>
+    <i style="left:950px;top:960px;width:130px;height:540px"></i>
+  </div>
 </div></div>
 
 <div id="ui">
   <button id="bSound" type="button">🔊 Assistir com som</button>
   <button id="bPlay" type="button">Pausar</button>
   <button id="bRestart" type="button">Reiniciar</button>
+  <button id="bGuides" type="button">Áreas seguras</button>
   <span id="clock">0.00s</span>
 </div>
 
@@ -292,6 +324,8 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const W = 1080, H = 1920, DURATION = 15;
+  // Cortes de cena no tempo forte da trilha (120 BPM): 3.0 · 5.5 · 8.0 · 10.5 · 12.5 · clique em 14.0
+  const CUT = [3.0, 5.5, 8.0, 10.5, 12.5], CLICK = 14.0;
   const SVGNS = "http://www.w3.org/2000/svg";
 
   // Ajusta o palco 1080x1920 à janela (no modo render a janela já é 1080x1920)
@@ -324,6 +358,19 @@
     });
   });
 
+  // Odômetro: uma coluna de dígitos por casa; as casas da direita giram mais voltas
+  $$(".odo").forEach(el => {
+    const s = String(el.dataset.to).padStart(+(el.dataset.pad || 0), "0"), n = s.length;
+    el.textContent = "";
+    el._cols = [...s].map((d, j) => {
+      const col = document.createElement("span"), stk = document.createElement("span");
+      col.className = "col"; stk.className = "stk";
+      for (let k = 0; k < 10 * n; k++) { const x = document.createElement("span"); x.textContent = k % 10; stk.append(x); }
+      col.append(stk); el.append(col);
+      return { stk, yp: -100 * (+d + 10 * j) / (10 * n) };
+    });
+  });
+
   // Fotos: usa assets/foto-1.jpg e foto-2.jpg se existirem; senão, placeholder da marca
   const loadPhoto = el => new Promise(res => {
     const img = new Image();
@@ -337,28 +384,28 @@
     document.fonts.load('700 130px "Exo 2"'), document.fonts.load('400 40px "Rubik"'), document.fonts.load('italic 400 120px "Instrument Serif"')])
     .then(build);
 
-  function countUp(tl, el, at, dur, pop) {
-    const to = +el.dataset.to, pad = +(el.dataset.pad || 0), o = { v: 0 };
-    tl.to(o, { v: to, duration: dur, ease: "power3.out",
-      onUpdate: () => { el.textContent = String(Math.round(o.v)).padStart(pad, "0"); } }, at);
-    if (pop) tl.fromTo(pop, { scale: 1 }, { scale: 1.08, duration: .12, yoyo: true, repeat: 1, ease: "power2.out", transformOrigin: "0% 100%" }, at + dur * .62);
+  function odometer(tl, el, at, dur, pop) {
+    el._cols.forEach((c, j) => tl.fromTo(c.stk, { yPercent: 0 }, { yPercent: c.yp, duration: dur * (.7 + .3 * j / Math.max(1, el._cols.length - 1)), ease: "power3.out" }, at));
+    if (pop) tl.fromTo(pop, { scale: 1 }, { scale: 1.08, duration: .12, yoyo: true, repeat: 1, ease: "power2.out" }, at + dur * .8);
   }
   const words = sel => $$(`${sel} .w > span`);
   const show = (tl, sel, at) => tl.set(sel, { visibility: "visible" }, at);
   const hide = (tl, sel, at) => tl.set(sel, { visibility: "hidden" }, at);
   const drawSw = (tl, sel, at) => {
     const p = $(`${sel} .sw path`), len = p.getTotalLength();
-    tl.fromTo(p, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, duration: .5, ease: "power2.inOut" }, at);
+    tl.fromTo(p, { strokeDasharray: len, strokeDashoffset: len, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, modifiers: { opacity: v => (+v > 0 ? 1 : 0) }, duration: .45, ease: "power2.inOut" }, at);
   };
-  // Entrada padrão de uma cena: header/footer, eyebrow, título palavra a palavra + sublinhado, barra do pager
+  // Entrada padrão de uma cena: header/footer, eyebrow, título palavra a palavra + sublinhado, barra do pager, luzes
   const enter = (tl, id, at, dur) => {
     tl.fromTo(`${id} .hdr, ${id} .ftr`, { autoAlpha: 0 }, { autoAlpha: 1, duration: .4 }, at)
-      .fromTo(`${id} .pager .bar i`, { scaleX: 0 }, { scaleX: 1, duration: dur, ease: "none" }, at);
+      .fromTo(`${id} .pager .bar i`, { scaleX: 0 }, { scaleX: 1, duration: dur, ease: "none" }, at)
+      .fromTo(`${id} .blob.b1`, { x: -80, y: -60 }, { x: 140, y: 120, duration: dur + .8, ease: "sine.inOut" }, at - .5)
+      .fromTo(`${id} .blob.b2`, { x: 80, y: 60 }, { x: -160, y: -140, duration: dur + .8, ease: "sine.inOut" }, at - .5);
     if ($(`${id} .eyebrow`)) tl.fromTo(`${id} .eyebrow`, { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: .5 }, at - .05);
     if ($(`${id} .ghost`)) tl.fromTo(`${id} .ghost`, { x: 140, autoAlpha: 0 }, { x: -40, autoAlpha: 1, duration: dur + .6, ease: "power1.out" }, at - .1);
     const ws = words(`${id} .headline`);
-    tl.to(ws, { yPercent: 0, duration: .6, stagger: .07 }, at);
-    drawSw(tl, `${id} .headline`, at + ws.length * .07 + .3);
+    tl.to(ws, { yPercent: 0, rotation: 0, duration: .55, stagger: .06, ease: "power3.out" }, at);
+    drawSw(tl, `${id} .headline`, at + ws.length * .06 + .28);
   };
 
   function build() {
@@ -386,160 +433,167 @@
 
     gsap.set("#pill", { xPercent: -50, yPercent: -50, left: W / 2, top: H / 2, width: 0, height: 12 });
     gsap.set(["#hole", "#iris-ring"], { xPercent: -50, yPercent: -50 });
-    gsap.set(".w > span", { yPercent: 140 });
+    gsap.set(".w > span", { yPercent: 140, rotation: 7, transformOrigin: "0% 100%" });
 
     const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
 
-    // Íris: anel coral corre à frente do recorte circular da cena que entra
-    const iris = (scene, cx, cy, at, dur) => {
+    // Íris: anel coral corre à frente do recorte circular da cena que entra; termina no corte
+    const iris = (scene, cx, cy, end, dur) => {
+      const at = end - dur;
       show(tl, scene, at); show(tl, "#iris-ring", at);
       tl.fromTo(scene, { clipPath: `circle(0px at ${cx}px ${cy}px)` }, { clipPath: `circle(2300px at ${cx}px ${cy}px)`, duration: dur, ease: "power3.in" }, at)
         .fromTo("#iris-ring", { left: cx, top: cy, width: 0, height: 0, borderWidth: 4 },
                               { width: 4800, height: 4800, borderWidth: 40, duration: dur, ease: "power3.in" }, at - .06);
-      hide(tl, "#iris-ring", at + dur);
+      hide(tl, "#iris-ring", end);
     };
 
-    // =========== CENA 1 (0 → 2.9s) · fundo branco ===========
+    // =========== CENA 1 (0 → 3.0s) · fundo branco ===========
     show(tl, "#s1", 0);
     tl.set("#wm .rest", { clipPath: "inset(-30% 100% -30% -2%)", x: -60 }, 0)
       .set(["#s1-symbol", "#s1-tag"], { autoAlpha: 0 }, 0)
-      .to("#pill", { width: 780, duration: .55, ease: "expo.out" }, .08)                                     // linha
-      .to("#pill", { width: 250, height: 136, duration: .45, ease: "back.out(1.7)" }, .6)                    // pílula
-      .to("#pill", { rotation: 90, duration: .45, ease: "back.out(1.4)" }, .6)
-      .to("#pill", { rotation: 0, left: O.cx, top: O.cy, width: O.w, height: O.h, duration: .5, ease: "power4.inOut" }, 1.02) // vira "O"
-      .to("#hole", { width: O.w - T * 2, height: O.h - T * 2, duration: .38, ease: "power3.out" }, 1.3)
-      .to("#wm .rest", { clipPath: "inset(-30% -4% -30% -2%)", x: 0, duration: .6, ease: "power3.out" }, 1.42)
+      .fromTo("#s1 .blob.b1", { x: -60, y: -40 }, { x: 120, y: 100, duration: 3, ease: "sine.inOut" }, 0)
+      .fromTo("#s1 .blob.b2", { x: 60, y: 40 }, { x: -140, y: -120, duration: 3, ease: "sine.inOut" }, 0)
+      .to("#pill", { width: 780, duration: .5, ease: "expo.out" }, .08)                                      // linha
+      .to("#pill", { width: 250, height: 136, rotation: 90, duration: .42, ease: "back.out(1.7)" }, .55)    // pílula
+      .to("#pill", { rotation: 0, left: O.cx, top: O.cy, width: O.w, height: O.h, duration: .5, ease: "power4.inOut" }, .95) // vira "O"
+      .to("#hole", { width: O.w - T * 2, height: O.h - T * 2, duration: .36, ease: "power3.out" }, 1.22)
+      .to("#wm .rest", { clipPath: "inset(-30% -4% -30% -2%)", x: 0, duration: .6, ease: "power3.out" }, 1.32)
       .fromTo("#s1-symbol", { autoAlpha: 0, scale: .4, rotation: -25, y: 50 },
-                            { autoAlpha: 1, scale: 1, rotation: 0, y: 0, duration: .75, ease: "back.out(1.7)" }, 1.7)
-      .fromTo("#s1-tag", { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: .5 }, 1.95)
-      .fromTo("#s1-in", { scale: 1 }, { scale: 1.05, duration: 1.4, ease: "sine.inOut", transformOrigin: `${O.cx}px ${O.cy}px` }, 1.5)
-      .to("#s1-in", { scale: .9, duration: .6, ease: "power3.in", transformOrigin: `${O.cx}px ${O.cy}px` }, 2.72);
+                            { autoAlpha: 1, scale: 1, rotation: 0, y: 0, duration: .75, ease: "back.out(1.7)" }, 1.55)
+      .fromTo("#s1-tag", { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: .5 }, 1.8)
+      .fromTo("#s1-in", { scale: 1 }, { scale: 1.05, duration: 1.1, ease: "sine.inOut", transformOrigin: `${O.cx}px ${O.cy}px` }, 1.35)
+      .to("#s1-in", { scale: .9, duration: .55, ease: "power3.in", transformOrigin: `${O.cx}px ${O.cy}px` }, CUT[0] - .55);
 
-    // Transição 1→2 · íris coral abrindo a partir do "O" (centro já com o zoom da cena 1)
-    const zx = O.cx, zy = O.cy;
-    iris("#s2", zx, zy, 2.72, .66);
-    hide(tl, "#s1", 3.45);
+    // Transição 1→2 · íris coral abrindo a partir do "O", fechando exatamente no drop da música
+    iris("#s2", O.cx, O.cy, CUT[0], .55);
+    hide(tl, "#s1", CUT[0] + .05);
 
-    // =========== CENA 2 (2.9 → 5.9s) · fundo coral ===========
-    enter(tl, "#s2", 3.1, 2.8);
-    tl.fromTo("#s2-photo", { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(50% at 50% 50%)", duration: .8, ease: "expo.out" }, 3.05)
-      .fromTo("#s2-photo .ph-img, #s2-photo .ph-mark", { scale: 1.35 }, { scale: 1, duration: 1.4, ease: "power2.out" }, 3.05)
-      .fromTo("#s2-orbit", { autoAlpha: 0, scale: .85 }, { autoAlpha: 1, scale: 1, duration: .8 }, 3.25)
-      .fromTo("#s2-orbit", { rotation: -30 }, { rotation: 110, duration: 3.5, ease: "none" }, 2.9)          // texto girando
-      .fromTo("#s2-orbit2", { autoAlpha: 0, rotation: 60 }, { autoAlpha: 1, rotation: -120, duration: 3.5, ease: "none" }, 2.9)
-      .fromTo("#s2-chips .chip", { autoAlpha: 0, y: 30, scale: .9 }, { autoAlpha: 1, y: 0, scale: 1, duration: .45, stagger: .08, ease: "back.out(2)" }, 4.15);
+    // =========== CENA 2 (3.0 → 5.5s) · fundo coral ===========
+    let b = CUT[0];
+    enter(tl, "#s2", b + .05, CUT[1] - b);
+    tl.fromTo("#s2-photo", { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(50% at 50% 50%)", duration: .75, ease: "expo.out" }, b - .05)
+      .fromTo("#s2-photo .ph-img, #s2-photo .ph-mark", { scale: 1.35 }, { scale: 1, duration: 1.3, ease: "power2.out" }, b - .05)
+      .fromTo("#s2-orbit", { autoAlpha: 0, scale: .85 }, { autoAlpha: 1, scale: 1, duration: .7 }, b + .1)
+      .fromTo("#s2-orbit", { rotation: -30 }, { rotation: 100, duration: 3.2, ease: "none" }, b - .55)     // texto girando
+      .fromTo("#s2-orbit2", { autoAlpha: 0, rotation: 60 }, { autoAlpha: 1, rotation: -110, duration: 3.2, ease: "none" }, b - .55)
+      .fromTo("#s2-chips .chip", { autoAlpha: 0, y: 30, scale: .9 }, { autoAlpha: 1, y: 0, scale: 1, duration: .4, stagger: .07, ease: "back.out(2)" }, b + .85);
 
     // Transição 2→3a · wipe vertical; a cena 2 sobe junto (parallax)
-    show(tl, "#s3a", 5.85);
-    tl.fromTo("#s3a", { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: .6, ease: "power4.inOut" }, 5.85)
-      .to("#s2", { y: -260, duration: .6, ease: "power4.inOut" }, 5.85);
-    hide(tl, "#s2", 6.5);
+    show(tl, "#s3a", CUT[1] - .5);
+    tl.fromTo("#s3a", { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: .5, ease: "power4.inOut" }, CUT[1] - .5)
+      .to("#s2", { y: -260, duration: .5, ease: "power4.inOut" }, CUT[1] - .5);
+    hide(tl, "#s2", CUT[1] + .05);
 
-    // =========== CENA 3a (6.0 → 8.4s) · Clareza · branco ===========
-    enter(tl, "#s3a", 6.3, 2.2);
+    // =========== CENA 3a (5.5 → 8.0s) · Clareza · branco ===========
+    b = CUT[1];
+    enter(tl, "#s3a", b - .05, CUT[2] - b);
     const lenMess = $("#mess").getTotalLength(), lenStr = $("#straight").getTotalLength();
-    tl.fromTo("#dotA", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: .4, ease: "back.out(2)" }, 6.5)
-      .fromTo("#lblA", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .4 }, 6.55)
-      .fromTo("#mess", { strokeDasharray: lenMess, strokeDashoffset: lenMess }, { strokeDashoffset: 0, duration: .75, ease: "power1.inOut" }, 6.55)
-      .to("#mess", { opacity: .28, duration: .4 }, 7.3)
-      .fromTo("#straight", { strokeDasharray: lenStr, strokeDashoffset: lenStr }, { strokeDashoffset: 0, duration: .55, ease: "power3.inOut" }, 7.15)
-      .fromTo("#arrowHead", { autoAlpha: 0, x: -20 }, { autoAlpha: 1, x: 0, duration: .3 }, 7.6)
-      .fromTo("#dotB", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: .4, ease: "back.out(2)" }, 7.6)
-      .fromTo("#lblB", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .4 }, 7.65)
-      .fromTo("#runner", { attr: { cx: 40 }, autoAlpha: 0 }, { attr: { cx: 840 }, autoAlpha: 1, duration: .7, ease: "power2.inOut" }, 7.6)
-      .fromTo("#s3a-stat", { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .5 }, 6.85)
-      .fromTo("#s3a-chips .chip", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .14 }, 7.25)
-      .fromTo("#s3a-chips .ck", { scale: 0 }, { scale: 1, duration: .35, stagger: .14, ease: "back.out(3)" }, 7.4);
-    countUp(tl, $("#s3a .count"), 6.9, 1.2, "#s3a-stat .num");
+    tl.fromTo("#dotA", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: .4, ease: "back.out(2)" }, b + .1)
+      .fromTo("#lblA", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .4 }, b + .15)
+      .fromTo("#mess", { strokeDasharray: lenMess, strokeDashoffset: lenMess, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, modifiers: { opacity: v => (+v > 0 ? 1 : 0) }, duration: .7, ease: "power1.inOut" }, b + .15)
+      .to("#mess", { opacity: .28, duration: .4 }, b + .85)
+      .fromTo("#straight", { strokeDasharray: lenStr, strokeDashoffset: lenStr, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, modifiers: { opacity: v => (+v > 0 ? 1 : 0) }, duration: .5, ease: "power3.inOut" }, b + .75)
+      .fromTo("#arrowHead", { autoAlpha: 0, x: -20 }, { autoAlpha: 1, x: 0, duration: .3 }, b + 1.15)
+      .fromTo("#dotB", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: .4, ease: "back.out(2)" }, b + 1.15)
+      .fromTo("#lblB", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .4 }, b + 1.2)
+      .fromTo("#runner", { attr: { cx: 40 }, autoAlpha: 0 }, { attr: { cx: 840 }, autoAlpha: 1, duration: .65, ease: "power2.inOut" }, b + 1.15)
+      .fromTo("#s3a-stat", { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .5 }, b + .4)
+      .fromTo("#s3a-chips .chip", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .14 }, b + .8)
+      .fromTo("#s3a-chips .ck", { scale: 0 }, { scale: 1, duration: .35, stagger: .14, ease: "back.out(3)" }, b + .95);
+    odometer(tl, $("#s3a .odo"), b + .45, 1.3, "#s3a-stat .num");
 
     // Transição 3a→3b · wipe horizontal com faixa grafite; a cena 3a escorre para a direita
-    show(tl, "#s3b", 8.3);
-    tl.fromTo("#s3b", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: .6, ease: "power4.inOut" }, 8.3)
-      .to("#s3a", { x: 260, duration: .6, ease: "power4.inOut" }, 8.3)
-      .set("#s3b-lead", { visibility: "visible" }, 8.3)
-      .fromTo("#s3b-lead", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 100%)", duration: .75, ease: "power3.inOut" }, 8.3);
-    hide(tl, "#s3a", 8.95); hide(tl, "#s3b-lead", 9.1);
+    show(tl, "#s3b", CUT[2] - .5);
+    tl.fromTo("#s3b", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: .5, ease: "power4.inOut" }, CUT[2] - .5)
+      .to("#s3a", { x: 260, duration: .5, ease: "power4.inOut" }, CUT[2] - .5)
+      .set("#s3b-lead", { visibility: "visible" }, CUT[2] - .5)
+      .fromTo("#s3b-lead", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 100%)", duration: .65, ease: "power3.inOut" }, CUT[2] - .5);
+    hide(tl, "#s3a", CUT[2] + .05); hide(tl, "#s3b-lead", CUT[2] + .2);
 
-    // =========== CENA 3b (8.6 → 10.8s) · Método · coral ===========
-    enter(tl, "#s3b", 8.7, 2.1);
+    // =========== CENA 3b (8.0 → 10.5s) · Método · coral ===========
+    b = CUT[2];
+    enter(tl, "#s3b", b - .05, CUT[3] - b);
     const lenTrend = $("#trend").getTotalLength();
-    tl.fromTo("#s3b-stat", { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .5 }, 8.95)
-      .fromTo("#bars rect", { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: .6, stagger: .12, ease: "back.out(1.3)" }, 9.0)
-      .fromTo("#barNums text", { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .35, stagger: .12 }, 9.3)
-      .fromTo("#barLbls text", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .12 }, 9.05)
-      .fromTo("#trend", { strokeDasharray: lenTrend, strokeDashoffset: lenTrend }, { strokeDashoffset: 0, duration: .7, ease: "power2.inOut" }, 9.55)
-      .fromTo("#trendDots circle", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: .35, stagger: .15, ease: "back.out(3)" }, 9.55);
-    countUp(tl, $("#s3b .count"), 9.0, 1.0, "#s3b-stat .num");
+    tl.fromTo("#s3b-stat", { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .5 }, b + .2)
+      .fromTo("#bars rect", { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: .55, stagger: .12, ease: "back.out(1.3)" }, b + .25)
+      .fromTo("#barNums text", { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .35, stagger: .12 }, b + .55)
+      .fromTo("#barLbls text", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .12 }, b + .3)
+      .fromTo("#trend", { strokeDasharray: lenTrend, strokeDashoffset: lenTrend, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, modifiers: { opacity: v => (+v > 0 ? 1 : 0) }, duration: .65, ease: "power2.inOut" }, b + .8)
+      .fromTo("#trendDots circle", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: .35, stagger: .15, ease: "back.out(3)" }, b + .8);
+    odometer(tl, $("#s3b .odo"), b + .25, 1.1, "#s3b-stat .num");
 
     // Transição 3b→3c · wipe diagonal; a cena 3b afunda em diagonal
-    show(tl, "#s3c", 10.6);
+    show(tl, "#s3c", CUT[3] - .5);
     tl.fromTo("#s3c", { clipPath: "polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%)" },
-                      { clipPath: "polygon(0% 0%, 200% 0%, 200% 0%, 0% 200%)", duration: .65, ease: "power3.inOut" }, 10.6)
-      .to("#s3b", { x: 180, y: 180, duration: .65, ease: "power3.inOut" }, 10.6);
-    hide(tl, "#s3b", 11.3);
+                      { clipPath: "polygon(0% 0%, 200% 0%, 200% 0%, 0% 200%)", duration: .5, ease: "power3.inOut" }, CUT[3] - .5)
+      .to("#s3b", { x: 180, y: 180, duration: .5, ease: "power3.inOut" }, CUT[3] - .5);
+    hide(tl, "#s3b", CUT[3] + .05);
 
-    // =========== CENA 3c (10.8 → 12.5s) · Estratégia + execução · branco ===========
-    enter(tl, "#s3c", 10.95, 1.5);
+    // =========== CENA 3c (10.5 → 12.5s) · Estratégia + execução · branco ===========
+    b = CUT[3];
+    enter(tl, "#s3c", b - .05, CUT[4] - b);
     const C = 2 * Math.PI * 270;
-    tl.fromTo("#outerRing", { autoAlpha: 0, rotation: -40, transformOrigin: "50% 50%" }, { autoAlpha: 1, rotation: 50, duration: 1.6, ease: "none" }, 11.0)
-      .fromTo("#arcA", { strokeDasharray: `0 ${C}` }, { strokeDasharray: `${C / 2} ${C}`, duration: .8, ease: "power2.inOut" }, 11.15)
-      .fromTo("#arcB", { strokeDasharray: `0 ${C}` }, { strokeDasharray: `${C / 2} ${C}`, duration: .8, ease: "power2.inOut" }, 11.4)
-      .fromTo("#donutSub", { autoAlpha: 0 }, { autoAlpha: 1, duration: .4 }, 11.45)
-      .fromTo(["#legA", "#legB"], { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .2 }, 11.3);
-    countUp(tl, $("#s3c .count"), 11.15, 1.05);
-    tl.fromTo("#donutNum", { scale: 1 }, { scale: 1.08, duration: .14, yoyo: true, repeat: 1, transformOrigin: "50% 50%" }, 11.95);
+    tl.fromTo("#outerRing", { autoAlpha: 0, rotation: -40, transformOrigin: "50% 50%" }, { autoAlpha: 1, rotation: 50, duration: 2, ease: "none" }, b)
+      .fromTo("#arcA", { strokeDasharray: `0 ${C}` }, { strokeDasharray: `${C / 2} ${C}`, duration: .75, ease: "power2.inOut" }, b + .1)
+      .fromTo("#arcB", { strokeDasharray: `0 ${C}` }, { strokeDasharray: `${C / 2} ${C}`, duration: .75, ease: "power2.inOut" }, b + .35)
+      .fromTo("#donutNum", { autoAlpha: 0, scale: .8 }, { autoAlpha: 1, scale: 1, duration: .4, ease: "back.out(2)" }, b + .1)
+      .fromTo("#donutSub", { autoAlpha: 0 }, { autoAlpha: 1, duration: .4 }, b + .4)
+      .fromTo(["#legA", "#legB"], { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .2 }, b + .25);
+    odometer(tl, $("#donutNum .odo"), b + .1, 1.0);
+    tl.to("#donutNum", { scale: 1.08, duration: .13, yoyo: true, repeat: 1, ease: "power2.out" }, b + 1.1);
 
     // Transição 3c→4 · íris coral a partir do centro do donut; a cena 3c recua
-    const DX = 90 + 450, DY = 800 + 330;
-    tl.to("#s3c", { scale: .9, duration: .6, ease: "power3.in", transformOrigin: `${DX}px ${DY}px` }, 12.3);
-    iris("#s4", DX, DY, 12.3, .6);
-    hide(tl, "#s3c", 12.95);
+    const DX = 90 + 450, DY = 700 + 330;
+    tl.to("#s3c", { scale: .9, duration: .5, ease: "power3.in", transformOrigin: `${DX}px ${DY}px` }, CUT[4] - .5);
+    iris("#s4", DX, DY, CUT[4], .5);
+    hide(tl, "#s3c", CUT[4] + .05);
 
     // =========== CENA 4 (12.5 → 15s) · foto + nome + Seguir · coral ===========
-    enter(tl, "#s4", 12.65, 2.35);
-    tl.fromTo("#card", { y: 300, autoAlpha: 0, rotation: 3 }, { y: 0, autoAlpha: 1, rotation: 0, duration: .65, ease: "expo.out" }, 12.75)
-      .fromTo("#ring", { scale: 0, rotation: -120 }, { scale: 1, rotation: 0, duration: .6, ease: "back.out(1.6)" }, 12.9)
-      .to("#ring", { rotation: 40, duration: 2, ease: "none" }, 13.5)
-      .fromTo("#s4-photo", { rotation: 0 }, { rotation: -40, duration: 2, ease: "none" }, 13.5)
-      .fromTo(["#s4-name", "#s4-handle", "#s4-bio"], { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .07 }, 13.0)
-      .fromTo("#btn", { scale: .8, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .45, ease: "back.out(2)" }, 13.15);
+    b = CUT[4];
+    enter(tl, "#s4", b + .05, DURATION - b);
+    tl.fromTo("#card", { y: 300, autoAlpha: 0, rotation: 3 }, { y: 0, autoAlpha: 1, rotation: 0, duration: .6, ease: "expo.out" }, b + .1)
+      .fromTo("#ring", { scale: 0, rotation: -120 }, { scale: 1, rotation: 0, duration: .55, ease: "back.out(1.6)" }, b + .25)
+      .to("#ring", { rotation: 40, duration: 2, ease: "none" }, b + .8)
+      .fromTo("#s4-photo", { rotation: 0 }, { rotation: -40, duration: 2, ease: "none" }, b + .8)
+      .fromTo(["#s4-name", "#s4-handle", "#s4-bio"], { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .07 }, b + .35)
+      .fromTo("#btn", { scale: .8, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .45, ease: "back.out(2)" }, b + .5);
 
-    // Cursor até o botão + clique
+    // Cursor até o botão + clique (no tempo forte de 14s)
     const BTN_W = 900 - 160, CX = BTN_W / 2 + 40, CY = 64;   // ponto do clique dentro do botão
-    const BX = 90 + 80 + CX, BY = 800 + 690 + CY;            // mesmo ponto em coordenadas do palco
+    const BX = 90 + 80 + CX, BY = 600 + 660 + CY;            // mesmo ponto em coordenadas do palco
     gsap.set("#lab2", { autoAlpha: 0, y: 40 });
     gsap.set("#ripple", { left: CX, top: CY });
-    gsap.set("#burst", { left: 80 + CX, top: 690 + CY });
+    gsap.set("#burst", { left: 80 + CX, top: 660 + CY });
     $$("#burst i").forEach((el, i) => gsap.set(el, { rotation: i * 45, scaleY: 0, autoAlpha: 0 }));
 
     // Confete ao redor do cartão depois do clique
     const conf = $("#confetti"), cols = ["#FFFFFF", "#161616", "#FFB199", "#FFFFFF"];
-    const bits = [...Array(22)].map((_, i) => {
+    const bits = [...Array(24)].map((_, i) => {
       const el = document.createElement("i");
       el.style.background = cols[i % cols.length];
       if (i % 3 === 0) { el.style.borderRadius = "4px"; el.style.width = "12px"; el.style.height = "26px"; }
       conf.append(el); return el;
     });
-    const rnd = (a, b, s) => a + (b - a) * ((Math.sin(s * 999.13) + 1) / 2);   // determinístico (render quadro a quadro)
+    const rnd = (a, z, s) => a + (z - a) * ((Math.sin(s * 999.13) + 1) / 2);   // determinístico (render quadro a quadro)
     bits.forEach((el, i) => {
-      const ang = rnd(-Math.PI * .95, -Math.PI * .05, i + 1), dist = rnd(260, 620, i + 7);
+      const ang = rnd(-Math.PI * .95, -Math.PI * .05, i + 1), dist = rnd(260, 640, i + 7);
       gsap.set(el, { left: BX, top: BY, autoAlpha: 0, scale: 0 });
-      tl.to(el, { x: Math.cos(ang) * dist, y: Math.sin(ang) * dist, rotation: rnd(-200, 200, i + 3), autoAlpha: 1, scale: rnd(.7, 1.3, i + 5), duration: .55, ease: "power3.out" }, 14.12 + i * .008)
-        .to(el, { y: `+=${rnd(80, 180, i + 11)}`, autoAlpha: 0, duration: .45, ease: "power1.in" }, 14.6 + i * .008);
+      tl.to(el, { x: Math.cos(ang) * dist, y: Math.sin(ang) * dist, rotation: rnd(-200, 200, i + 3), autoAlpha: 1, scale: rnd(.7, 1.3, i + 5), duration: .55, ease: "power3.out" }, CLICK + i * .008)
+        .to(el, { y: `+=${rnd(80, 180, i + 11)}`, autoAlpha: 0, duration: .45, ease: "power1.in" }, CLICK + .5 + i * .008);
     });
 
-    tl.fromTo("#cursor", { x: 1000, y: 1960, rotation: 8 }, { x: BX - 16, y: BY - 8, rotation: 0, duration: .75, ease: "power3.out" }, 13.3)
-      .to("#cursor", { scale: .82, duration: .09, ease: "power2.in", transformOrigin: "20% 10%" }, 14.02)
-      .to("#btn", { scale: .94, duration: .09, ease: "power2.in" }, 14.02)
-      .to("#cursor", { scale: 1, duration: .25, ease: "back.out(3)" }, 14.12)
-      .to("#btn", { scale: 1, backgroundColor: "#161616", duration: .35, ease: "back.out(3)" }, 14.12)
-      .to("#ripple", { scale: 18, autoAlpha: 0, duration: .55, ease: "power2.out" }, 14.11)
-      .to("#lab1", { y: -40, autoAlpha: 0, duration: .25, ease: "power2.in" }, 14.11)
-      .to("#lab2", { y: 0, autoAlpha: 1, duration: .35, ease: "back.out(2)" }, 14.24)
-      .to("#burst i", { scaleY: 1, autoAlpha: 1, y: -30, duration: .2, ease: "power2.out" }, 14.11)
-      .to("#burst i", { autoAlpha: 0, y: -70, duration: .3, ease: "power1.in" }, 14.31)
-      .to("#card", { scale: 1.025, duration: .18, yoyo: true, repeat: 1, ease: "power2.out" }, 14.12)
-      .to("#cursor", { x: BX + 140, y: BY + 200, autoAlpha: 0, duration: .5, ease: "power2.in" }, 14.5)
+    tl.fromTo("#cursor", { x: 1000, y: 1960, rotation: 8 }, { x: BX - 16, y: BY - 8, rotation: 0, duration: .7, ease: "power3.out" }, CLICK - .85)
+      .to("#cursor", { scale: .82, duration: .08, ease: "power2.in", transformOrigin: "20% 10%" }, CLICK - .08)
+      .to("#btn", { scale: .94, duration: .08, ease: "power2.in" }, CLICK - .08)
+      .to("#cursor", { scale: 1, duration: .25, ease: "back.out(3)" }, CLICK)
+      .to("#btn", { scale: 1, backgroundColor: "#161616", duration: .35, ease: "back.out(3)" }, CLICK)
+      .to("#ripple", { scale: 18, autoAlpha: 0, duration: .55, ease: "power2.out" }, CLICK)
+      .to("#lab1", { y: -40, autoAlpha: 0, duration: .25, ease: "power2.in" }, CLICK)
+      .to("#lab2", { y: 0, autoAlpha: 1, duration: .35, ease: "back.out(2)" }, CLICK + .12)
+      .to("#burst i", { scaleY: 1, autoAlpha: 1, y: -30, duration: .2, ease: "power2.out" }, CLICK)
+      .to("#burst i", { autoAlpha: 0, y: -70, duration: .3, ease: "power1.in" }, CLICK + .2)
+      .to("#card", { scale: 1.025, duration: .18, yoyo: true, repeat: 1, ease: "power2.out" }, CLICK)
+      .to("#cursor", { x: BX + 140, y: BY + 200, autoAlpha: 0, duration: .5, ease: "power2.in" }, CLICK + .4)
       .to({}, { duration: 0 }, DURATION);                   // fixa a duração total em 15s
 
     // ---------- Reprodução ----------
@@ -576,6 +630,7 @@
       if (soundOn) { actx = actx || new AudioContext(); restart(); } else stopAudio();
     };
     $("#bRestart").onclick = restart;
+    $("#bGuides").onclick = () => $("#guides").classList.toggle("on");
     addEventListener("keydown", e => {
       if (e.code === "Space") { e.preventDefault(); bPlay.click(); }
       if (e.key === "r" || e.key === "R") $("#bRestart").click();

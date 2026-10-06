@@ -1,14 +1,22 @@
 // Trilha original da apresentação (15s, 120 BPM, I–V–vi–IV em Dó maior), sintetizada com Web Audio.
-// Sincronizada com a timeline: drop em 3.0s (cena 2), "whoosh" em cada transição, clique + acorde final em 14.1s.
+// Sincronizada com a timeline: drop em 3.0s, cortes de cena em 5.5 · 8.0 · 10.5 · 12.5 (sempre no tempo forte),
+// pausa antes da cena final e clique + acorde final em 14.0s.
 // Se existir assets/musica.mp3, ela é usada no lugar da trilha sintetizada.
 (() => {
   const SR = 44100, LEN = 15;
-  const BEAT = 60 / 120, S16 = BEAT / 4;
-  const DROP = 3.0, CLICK = 14.02, FINAL = 14.12;
-  const SWEEPS = [5.85, 8.3, 10.6, 12.3];
+  const BEAT = 60 / 120, S16 = BEAT / 4, S8 = BEAT / 2;
+  const DROP = 3.0, CUTS = [5.5, 8.0, 10.5, 12.5], BREAK = [12.0, 12.5], CLICK = 14.0;
   // um acorde por compasso (2s): C G Am F C G F C
-  const CHORDS = [[60, 64, 67], [59, 62, 67], [57, 60, 64], [57, 60, 65], [60, 64, 67], [59, 62, 67], [57, 60, 65], [60, 64, 67]];
-  const ROOTS = [36, 43, 45, 41, 36, 43, 41, 36];
+  const NAMES = ["C", "G", "Am", "F", "C", "G", "F", "C"];
+  const CHORD = { C: [60, 64, 67], G: [59, 62, 67], Am: [57, 60, 64], F: [57, 60, 65] };
+  const ROOT = { C: 36, G: 43, Am: 45, F: 41 };
+  // melodia (colcheias; null = pausa), uma frase por acorde
+  const MELODY = {
+    C:  [76, null, 79, null, 81, 79, null, 76],
+    G:  [74, null, 74, 76, null, 79, null, null],
+    Am: [76, null, 79, null, 84, 83, null, 79],
+    F:  [81, null, 79, 76, null, 74, null, 72],
+  };
   const hz = m => 440 * Math.pow(2, (m - 69) / 12);
 
   function synth() {
@@ -26,11 +34,13 @@
     comp.connect(ctx.destination);
     const master = ctx.createGain(); master.gain.value = .9; master.connect(comp);
     const delay = ctx.createDelay(1); delay.delayTime.value = BEAT * .75;
-    const fb = ctx.createGain(); fb.gain.value = .32;
-    const wet = ctx.createGain(); wet.gain.value = .22;
-    delay.connect(fb); fb.connect(delay); delay.connect(wet); wet.connect(master);
+    const fb = ctx.createGain(); fb.gain.value = .3;
+    const wet = ctx.createGain(); wet.gain.value = .2;
+    const dlp = ctx.createBiquadFilter(); dlp.type = "lowpass"; dlp.frequency.value = 3500;
+    delay.connect(dlp); dlp.connect(fb); fb.connect(delay); dlp.connect(wet); wet.connect(master);
     // "sidechain": instrumentos melódicos abaixam a cada bumbo
-    const duck = ctx.createGain(); duck.connect(master); duck.connect(delay);
+    const duck = ctx.createGain(); duck.connect(master);
+    const send = ctx.createGain(); send.gain.value = 1; send.connect(duck); send.connect(delay);
     const pan = (node, p) => { const s = ctx.createStereoPanner(); s.pan.value = p; node.connect(s); return s; };
 
     const env = (g, t, a, peak, d, end = .0001) => {
@@ -53,6 +63,13 @@
       v.gain.exponentialRampToValueAtTime(.0001, t + .22);
       const n = noiseSrc(t, .25); n.connect(f); f.connect(v); pan(v, .05).connect(master);
     };
+    const snare = (t, g = .3) => {
+      const f = ctx.createBiquadFilter(); f.type = "bandpass"; f.frequency.value = 2400; f.Q.value = .7;
+      const v = ctx.createGain(); env(v, t, .001, g, .1);
+      const n = noiseSrc(t, .12); n.connect(f); f.connect(v); v.connect(master);
+      const o = ctx.createOscillator(); o.type = "triangle"; o.frequency.setValueAtTime(240, t); o.frequency.exponentialRampToValueAtTime(160, t + .06);
+      const ov = ctx.createGain(); env(ov, t, .001, g * .6, .08); o.connect(ov); ov.connect(master); o.start(t); o.stop(t + .12);
+    };
     const hat = (t, g = .12, len = .04, p = .25) => {
       const f = ctx.createBiquadFilter(); f.type = "highpass"; f.frequency.value = 7500;
       const v = ctx.createGain(); env(v, t, .001, g, len);
@@ -70,24 +87,51 @@
     const stab = (t, notes, dur, g, cutoff) => {
       const f = ctx.createBiquadFilter(); f.type = "lowpass"; f.Q.value = 3;
       f.frequency.setValueAtTime(cutoff, t); f.frequency.exponentialRampToValueAtTime(Math.max(200, cutoff * .25), t + dur);
-      const v = ctx.createGain(); env(v, t, .004, g, dur); f.connect(v); v.connect(duck);
-      notes.forEach((m, i) => [-9, 9].forEach(c => {
+      const v = ctx.createGain(); env(v, t, .004, g, dur); f.connect(v); v.connect(send);
+      notes.forEach(m => [-9, 9].forEach(c => {
         const o = ctx.createOscillator(); o.type = "sawtooth"; o.frequency.value = hz(m); o.detune.value = c;
         const p = ctx.createStereoPanner(); p.pan.value = c > 0 ? .35 : -.35; o.connect(p); p.connect(f);
         o.start(t); o.stop(t + dur + .05);
       }));
     };
-    const pluck = (t, m, g = .11) => {
+    // pad: acorde sustentado, ataque lento, bem aberto no estéreo
+    const pad = (t, notes, dur, g = .035, cutoff = 1400) => {
+      const f = ctx.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = cutoff; f.Q.value = .5;
+      const v = ctx.createGain();
+      v.gain.setValueAtTime(.0001, t); v.gain.exponentialRampToValueAtTime(g, t + .35);
+      v.gain.setValueAtTime(g, t + dur - .25); v.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      f.connect(v); v.connect(duck);
+      notes.forEach((m, i) => [-14, 0, 14].forEach((c, k) => {
+        const o = ctx.createOscillator(); o.type = "sawtooth"; o.frequency.value = hz(m - 12); o.detune.value = c;
+        const p = ctx.createStereoPanner(); p.pan.value = (k - 1) * .7; o.connect(p); p.connect(f);
+        o.start(t); o.stop(t + dur + .05);
+      }));
+    };
+    const lead = (t, m, dur, g = .075) => {
+      const f = ctx.createBiquadFilter(); f.type = "lowpass"; f.Q.value = 2;
+      f.frequency.setValueAtTime(4200, t); f.frequency.exponentialRampToValueAtTime(1600, t + dur);
+      const v = ctx.createGain();
+      v.gain.setValueAtTime(.0001, t); v.gain.exponentialRampToValueAtTime(g, t + .008);
+      v.gain.exponentialRampToValueAtTime(g * .55, t + .08); v.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      [-6, 6].forEach(c => {
+        const o = ctx.createOscillator(); o.type = "square"; o.frequency.value = hz(m); o.detune.value = c;
+        o.connect(f); o.start(t); o.stop(t + dur + .05);
+      });
+      const tri = ctx.createOscillator(); tri.type = "triangle"; tri.frequency.value = hz(m + 12);
+      const tv = ctx.createGain(); tv.gain.value = .5; tri.connect(tv); tv.connect(f); tri.start(t); tri.stop(t + dur + .05);
+      f.connect(v); pan(v, .12).connect(send);
+    };
+    const pluck = (t, m, g = .07) => {
       const o = ctx.createOscillator(); o.type = "square"; o.frequency.value = hz(m);
-      const f = ctx.createBiquadFilter(); f.type = "lowpass"; f.frequency.setValueAtTime(5000, t); f.frequency.exponentialRampToValueAtTime(700, t + .16);
-      const v = ctx.createGain(); env(v, t, .002, g, .17);
-      o.connect(f); f.connect(v); pan(v, -.2).connect(duck); o.start(t); o.stop(t + .22);
+      const f = ctx.createBiquadFilter(); f.type = "lowpass"; f.frequency.setValueAtTime(4000, t); f.frequency.exponentialRampToValueAtTime(700, t + .14);
+      const v = ctx.createGain(); env(v, t, .002, g, .15);
+      o.connect(f); f.connect(v); pan(v, -.3).connect(send); o.start(t); o.stop(t + .2);
     };
     const whoosh = (t, dur = .55, g = .32, from = 300, to = 7000) => {
       const f = ctx.createBiquadFilter(); f.type = "bandpass"; f.Q.value = 1.6;
       f.frequency.setValueAtTime(from, t); f.frequency.exponentialRampToValueAtTime(to, t + dur);
       const v = ctx.createGain(); v.gain.setValueAtTime(.0001, t);
-      v.gain.exponentialRampToValueAtTime(g, t + dur * .75); v.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      v.gain.exponentialRampToValueAtTime(g, t + dur * .8); v.gain.exponentialRampToValueAtTime(.0001, t + dur);
       const n = noiseSrc(t, dur); n.connect(f); f.connect(v); v.connect(master);
     };
     const crash = (t, g = .3, len = 1.4) => {
@@ -109,49 +153,72 @@
       const v = ctx.createGain(); env(v, t, .003, g * k, 1.1); o.connect(v); v.connect(master); v.connect(delay); o.start(t); o.stop(t + 1.3);
     });
 
+    const inBreak = t => t >= BREAK[0] && t < BREAK[1];
+    const nearCut = t => CUTS.some(c => t >= c - BEAT && t < c);
+
     // ---------- Arranjo ----------
-    for (let step = 0; step * S16 < LEN; step++) {
+    for (let bar = 0; bar < 7; bar++) {
+      const name = NAMES[bar], t0 = bar * 2;
+      // pad sustentado (no intro, mais fechado)
+      pad(t0, CHORD[name], 2, t0 < DROP ? .03 : .04, t0 < DROP ? 700 + t0 * 300 : 1500);
+    }
+    for (let step = 0; step * S16 < CLICK; step++) {
       const t = step * S16, bar = Math.floor(t / 2), inBar = step % 16, beat = step % 4 === 0;
-      const chord = CHORDS[Math.min(bar, 7)], root = ROOTS[Math.min(bar, 7)];
-      const intro = t < DROP, outro = t >= FINAL;
-      if (outro) continue;
+      const name = NAMES[Math.min(bar, 7)], chord = CHORD[name], root = ROOT[name];
+      const intro = t < DROP, brk = inBreak(t);
 
       // stabs sincopados (no intro: filtro abrindo)
-      if ([0, 3, 6, 10, 13].includes(inBar)) {
+      if ([0, 3, 6, 10, 13].includes(inBar) && !brk) {
         const cut = intro ? 350 + Math.pow(t / DROP, 2) * 3200 : 3200;
-        stab(t, intro ? chord : chord.map(n => n + 12), .26, intro ? .12 + .08 * t / DROP : .12, cut);
+        stab(t, intro ? chord : chord.map(n => n + 12), .26, intro ? .12 + .08 * t / DROP : .1, cut);
       }
       // hats: entram no 1s do intro e crescem
       if (t >= 1 && intro) hat(t, .02 + .07 * (t - 1) / 2, .03);
-      if (!intro) {
+      if (!intro && !brk) {
         if (beat) kick(t);
-        if (step % 8 === 4) clap(t);
+        if (step % 8 === 4 && !nearCut(t)) clap(t);
         if (step % 4 === 2) hat(t, .16, .11, .3);          // hat aberto no contratempo
         else hat(t, .055, .03, -.25);
-        if (step % 4 === 2) bass(t, root, BEAT / 2 - .02);       // baixo no contratempo
+        if (step % 4 === 2) bass(t, root, S8 - .02);       // baixo no contratempo
         if (step % 4 === 3) bass(t, root + 12, S16 * .9, .22);
       }
-      // arpejo a partir da cena 3a
-      if (t >= 6 && !intro) {
-        const arp = [0, 1, 2, 1, 2, 0, 2, 1][step % 8];
-        pluck(t, chord[arp] + (step % 16 >= 8 ? 24 : 12));
+      // melodia (cenas 3a → 3c) e arpejo leve por baixo
+      if (t >= CUTS[0] && t < BREAK[0]) {
+        if (step % 2 === 0) {
+          const phrase = MELODY[name], i = (step % 16) / 2, m = phrase[i];
+          if (m) { let k = i + 1; while (k < 8 && phrase[k] === null) k++; lead(t, m, (k - i) * S8 * .92); }
+        }
+        pluck(t, chord[[0, 1, 2, 1][step % 4]] + 12, .045);
+      } else if (!intro && !brk && t < CUTS[0]) {
+        pluck(t, chord[[0, 1, 2, 1, 2, 0, 2, 1][step % 8]] + 12, .07);
       }
     }
-    // rufar de caixa + riser preparando o drop
-    for (let t = 1.5; t < DROP - .01; t += (t < 2.5 ? S16 * 2 : S16)) clap(t, .08 + .3 * (t - 1.5) / 1.5);
+    // virada de caixa no último tempo antes de cada corte
+    CUTS.slice(0, 3).forEach(c => { for (let k = 0; k < 4; k++) snare(c - BEAT + k * S16, .14 + k * .05); });
+
+    // rufar + riser preparando o drop
+    for (let t = 1.5; t < DROP - .01; t += (t < 2.5 ? S8 : S16)) clap(t, .08 + .3 * (t - 1.5) / 1.5);
     whoosh(1.2, DROP - 1.2, .5, 250, 9000);
     boom(DROP); crash(DROP, .32, 1.8); kick(DROP, 1.1);
 
-    // transições
-    SWEEPS.forEach(t => { whoosh(t - .1, .55, .5); });
-    crash(SWEEPS[3] + .5, .18, 1);
+    // cortes: whoosh durante o wipe, impacto no tempo forte
+    CUTS.forEach((c, i) => {
+      whoosh(c - .55, .55, .45, 300, 7500);
+      crash(c, i === 3 ? .3 : .2, i === 3 ? 1.6 : 1);
+      if (i === 3) { boom(c, .8); kick(c, 1.1); }
+    });
+    // pausa (12.0–12.5): só pad + riser curto + rufar
+    whoosh(BREAK[0], BREAK[1] - BREAK[0], .4, 500, 10000);
+    for (let k = 0; k < 8; k++) snare(BREAK[0] + k * S16 / 2 + .25, .1 + k * .03);
 
     // clique no "Seguir" + final
-    uiClick(CLICK);
-    kick(FINAL, 1); boom(FINAL, .5); crash(FINAL, .26, 1.2);
-    stab(FINAL, [60, 64, 67, 72, 76], .85, .12, 4200);
-    bass(FINAL, 36, .8, .45);
-    ding(FINAL + .02);
+    uiClick(CLICK - .08);
+    kick(CLICK, 1); boom(CLICK, .5); crash(CLICK, .26, 1.2);
+    stab(CLICK, [60, 64, 67, 72, 76], .9, .13, 4200);
+    pad(CLICK, [60, 64, 67, 72], 1, .05, 2200);
+    bass(CLICK, 36, .8, .45);
+    lead(CLICK, 84, .6, .06);
+    ding(CLICK + .02);
 
     return ctx.startRendering();
   }

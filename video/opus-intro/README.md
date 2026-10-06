@@ -1,4 +1,4 @@
-# Opus SoftWorks — vídeo de apresentação (15s, 1080x1920)
+# Opus SoftWorks — vídeo de apresentação (60s, 1080x1920)
 
 Visual e textos baseados no site opussoftworks.com.br: fundo pontilhado, seção de caracteres
 ("Como trabalhamos"), bloco azul-marinho com brilho coral ("Um método, resultado visível."),

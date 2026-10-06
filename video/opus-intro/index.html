@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Opus SoftWorks — Apresentação 15s</title>
+<title>Opus SoftWorks — Apresentação 60s</title>
 <style>
   @font-face { font-family: "Exo 2"; src: url(assets/fonts/exo2-latin.woff2) format("woff2"); font-weight: 100 900; font-display: block; }
   @font-face { font-family: "Inter Tight"; src: url(assets/fonts/inter-tight-latin.woff2) format("woff2"); font-weight: 100 900; font-display: block; }
@@ -67,7 +67,8 @@
   .bg-coral .pager .bar i { background: var(--white); } .bg-navy .pager .bar i, .bg-night .pager .bar i { background: var(--coral); }
 
   /* Tipografia: grotesca apertada (como no site) + uma palavra em serifada itálica colorida */
-  .headline { position: absolute; left: 90px; right: 90px; font: 700 118px/1.0 "Inter Tight"; letter-spacing: -.055em; }
+  .headline { position: absolute; left: 90px; right: 90px; top: 350px; font: 700 118px/1.0 "Inter Tight"; letter-spacing: -.055em; }
+  .headline.sm { font-size: 104px; }
   .headline i { font: italic 400 1.18em/0.9 "Instrument Serif"; letter-spacing: -.015em; padding-right: .04em; }
   .bg-paper .headline i, .bg-navy .headline i, .bg-night .headline i { color: var(--coral); }
   .bg-coral .headline i { color: var(--ink); }
@@ -77,7 +78,7 @@
   .sw path { fill: none; stroke-width: 5; stroke-linecap: round; }
   .bg-paper .sw path, .bg-navy .sw path, .bg-night .sw path { stroke: var(--coral); }
   .bg-coral .sw path { stroke: var(--ink); }
-  .eyebrow { position: absolute; left: 90px; font: 600 28px/1 "Inter Tight"; letter-spacing: .2em; text-transform: uppercase; color: var(--coral); }
+  .eyebrow { position: absolute; left: 90px; top: 290px; font: 600 28px/1 "Inter Tight"; letter-spacing: .2em; text-transform: uppercase; color: var(--coral); display: flex; gap: .5em; }
   .bg-coral .eyebrow { color: var(--ink); }
   .lead { position: absolute; left: 90px; right: 90px; font: 400 38px/1.4 "Inter Tight"; letter-spacing: -.01em; }
   .bg-paper .lead { color: var(--ink-2); }
@@ -97,7 +98,11 @@
   .photo .ph-grid { position: absolute; inset: 0; background: repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.05) 0 2px, transparent 2px 64px); }
   .photo.has-img .ph-mark, .photo.has-img .ph-grid { display: none; }
 
-  /* ---------- Cena 1 · logo ---------- */
+  .pill-btn { display: inline-flex; align-items: center; height: 96px; padding: 0 34px; border-radius: 999px; white-space: nowrap; font: 600 30px/1 "Inter Tight"; letter-spacing: -.01em; }
+  .pill-btn.dark { background: var(--ink); color: var(--white); }
+  .pill-btn.light { background: var(--white); color: var(--ink); }
+
+  /* ---------- 1 · logo ---------- */
   #s1-in { position: absolute; inset: 0; }
   #wm { position: absolute; left: 0; width: 1080px; top: 960px; text-align: center; white-space: nowrap; font: 400 130px/1 "Exo 2"; letter-spacing: -.01em; color: var(--ink); }
   #wm .o { font-weight: 700; color: transparent; }
@@ -110,29 +115,93 @@
   #s1-tag { position: absolute; left: 0; right: 0; top: 1165px; display: flex; justify-content: center; gap: 22px; font: 500 40px/1 "Inter Tight"; color: var(--ink-2); letter-spacing: -.01em; }
   #s1-tag span:nth-child(even) { color: var(--coral); }
 
+  /* ---------- 1b · OPUS SOFTWORKS gigante ---------- */
+  #giga { position: absolute; left: 0; width: 1080px; top: 530px; text-align: center; font: 800 255px/.86 "Inter Tight"; letter-spacing: -.065em; }
+  #giga div { white-space: nowrap; }
+  #giga .c { display: inline-block; clip-path: inset(-10% -10% 0 -10%); }
+  #giga .c > span { display: inline-block; }
+  #s1b-cap { position: absolute; left: 90px; top: 300px; font: 500 30px/1 "Inter Tight"; color: var(--ink-2); }
+  #s1b-foot { position: absolute; left: 90px; right: 90px; top: 1400px; display: flex; justify-content: space-between; font: 500 30px/1 "Inter Tight"; color: var(--ink-2); }
+
   #iris-ring { position: absolute; left: 0; top: 0; width: 0; height: 0; border: 18px solid var(--coral); border-radius: 50%; visibility: hidden; }
 
-  /* ---------- Cena 2 · coral ---------- */
-  #s2-photo { left: 300px; top: 330px; width: 480px; height: 480px; }
-  #s2-orbit, #s2-orbit2 { position: absolute; left: 190px; top: 220px; width: 700px; height: 700px; overflow: visible; }
-  #s2-orbit text { font: 600 27px "Inter Tight"; letter-spacing: .02em; fill: var(--white); text-transform: uppercase; }
-  #s2-head { top: 1010px; }
-  #s2-lead { top: 1270px; }
+  /* ---------- 2 · hero coral ---------- */
+  #s2-photo { left: 330px; top: 300px; width: 420px; height: 420px; }
+  #s2-orbit, #s2-orbit2 { position: absolute; left: 220px; top: 190px; width: 640px; height: 640px; overflow: visible; }
+  #s2-orbit text { font: 600 26px "Inter Tight"; letter-spacing: .02em; fill: var(--white); text-transform: uppercase; }
+  #s2-head { top: 870px; }
+  #s2-lead { top: 1125px; }
+  #s2-btns { position: absolute; left: 90px; right: 90px; top: 1340px; display: flex; gap: 20px; }
 
-  /* ---------- Cena 3a · Clareza (fundo de caracteres) ---------- */
-  .s3 .eyebrow { top: 300px; }
-  .s3 .headline { top: 350px; }
-  #s3a-svg { position: absolute; left: 90px; top: 640px; overflow: visible; }
+  /* ---------- 3 · onde a Opus entra ---------- */
+  #rot { position: absolute; left: 0; width: 1080px; top: 350px; height: 130px; text-align: center; white-space: nowrap; font: 700 92px/130px "Inter Tight"; letter-spacing: -.05em; color: var(--ink); }
+  #rot span { display: inline-block; margin: 0 14px; }
+  #brk { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+  #brk i { position: absolute; width: 30px; height: 30px; border: 0 solid var(--coral); }
+  #brk i:nth-child(1) { left: 0; top: 0; border-left-width: 6px; border-top-width: 6px; }
+  #brk i:nth-child(2) { right: 0; top: 0; border-right-width: 6px; border-top-width: 6px; }
+  #brk i:nth-child(3) { left: 0; bottom: 0; border-left-width: 6px; border-bottom-width: 6px; }
+  #brk i:nth-child(4) { right: 0; bottom: 0; border-right-width: 6px; border-bottom-width: 6px; }
+  #s3-head { top: 540px; }
+  #s3-lead { top: 800px; }
+  .tiles { position: absolute; left: 90px; right: 90px; top: 1100px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .tile { background: var(--card); border-radius: 28px; padding: 28px 26px; height: 270px; }
+  .tile .n { font: 600 28px/1 "Inter Tight"; color: var(--coral); }
+  .tile h4 { margin-top: 22px; font: 600 34px/1.15 "Inter Tight"; letter-spacing: -.02em; }
+
+  /* ---------- 4 · Tráfego (funil) ---------- */
+  #s4-lead { top: 690px; }
+  #funnel { position: absolute; left: 90px; top: 900px; overflow: visible; }
+  #funnel text { font-family: "Inter Tight"; }
+
+  /* ---------- 5 · Sistemas (painel único) ---------- */
+  #s5-lead { top: 700px; }
+  #s5-area { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  .chip { position: absolute; display: inline-flex; align-items: center; gap: 14px; height: 76px; padding: 0 30px 0 22px; border-radius: 999px; background: var(--white); box-shadow: 0 14px 30px -14px rgba(18,18,22,.3), inset 0 0 0 2px #E7E7EC; font: 500 30px/1 "Inter Tight"; color: var(--ink); white-space: nowrap; }
+  .chip i { width: 18px; height: 18px; border-radius: 50%; background: var(--line); }
+  #hub { position: absolute; left: 290px; top: 1000px; width: 500px; height: 330px; border-radius: 34px; background: var(--white); box-shadow: 0 30px 60px -24px rgba(18,18,22,.35), inset 0 0 0 3px var(--coral); padding: 30px 34px; }
+  #hub h5 { font: 700 34px/1 "Inter Tight"; letter-spacing: -.02em; display: flex; align-items: center; gap: 14px; }
+  #hub h5 i { width: 16px; height: 16px; border-radius: 50%; background: var(--coral); }
+  .hrow { margin-top: 28px; display: flex; align-items: center; gap: 18px; }
+  .hrow .bar { flex: 1; height: 18px; border-radius: 10px; background: #ECECF0; position: relative; overflow: hidden; }
+  .hrow .bar b { position: absolute; inset: 0; background: var(--ink); border-radius: 10px; transform-origin: 0 50%; }
+  .hrow .ok { width: 44px; height: 44px; border-radius: 50%; background: var(--coral); display: grid; place-items: center; }
+  .hrow .ok svg { width: 26px; height: 26px; }
+
+  /* ---------- 6 · Sites (celular) ---------- */
+  #s6-lead { top: 630px; }
+  #phone { position: absolute; left: 90px; top: 850px; width: 340px; height: 600px; border-radius: 52px; background: var(--ink); padding: 14px; box-shadow: 0 40px 80px -30px rgba(18,18,22,.55); }
+  #screen { position: relative; width: 100%; height: 100%; border-radius: 40px; background: var(--paper); overflow: hidden; }
+  #load { position: absolute; left: 0; right: 0; top: 0; bottom: 0; display: grid; place-items: center; }
+  #load .pct { font: 800 74px/1 "Inter Tight"; letter-spacing: -.05em; color: var(--coral); display: inline-flex; }
+  #load .lbar { position: absolute; left: 40px; right: 40px; top: 360px; height: 8px; border-radius: 8px; background: #E4E4E9; overflow: hidden; }
+  #load .lbar i { position: absolute; inset: 0; background: var(--coral); transform-origin: 0 50%; transform: scaleX(0); }
+  .blk { position: absolute; left: 26px; border-radius: 12px; }
+  #b-nav { top: 30px; right: 26px; height: 44px; border-radius: 999px; background: var(--white); box-shadow: 0 4px 12px -6px rgba(0,0,0,.2); display: flex; align-items: center; padding: 0 14px; font: 400 18px/1 "Exo 2"; color: var(--ink); }
+  #b-nav b { color: var(--coral); font-weight: 700; }
+  #b-t1 { top: 120px; width: 250px; height: 30px; background: var(--ink); }
+  #b-t2 { top: 162px; width: 190px; height: 30px; background: var(--coral); }
+  #b-p  { top: 216px; width: 240px; height: 14px; background: #D6D6DC; }
+  #b-p2 { top: 240px; width: 200px; height: 14px; background: #D6D6DC; }
+  #b-btn { top: 284px; width: 170px; height: 52px; border-radius: 999px; background: var(--ink); }
+  #b-img { top: 366px; right: 26px; height: 170px; border-radius: 22px; background: linear-gradient(135deg, #FFB199, var(--coral)); }
+  .checks { position: absolute; left: 480px; right: 90px; top: 900px; display: flex; flex-direction: column; gap: 34px; }
+  .check { display: flex; align-items: center; gap: 22px; font: 600 36px/1.15 "Inter Tight"; letter-spacing: -.02em; color: var(--white); }
+  .check .n { flex: none; width: 66px; height: 66px; border-radius: 50%; background: var(--white); color: var(--coral); display: grid; place-items: center; font: 700 28px/1 "Inter Tight"; }
+
+  /* ---------- 7 · Clareza (fundo de caracteres) ---------- */
+  #s7-svg { position: absolute; left: 90px; top: 630px; overflow: visible; }
   svg text { font-family: "Inter Tight"; }
-  .steps { position: absolute; left: 90px; right: 90px; top: 1180px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .step { background: var(--white); border: 2px solid #E7E7EC; border-radius: 30px; padding: 34px 32px; box-shadow: 0 20px 40px -24px rgba(18,18,22,.18); }
-  .step h4 { font: 600 36px/1 "Inter Tight"; letter-spacing: -.02em; display: flex; align-items: baseline; gap: 14px; }
-  .step h4 .n { font: 600 30px/1 "Inter Tight"; color: var(--coral); display: inline-flex; }
-  .step p { margin-top: 18px; font: 500 30px/1.3 "Inter Tight"; color: var(--ink); letter-spacing: -.01em; }
+  .steps { position: absolute; left: 90px; right: 90px; top: 1130px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .step { background: var(--white); border: 2px solid #E7E7EC; border-radius: 30px; padding: 30px 28px; box-shadow: 0 20px 40px -24px rgba(18,18,22,.18); }
+  .step h4 { font: 600 34px/1 "Inter Tight"; letter-spacing: -.02em; display: flex; align-items: baseline; gap: 12px; }
+  .step h4 .n { font: 600 28px/1 "Inter Tight"; color: var(--coral); display: inline-flex; }
+  .step p { margin-top: 16px; font: 600 28px/1.25 "Inter Tight"; color: var(--ink); letter-spacing: -.01em; }
+  .step small { display: block; margin-top: 12px; font: 400 23px/1.38 "Inter Tight"; color: var(--ink-2); }
 
-  /* ---------- Cena 3b · Método (azul-marinho) ---------- */
-  #s3b-lead { top: 610px; }
-  #panel { position: absolute; left: 90px; right: 90px; top: 880px; height: 560px; border-radius: 36px; background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 2px rgba(255,255,255,.12); }
+  /* ---------- 8 · Método (azul-marinho) ---------- */
+  #s8-lead { top: 610px; }
+  #panel { position: absolute; left: 90px; right: 90px; top: 900px; height: 560px; border-radius: 36px; background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 2px rgba(255,255,255,.12); }
   #panel .top { position: absolute; left: 36px; right: 36px; top: 30px; display: flex; align-items: center; gap: 12px; font: 500 26px/1 "Inter Tight"; color: rgba(255,255,255,.6); letter-spacing: .12em; text-transform: uppercase; }
   #panel .top i { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,.25); }
   #panel .top i:first-child { background: var(--coral); }
@@ -144,37 +213,24 @@
   .kpi .tag svg { width: 34px; height: 34px; }
   #k1 { top: 96px; } #k2 { top: 238px; } #k3 { top: 380px; }
 
-  /* ---------- Cena 3c · três frentes ---------- */
-  #rot { position: absolute; left: 0; width: 1080px; top: 640px; height: 130px; text-align: center; white-space: nowrap; font: 700 92px/130px "Inter Tight"; letter-spacing: -.05em; color: var(--ink); }
-  #rot span { display: inline-block; margin: 0 14px; }
-  #brk { position: absolute; left: 0; top: 0; width: 0; height: 0; }
-  #brk i { position: absolute; width: 30px; height: 30px; border: 0 solid var(--coral); }
-  #brk i:nth-child(1) { left: 0; top: 0; border-left-width: 6px; border-top-width: 6px; }
-  #brk i:nth-child(2) { right: 0; top: 0; border-right-width: 6px; border-top-width: 6px; }
-  #brk i:nth-child(3) { left: 0; bottom: 0; border-left-width: 6px; border-bottom-width: 6px; }
-  #brk i:nth-child(4) { right: 0; bottom: 0; border-right-width: 6px; border-bottom-width: 6px; }
-  .fronts { position: absolute; left: 90px; right: 90px; top: 830px; display: flex; flex-direction: column; gap: 18px; }
-  .front { display: flex; align-items: flex-start; gap: 28px; background: var(--card); border-radius: 28px; padding: 26px 32px; }
-  .front .n { font: 600 30px/1.2 "Inter Tight"; color: var(--coral); padding-top: 4px; }
-  .front h4 { font: 600 38px/1.15 "Inter Tight"; letter-spacing: -.02em; }
-  .front p { margin-top: 8px; font: 500 30px/1.25 "Inter Tight"; color: var(--ink-2); }
-  .front p b { color: var(--ink); font-weight: 600; }
-  #s3c-stat { position: absolute; left: 90px; right: 90px; top: 1350px; display: flex; align-items: center; gap: 26px; }
-  #s3c-stat .num { font: 800 132px/1 "Inter Tight"; letter-spacing: -.06em; color: var(--coral); display: inline-flex; }
-  #s3c-stat .lbl { font: 500 38px/1.2 "Inter Tight"; color: var(--ink-2); letter-spacing: -.01em; }
-  #s3c-stat .lbl b { color: var(--ink); font-weight: 700; }
+  /* ---------- 9 · três frentes convergindo ---------- */
+  #conv { position: absolute; left: 90px; top: 660px; overflow: visible; }
+  #s9-stat { position: absolute; left: 90px; right: 90px; top: 1290px; display: flex; align-items: center; gap: 26px; }
+  #s9-stat .num { font: 800 132px/1 "Inter Tight"; letter-spacing: -.06em; color: var(--coral); display: inline-flex; transform-origin: 0 100%; }
+  #s9-stat .lbl { font: 500 38px/1.2 "Inter Tight"; color: var(--ink-2); letter-spacing: -.01em; }
+  #s9-stat .lbl b { color: var(--ink); font-weight: 700; }
 
-  /* ---------- Cena 4 · CTA escuro ---------- */
-  #s4-head { top: 300px; font-size: 116px; font-weight: 800; letter-spacing: -.06em; }
+  /* ---------- 10 · CTA escuro ---------- */
+  #s10-head { top: 300px; font-size: 116px; font-weight: 800; letter-spacing: -.06em; }
   #giant { position: absolute; left: -30px; bottom: 120px; font: 800 380px/1 "Inter Tight"; letter-spacing: -.06em; color: transparent; white-space: nowrap;
            background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,0)); -webkit-background-clip: text; background-clip: text; }
   #card { position: absolute; left: 90px; top: 600px; width: 900px; height: 860px; background: var(--white); border-radius: 60px; box-shadow: 0 50px 100px -30px rgba(0,0,0,.7); color: var(--ink); }
   #ring { position: absolute; left: 50%; top: 56px; width: 340px; height: 340px; margin-left: -170px; border-radius: 50%; background: conic-gradient(from 200deg, var(--coral), #FFB199, var(--coral-2), var(--coral)); }
-  #s4-photo { left: 14px; top: 14px; width: 312px; height: 312px; box-shadow: 0 0 0 9px var(--white); }
-  #s4-name { position: absolute; left: 0; right: 0; top: 428px; text-align: center; font: 400 74px/1 "Exo 2"; letter-spacing: -.01em; }
-  #s4-name b { font-weight: 700; color: var(--coral); }
-  #s4-handle { position: absolute; left: 0; right: 0; top: 520px; text-align: center; font: 600 40px/1 "Inter Tight"; color: var(--ink); letter-spacing: -.01em; }
-  #s4-bio { position: absolute; left: 0; right: 0; top: 578px; text-align: center; font: 500 32px/1 "Inter Tight"; color: var(--line); }
+  #s10-photo { left: 14px; top: 14px; width: 312px; height: 312px; box-shadow: 0 0 0 9px var(--white); }
+  #s10-name { position: absolute; left: 0; right: 0; top: 428px; text-align: center; font: 400 74px/1 "Exo 2"; letter-spacing: -.01em; }
+  #s10-name b { font-weight: 700; color: var(--coral); }
+  #s10-handle { position: absolute; left: 0; right: 0; top: 520px; text-align: center; font: 600 40px/1 "Inter Tight"; color: var(--ink); letter-spacing: -.01em; }
+  #s10-bio { position: absolute; left: 0; right: 0; top: 578px; text-align: center; font: 500 32px/1 "Inter Tight"; color: var(--line); }
   #btn { position: absolute; left: 80px; right: 80px; top: 660px; height: 128px; border-radius: 999px; background: var(--coral); color: var(--white); overflow: hidden; display: grid; place-items: center; font: 700 50px/1 "Inter Tight"; letter-spacing: -.02em; }
   #btn .lab { position: absolute; display: flex; align-items: center; gap: 18px; }
   #btn .lab svg { width: 46px; height: 46px; }
@@ -184,7 +240,7 @@
   #confetti { position: absolute; inset: 0; pointer-events: none; }
   #confetti i { position: absolute; width: 18px; height: 18px; border-radius: 50%; }
   #cursor { position: absolute; left: 0; top: 0; width: 88px; height: 88px; filter: drop-shadow(0 10px 16px rgba(0,0,0,.4)); }
-  #s4-foot { position: absolute; left: 90px; right: 90px; bottom: 96px; display: flex; justify-content: space-between; font: 500 24px/1 "Inter Tight"; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+  #s10-foot { position: absolute; left: 90px; right: 90px; bottom: 96px; display: flex; justify-content: space-between; font: 500 24px/1 "Inter Tight"; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.45); }
 
   .sweep { position: absolute; inset: 0; visibility: hidden; }
 
@@ -205,7 +261,7 @@
 <body>
 <div id="viewport"><div id="stage">
 
-  <!-- CENA 1 · linha → pílula → "O" (fundo pontilhado do site) -->
+  <!-- 1 · linha → pílula → "O" (fundo pontilhado do site) -->
   <section class="scene bg-paper" id="s1"><div class="dots"></div><div class="glow g1"></div><div class="glow g2"></div><div id="s1-in">
     <img id="s1-symbol" src="assets/opus-simbolo.png" alt="">
     <div id="wm"><span class="o">O</span><span class="bl"></span><span class="rest"><b>pus</b>SoftWorks</span></div>
@@ -213,29 +269,117 @@
     <p id="s1-tag"><span>Tráfego</span><span>·</span><span>Sistemas</span><span>·</span><span>Sites</span></p>
   </div></section>
 
-  <!-- CENA 2 · coral · foto + texto girando + hero do site -->
+  <!-- 1b · OPUS SOFTWORKS gigante (seção do site) -->
+  <section class="scene bg-paper" id="s1b">
+    <p id="s1b-cap">Role para entrar na estratégia</p>
+    <div id="giga"><div>OPUS</div><div>SOFT</div><div>WORKS</div></div>
+    <div id="s1b-foot"><span>Scroll to enter.</span><span>Ver a estratégia ↘</span></div>
+  </section>
+
+  <!-- 2 · coral · foto + texto girando + hero do site -->
   <section class="scene bg-coral" id="s2">
     <div class="dots"></div><div class="glow g1"></div><div class="glow g2"></div>
     <div class="nav"><span class="mark"><b>Opus</b>SoftWorks</span><span class="cta">Entrar em contato ↗</span></div>
-    <span class="pager"><span class="bar"><i></i></span>01 / 05</span>
-    <svg id="s2-orbit2" viewBox="0 0 700 700" aria-hidden="true"><circle cx="350" cy="350" r="275" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-dasharray="2 14" stroke-linecap="round"/><circle cx="350" cy="75" r="10" fill="#121216"/></svg>
-    <svg id="s2-orbit" viewBox="0 0 700 700" aria-hidden="true">
-      <defs><path id="orbitPath" d="M350,350 m-322,0 a322,322 0 1,1 644,0 a322,322 0 1,1 -644,0"/></defs>
-      <text><textPath href="#orbitPath" textLength="2015" lengthAdjust="spacing">Tráfego ✦ Sistemas ✦ Sites ✦ Estratégia ✦ Tecnologia ✦ IA ✦ </textPath></text>
+    <span class="pager"><span class="bar"><i></i></span>01 / 09</span>
+    <svg id="s2-orbit2" viewBox="0 0 640 640" aria-hidden="true"><circle cx="320" cy="320" r="242" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-dasharray="2 14" stroke-linecap="round"/><circle cx="320" cy="78" r="10" fill="#121216"/></svg>
+    <svg id="s2-orbit" viewBox="0 0 640 640" aria-hidden="true">
+      <defs><path id="orbitPath" d="M320,320 m-292,0 a292,292 0 1,1 584,0 a292,292 0 1,1 -584,0"/></defs>
+      <text><textPath href="#orbitPath" textLength="1830" lengthAdjust="spacing">Tráfego ✦ Sistemas ✦ Sites ✦ Estratégia ✦ Tecnologia ✦ IA ✦ </textPath></text>
     </svg>
     <div class="photo" id="s2-photo" data-src="assets/foto-1.jpg"><div class="ph-grid"></div><img class="ph-mark" src="assets/opus-simbolo.png" alt=""><div class="ph-img"></div></div>
     <h1 class="headline" id="s2-head">Resultado não é sorte. É <i>entrega.</i></h1>
     <p class="lead" id="s2-lead">Estratégia, tecnologia e IA para empresas que querem vender mais, operar melhor e crescer com clareza.</p>
+    <div id="s2-btns"><span class="pill-btn dark">Falar com um especialista ↗</span><span class="pill-btn light">Conhecer soluções</span></div>
   </section>
 
-  <!-- CENA 3a · Clareza · fundo de caracteres -->
-  <section class="scene bg-paper s3" id="s3a">
+  <!-- 3 · onde a Opus SoftWorks entra -->
+  <section class="scene bg-paper" id="s3">
+    <div class="dots"></div><div class="glow g1"></div><div class="glow g2"></div>
+    <div class="nav"><span class="mark"><b>Opus</b>SoftWorks</span><span class="cta">Entrar em contato ↗</span></div>
+    <span class="pager"><span class="bar"><i></i></span>02 / 09</span>
+    <p class="eyebrow">Onde a Opus SoftWorks entra</p>
+    <div id="rot"><span>Tráfego</span><span>Sistemas</span><span>Sites</span></div>
+    <div id="brk"><i></i><i></i><i></i><i></i></div>
+    <h2 class="headline" id="s3-head">Três frentes, uma mesma <i>estratégia.</i></h2>
+    <p class="lead" id="s3-lead">Raramente o problema é só um. Quase sempre é aquisição, operação e presença digital puxando para lados diferentes. Trabalhamos nos três, na ordem que fizer sentido.</p>
+    <div class="tiles">
+      <div class="tile"><span class="n">01</span><h4>Tráfego pago e aquisição</h4></div>
+      <div class="tile"><span class="n">02</span><h4>Sistemas e automações</h4></div>
+      <div class="tile"><span class="n">03</span><h4>Sites que convertem</h4></div>
+    </div>
+  </section>
+
+  <!-- 4 · Tráfego pago e aquisição · coral · funil -->
+  <section class="scene bg-coral" id="s4">
+    <div class="dots"></div><div class="glow g1"></div><div class="glow g2"></div>
+    <div class="nav"><span class="mark"><b>Opus</b>SoftWorks</span><span class="cta">Entrar em contato ↗</span></div>
+    <span class="pager"><span class="bar"><i></i></span>03 / 09</span>
+    <p class="eyebrow"><span class="odo" data-to="1" data-pad="2"></span><span>· Tráfego pago e aquisição</span></p>
+    <h2 class="headline sm">Lead não é resultado.<br><i>Venda</i> é.</h2>
+    <p class="lead" id="s4-lead">Campanhas em Meta e Google guiadas por números que importam: custo por cliente, taxa de fechamento e retorno sobre o investimento.</p>
+    <svg id="funnel" width="900" height="560" viewBox="0 0 900 560" aria-hidden="true">
+      <g id="fs1"><path d="M0,0 H900 L800,150 H100 Z" fill="rgba(255,255,255,.28)" stroke="rgba(255,255,255,.28)" stroke-width="24" stroke-linejoin="round"/><text x="450" y="90" text-anchor="middle" font-size="40" font-weight="600" fill="#fff">Anúncios</text></g>
+      <g id="fs2"><path d="M110,190 H790 L690,340 H210 Z" fill="rgba(255,255,255,.5)" stroke="rgba(255,255,255,.5)" stroke-width="24" stroke-linejoin="round"/><text x="450" y="280" text-anchor="middle" font-size="40" font-weight="600" fill="#fff">Leads</text></g>
+      <g id="fs3"><path d="M220,380 H680 L600,530 H300 Z" fill="#121216" stroke="#121216" stroke-width="24" stroke-linejoin="round"/><text x="430" y="470" text-anchor="middle" font-size="40" font-weight="700" fill="#fff">Vendas</text>
+        <g id="fcheck"><circle cx="560" cy="456" r="26" fill="#FF6039"/><path d="M548,457 l8,8 l16,-17" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+      <g id="fdots"></g>
+    </svg>
+  </section>
+
+  <!-- 5 · Sistemas e automações · painel único -->
+  <section class="scene bg-paper" id="s5">
+    <div class="dots"></div><div class="glow g1"></div><div class="glow g2"></div>
+    <div class="nav"><span class="mark"><b>Opus</b>SoftWorks</span><span class="cta">Entrar em contato ↗</span></div>
+    <span class="pager"><span class="bar"><i></i></span>04 / 09</span>
+    <p class="eyebrow"><span class="odo" data-to="2" data-pad="2"></span><span>· Sistemas e automações</span></p>
+    <h2 class="headline sm">Menos trabalho manual. Mais <i>controle.</i></h2>
+    <p class="lead" id="s5-lead">Entendemos como a operação funciona, eliminamos tarefas repetitivas e centralizamos as informações que hoje estão espalhadas.</p>
+    <div id="s5-area">
+      <div id="hub"><h5><i></i>Painel único</h5>
+        <div class="hrow"><span class="bar"><b></b></span><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></div>
+        <div class="hrow"><span class="bar"><b></b></span><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></div>
+        <div class="hrow"><span class="bar"><b></b></span><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></div>
+      </div>
+      <span class="chip" style="left:90px;top:900px"><i></i>Planilhas</span>
+      <span class="chip" style="left:700px;top:910px"><i></i>WhatsApp</span>
+      <span class="chip" style="left:110px;top:1150px"><i></i>E-mail</span>
+      <span class="chip" style="left:760px;top:1160px"><i></i>Papel</span>
+      <span class="chip" style="left:150px;top:1380px"><i></i>Agenda</span>
+      <span class="chip" style="left:680px;top:1390px"><i></i>Pedidos</span>
+    </div>
+  </section>
+
+  <!-- 6 · Sites que convertem · coral · celular -->
+  <section class="scene bg-coral" id="s6">
+    <div class="dots"></div><div class="glow g1"></div><div class="glow g2"></div>
+    <div class="nav"><span class="mark"><b>Opus</b>SoftWorks</span><span class="cta">Entrar em contato ↗</span></div>
+    <span class="pager"><span class="bar"><i></i></span>05 / 09</span>
+    <p class="eyebrow"><span class="odo" data-to="3" data-pad="2"></span><span>· Sites que convertem</span></p>
+    <h2 class="headline">Sites pensados para <i>vender.</i></h2>
+    <p class="lead" id="s6-lead">Em poucos segundos, o visitante entende o que a empresa faz, por que escolher você e qual é o próximo passo.</p>
+    <div id="phone"><div id="screen">
+      <div id="load"><span class="pct"><span class="odo" data-to="100"></span>%</span><span class="lbar"><i></i></span></div>
+      <div class="blk" id="b-nav"><b>Opus</b>SoftWorks</div>
+      <div class="blk" id="b-t1"></div><div class="blk" id="b-t2"></div>
+      <div class="blk" id="b-p"></div><div class="blk" id="b-p2"></div>
+      <div class="blk" id="b-btn"></div>
+      <div class="blk" id="b-img"></div>
+    </div></div>
+    <div class="checks">
+      <div class="check"><span class="n">1</span>O que a empresa faz</div>
+      <div class="check"><span class="n">2</span>Por que escolher você</div>
+      <div class="check"><span class="n">3</span>Qual é o próximo passo</div>
+    </div>
+  </section>
+
+  <!-- 7 · Clareza antes de velocidade · fundo de caracteres -->
+  <section class="scene bg-paper" id="s7">
     <pre class="ascii" id="ascii"></pre>
     <div class="nav"><span class="mark"><b>Opus</b>SoftWorks</span><span class="cta">Entrar em contato ↗</span></div>
-    <span class="pager"><span class="bar"><i></i></span>02 / 05</span>
+    <span class="pager"><span class="bar"><i></i></span>06 / 09</span>
     <p class="eyebrow">Como trabalhamos</p>
     <h2 class="headline"><i>Clareza</i> antes de velocidade.</h2>
-    <svg id="s3a-svg" width="900" height="480" viewBox="0 0 900 520" aria-hidden="true">
+    <svg id="s7-svg" width="900" height="460" viewBox="0 0 900 520" aria-hidden="true">
       <path id="mess" fill="none" stroke="#BDBDC4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
       <path id="straight" d="M40,260 L846,260" fill="none" stroke="#FF6039" stroke-width="16" stroke-linecap="round"/>
       <path id="arrowHead" d="M818,228 L858,260 L818,292" fill="none" stroke="#FF6039" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
@@ -246,20 +390,20 @@
       <g id="lblB"><rect x="732" y="462" width="172" height="54" rx="27" fill="#FF6039"/><text x="818" y="498" font-size="28" font-weight="600" fill="#fff" text-anchor="middle">Entrega</text></g>
     </svg>
     <div class="steps">
-      <div class="step"><h4>Diagnóstico <span class="n"><span class="odo" data-to="1" data-pad="2"></span></span></h4><p>Antes de propor, a gente entende.</p></div>
-      <div class="step"><h4>Estratégia <span class="n"><span class="odo" data-to="2" data-pad="2"></span></span></h4><p>Prioridade antes de execução.</p></div>
+      <div class="step"><h4>Diagnóstico <span class="n"><span class="odo" data-to="1" data-pad="2"></span></span></h4><p>Antes de propor, a gente entende.</p><small>Mergulhamos na operação, nas metas, nos números e nos gargalos para identificar o que realmente precisa ser resolvido.</small></div>
+      <div class="step"><h4>Estratégia <span class="n"><span class="odo" data-to="2" data-pad="2"></span></span></h4><p>Prioridade antes de execução.</p><small>Definimos o que atacar primeiro, onde investir e quais indicadores vão mostrar, na prática, se estamos no caminho certo.</small></div>
     </div>
   </section>
 
-  <!-- CENA 3b · Método · azul-marinho com brilho coral -->
-  <section class="scene bg-navy s3" id="s3b">
-    <div class="sweep" style="background:var(--coral)" id="s3b-lead-sweep"></div>
+  <!-- 8 · Um método, resultado visível · azul-marinho -->
+  <section class="scene bg-navy" id="s8">
+    <div class="sweep" style="background:var(--coral)" id="s8-sweep"></div>
     <div class="glow g1"></div><div class="glow g2"></div>
     <div class="nav"><span class="mark"><b>Opus</b>SoftWorks</span><span class="cta">Entrar em contato ↗</span></div>
-    <span class="pager"><span class="bar"><i></i></span>03 / 05</span>
+    <span class="pager"><span class="bar"><i></i></span>07 / 09</span>
     <p class="eyebrow">O método</p>
     <h2 class="headline">Um método, resultado <i>visível.</i></h2>
-    <p class="lead" id="s3b-lead">Tráfego, sistemas e presença digital trabalhando juntos, com dados que qualquer pessoa do time consegue olhar e entender.</p>
+    <p class="lead" id="s8-lead">Tráfego, sistemas e presença digital trabalhando juntos, sob uma mesma estratégia, com dados que qualquer pessoa do time consegue olhar e entender.</p>
     <div id="panel">
       <div class="top"><i></i><i></i><i></i><span>Painel da operação</span></div>
       <div class="kpi" id="k1"><span class="lbl">Custo por cliente</span>
@@ -274,36 +418,43 @@
     </div>
   </section>
 
-  <!-- CENA 3c · três frentes, uma mesma estratégia -->
-  <section class="scene bg-paper s3" id="s3c">
+  <!-- 9 · Estratégia, aliada à execução · três frentes convergindo -->
+  <section class="scene bg-paper" id="s9">
     <div class="dots"></div><div class="glow g1"></div><div class="glow g2"></div>
     <div class="nav"><span class="mark"><b>Opus</b>SoftWorks</span><span class="cta">Entrar em contato ↗</span></div>
-    <span class="pager"><span class="bar"><i></i></span>04 / 05</span>
-    <p class="eyebrow">Onde a Opus SoftWorks entra</p>
+    <span class="pager"><span class="bar"><i></i></span>08 / 09</span>
+    <p class="eyebrow">Uma mesma estratégia</p>
     <h2 class="headline">Estratégia, aliada à <i>execução.</i></h2>
-    <div id="rot"><span>Tráfego</span><span>Sistemas</span><span>Sites</span></div>
-    <div id="brk"><i></i><i></i><i></i><i></i></div>
-    <div class="fronts">
-      <div class="front"><span class="n">01</span><div><h4>Tráfego pago e aquisição</h4><p>Lead não é resultado. <b>Venda é.</b></p></div></div>
-      <div class="front"><span class="n">02</span><div><h4>Sistemas e automações</h4><p>Menos trabalho manual. <b>Mais controle para decidir.</b></p></div></div>
-      <div class="front"><span class="n">03</span><div><h4>Sites que convertem</h4><p>Por que escolher você e <b>qual é o próximo passo.</b></p></div></div>
-    </div>
-    <div id="s3c-stat"><span class="num"><span class="odo" data-to="3" data-pad="2"></span></span><span class="lbl">frentes, <b>uma mesma estratégia.</b></span></div>
+    <svg id="conv" width="900" height="560" viewBox="0 0 900 560" aria-hidden="true">
+      <g fill="none" stroke="#D3D3DA" stroke-width="6" stroke-linecap="round">
+        <path class="cv" id="cv1" d="M250,80 C420,80 420,280 560,280"/>
+        <path class="cv" id="cv2" d="M250,280 C400,280 420,280 560,280"/>
+        <path class="cv" id="cv3" d="M250,480 C420,480 420,280 560,280"/>
+      </g>
+      <path id="cvOut" d="M610,280 L800,280" fill="none" stroke="#FF6039" stroke-width="10" stroke-linecap="round"/>
+      <g id="cvDots" fill="#FF6039"><circle r="10"/><circle r="10"/><circle r="10"/></g>
+      <g class="cn" id="cn1"><rect x="0" y="40" width="250" height="80" rx="40" fill="#121216"/><text x="125" y="91" text-anchor="middle" font-size="32" font-weight="600" fill="#fff">Tráfego</text></g>
+      <g class="cn" id="cn2"><rect x="0" y="240" width="250" height="80" rx="40" fill="#121216"/><text x="125" y="291" text-anchor="middle" font-size="32" font-weight="600" fill="#fff">Sistemas</text></g>
+      <g class="cn" id="cn3"><rect x="0" y="440" width="250" height="80" rx="40" fill="#121216"/><text x="125" y="491" text-anchor="middle" font-size="32" font-weight="600" fill="#fff">Sites</text></g>
+      <g id="hubNode"><circle cx="585" cy="280" r="52" fill="#FF6039"/><circle cx="585" cy="280" r="74" fill="none" stroke="#FF6039" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/><text x="585" y="292" text-anchor="middle" font-size="34" font-weight="800" fill="#fff">1</text></g>
+      <g id="result"><path d="M780,252 L812,280 L780,308" fill="none" stroke="#FF6039" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><text x="900" y="370" text-anchor="end" font-size="32" font-weight="700" fill="#121216">Resultado</text></g>
+    </svg>
+    <div id="s9-stat"><span class="num"><span class="odo" data-to="3" data-pad="2"></span></span><span class="lbl">frentes, <b>uma mesma estratégia.</b></span></div>
   </section>
 
-  <!-- CENA 4 · CTA escuro do site + Seguir -->
-  <section class="scene bg-night" id="s4">
+  <!-- 10 · CTA escuro do site + Seguir -->
+  <section class="scene bg-night" id="s10">
     <div class="gridlines"></div><div class="glow g1"></div><div class="glow g2"></div>
     <div id="giant">SOFTWORKS</div>
     <div class="nav"><span class="mark"><b>Opus</b>SoftWorks</span><span class="cta">Entrar em contato ↗</span></div>
-    <span class="pager"><span class="bar"><i></i></span>05 / 05</span>
-    <h2 class="headline" id="s4-head">Vamos <i>elevar</i> o próximo passo?</h2>
+    <span class="pager"><span class="bar"><i></i></span>09 / 09</span>
+    <h2 class="headline" id="s10-head">Vamos <i>elevar</i> o próximo passo?</h2>
     <div id="confetti"></div>
     <div id="card">
-      <div id="ring"><div class="photo" id="s4-photo" data-src="assets/foto-2.jpg"><div class="ph-grid"></div><img class="ph-mark" src="assets/opus-simbolo.png" alt=""><div class="ph-img"></div></div></div>
-      <p id="s4-name"><b>Opus</b>SoftWorks</p>
-      <p id="s4-handle">@opussoftworks</p>
-      <p id="s4-bio">Tráfego pago, sistemas e sites.</p>
+      <div id="ring"><div class="photo" id="s10-photo" data-src="assets/foto-2.jpg"><div class="ph-grid"></div><img class="ph-mark" src="assets/opus-simbolo.png" alt=""><div class="ph-img"></div></div></div>
+      <p id="s10-name"><b>Opus</b>SoftWorks</p>
+      <p id="s10-handle">@opussoftworks</p>
+      <p id="s10-bio">Tráfego pago, sistemas e sites.</p>
       <div id="btn">
         <div id="ripple"></div>
         <span class="lab" id="lab1">Seguir</span>
@@ -311,7 +462,7 @@
       </div>
       <div id="burst"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </div>
-    <div id="s4-foot"><span>@opussoftworks</span><span>opussoftworks.com.br</span></div>
+    <div id="s10-foot"><span>@opussoftworks</span><span>opussoftworks.com.br</span></div>
     <svg id="cursor" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 3 L6 25 L11.5 19.8 L15.2 28.2 L19 26.6 L15.4 18.4 L23 18.4 Z" fill="#fff" stroke="#121216" stroke-width="1.8" stroke-linejoin="round"/></svg>
   </section>
 
@@ -339,10 +490,11 @@
   if (RENDER) document.body.classList.add("render");
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const W = 1080, H = 1920, DURATION = 15;
-  // Cortes de cena no tempo forte da trilha (120 BPM): 3.0 · 5.5 · 8.0 · 10.5 · 12.5 · clique em 14.0
-  const CUT = [3.0, 5.5, 8.0, 10.5, 12.5], CLICK = 14.0;
+  const W = 1080, H = 1920, DURATION = 60;
+  // Cortes de cena no tempo forte da trilha (120 BPM) — manter em sincronia com assets/trilha.js
+  const CUT = [5, 9, 15, 21, 26.5, 32, 37.5, 43.5, 49.5, 54], CLICK = 58;
   const SVGNS = "http://www.w3.org/2000/svg";
+  const rnd = (a, z, s) => a + (z - a) * ((Math.sin(s * 999.13) + 1) / 2);   // pseudoaleatório determinístico
 
   const vp = $("#viewport");
   const fit = () => { const s = Math.min(innerWidth / W, innerHeight / H); vp.style.transform = `scale(${s})`; };
@@ -372,6 +524,15 @@
     });
   });
 
+  // "OPUS SOFTWORKS" gigante: uma máscara por letra, cor em degradê ameixa → azul-marinho (como no site)
+  $$("#giga div").forEach(line => {
+    const chars = [...line.textContent]; line.textContent = "";
+    chars.forEach((ch, i) => {
+      const c = document.createElement("span"), s = document.createElement("span");
+      c.className = "c"; s.textContent = ch; c.append(s); line.append(c);
+    });
+  });
+
   // Odômetro: uma coluna de dígitos por casa; as casas da direita giram mais voltas
   $$(".odo").forEach(el => {
     const s = String(el.dataset.to).padStart(+(el.dataset.pad || 0), "0"), n = s.length;
@@ -385,7 +546,7 @@
     });
   });
 
-  // Fundo de caracteres (como a seção "Como trabalhamos" do site) — determinístico por quadro
+  // Fundo de caracteres (seção "Como trabalhamos" do site) — determinístico por quadro
   const ASCII_SET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+=-:;<>/\\|[]{}";
   const asciiEl = $("#ascii");
   const asciiFrame = k => {
@@ -403,6 +564,10 @@
   };
   asciiFrame(0);
 
+  // Bolinhas do funil (cena Tráfego)
+  const fd = $("#fdots");
+  for (let i = 0; i < 21; i++) { const c = document.createElementNS(SVGNS, "circle"); c.setAttribute("r", 11); c.setAttribute("fill", "#fff"); fd.append(c); }
+
   const loadPhoto = el => new Promise(res => {
     const img = new Image();
     img.onload = () => { el.classList.add("has-img"); $(".ph-img", el).style.backgroundImage = `url(${el.dataset.src})`; res(); };
@@ -412,47 +577,213 @@
 
   const imgsReady = Promise.all($$("img").map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
   const ready = Promise.all([document.fonts.ready, imgsReady, ...$$(".photo[data-src]").map(loadPhoto),
-    document.fonts.load('700 130px "Exo 2"'), document.fonts.load('700 120px "Inter Tight"'), document.fonts.load('italic 400 120px "Instrument Serif"')])
+    document.fonts.load('700 130px "Exo 2"'), document.fonts.load('800 120px "Inter Tight"'), document.fonts.load('italic 400 120px "Instrument Serif"')])
     .then(build);
 
-  function odometer(tl, el, at, dur, pop) {
-    el._cols.forEach((c, j) => tl.fromTo(c.stk, { yPercent: 0 }, { yPercent: c.yp, duration: dur * (.7 + .3 * j / Math.max(1, el._cols.length - 1)), ease: "power3.out" }, at));
-    if (pop) tl.fromTo(pop, { scale: 1 }, { scale: 1.08, duration: .12, yoyo: true, repeat: 1, ease: "power2.out" }, at + dur * .8);
-  }
-  const words = sel => $$(`${sel} .w > span`);
-  const show = (tl, sel, at) => tl.set(sel, { visibility: "visible" }, at);
-  const hide = (tl, sel, at) => tl.set(sel, { visibility: "hidden" }, at);
-  const snapOn = { opacity: v => (+v > 0 ? 1 : 0) };   // esconde a ponta arredondada do traço até o desenho começar
-  const draw = (tl, el, at, dur, ease = "power2.inOut") => {
-    const len = el.getTotalLength();
-    tl.fromTo(el, { strokeDasharray: len, strokeDashoffset: len, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, modifiers: snapOn, duration: dur, ease }, at);
-  };
-  const enter = (tl, id, at, dur) => {
-    tl.fromTo(`${id} .nav`, { y: -40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .5 }, at - .05)
-      .fromTo(`${id} .pager`, { autoAlpha: 0 }, { autoAlpha: 1, duration: .4 }, at)
-      .fromTo(`${id} .pager .bar i`, { scaleX: 0 }, { scaleX: 1, duration: dur, ease: "none" }, at);
-    if ($(`${id} .glow`)) tl.fromTo(`${id} .glow.g1`, { x: -80, y: -60 }, { x: 140, y: 120, duration: dur + .8, ease: "sine.inOut" }, at - .5)
-                            .fromTo(`${id} .glow.g2`, { x: 80, y: 60 }, { x: -160, y: -140, duration: dur + .8, ease: "sine.inOut" }, at - .5);
-    if ($(`${id} .eyebrow`)) tl.fromTo(`${id} .eyebrow`, { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: .5 }, at - .05);
-    const ws = words(`${id} .headline`);
-    tl.to(ws, { yPercent: 0, rotation: 0, duration: .55, stagger: .06, ease: "power3.out" }, at);
-    draw(tl, $(`${id} .sw path`), at + ws.length * .06 + .28, .45);
-  };
-
   function build() {
-    // ---------- Geometria do "O" do logotipo ----------
+    const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+
+    // ---------- Utilitários de timeline ----------
+    const show = (sel, at) => tl.set(sel, { visibility: "visible" }, at);
+    const hide = (sel, at) => tl.set(sel, { visibility: "hidden" }, at);
+    const snapOn = { opacity: v => (+v > 0 ? 1 : 0) };   // esconde a ponta arredondada do traço até o desenho começar
+    const draw = (el, at, dur, ease = "power2.inOut") => {
+      const len = el.getTotalLength();
+      tl.fromTo(el, { strokeDasharray: len, strokeDashoffset: len, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, modifiers: snapOn, duration: dur, ease }, at);
+    };
+    const odometer = (el, at, dur, pop) => {
+      el._cols.forEach((c, j) => tl.fromTo(c.stk, { yPercent: 0 }, { yPercent: c.yp, duration: dur * (.7 + .3 * j / Math.max(1, el._cols.length - 1)), ease: "power3.out" }, at));
+      if (pop) tl.fromTo(pop, { scale: 1 }, { scale: 1.08, duration: .12, yoyo: true, repeat: 1, ease: "power2.out" }, at + dur * .8);
+    };
+    // Entrada padrão de uma cena: menu, pager, luzes, eyebrow, título palavra a palavra + sublinhado
+    const enter = (id, at, dur) => {
+      const q = s => $(`${id} ${s}`);
+      if (q(".nav")) tl.fromTo(`${id} .nav`, { y: -40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .5 }, at - .05);
+      if (q(".pager")) tl.fromTo(`${id} .pager`, { autoAlpha: 0 }, { autoAlpha: 1, duration: .4 }, at)
+                         .fromTo(`${id} .pager .bar i`, { scaleX: 0 }, { scaleX: 1, duration: dur, ease: "none" }, at);
+      if (q(".glow")) tl.fromTo(`${id} .glow.g1`, { x: -80, y: -60 }, { x: 140, y: 120, duration: dur + .8, ease: "sine.inOut" }, at - .5)
+                        .fromTo(`${id} .glow.g2`, { x: 80, y: 60 }, { x: -160, y: -140, duration: dur + .8, ease: "sine.inOut" }, at - .5);
+      if (q(".eyebrow")) tl.fromTo(`${id} .eyebrow`, { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: .5 }, at - .05);
+      if (q(".eyebrow .odo")) odometer(q(".eyebrow .odo"), at + .1, .9);
+      const ws = $$(`${id} .headline .w > span`);
+      if (ws.length) {
+        tl.to(ws, { yPercent: 0, rotation: 0, duration: .55, stagger: .06, ease: "power3.out" }, at);
+        draw(q(".sw path"), at + ws.length * .06 + .28, .45);
+      }
+    };
+    // Transições: wipe (com parallax na cena que sai) e íris (com anel coral à frente)
+    const WIPES = {
+      up:    { from: "inset(100% 0% 0% 0%)", to: "inset(0% 0% 0% 0%)", out: { y: -260 } },
+      down:  { from: "inset(0% 0% 100% 0%)", to: "inset(0% 0% 0% 0%)", out: { y: 260 } },
+      right: { from: "inset(0% 100% 0% 0%)", to: "inset(0% 0% 0% 0%)", out: { x: 260 } },
+      diag:  { from: "polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%)", to: "polygon(0% 0%, 200% 0%, 200% 0%, 0% 200%)", out: { x: 180, y: 180 } },
+    };
+    const wipe = (prev, next, kind, end, dur = .5, sweep) => {
+      const k = WIPES[kind], at = end - dur;
+      show(next, at);
+      tl.fromTo(next, { clipPath: k.from }, { clipPath: k.to, duration: dur, ease: "power4.inOut" }, at)
+        .to(prev, { ...k.out, duration: dur, ease: "power4.inOut" }, at);
+      if (sweep) {
+        show(sweep, at);
+        tl.fromTo(sweep, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 100%)", duration: dur + .15, ease: "power3.inOut" }, at);
+        hide(sweep, end + .2);
+      }
+      hide(prev, end + .05);
+    };
+    const iris = (prev, next, cx, cy, end, dur = .55) => {
+      const at = end - dur;
+      show(next, at); show("#iris-ring", at);
+      tl.to(prev, { scale: .9, duration: dur, ease: "power3.in", transformOrigin: `${cx}px ${cy}px` }, at)
+        .fromTo(next, { clipPath: `circle(0px at ${cx}px ${cy}px)` }, { clipPath: `circle(2300px at ${cx}px ${cy}px)`, duration: dur, ease: "power3.in" }, at)
+        .fromTo("#iris-ring", { left: cx, top: cy, width: 0, height: 0, borderWidth: 4 },
+                              { width: 4800, height: 4800, borderWidth: 40, duration: dur, ease: "power3.in" }, at - .06);
+      hide("#iris-ring", end); hide(prev, end + .05);
+    };
+
+    gsap.set(["#hole", "#iris-ring"], { xPercent: -50, yPercent: -50 });
+    gsap.set(".w > span", { yPercent: 140, rotation: 7, transformOrigin: "0% 100%" });
+
+    // ================= 1 · LOGO (0 → 5s) =================
     const wm = $("#wm"), oSpan = $("#wm .o"), bl = $("#wm .bl");
     const ctx = document.createElement("canvas").getContext("2d");
     ctx.font = '700 130px "Exo 2"';
     const m = ctx.measureText("O");
     const baseY = wm.offsetTop + bl.offsetTop;
-    const x0 = wm.offsetLeft + oSpan.offsetLeft - m.actualBoundingBoxLeft;
-    const x1 = wm.offsetLeft + oSpan.offsetLeft + m.actualBoundingBoxRight;
+    const x0 = wm.offsetLeft + oSpan.offsetLeft - m.actualBoundingBoxLeft, x1 = wm.offsetLeft + oSpan.offsetLeft + m.actualBoundingBoxRight;
     const y0 = baseY - m.actualBoundingBoxAscent, y1 = baseY + m.actualBoundingBoxDescent;
-    const O = { cx: (x0 + x1) / 2, cy: (y0 + y1) / 2, w: x1 - x0, h: y1 - y0 };
-    const T = 19;
+    const O = { cx: (x0 + x1) / 2, cy: (y0 + y1) / 2, w: x1 - x0, h: y1 - y0 }, T = 19;
+    gsap.set("#pill", { xPercent: -50, yPercent: -50, left: W / 2, top: H / 2, width: 0, height: 12 });
 
-    // ---------- Linha "bagunçada" (com laços) da cena Clareza ----------
+    show("#s1", 0);
+    tl.set("#wm .rest", { clipPath: "inset(-30% 100% -30% -2%)", x: -60 }, 0)
+      .set(["#s1-symbol", "#s1-tag span"], { autoAlpha: 0 }, 0)
+      .fromTo("#s1 .dots", { autoAlpha: 0, scale: 1.1 }, { autoAlpha: 1, scale: 1, duration: 1.6, ease: "power2.out" }, 0)
+      .fromTo("#s1 .glow.g1", { x: -60, y: -40 }, { x: 160, y: 140, duration: 5, ease: "sine.inOut" }, 0)
+      .fromTo("#s1 .glow.g2", { x: 60, y: 40 }, { x: -180, y: -160, duration: 5, ease: "sine.inOut" }, 0)
+      .to("#pill", { width: 780, duration: .7, ease: "expo.out" }, .2)
+      .to("#pill", { width: 250, height: 136, rotation: 90, duration: .5, ease: "back.out(1.7)" }, .9)
+      .to("#pill", { rotation: 0, left: O.cx, top: O.cy, width: O.w, height: O.h, duration: .6, ease: "power4.inOut" }, 1.5)
+      .to("#hole", { width: O.w - T * 2, height: O.h - T * 2, duration: .4, ease: "power3.out" }, 1.85)
+      .to("#wm .rest", { clipPath: "inset(-30% -4% -30% -2%)", x: 0, duration: .7, ease: "power3.out" }, 2.0)
+      .fromTo("#s1-symbol", { autoAlpha: 0, scale: .4, rotation: -25, y: 50 }, { autoAlpha: 1, scale: 1, rotation: 0, y: 0, duration: .8, ease: "back.out(1.7)" }, 2.35)
+      .fromTo("#s1-tag span", { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: .45, stagger: .08 }, 2.7)
+      .fromTo("#s1-in", { scale: 1 }, { scale: 1.05, duration: 2.2, ease: "sine.inOut", transformOrigin: `${O.cx}px ${O.cy}px` }, 2.2);
+
+    // 1 → 1b · o logo "explode" e dá lugar ao nome gigante
+    show("#s1b", CUT[0] - .5);
+    tl.to("#s1-in", { scale: 2.4, autoAlpha: 0, filter: "blur(12px)", duration: .55, ease: "power3.in", transformOrigin: `${O.cx}px ${O.cy}px` }, CUT[0] - .55)
+      .fromTo("#s1b", { autoAlpha: 0 }, { autoAlpha: 1, duration: .35 }, CUT[0] - .3);
+    hide("#s1", CUT[0] + .05);
+
+    // ================= 1b · OPUS SOFTWORKS gigante (5 → 9s) =================
+    let b = CUT[0];
+    const gc = $$("#giga .c");
+    gc.forEach(c => {           // degradê ameixa → azul-marinho conforme a posição horizontal
+      const f = Math.min(1, Math.max(0, (c.offsetLeft + c.offsetWidth / 2 - 100) / 880));
+      const mix = (a, z) => Math.round(a + (z - a) * f);
+      c.firstChild.style.color = `rgb(${mix(70, 22)},${mix(34, 34)},${mix(68, 92)})`;
+    });
+    tl.fromTo("#giga .c > span", { yPercent: 105 }, { yPercent: 0, duration: .6, stagger: .035, ease: "power4.out" }, b - .2)
+      .fromTo("#giga", { scale: .96 }, { scale: 1.14, duration: 4.2, ease: "power1.inOut" }, b - .2)
+      .fromTo("#s1b-cap", { autoAlpha: 0, y: -20 }, { autoAlpha: 1, y: 0, duration: .5 }, b + .3)
+      .fromTo("#s1b-foot span", { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .5, stagger: .15 }, b + .6);
+    // centro do "O" de OPUS considerando o zoom do bloco no instante do corte
+    const g = $("#giga"), oC = gc[0];
+    const gCx = 540, gCy = g.offsetTop + g.offsetHeight / 2, sAt = 1.14;
+    const ox = oC.offsetLeft + g.offsetLeft + oC.offsetWidth / 2, oy = oC.parentElement.offsetTop + g.offsetTop + oC.offsetHeight * .45;
+    const OX = gCx + (ox - gCx) * sAt, OY = gCy + (oy - gCy) * sAt;
+    iris("#s1b", "#s2", OX, OY, CUT[1]);
+
+    // ================= 2 · hero coral (9 → 15s) =================
+    b = CUT[1];
+    enter("#s2", b + .05, CUT[2] - b);
+    tl.fromTo("#s2-photo", { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(50% at 50% 50%)", duration: .8, ease: "expo.out" }, b)
+      .fromTo("#s2-photo .ph-img, #s2-photo .ph-mark", { scale: 1.35 }, { scale: 1, duration: 1.6, ease: "power2.out" }, b)
+      .fromTo("#s2-orbit", { autoAlpha: 0, scale: .85 }, { autoAlpha: 1, scale: 1, duration: .7 }, b + .1)
+      .fromTo("#s2-orbit", { rotation: -30 }, { rotation: 190, duration: 6.6, ease: "none" }, b - .55)
+      .fromTo("#s2-orbit2", { autoAlpha: 0, rotation: 60 }, { autoAlpha: 1, rotation: -200, duration: 6.6, ease: "none" }, b - .55)
+      .fromTo("#s2 .dots", { autoAlpha: 0 }, { autoAlpha: 1, duration: .8 }, b)
+      .fromTo("#s2-lead", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .6 }, b + .9)
+      .fromTo("#s2-btns > *", { autoAlpha: 0, y: 30, scale: .92 }, { autoAlpha: 1, y: 0, scale: 1, duration: .5, stagger: .12, ease: "back.out(2)" }, b + 1.4)
+      .to("#s2-btns > :first-child", { scale: 1.05, duration: .25, yoyo: true, repeat: 1, ease: "power2.inOut" }, b + 3.2);
+    wipe("#s2", "#s3", "up", CUT[2]);
+
+    // ================= 3 · onde a Opus entra (15 → 21s) =================
+    b = CUT[2];
+    enter("#s3", b - .05, CUT[3] - b);
+    const rot = $("#rot"), rw = $$("#rot span");
+    const box = el => ({ x: rot.offsetLeft + el.offsetLeft - 22, y: rot.offsetTop + 6, w: el.offsetWidth + 44, h: 118 });
+    const allBox = { x: box(rw[0]).x, y: box(rw[0]).y, w: box(rw[2]).x + box(rw[2]).w - box(rw[0]).x, h: 118 };
+    const focus = (i, at) => {
+      const k = box(rw[i]);
+      tl.to("#brk", { left: k.x, top: k.y, width: k.w, height: k.h, duration: .35, ease: "power3.inOut" }, at)
+        .to(rw, { filter: j => j === i ? "blur(0px)" : "blur(6px)", opacity: j => j === i ? 1 : .3, duration: .35 }, at);
+    };
+    const k0 = box(rw[0]);
+    tl.fromTo(rw, { filter: "blur(10px)", opacity: 0, y: 30 }, { filter: "blur(6px)", opacity: .3, y: 0, duration: .4, stagger: .06 }, b)
+      .fromTo("#brk", { left: k0.x + k0.w / 2, top: k0.y + k0.h / 2, width: 0, height: 0, autoAlpha: 0 },
+                      { left: k0.x, top: k0.y, width: k0.w, height: k0.h, autoAlpha: 1, duration: .35 }, b + .2)
+      .to(rw[0], { filter: "blur(0px)", opacity: 1, duration: .3 }, b + .2);
+    focus(1, b + 1.0); focus(2, b + 1.8); focus(0, b + 2.6); focus(1, b + 3.4);
+    tl.to("#brk", { left: allBox.x, top: allBox.y, width: allBox.w, height: allBox.h, duration: .4, ease: "back.out(1.6)" }, b + 4.2)
+      .to(rw, { filter: "blur(0px)", opacity: 1, duration: .35 }, b + 4.2)
+      .fromTo("#s3-lead", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .6 }, b + .9)
+      .fromTo(".tile", { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .5, stagger: .15 }, b + 1.5)
+      .to(".tile", { backgroundColor: "#FFE7DF", duration: .3, stagger: { each: .8, yoyo: true, repeat: 1 } }, b + 2.6);
+    wipe("#s3", "#s4", "right", CUT[3], .5, null);
+
+    // ================= 4 · Tráfego · funil (21 → 26.5s) =================
+    b = CUT[3];
+    enter("#s4", b - .05, CUT[4] - b);
+    tl.fromTo("#s4-lead", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .6 }, b + .7)
+      .fromTo(["#fs1", "#fs2", "#fs3"], { autoAlpha: 0, scaleX: .6, transformOrigin: "50% 50%" }, { autoAlpha: 1, scaleX: 1, duration: .55, stagger: .18, ease: "back.out(1.6)" }, b + 1.0)
+      .fromTo("#fcheck", { scale: 0, transformOrigin: "560px 456px" }, { scale: 1, duration: .4, ease: "back.out(3)" }, b + 4.0)
+      .to("#fs3", { scale: 1.04, transformOrigin: "50% 80%", duration: .2, yoyo: true, repeat: 1 }, b + 4.0);
+    // bolinhas descendo pelo funil: só algumas chegam até "Vendas"
+    $$("#fdots circle").forEach((c, i) => {
+      const lvl = i % 7 === 0 || i % 7 === 3 || i % 7 === 5 ? 2 : (i % 2 ? 1 : 0);   // até onde a bolinha chega
+      const yEnd = [150, 340, 470][lvl], xs = rnd(120, 780, i + 2);
+      const xEnd = 450 + (xs - 450) * [0.8, 0.5, 0.15][lvl];
+      const at = b + 1.6 + i * .11;
+      tl.fromTo(c, { attr: { cx: xs, cy: -30 }, opacity: 0 }, { attr: { cx: xEnd, cy: yEnd }, opacity: 1, duration: .9, ease: "power1.in" }, at)
+        .to(c, { opacity: 0, duration: .2 }, at + .9);
+    });
+    wipe("#s4", "#s5", "diag", CUT[4]);
+
+    // ================= 5 · Sistemas · painel único (26.5 → 32s) =================
+    b = CUT[4];
+    enter("#s5", b - .05, CUT[5] - b);
+    tl.fromTo("#s5-lead", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .6 }, b + .8);
+    $$("#s5 .chip").forEach((c, i) => {
+      const r = rnd(-9, 9, i + 4);
+      const dx = 540 - (c.offsetLeft + c.offsetWidth / 2), dy = 1165 - (c.offsetTop + 38);
+      tl.fromTo(c, { autoAlpha: 0, scale: .5, rotation: r * 2 }, { autoAlpha: 1, scale: 1, rotation: r, duration: .45, ease: "back.out(2)" }, b + .9 + i * .1)
+        .to(c, { y: rnd(-18, 18, i + 9), x: rnd(-14, 14, i + 13), duration: 1.4, ease: "sine.inOut" }, b + 1.4)
+        .to(c, { x: dx, y: dy, scale: .25, rotation: 0, autoAlpha: 0, duration: .55, ease: "power3.in" }, b + 2.8 + i * .07);
+    });
+    tl.fromTo("#hub", { autoAlpha: 0, scale: .6 }, { autoAlpha: 1, scale: 1, duration: .55, ease: "back.out(1.8)" }, b + 2.9)
+      .fromTo("#hub .hrow .bar b", { scaleX: 0 }, { scaleX: i => [.82, .64, .9][i], duration: .6, stagger: .18 }, b + 3.5)
+      .fromTo("#hub .hrow .ok", { scale: 0 }, { scale: 1, duration: .35, stagger: .18, ease: "back.out(3)" }, b + 3.9)
+      .to("#hub", { scale: 1.04, duration: .18, yoyo: true, repeat: 1 }, b + 4.6);
+    iris("#s5", "#s6", 540, 1165, CUT[5]);
+
+    // ================= 6 · Sites · celular (32 → 37.5s) =================
+    b = CUT[5];
+    enter("#s6", b + .05, CUT[6] - b);
+    tl.fromTo("#s6-lead", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .6 }, b + .8)
+      .fromTo("#phone", { autoAlpha: 0, y: 120, rotation: -4 }, { autoAlpha: 1, y: 0, rotation: 0, duration: .7, ease: "expo.out" }, b + .7)
+      .fromTo("#load .lbar i", { scaleX: 0 }, { scaleX: 1, duration: 1.2, ease: "power2.inOut" }, b + 1.2)
+      .to("#load", { autoAlpha: 0, scale: .9, duration: .3 }, b + 2.5)
+      .fromTo("#screen .blk", { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .09 }, b + 2.6)
+      .fromTo(".check", { autoAlpha: 0, x: 40 }, { autoAlpha: 1, x: 0, duration: .45, stagger: .45 }, b + 2.8)
+      .fromTo(".check .n", { scale: 0 }, { scale: 1, duration: .35, stagger: .45, ease: "back.out(3)" }, b + 2.9)
+      .to("#b-btn", { scale: 1.12, duration: .2, yoyo: true, repeat: 1, transformOrigin: "50% 50%" }, b + 4.2);
+    odometer($("#load .odo"), b + 1.2, 1.2);
+    wipe("#s6", "#s7", "up", CUT[6]);
+
+    // ================= 7 · Clareza (37.5 → 43.5s) — momento mais calmo da trilha =================
+    b = CUT[6];
+    enter("#s7", b - .05, CUT[7] - b);
     let d = "";
     for (let i = 0; i <= 260; i++) {
       const t = i / 260;
@@ -461,141 +792,65 @@
       d += (i ? "L" : "M") + x.toFixed(1) + "," + y.toFixed(1);
     }
     $("#mess").setAttribute("d", d);
-
-    // ---------- Palavras giratórias com colchetes (cena 3c) ----------
-    const rot = $("#rot"), rw = $$("#rot span");
-    const box = el => ({ x: rot.offsetLeft + el.offsetLeft - 22, y: rot.offsetTop + 6, w: el.offsetWidth + 44, h: 118 });
-    const allBox = { x: box(rw[0]).x, y: box(rw[0]).y, w: box(rw[2]).x + box(rw[2]).w - box(rw[0]).x, h: 118 };
-
-    gsap.set("#pill", { xPercent: -50, yPercent: -50, left: W / 2, top: H / 2, width: 0, height: 12 });
-    gsap.set(["#hole", "#iris-ring"], { xPercent: -50, yPercent: -50 });
-    gsap.set(".w > span", { yPercent: 140, rotation: 7, transformOrigin: "0% 100%" });
-
-    const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
-
-    const iris = (scene, cx, cy, end, dur) => {
-      const at = end - dur;
-      show(tl, scene, at); show(tl, "#iris-ring", at);
-      tl.fromTo(scene, { clipPath: `circle(0px at ${cx}px ${cy}px)` }, { clipPath: `circle(2300px at ${cx}px ${cy}px)`, duration: dur, ease: "power3.in" }, at)
-        .fromTo("#iris-ring", { left: cx, top: cy, width: 0, height: 0, borderWidth: 4 },
-                              { width: 4800, height: 4800, borderWidth: 40, duration: dur, ease: "power3.in" }, at - .06);
-      hide(tl, "#iris-ring", end);
-    };
-
-    // =========== CENA 1 (0 → 3.0s) · logo sobre o fundo pontilhado ===========
-    show(tl, "#s1", 0);
-    tl.set("#wm .rest", { clipPath: "inset(-30% 100% -30% -2%)", x: -60 }, 0)
-      .set(["#s1-symbol", "#s1-tag span"], { autoAlpha: 0 }, 0)
-      .fromTo("#s1 .dots", { autoAlpha: 0, scale: 1.1 }, { autoAlpha: 1, scale: 1, duration: 1.2, ease: "power2.out" }, 0)
-      .fromTo("#s1 .glow.g1", { x: -60, y: -40 }, { x: 120, y: 100, duration: 3, ease: "sine.inOut" }, 0)
-      .fromTo("#s1 .glow.g2", { x: 60, y: 40 }, { x: -140, y: -120, duration: 3, ease: "sine.inOut" }, 0)
-      .to("#pill", { width: 780, duration: .5, ease: "expo.out" }, .08)
-      .to("#pill", { width: 250, height: 136, rotation: 90, duration: .42, ease: "back.out(1.7)" }, .55)
-      .to("#pill", { rotation: 0, left: O.cx, top: O.cy, width: O.w, height: O.h, duration: .5, ease: "power4.inOut" }, .95)
-      .to("#hole", { width: O.w - T * 2, height: O.h - T * 2, duration: .36, ease: "power3.out" }, 1.22)
-      .to("#wm .rest", { clipPath: "inset(-30% -4% -30% -2%)", x: 0, duration: .6, ease: "power3.out" }, 1.32)
-      .fromTo("#s1-symbol", { autoAlpha: 0, scale: .4, rotation: -25, y: 50 },
-                            { autoAlpha: 1, scale: 1, rotation: 0, y: 0, duration: .75, ease: "back.out(1.7)" }, 1.55)
-      .fromTo("#s1-tag span", { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .07 }, 1.75)
-      .fromTo("#s1-in", { scale: 1 }, { scale: 1.05, duration: 1.1, ease: "sine.inOut", transformOrigin: `${O.cx}px ${O.cy}px` }, 1.35)
-      .to("#s1-in", { scale: .9, duration: .55, ease: "power3.in", transformOrigin: `${O.cx}px ${O.cy}px` }, CUT[0] - .55);
-
-    iris("#s2", O.cx, O.cy, CUT[0], .55);
-    hide(tl, "#s1", CUT[0] + .05);
-
-    // =========== CENA 2 (3.0 → 5.5s) · coral · hero do site ===========
-    let b = CUT[0];
-    enter(tl, "#s2", b + .05, CUT[1] - b);
-    tl.fromTo("#s2-photo", { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(50% at 50% 50%)", duration: .75, ease: "expo.out" }, b - .05)
-      .fromTo("#s2-photo .ph-img, #s2-photo .ph-mark", { scale: 1.35 }, { scale: 1, duration: 1.3, ease: "power2.out" }, b - .05)
-      .fromTo("#s2-orbit", { autoAlpha: 0, scale: .85 }, { autoAlpha: 1, scale: 1, duration: .7 }, b + .1)
-      .fromTo("#s2-orbit", { rotation: -30 }, { rotation: 100, duration: 3.2, ease: "none" }, b - .55)
-      .fromTo("#s2-orbit2", { autoAlpha: 0, rotation: 60 }, { autoAlpha: 1, rotation: -110, duration: 3.2, ease: "none" }, b - .55)
-      .fromTo("#s2 .dots", { autoAlpha: 0 }, { autoAlpha: 1, duration: .8 }, b)
-      .fromTo("#s2-lead", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .5 }, b + .75);
-
-    show(tl, "#s3a", CUT[1] - .5);
-    tl.fromTo("#s3a", { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: .5, ease: "power4.inOut" }, CUT[1] - .5)
-      .to("#s2", { y: -260, duration: .5, ease: "power4.inOut" }, CUT[1] - .5);
-    hide(tl, "#s2", CUT[1] + .05);
-
-    // =========== CENA 3a (5.5 → 8.0s) · Clareza · fundo de caracteres ===========
-    b = CUT[1];
-    enter(tl, "#s3a", b - .05, CUT[2] - b);
     const ascii = { k: 0 };
-    tl.fromTo("#ascii", { autoAlpha: 0 }, { autoAlpha: 1, duration: .5 }, b - .3)
-      .fromTo(ascii, { k: 0 }, { k: 24, duration: CUT[2] - b + .5, ease: "none", onUpdate: () => asciiFrame(Math.round(ascii.k)) }, b - .5)
-      .fromTo("#dotA", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: .4, ease: "back.out(2)" }, b + .1)
-      .fromTo("#lblA", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .4 }, b + .15)
-      .to("#mess", { opacity: .3, duration: .4 }, b + .85)
-      .fromTo("#arrowHead", { autoAlpha: 0, x: -20 }, { autoAlpha: 1, x: 0, duration: .3 }, b + 1.15)
-      .fromTo("#dotB", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: .4, ease: "back.out(2)" }, b + 1.15)
-      .fromTo("#lblB", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .4 }, b + 1.2)
-      .fromTo("#runner", { attr: { cx: 40 }, autoAlpha: 0 }, { attr: { cx: 840 }, autoAlpha: 1, duration: .65, ease: "power2.inOut" }, b + 1.15)
-      .fromTo(".step", { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .5, stagger: .15 }, b + .55);
-    draw(tl, $("#mess"), b + .15, .7, "power1.inOut");
-    draw(tl, $("#straight"), b + .75, .5, "power3.inOut");
-    $$(".step .odo").forEach((el, i) => odometer(tl, el, b + .7 + i * .15, .9));
+    tl.fromTo("#ascii", { autoAlpha: 0 }, { autoAlpha: 1, duration: .6 }, b - .3)
+      .fromTo(ascii, { k: 0 }, { k: 40, duration: CUT[7] - b + .5, ease: "none", onUpdate: () => asciiFrame(Math.round(ascii.k)) }, b - .5)
+      .fromTo("#dotA", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: .4, ease: "back.out(2)" }, b + .3)
+      .fromTo("#lblA", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .4 }, b + .35)
+      .to("#mess", { opacity: .3, duration: .5 }, b + 1.8)
+      .fromTo("#arrowHead", { autoAlpha: 0, x: -20 }, { autoAlpha: 1, x: 0, duration: .3 }, b + 2.4)
+      .fromTo("#dotB", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: .4, ease: "back.out(2)" }, b + 2.4)
+      .fromTo("#lblB", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .4 }, b + 2.45)
+      .fromTo("#runner", { attr: { cx: 40 }, autoAlpha: 0 }, { attr: { cx: 840 }, autoAlpha: 1, duration: .9, ease: "power2.inOut" }, b + 2.4)
+      .fromTo(".step", { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .6, stagger: .3 }, b + 2.9);
+    draw($("#mess"), b + .4, 1.3, "power1.inOut");
+    draw($("#straight"), b + 1.7, .7, "power3.inOut");
+    $$(".step .odo").forEach((el, i) => odometer(el, b + 3.1 + i * .3, .9));
+    wipe("#s7", "#s8", "right", CUT[7], .5, "#s8-sweep");
 
-    show(tl, "#s3b", CUT[2] - .5);
-    tl.fromTo("#s3b", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: .5, ease: "power4.inOut" }, CUT[2] - .5)
-      .to("#s3a", { x: 260, duration: .5, ease: "power4.inOut" }, CUT[2] - .5)
-      .set("#s3b-lead-sweep", { visibility: "visible" }, CUT[2] - .5)
-      .fromTo("#s3b-lead-sweep", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 100%)", duration: .65, ease: "power3.inOut" }, CUT[2] - .5);
-    hide(tl, "#s3a", CUT[2] + .05); hide(tl, "#s3b-lead-sweep", CUT[2] + .2);
+    // ================= 8 · Método · azul-marinho (43.5 → 49.5s) =================
+    b = CUT[7];
+    enter("#s8", b - .05, CUT[8] - b);
+    tl.fromTo("#s8-lead", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .6 }, b + .7)
+      .fromTo("#panel", { autoAlpha: 0, y: 80, scale: .96 }, { autoAlpha: 1, y: 0, scale: 1, duration: .7, ease: "expo.out" }, b + 1.1)
+      .fromTo(".kpi", { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: .45, stagger: .35 }, b + 1.5)
+      .fromTo(".kpi .tag", { scale: 0 }, { scale: 1, duration: .35, stagger: .35, ease: "back.out(3)" }, b + 2.5);
+    $$(".spark").forEach((p, i) => draw(p, b + 1.7 + i * .35, .8));
+    wipe("#s8", "#s9", "diag", CUT[8]);
 
-    // =========== CENA 3b (8.0 → 10.5s) · Método · azul-marinho ===========
-    b = CUT[2];
-    enter(tl, "#s3b", b - .05, CUT[3] - b);
-    tl.fromTo("#s3b-lead", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .5 }, b + .45)
-      .fromTo("#panel", { autoAlpha: 0, y: 80, scale: .96 }, { autoAlpha: 1, y: 0, scale: 1, duration: .6, ease: "expo.out" }, b + .35)
-      .fromTo(".kpi", { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: .4, stagger: .15 }, b + .6)
-      .fromTo(".kpi .tag", { scale: 0 }, { scale: 1, duration: .35, stagger: .15, ease: "back.out(3)" }, b + 1.3);
-    $$(".spark").forEach((p, i) => draw(tl, p, b + .75 + i * .15, .6));
+    // ================= 9 · três frentes convergindo (49.5 → 54s) =================
+    b = CUT[8];
+    enter("#s9", b - .05, CUT[9] - b);
+    tl.fromTo(".cn", { autoAlpha: 0, x: -40 }, { autoAlpha: 1, x: 0, duration: .45, stagger: .15 }, b + .6)
+      .fromTo("#hubNode", { scale: 0, transformOrigin: "585px 280px" }, { scale: 1, duration: .5, ease: "back.out(2)" }, b + 1.6)
+      .fromTo("#result", { autoAlpha: 0, x: -20 }, { autoAlpha: 1, x: 0, duration: .4 }, b + 2.3)
+      .fromTo("#s9-stat", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .5 }, b + 1.9);
+    $$(".cv").forEach((p, i) => draw(p, b + .9 + i * .12, .7));
+    draw($("#cvOut"), b + 1.9, .5);
+    odometer($("#s9-stat .odo"), b + 2.0, .9, "#s9-stat .num");
+    // pontos viajando pelas curvas até o centro
+    $$("#cvDots circle").forEach((c, i) => {
+      const p = $(`#cv${i + 1}`), L = p.getTotalLength(), o = { t: 0 };
+      tl.fromTo(o, { t: 0 }, { t: 1, duration: 1.1, ease: "power1.inOut", repeat: 1, onUpdate: () => {
+        const pt = p.getPointAtLength(o.t * L); c.setAttribute("cx", pt.x); c.setAttribute("cy", pt.y); } }, b + 1.7 + i * .15)
+        .fromTo(c, { opacity: 0 }, { opacity: 1, duration: .1 }, b + 1.7 + i * .15);
+    });
+    tl.to("#hubNode", { scale: 1.1, duration: .2, yoyo: true, repeat: 3, transformOrigin: "585px 280px" }, b + 2.8);
+    const HX = 90 + 585, HY = 660 + 280;
+    iris("#s9", "#s10", HX, HY, CUT[9]);
 
-    show(tl, "#s3c", CUT[3] - .5);
-    tl.fromTo("#s3c", { clipPath: "polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%)" },
-                      { clipPath: "polygon(0% 0%, 200% 0%, 200% 0%, 0% 200%)", duration: .5, ease: "power3.inOut" }, CUT[3] - .5)
-      .to("#s3b", { x: 180, y: 180, duration: .5, ease: "power3.inOut" }, CUT[3] - .5);
-    hide(tl, "#s3b", CUT[3] + .05);
-
-    // =========== CENA 3c (10.5 → 12.5s) · três frentes, uma mesma estratégia ===========
-    b = CUT[3];
-    enter(tl, "#s3c", b - .05, CUT[4] - b);
-    const focus = (i, at) => {
-      const k = box(rw[i]);
-      tl.to("#brk", { left: k.x, top: k.y, width: k.w, height: k.h, duration: .3, ease: "power3.inOut" }, at)
-        .to(rw, { filter: j => j === i ? "blur(0px)" : "blur(6px)", opacity: j => j === i ? 1 : .3, duration: .3 }, at);
-    };
-    const k0 = box(rw[0]);
-    tl.fromTo(rw, { filter: "blur(10px)", opacity: 0, y: 30 }, { filter: "blur(6px)", opacity: .3, y: 0, duration: .35, stagger: .05 }, b + .05)
-      .fromTo("#brk", { left: k0.x + k0.w / 2, top: k0.y + k0.h / 2, width: 0, height: 0, autoAlpha: 0 },
-                      { left: k0.x, top: k0.y, width: k0.w, height: k0.h, autoAlpha: 1, duration: .3 }, b + .2)
-      .to(rw[0], { filter: "blur(0px)", opacity: 1, duration: .25 }, b + .2);
-    focus(1, b + .55); focus(2, b + .85);
-    tl.to("#brk", { left: allBox.x, top: allBox.y, width: allBox.w, height: allBox.h, duration: .35, ease: "back.out(1.6)" }, b + 1.15)
-      .to(rw, { filter: "blur(0px)", opacity: 1, duration: .3 }, b + 1.15)
-      .fromTo(".front", { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .45, stagger: .12 }, b + .3)
-      .fromTo("#s3c-stat", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .45 }, b + .7);
-    odometer(tl, $("#s3c-stat .odo"), b + .75, .8, "#s3c-stat .num");
-
-    // íris a partir das três frentes, levando ao CTA escuro
-    const DX = allBox.x + allBox.w / 2, DY = allBox.y + allBox.h / 2;
-    tl.to("#s3c", { scale: .9, duration: .5, ease: "power3.in", transformOrigin: `${DX}px ${DY}px` }, CUT[4] - .5);
-    iris("#s4", DX, DY, CUT[4], .5);
-    hide(tl, "#s3c", CUT[4] + .05);
-
-    // =========== CENA 4 (12.5 → 15s) · CTA escuro + Seguir ===========
-    b = CUT[4];
-    enter(tl, "#s4", b + .05, DURATION - b);
-    tl.fromTo("#giant", { x: 120, autoAlpha: 0 }, { x: -60, autoAlpha: 1, duration: 2.5, ease: "power1.out" }, b)
-      .fromTo("#s4-foot", { autoAlpha: 0 }, { autoAlpha: 1, duration: .4 }, b + .2)
-      .fromTo("#card", { y: 300, autoAlpha: 0, rotation: 3 }, { y: 0, autoAlpha: 1, rotation: 0, duration: .6, ease: "expo.out" }, b + .1)
-      .fromTo("#ring", { scale: 0, rotation: -120 }, { scale: 1, rotation: 0, duration: .55, ease: "back.out(1.6)" }, b + .25)
-      .to("#ring", { rotation: 40, duration: 2, ease: "none" }, b + .8)
-      .fromTo("#s4-photo", { rotation: 0 }, { rotation: -40, duration: 2, ease: "none" }, b + .8)
-      .fromTo(["#s4-name", "#s4-handle", "#s4-bio"], { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .4, stagger: .07 }, b + .35)
-      .fromTo("#btn", { scale: .8, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .45, ease: "back.out(2)" }, b + .5);
+    // ================= 10 · CTA escuro + Seguir (54 → 60s) =================
+    b = CUT[9];
+    enter("#s10", b + .05, DURATION - b);
+    tl.fromTo("#giant", { x: 160, autoAlpha: 0 }, { x: -120, autoAlpha: 1, duration: 6, ease: "power1.out" }, b)
+      .fromTo("#s10-foot", { autoAlpha: 0 }, { autoAlpha: 1, duration: .4 }, b + .3)
+      .fromTo("#card", { y: 300, autoAlpha: 0, rotation: 3 }, { y: 0, autoAlpha: 1, rotation: 0, duration: .7, ease: "expo.out" }, b + .5)
+      .fromTo("#ring", { scale: 0, rotation: -120 }, { scale: 1, rotation: 0, duration: .6, ease: "back.out(1.6)" }, b + .7)
+      .to("#ring", { rotation: 120, duration: 4.5, ease: "none" }, b + 1.3)
+      .fromTo("#s10-photo", { rotation: 0 }, { rotation: -120, duration: 4.5, ease: "none" }, b + 1.3)
+      .fromTo(["#s10-name", "#s10-handle", "#s10-bio"], { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .45, stagger: .1 }, b + .9)
+      .fromTo("#btn", { scale: .8, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .5, ease: "back.out(2)" }, b + 1.3)
+      .to("#btn", { scale: 1.04, duration: .35, yoyo: true, repeat: 3, ease: "sine.inOut" }, b + 2.0);
 
     const BTN_W = 900 - 160, CX = BTN_W / 2 + 40, CY = 64;
     const BX = 90 + 80 + CX, BY = 600 + 660 + CY;
@@ -603,23 +858,18 @@
     gsap.set("#ripple", { left: CX, top: CY });
     gsap.set("#burst", { left: 80 + CX, top: 660 + CY });
     $$("#burst i").forEach((el, i) => gsap.set(el, { rotation: i * 45, scaleY: 0, autoAlpha: 0 }));
-
     const conf = $("#confetti"), cols = ["#FF6039", "#FFFFFF", "#FFB199", "#FF8A5C"];
-    const bits = [...Array(24)].map((_, i) => {
+    [...Array(28)].forEach((_, i) => {
       const el = document.createElement("i");
       el.style.background = cols[i % cols.length];
       if (i % 3 === 0) { el.style.borderRadius = "4px"; el.style.width = "12px"; el.style.height = "26px"; }
-      conf.append(el); return el;
-    });
-    const rnd = (a, z, s) => a + (z - a) * ((Math.sin(s * 999.13) + 1) / 2);
-    bits.forEach((el, i) => {
-      const ang = rnd(-Math.PI * .95, -Math.PI * .05, i + 1), dist = rnd(260, 640, i + 7);
+      conf.append(el);
+      const ang = rnd(-Math.PI * .95, -Math.PI * .05, i + 1), dist = rnd(260, 680, i + 7);
       gsap.set(el, { left: BX, top: BY, autoAlpha: 0, scale: 0 });
-      tl.to(el, { x: Math.cos(ang) * dist, y: Math.sin(ang) * dist, rotation: rnd(-200, 200, i + 3), autoAlpha: 1, scale: rnd(.7, 1.3, i + 5), duration: .55, ease: "power3.out" }, CLICK + i * .008)
-        .to(el, { y: `+=${rnd(80, 180, i + 11)}`, autoAlpha: 0, duration: .45, ease: "power1.in" }, CLICK + .5 + i * .008);
+      tl.to(el, { x: Math.cos(ang) * dist, y: Math.sin(ang) * dist, rotation: rnd(-200, 200, i + 3), autoAlpha: 1, scale: rnd(.7, 1.3, i + 5), duration: .6, ease: "power3.out" }, CLICK + i * .008)
+        .to(el, { y: `+=${rnd(120, 260, i + 11)}`, autoAlpha: 0, duration: .8, ease: "power1.in" }, CLICK + .6 + i * .008);
     });
-
-    tl.fromTo("#cursor", { x: 1000, y: 1960, rotation: 8 }, { x: BX - 16, y: BY - 8, rotation: 0, duration: .7, ease: "power3.out" }, CLICK - .85)
+    tl.fromTo("#cursor", { x: 1000, y: 1960, rotation: 8 }, { x: BX - 16, y: BY - 8, rotation: 0, duration: .9, ease: "power3.out" }, CLICK - 1.1)
       .to("#cursor", { scale: .82, duration: .08, ease: "power2.in", transformOrigin: "20% 10%" }, CLICK - .08)
       .to("#btn", { scale: .94, duration: .08, ease: "power2.in" }, CLICK - .08)
       .to("#cursor", { scale: 1, duration: .25, ease: "back.out(3)" }, CLICK)
@@ -630,7 +880,7 @@
       .to("#burst i", { scaleY: 1, autoAlpha: 1, y: -30, duration: .2, ease: "power2.out" }, CLICK)
       .to("#burst i", { autoAlpha: 0, y: -70, duration: .3, ease: "power1.in" }, CLICK + .2)
       .to("#card", { scale: 1.025, duration: .18, yoyo: true, repeat: 1, ease: "power2.out" }, CLICK)
-      .to("#cursor", { x: BX + 140, y: BY + 200, autoAlpha: 0, duration: .5, ease: "power2.in" }, CLICK + .4)
+      .to("#cursor", { x: BX + 140, y: BY + 200, autoAlpha: 0, duration: .6, ease: "power2.in" }, CLICK + .5)
       .to({}, { duration: 0 }, DURATION);
 
     // ---------- Reprodução ----------

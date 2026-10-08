@@ -30,6 +30,19 @@ export const TYPE = {
  * Com o caminho preenchido, o LogoReveal usa o arquivo original; com `null`,
  * usa a reconstrução geométrica do símbolo feita a partir do storyboard.
  */
+/**
+ * Prints reais do site (página inteira) para as telas do plano "Sites" do promo.
+ * Coloque os arquivos em `video/public/brand/site/` e informe o caminho
+ * relativo a `public/`. `scroll` = fração da altura do print que a tela rola.
+ * Com `null`, as telas mostram uma página-modelo desenhada em código.
+ */
+export const SITE_SCREENSHOTS: {desktop: string | null; mobile: string | null; desktopScroll: number; mobileScroll: number} = {
+  desktop: null,
+  mobile: null,
+  desktopScroll: 0.45,
+  mobileScroll: 0.55,
+};
+
 export const LOGO_ASSETS: {symbol: string | null; wordmark: string | null} = {
   symbol: 'brand/opus-simbolo.png',
   wordmark: null,

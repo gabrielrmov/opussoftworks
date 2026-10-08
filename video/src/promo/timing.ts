@@ -17,7 +17,7 @@ export const SHOTS: ShotDef[] = [
   {name: '05 · Três frentes', dur: 42, holds: [{at: 26, len: 24}]},
   {name: '06 · Tráfego', dur: 102, holds: [{at: 86, len: 30}]},
   {name: '07 · Sistemas', dur: 102, holds: [{at: 80, len: 30}]},
-  {name: '08 · Sites', dur: 102, holds: [{at: 67, len: 26}]},
+  {name: '08 · Sites', dur: 150, holds: [{at: 116, len: 28}]},
   {name: '09 · Tudo funciona junto', dur: 96, holds: [{at: 74, len: 30}]},
   {name: '10 · O método Opus', dur: 156, holds: [{at: 40, len: 22}, {at: 72, len: 22}, {at: 104, len: 22}, {at: 141, len: 26}]},
   {name: '11 · É entrega', dur: 114, holds: [{at: 28, len: 24}, {at: 86, len: 32}]},

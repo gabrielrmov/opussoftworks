@@ -54,9 +54,14 @@ para usar um, preencha `LOGO_ASSETS.wordmark` em `src/brand.ts`.
 Segundo filme, no ritmo da referência enviada (promo da CENDAP): 15 planos curtos,
 tipografia cinética letra a letra, painéis de cor, explosão de raios, cursor
 clicando em elementos de interface, mockups de notebook/celular e assinatura
-final. 1080×1920 · 30 fps · ~62 s. Código em `src/promo/` (kit em
+final. 1080×1920 · 30 fps · ~64 s. Código em `src/promo/` (kit em
 `src/promo/kit/`, planos em `src/promo/shots/`, ordem e duração em
 `src/promo/timing.ts`).
+
+No plano "Sites", as telas do notebook e do celular rolam um print do site.
+Para usar o site real, salve prints da página inteira (desktop ~1440 px de
+largura e celular ~390 px) em `public/brand/site/` e preencha
+`SITE_SCREENSHOTS` em `src/brand.ts`; sem prints, aparece uma página-modelo.
 
 Cada plano tem pausas de leitura (`holds` em `timing.ts`): quando um texto
 termina de entrar, o tempo do plano desacelera para 15% por alguns frames, para

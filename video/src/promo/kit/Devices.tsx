@@ -1,5 +1,6 @@
 import React from 'react';
-import {C, FONT} from '../../brand';
+import {Img, staticFile} from 'remotion';
+import {C, FONT, SITE_SCREENSHOTS} from '../../brand';
 import {OpusSymbol} from '../../components/OpusSymbol';
 import {Glyph, GlyphName} from './Glyph';
 import {Skel} from './UI';
@@ -90,9 +91,39 @@ const ServiceRow: React.FC<{s: (typeof SERVICES)[number]; scale: number}> = ({s,
   </div>
 );
 
-/** Página-modelo da OPUS desenhada em código (desktop ou mobile). `scroll` em px. */
-export const SiteScreen: React.FC<{variant: 'desktop' | 'mobile'; scroll?: number}> = ({variant, scroll = 0}) => {
+/** Reflexo de luz que atravessa a tela na diagonal. `t` 0..1 = posição do reflexo. */
+export const Glare: React.FC<{t: number}> = ({t}) =>
+  t <= 0 || t >= 1 ? null : (
+    <div
+      style={{
+        position: 'absolute',
+        inset: 0,
+        pointerEvents: 'none',
+        background: `linear-gradient(115deg, transparent ${t * 160 - 40}%, rgba(255,255,255,0.55) ${t * 160 - 25}%, transparent ${t * 160 - 10}%)`,
+      }}
+    />
+  );
+
+/**
+ * Tela do site rolando (`progress` 0..1). Usa o print real quando configurado em
+ * SITE_SCREENSHOTS; senão, a página-modelo desenhada em código.
+ */
+export const SiteScreen: React.FC<{variant: 'desktop' | 'mobile'; progress?: number}> = ({variant, progress = 0}) => {
   const desk = variant === 'desktop';
+  const shot = desk ? SITE_SCREENSHOTS.desktop : SITE_SCREENSHOTS.mobile;
+  if (shot) {
+    const max = desk ? SITE_SCREENSHOTS.desktopScroll : SITE_SCREENSHOTS.mobileScroll;
+    return (
+      <div style={{position: 'absolute', inset: 0, overflow: 'hidden'}}>
+        <Img src={staticFile(shot)} style={{width: '100%', display: 'block', transform: `translateY(${-progress * max * 100}%)`}} />
+      </div>
+    );
+  }
+  return <MockSite desk={desk} scroll={progress * (desk ? 96 : 330)} />;
+};
+
+/** Página-modelo da OPUS desenhada em código (desktop ou mobile). `scroll` em px. */
+const MockSite: React.FC<{desk: boolean; scroll: number}> = ({desk, scroll}) => {
   const s = desk ? 1.4 : 1;
   return (
     <div style={{position: 'absolute', inset: 0, transform: `translateY(${-scroll}px)`}}>

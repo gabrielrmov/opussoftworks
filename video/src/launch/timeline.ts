@@ -21,44 +21,44 @@ export const HOOK = {
   sorteOut: 44,
   entrega: 50,
   boxClosed: 76,
-  exit: 86,
+  exit: 80, // saídas terminam até a câmera partir
   moveFrom: 96,
 };
 
-// ---------- Pilares (114–280): os mockups ficam no mundo ----------
-export const PILLAR_AT = [114, 174, 234] as const; // câmera assentou
-export const TRAFEGO = { cursorFrom: 128, click: 144, leadsFrom: 150 };
-export const SISTEMAS = { rowsFrom: 180, barsFrom: 200 };
-export const SITES = { loadFrom: 236, loaded: 248, tap: 264, sent: 270 };
+// ---------- Pilares (114–290): os mockups ficam no mundo ----------
+export const PILLAR_AT = [114, 184, 244] as const; // câmera assentou
+export const TRAFEGO = { cursorFrom: 120, click: 134, leadsFrom: 140 };
+export const SISTEMAS = { rowsFrom: 188, barsFrom: 200 };
+export const SITES = { loadFrom: 240, loaded: 250, tap: 270 };
 
-// ---------- Visão geral (280–340) ----------
-export const SYSTEM = { zoomFrom: 280, zoomTo: 302, titleA: 298, titleB: 302, out: 332, moveFrom: 340 };
+// ---------- Visão geral (290–350) ----------
+export const SYSTEM = { zoomFrom: 290, zoomTo: 312, titleA: 308, titleB: 312, out: 336, moveFrom: 350 };
 
-// ---------- Método (358–462) ----------
-export const METHOD = { at: 358, steps: [362, 380, 398, 416] as const, exit: 452, moveFrom: 462 };
+// ---------- Método (368–472) ----------
+export const METHOD = { at: 368, steps: [372, 390, 408, 426] as const, exit: 456, moveFrom: 472 };
 
-// ---------- Outcome (480–630) ----------
-export const OUTCOME = { at: 480, lines: [478, 490, 502, 506] as const, curveFrom: 484, curveTo: 540, exit: 620, moveFrom: 630 };
+// ---------- Outcome (490–636) ----------
+export const OUTCOME = { at: 490, lines: [488, 500, 512, 516] as const, curveFrom: 494, curveTo: 550, exit: 620, moveFrom: 636 };
 
-// ---------- Logo (648–716) ----------
+// ---------- Logo (654–722) ----------
 export const LOGO = {
-  at: 648,
+  at: 654,
   /** a linha assenta no patamar e vira a base; o wordmark sobe de trás dela */
-  baseTo: 662,
-  reveal: 650,
-  retract: 690,
-  moveFrom: 694,
-  moveTo: 716,
+  baseTo: 668,
+  reveal: 656,
+  retract: 696,
+  moveFrom: 700,
+  moveTo: 722,
 };
 
-// ---------- CTA (704–900) ----------
+// ---------- CTA (710–900) ----------
 export const CTA = {
-  question: 704,
-  pillFrom: 712,
-  closed: 734,
-  label: 736,
-  url: 742,
-  still: 760,
+  question: 710,
+  pillFrom: 718,
+  closed: 740,
+  label: 742,
+  url: 748,
+  still: 766,
 };
 
 /**

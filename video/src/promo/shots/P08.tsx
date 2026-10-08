@@ -6,7 +6,7 @@ import {Stage} from '../../components/Stage';
 import {CLAMP, EASE_IN_OUT, clamp01, lerp, prog} from '../../lib/anim';
 import {Cursor} from '../kit/Cursor';
 import {Glare, Laptop, laptopScreenWidth, Phone, phoneScreenWidth, SiteScreen} from '../kit/Devices';
-import {exitStyle, snap} from '../kit/fx';
+import {snap} from '../kit/fx';
 import {Shot} from '../kit/Shot';
 import {FrontLabel} from './Labels';
 
@@ -44,7 +44,7 @@ export const P08: React.FC<{dur: number}> = ({dur}) => {
 
   return (
     <Shot bg={C.white} dur={dur} push={0.03}>
-      <AbsoluteFill style={exitStyle(f, 140, 10, 'blur')}>
+      <AbsoluteFill>
         <Stage>
           <circle cx={discX} cy={discY} r={Math.max(0, discR)} fill={C.coral} opacity={lerp(1, 0.1, open)} />
           <AnimatedCircle cx={1080} cy={140} r={330} mode="draw" delay={30} duration={30} strokeWidth={6} />

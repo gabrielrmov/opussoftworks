@@ -1,20 +1,38 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
 import {C, FONT} from '../../brand';
+import {AnimatedLine} from '../../components/AnimatedLine';
+import {Stage} from '../../components/Stage';
+import {prog} from '../../lib/anim';
 import {At} from '../kit/At';
-import {exitStyle} from '../kit/fx';
 import {Glow, IconTile} from '../kit/IconTile';
 import {KineticText} from '../kit/KineticText';
 import {Underline} from '../kit/Marks';
 import {Shot} from '../kit/Shot';
+
+const CHART_PTS = [
+  [80, 1720],
+  [290, 1570],
+  [450, 1630],
+  [660, 1430],
+  [820, 1480],
+  [1000, 1290],
+];
+const CHART = `M${CHART_PTS.map(([x, y]) => `${x} ${y}`).join(' L')}`;
 
 /** 01 — Gancho: "Toda empresa quer crescer." com ícones de crescimento flutuando. */
 export const P01: React.FC<{dur: number}> = ({dur}) => {
   const f = useCurrentFrame();
   return (
     <Shot bg={C.white} dur={dur}>
-      <AbsoluteFill style={exitStyle(f, 56, 10, 'blur')}>
+      <AbsoluteFill>
         <Glow x={120} y={280} size={560} />
+        <Stage>
+          <AnimatedLine d={CHART} draw={[6, 40]} width={7} opacity={0.35} />
+          {CHART_PTS.map(([x, y], i) => (
+            <circle key={i} cx={x} cy={y} r={11 * prog(f, 10 + i * 6, 8)} fill={C.coral} opacity={0.5} />
+          ))}
+        </Stage>
         <Glow x={1000} y={1640} size={640} opacity={0.14} />
         <IconTile glyph="trend" x={250} y={560} size={180} delay={2} rot={-12} drift={0.6} />
         <IconTile glyph="target" x={860} y={650} size={124} delay={7} rot={10} blur={2} drift={0.9} />

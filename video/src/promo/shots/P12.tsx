@@ -5,6 +5,7 @@ import {At} from '../kit/At';
 import {exitStyle} from '../kit/fx';
 import {KineticText, WeightMorph} from '../kit/KineticText';
 import {Underline} from '../kit/Marks';
+import {Burst} from '../kit/Extras';
 import {Shot} from '../kit/Shot';
 
 /** 12 — Slogan: "Estratégia," ganha peso; "execução." entra em coral e é sublinhada. */
@@ -24,6 +25,7 @@ export const P12: React.FC<{dur: number}> = ({dur}) => {
             <KineticText text="execução." size={150} color={C.coral} delay={26} stagger={1.4} />
           </Underline>
         </At>
+        <Burst x={860} y={1180} frame={f} at={55} color={C.coral} radius={90} rays={8} />
       </AbsoluteFill>
     </Shot>
   );

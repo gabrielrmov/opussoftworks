@@ -3,7 +3,7 @@ import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
 import {C} from '../../brand';
 import {clamp01, lerp, prog} from '../../lib/anim';
 import {Cursor} from '../kit/Cursor';
-import {BOUNCE, exitStyle, snap} from '../kit/fx';
+import {BOUNCE, snap} from '../kit/fx';
 import {Glyph, GlyphName} from '../kit/Glyph';
 import {Shot} from '../kit/Shot';
 import {CheckBadge, Skel, Toggle} from '../kit/UI';
@@ -25,8 +25,8 @@ export const P07: React.FC<{dur: number}> = ({dur}) => {
   const {fps} = useVideoConfig();
   const t = snap(f, fps, 0);
   return (
-    <Shot bg={C.g100} dur={dur}>
-      <AbsoluteFill style={exitStyle(f, 92, 10, 'whipUp')}>
+    <Shot bg={C.g100} dur={dur} ambient="grey" seed="p07">
+      <AbsoluteFill>
         <div
           style={{
             position: 'absolute',
@@ -64,6 +64,26 @@ export const P07: React.FC<{dur: number}> = ({dur}) => {
             </div>
           ))}
         </div>
+        <svg width={1080} height={1920} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
+          {CLICKS.map((c, i) => {
+            const on = prog(f, c, 6);
+            if (on <= 0) return null;
+            const sx = TOGGLE_X + 60;
+            const sy = rowY(i);
+            const ex = CARD.x + CARD.w - 25;
+            const ey = CARD.y + 15;
+            const d = `M${sx} ${sy} C ${sx + 90} ${sy}, ${ex + 40} ${ey + 120}, ${ex} ${ey}`;
+            const k = ((f - c) % 20) / 20;
+            const qx = (1 - k) ** 3 * sx + 3 * (1 - k) ** 2 * k * (sx + 90) + 3 * (1 - k) * k ** 2 * (ex + 40) + k ** 3 * ex;
+            const qy = (1 - k) ** 3 * sy + 3 * (1 - k) ** 2 * k * sy + 3 * (1 - k) * k ** 2 * (ey + 120) + k ** 3 * ey;
+            return (
+              <g key={c} opacity={on}>
+                <path d={d} fill="none" stroke={C.coral} strokeWidth={3} strokeDasharray="6 10" opacity={0.5} />
+                <circle cx={qx} cy={qy} r={8} fill={C.coral} />
+              </g>
+            );
+          })}
+        </svg>
         <div style={{position: 'absolute', left: CARD.x + CARD.w - 100, top: CARD.y - 60}}>
           <CheckBadge t={snap(f, fps, 48, BOUNCE)} draw={prog(f, 52, 10)} size={150} />
         </div>

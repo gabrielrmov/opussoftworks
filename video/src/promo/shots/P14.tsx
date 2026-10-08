@@ -3,7 +3,8 @@ import {AbsoluteFill, useCurrentFrame} from 'remotion';
 import {C} from '../../brand';
 import {EASE_IN_OUT, prog} from '../../lib/anim';
 import {At} from '../kit/At';
-import {exitStyle} from '../kit/fx';
+import {Cursor} from '../kit/Cursor';
+import {pulse} from '../kit/fx';
 import {KineticText} from '../kit/KineticText';
 import {Shot} from '../kit/Shot';
 
@@ -16,7 +17,7 @@ export const P14: React.FC<{dur: number}> = ({dur}) => {
   const caret = f < 30 && Math.floor(f / 6) % 2 === 0;
   return (
     <Shot bg={C.white} dur={dur} push={0.02}>
-      <AbsoluteFill style={exitStyle(f, 58, 8, 'blur')}>
+      <AbsoluteFill style={{transform: `scale(${1 - 0.04 * pulse(f, 60, 5)})`}}>
         <At y={960}>
           <KineticText text={URL} size={66} weight={700} color={C.coral} mode="type" delay={2} stagger={1.2} letterSpacing="0.01em" />
           <div style={{width: 6, height: 74, marginLeft: 6, background: C.coral, opacity: caret ? 1 : 0}} />
@@ -40,6 +41,13 @@ export const P14: React.FC<{dur: number}> = ({dur}) => {
             <div style={{width: 6, height: 74, marginLeft: 6, opacity: 0}} />
           </At>
         </AbsoluteFill>
+        <Cursor
+          keys={[
+            {f: 46, x: 920, y: 1420},
+            {f: 58, x: 640, y: 985},
+          ]}
+          clicks={[60]}
+        />
       </AbsoluteFill>
     </Shot>
   );

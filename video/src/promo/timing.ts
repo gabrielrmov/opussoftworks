@@ -23,8 +23,8 @@ export const SHOTS: ShotDef[] = [
   {name: '11 · É entrega', dur: 114, holds: [{at: 28, len: 24}, {at: 86, len: 32}]},
   {name: '12 · Estratégia, aliada à execução', dur: 90, holds: [{at: 56, len: 30}]},
   {name: '13 · Marca', dur: 120, holds: [{at: 66, len: 26}]},
-  {name: '14 · Site', dur: 66, holds: [{at: 44, len: 26}]},
-  {name: '15 · Símbolo', dur: 84, holds: []},
+  {name: '14 · Site', dur: 80, holds: [{at: 44, len: 26}]},
+  {name: '15 · Símbolo', dur: 104, holds: []},
 ];
 
 /** Duração final (frames de vídeo) de um plano, contando as pausas. */
@@ -42,4 +42,19 @@ export const remapFrame = (f: number, holds: Hold[]) => {
   return f - shift;
 };
 
-export const PROMO_DURATION = SHOTS.reduce((acc, s) => acc + shotLength(s), 0);
+/** Transição depois de cada plano (índice = plano que sai). Ausente = corte (a passagem já está desenhada no plano). */
+export type TransitionKind = 'zoom' | 'slideUp' | 'slideLeft' | 'bar' | 'circle' | 'fade';
+export const TRANSITIONS: Record<number, {kind: TransitionKind; frames: number; spring?: boolean}> = {
+  0: {kind: 'zoom', frames: 16},
+  2: {kind: 'slideUp', frames: 18, spring: true},
+  5: {kind: 'bar', frames: 20},
+  6: {kind: 'circle', frames: 20},
+  7: {kind: 'zoom', frames: 16},
+  8: {kind: 'slideLeft', frames: 18, spring: true},
+  9: {kind: 'circle', frames: 20},
+  12: {kind: 'bar', frames: 18},
+  13: {kind: 'fade', frames: 12},
+};
+
+export const PROMO_DURATION =
+  SHOTS.reduce((acc, s) => acc + shotLength(s), 0) - Object.values(TRANSITIONS).reduce((acc, t) => acc + t.frames, 0);

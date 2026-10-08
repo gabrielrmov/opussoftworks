@@ -3,6 +3,7 @@ import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {C} from '../../brand';
 import {CLAMP, EASE_IN, EASE_OUT, prog} from '../../lib/anim';
 import {At} from '../kit/At';
+import {Compass} from '../kit/Extras';
 import {KineticText} from '../kit/KineticText';
 import {RayBurst} from '../kit/RayBurst';
 import {Shot} from '../kit/Shot';
@@ -13,11 +14,12 @@ export const P02: React.FC<{dur: number}> = ({dur}) => {
   const coral = 1 - prog(f, 26, 9, EASE_OUT);
   const dark = 1 - prog(f, 58, 9, EASE_OUT);
   return (
-    <Shot bg={C.white} dur={dur}>
+    <Shot bg={C.white} dur={dur} seed="p02">
       <At y={900}>
         <KineticText text="Mas crescer" size={124} delay={0} stagger={1.3} />
       </At>
       <AbsoluteFill style={{transform: `translateX(${coral * 1100}px)`, background: C.coral, borderRadius: '110px 0 0 110px'}}>
+        <Compass x={540} y={620} r={120} frame={f} color={C.white} opacity={prog(f, 30, 8)} />
         <At y={960}>
           <KineticText text="sem direção" size={128} color={C.white} mode="slam" delay={32} stagger={1.2} />
         </At>

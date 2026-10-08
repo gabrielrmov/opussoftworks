@@ -3,7 +3,7 @@ import {AbsoluteFill, interpolateColors, useCurrentFrame, useVideoConfig} from '
 import {C} from '../../brand';
 import {clamp01, lerp, prog} from '../../lib/anim';
 import {At} from '../kit/At';
-import {exitStyle, snap} from '../kit/fx';
+import {snap} from '../kit/fx';
 import {Glyph, GlyphName} from '../kit/Glyph';
 import {KineticText} from '../kit/KineticText';
 import {Shot} from '../kit/Shot';
@@ -30,8 +30,8 @@ export const P10: React.FC<{dur: number}> = ({dur}) => {
   const fling = prog(f, 144, 12);
 
   return (
-    <Shot bg={C.g100} dur={dur}>
-      <AbsoluteFill style={exitStyle(f, 146, 10, 'blur')}>
+    <Shot bg={C.g100} dur={dur} ambient="grey" seed="p10">
+      <AbsoluteFill>
         <At y={600}>
           <KineticText text="O MÉTODO OPUS" size={38} weight={700} color={C.g500} letterSpacing="0.2em" mode="rise" delay={0} stagger={0.7} />
         </At>
@@ -83,6 +83,13 @@ export const P10: React.FC<{dur: number}> = ({dur}) => {
           </div>
         </div>
 
+        <div style={{position: 'absolute', left: 540 - 330, top: 1530, width: 660, display: 'flex', gap: 16, opacity: 1 - fling}}>
+          {STEPS.map((s, i) => (
+            <div key={s.n} style={{flex: 1, height: 10, borderRadius: 5, background: 'rgba(156,156,156,0.3)', overflow: 'hidden'}}>
+              <div style={{width: `${prog(f, AT[i], 14) * 100}%`, height: '100%', background: C.coral}} />
+            </div>
+          ))}
+        </div>
         <div style={{position: 'absolute', left: 0, width: 1080, top: 1200, height: 300, overflow: 'hidden', opacity: 1 - fling}}>
           {STEPS.map((s, i) => (
             <At key={s.n} y={150}>

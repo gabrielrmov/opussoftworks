@@ -14,6 +14,12 @@ importers:
       '@remotion/fonts':
         specifier: 4.0.534
         version: 4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/motion-blur':
+        specifier: 4.0.534
+        version: 4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/transitions':
+        specifier: 4.0.534
+        version: 4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react:
         specifier: 19.2.3
         version: 19.2.3
@@ -407,6 +413,12 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
+  '@remotion/motion-blur@4.0.534':
+    resolution: {integrity: sha512-UCgL2U/w/cRTVCTJFVauv8tqxIUK7cFKZTtXvlwCi8qkUbQIeoD1zaPwQszHTX+AcWrgf78GqCnWjiiaPZd4mg==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+
   '@remotion/openai-whisper@4.0.534':
     resolution: {integrity: sha512-YKUkbL7PXTtlIwiBEDD1k/3cqMJXTKh9T8jRvIr/q6Bjbv26Ed0FfAd6ZY3kKX/3x4ozlHF7OTOG/3HMBgKZeA==}
 
@@ -427,6 +439,12 @@ packages:
 
   '@remotion/sdk@4.0.534':
     resolution: {integrity: sha512-XMh394qeaEsbo6Q2HCaxx4uYBauNutMiQiFwBvMnIzjRr7j+SRKSv8x4d7RWlAWDTdlEeithNgwSJxm0lXgwVQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+
+  '@remotion/shapes@4.0.534':
+    resolution: {integrity: sha512-RejGlDRB+oy2+hKylGVdHSFbX2LwwbbEjc27QXbzA7dWj3D3jNsWLROR4k5GCqo9jfjuHtyW0Ue3ZE6SD0eFBA==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -458,6 +476,12 @@ packages:
 
   '@remotion/timeline-utils@4.0.534':
     resolution: {integrity: sha512-4qx/e4LV/FurqLBZKbOte18zi9OzRDQE4aa+uuUvxAwnil7mN8Usg+suamPYogwq6pZ1+ZjuMbB7pQqqAU1KLQ==}
+
+  '@remotion/transitions@4.0.534':
+    resolution: {integrity: sha512-JGy0sFYJ3aubtOyy+dXwoOGlW1NeP0sN3BslwcDF4pa+yIvzhl57wD2F9bj86pEgEF03ng9gjwiIH/cBjxqL7A==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   '@remotion/web-renderer@4.0.534':
     resolution: {integrity: sha512-5JlbHvU4eAA/ymvHLmHHvR+YfkTMnVcInwaNVu2kLyXGEO6HcRmqDwp2hhAGtj212/LvZKKLPLBXbfhHygelIQ==}
@@ -1753,6 +1777,12 @@ snapshots:
       remotion: 4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       zod: 4.5.4
 
+  '@remotion/motion-blur@4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+    dependencies:
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
+      remotion: 4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+
   '@remotion/openai-whisper@4.0.534':
     dependencies:
       '@remotion/captions': 4.0.534
@@ -1797,6 +1827,13 @@ snapshots:
     dependencies:
       '@remotion/player': 4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@remotion/studio-shared': 4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
+      remotion: 4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+
+  '@remotion/shapes@4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+    dependencies:
+      '@remotion/paths': 4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
       remotion: 4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -1895,6 +1932,14 @@ snapshots:
     transitivePeerDependencies:
       - react
       - react-dom
+
+  '@remotion/transitions@4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+    dependencies:
+      '@remotion/paths': 4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@remotion/shapes': 4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
+      remotion: 4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
 
   '@remotion/web-renderer@4.0.534(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:

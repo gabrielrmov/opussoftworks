@@ -7,7 +7,8 @@ import {Stage} from '../../components/Stage';
 import {EASE_IN_OUT, prog} from '../../lib/anim';
 import {At} from '../kit/At';
 import {Cursor} from '../kit/Cursor';
-import {exitStyle, pulse} from '../kit/fx';
+import {LogoShine} from '../kit/Extras';
+import {pulse} from '../kit/fx';
 import {Glow} from '../kit/IconTile';
 import {KineticText} from '../kit/KineticText';
 import {Shot} from '../kit/Shot';
@@ -18,7 +19,7 @@ export const P13: React.FC<{dur: number}> = ({dur}) => {
   const punch = 1 - 0.05 * pulse(f, 82, 5);
   return (
     <Shot bg={C.white} dur={dur} push={0.025}>
-      <AbsoluteFill style={exitStyle(f, 110, 10, 'blur')}>
+      <AbsoluteFill>
         <Glow x={540} y={900} size={820} opacity={0.12} />
         <Stage>
           <AnimatedCircle cx={540} cy={900} r={330} delay={0} duration={24} strokeWidth={3} opacity={0.5} />
@@ -26,6 +27,7 @@ export const P13: React.FC<{dur: number}> = ({dur}) => {
           <AnimatedCircle cx={540} cy={900} r={600} delay={8} duration={24} strokeWidth={3} opacity={0.2} />
           <OpusSymbol cx={540} cy={790} width={470} progress={prog(f, 6, 30, EASE_IN_OUT)} />
         </Stage>
+        <LogoShine cx={540} cy={790} width={470} frame={f} start={40} />
         <At y={1060} style={{transform: `scale(${punch})`}}>
           <KineticText
             segments={[

@@ -4,6 +4,8 @@ import {C, FONT} from '../../brand';
 import {EASE_IN, EASE_OUT, prog} from '../../lib/anim';
 import {At} from '../kit/At';
 import {pulse} from '../kit/fx';
+import {Ambient} from '../kit/Ambient';
+import {Burst} from '../kit/Extras';
 import {KineticText} from '../kit/KineticText';
 import {Underline} from '../kit/Marks';
 
@@ -40,6 +42,8 @@ export const P11: React.FC<{dur: number}> = () => {
         >
           ENTREGA
         </div>
+        <Ambient variant="coral" seed="p11" />
+        <Burst x={540} y={900} frame={f} at={61} color={C.white} radius={420} rays={16} />
         <At y={780}>
           <KineticText text="É" size={210} color={C.white} mode="slam" delay={56} />
         </At>

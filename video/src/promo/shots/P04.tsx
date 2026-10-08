@@ -5,6 +5,7 @@ import {prog} from '../../lib/anim';
 import {At} from '../kit/At';
 import {exitStyle} from '../kit/fx';
 import {KineticText, WeightMorph} from '../kit/KineticText';
+import {Compass, TaskPile} from '../kit/Extras';
 import {ArrowUnder, Strike} from '../kit/Marks';
 import {Shot} from '../kit/Shot';
 
@@ -14,6 +15,7 @@ export const P04: React.FC<{dur: number}> = ({dur}) => {
   return (
     <Shot bg={C.white} dur={dur}>
       <AbsoluteFill style={exitStyle(f, 94, 10, 'zoom', '50% 50%')}>
+        <TaskPile frame={f} start={2} exitAt={34} />
         <At y={830}>
           <KineticText text="O que falta não é" size={64} family={FONT.text} weight={500} color={C.g700} mode="rise" delay={0} stagger={0.8} exitAt={34} exitMode="up" />
         </At>
@@ -23,6 +25,7 @@ export const P04: React.FC<{dur: number}> = ({dur}) => {
           </Strike>
         </At>
 
+        <Compass x={540} y={640} r={100} frame={f} color={C.coral} settleAt={58} opacity={prog(f, 46, 8)} />
         <At y={930}>
           <ArrowUnder start={70} thickness={11} gap={30}>
             <div style={{display: 'flex', alignItems: 'flex-end', gap: 34}}>

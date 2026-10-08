@@ -5,7 +5,8 @@ import {OpusSymbol} from '../../components/OpusSymbol';
 import {EASE_IN_OUT, clamp01, lerp, prog} from '../../lib/anim';
 import {At} from '../kit/At';
 import {Cursor} from '../kit/Cursor';
-import {BOUNCE, exitStyle, snap} from '../kit/fx';
+import {Burst} from '../kit/Extras';
+import {BOUNCE, snap} from '../kit/fx';
 import {Glyph, GlyphName} from '../kit/Glyph';
 import {KineticText} from '../kit/KineticText';
 import {Shot} from '../kit/Shot';
@@ -27,7 +28,7 @@ export const P09: React.FC<{dur: number}> = ({dur}) => {
   const core = snap(f, fps, 45, BOUNCE);
   return (
     <Shot bg={C.white} dur={dur}>
-      <AbsoluteFill style={exitStyle(f, 86, 10, 'zoom', '50% 44%')}>
+      <AbsoluteFill>
         <div
           style={{
             position: 'absolute',
@@ -88,6 +89,7 @@ export const P09: React.FC<{dur: number}> = ({dur}) => {
             </svg>
           </div>
         )}
+        <Burst x={540} y={Y} frame={f} at={46} color={C.coral} radius={240} />
         <Cursor
           keys={[
             {f: 10, x: 920, y: 1350},

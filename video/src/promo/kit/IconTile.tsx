@@ -69,9 +69,8 @@ export const Glow: React.FC<{x: number; y: number; size: number; opacity?: numbe
       width: size,
       height: size,
       borderRadius: '50%',
-      background: color,
-      opacity,
-      filter: `blur(${size * 0.22}px)`,
+      background: `radial-gradient(circle, ${color} 0%, transparent 70%)`,
+      opacity: opacity * 1.6,
     }}
   />
 );

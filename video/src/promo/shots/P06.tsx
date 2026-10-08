@@ -5,7 +5,7 @@ import {AnimatedCircle} from '../../components/AnimatedCircle';
 import {Stage} from '../../components/Stage';
 import {CLAMP, EASE_IN, EASE_IN_OUT, lerp, prog} from '../../lib/anim';
 import {Cursor} from '../kit/Cursor';
-import {BOUNCE, exitStyle, pulse, snap} from '../kit/fx';
+import {BOUNCE, pulse, snap} from '../kit/fx';
 import {Glow} from '../kit/IconTile';
 import {Shot} from '../kit/Shot';
 import {PillButton} from '../kit/UI';
@@ -29,7 +29,7 @@ export const P06: React.FC<{dur: number}> = ({dur}) => {
 
   return (
     <Shot bg={C.white} dur={dur}>
-      <AbsoluteFill style={{...exitStyle(f, 92, 10, 'whipLeft'), transform: `${exitStyle(f, 92, 10, 'whipLeft').transform ?? ''} translateX(${shake}px)`}}>
+      <AbsoluteFill style={{transform: `translateX(${shake}px)`}}>
         <Glow x={980} y={300} size={520} opacity={0.12} />
         <Stage>
           <AnimatedCircle cx={O.x} cy={O.y} r={320} delay={48} duration={14} strokeWidth={4} opacity={0.5} />
@@ -71,6 +71,27 @@ export const P06: React.FC<{dur: number}> = ({dur}) => {
           clicks={[32]}
           vanish={44}
         />
+        {Array.from({length: 12}, (_, i) => {
+          const t = prog(f, 64 + i * 2.5, 14, EASE_IN);
+          if (t <= 0 || t >= 1) return null;
+          const a = (i / 12) * Math.PI * 2 + 0.4;
+          const R = 760;
+          return (
+            <div
+              key={i}
+              style={{
+                position: 'absolute',
+                left: O.x + Math.cos(a) * R * (1 - t) - 9,
+                top: O.y + Math.sin(a) * R * (1 - t) - 9,
+                width: 18,
+                height: 18,
+                borderRadius: 9,
+                background: i % 3 ? C.coral : C.graphite,
+                opacity: Math.min(1, t * 4) * (1 - t * t),
+              }}
+            />
+          );
+        })}
         <FrontLabel kicker="TRÁFEGO" word="Aquisição" y={1270} delay={62} />
       </AbsoluteFill>
     </Shot>

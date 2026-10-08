@@ -13,6 +13,7 @@ cd video
 pnpm install
 pnpm studio   # preview interativo com timeline
 pnpm render   # gera out/opus-launch-film.mp4
+pnpm render:promo   # gera out/opus-promo.mp4
 ```
 
 ## Estrutura
@@ -44,3 +45,17 @@ O repositório não tem o arquivo do logo da OPUS, então o símbolo e o
 wordmark foram reconstruídos a partir do storyboard. Para usar o arquivo
 original, coloque-o em `public/brand/` e preencha `LOGO_ASSETS` em
 `src/brand.ts`: o `LogoReveal` passa a usar o arquivo, com a mesma máscara.
+
+## Promo (OpusPromo)
+
+Segundo filme, no ritmo da referência enviada (promo da CENDAP): 15 planos curtos,
+tipografia cinética letra a letra, painéis de cor, explosão de raios, cursor
+clicando em elementos de interface, mockups de notebook/celular e assinatura
+final. 1080×1920 · 30 fps · 45 s. Código em `src/promo/` (kit em
+`src/promo/kit/`, planos em `src/promo/shots/`, ordem e duração em
+`src/promo/timing.ts`).
+
+Os textos vêm do storyboard: "Toda empresa quer crescer.", "Mas crescer sem
+direção custa caro.", "O que falta não é fazer mais. É direção.", as três frentes
+(Tráfego/Aquisição, Sistemas/Automação, Sites/Presença), "Tudo funciona junto.",
+as quatro etapas do método, "Resultado não é sorte. É entrega.", o slogan e o site.

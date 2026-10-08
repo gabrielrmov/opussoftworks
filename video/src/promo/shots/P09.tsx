@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
 import {C} from '../../brand';
-import {InfinityShape} from '../../components/InfinityShape';
+import {OpusSymbol} from '../../components/OpusSymbol';
 import {EASE_IN_OUT, clamp01, lerp, prog} from '../../lib/anim';
 import {At} from '../kit/At';
 import {Cursor} from '../kit/Cursor';
@@ -78,13 +78,13 @@ export const P09: React.FC<{dur: number}> = ({dur}) => {
               width: 240,
               height: 240,
               borderRadius: 66,
-              background: `linear-gradient(150deg, #FF8463 0%, ${C.coral} 48%, #E9502B 100%)`,
-              boxShadow: '0 30px 60px rgba(255,96,57,0.35)',
+              background: C.white,
+              boxShadow: '0 30px 60px rgba(22,22,22,0.14)',
               transform: `scale(${core})`,
             }}
           >
             <svg width={240} height={240} style={{position: 'absolute', inset: 0}}>
-              <InfinityShape cx={120} cy={122} width={160} color={C.white} strokeWidth={15} progress={prog(f, 48, 16, EASE_IN_OUT)} />
+              <OpusSymbol cx={120} cy={120} width={184} progress={prog(f, 48, 16, EASE_IN_OUT)} />
             </svg>
           </div>
         )}

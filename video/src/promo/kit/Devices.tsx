@@ -1,6 +1,6 @@
 import React from 'react';
 import {C, FONT} from '../../brand';
-import {InfinityShape} from '../../components/InfinityShape';
+import {OpusSymbol} from '../../components/OpusSymbol';
 import {Glyph, GlyphName} from './Glyph';
 import {Skel} from './UI';
 
@@ -55,7 +55,7 @@ export const Laptop: React.FC<{width: number; children: React.ReactNode; style?:
 const Brand: React.FC<{scale: number}> = ({scale}) => (
   <div style={{display: 'flex', alignItems: 'center', gap: 8 * scale}}>
     <svg width={36 * scale} height={24 * scale} style={{overflow: 'visible'}}>
-      <InfinityShape cx={18 * scale} cy={12 * scale} width={34 * scale} strokeWidth={4.5 * scale} />
+      <OpusSymbol cx={18 * scale} cy={12 * scale} width={36 * scale} />
     </svg>
     <span style={{fontFamily: FONT.title, fontWeight: 700, fontSize: 17 * scale, color: C.graphite}}>OpusSoftWorks</span>
   </div>
@@ -125,7 +125,7 @@ export const SiteScreen: React.FC<{variant: 'desktop' | 'mobile'; scroll?: numbe
         </div>
         <div style={{flex: 1, minHeight: desk ? 260 : 170, borderRadius: 18 * s, background: C.graphite, position: 'relative', overflow: 'hidden'}}>
           <svg width="100%" height="100%" viewBox="0 0 200 150" style={{position: 'absolute', inset: 0}}>
-            <InfinityShape cx={100} cy={75} width={130} strokeWidth={12} />
+            <OpusSymbol cx={100} cy={75} width={150} />
           </svg>
         </div>
       </div>

@@ -31,6 +31,6 @@ export const TYPE = {
  * usa a reconstrução geométrica do símbolo feita a partir do storyboard.
  */
 export const LOGO_ASSETS: {symbol: string | null; wordmark: string | null} = {
-  symbol: null,
+  symbol: 'brand/opus-simbolo.png',
   wordmark: null,
 };

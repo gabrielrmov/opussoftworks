@@ -1,10 +1,10 @@
 import React from 'react';
-import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, interpolateColors, useCurrentFrame, useVideoConfig} from 'remotion';
 import {C, TYPE} from '../brand';
 import {AnimatedCircle} from '../components/AnimatedCircle';
 import {AnimatedLine} from '../components/AnimatedLine';
 import {ConnectedNode, NodeLook} from '../components/ConnectedNode';
-import {InfinityShape} from '../components/InfinityShape';
+import {OpusSymbol} from '../components/OpusSymbol';
 import {MaskText} from '../components/MaskText';
 import {ServiceIconName} from '../components/ServiceIcon';
 import {Stage} from '../components/Stage';
@@ -53,13 +53,13 @@ export const Scene05: React.FC = () => {
           return <AnimatedLine key={n.label} d={lineD(a, b)} draw={[30 + i * 4, 24]} retract={[148, 18]} width={6} />;
         })}
         <AnimatedCircle cx={O.x} cy={O.y} r={250} fromR={S5_CORE_R} delay={104} duration={40} strokeWidth={3} mode="ripple" opacity={0.4} />
-        {core > 0.001 && <circle cx={O.x} cy={O.y} r={coreR} fill={C.coral} />}
-        <InfinityShape
+        {core > 0.001 && (
+          <circle cx={O.x} cy={O.y} r={coreR} fill={interpolateColors(collapse, [0.4, 0.9], [C.white, C.coral])} stroke={C.coral} strokeWidth={6} />
+        )}
+        <OpusSymbol
           cx={O.x}
           cy={O.y}
-          width={168 * breath * core}
-          color={C.white}
-          strokeWidth={13}
+          width={196 * breath * core}
           progress={prog(frame, 28, 30, EASE_IN_OUT)}
           opacity={1 - prog(frame, 148, 10)}
         />

@@ -34,6 +34,6 @@ export const TIMELINE = {y: 872, xs: [190, 423, 657, 890], r: 50};
 /** Linha de destaque sob "É entrega." — vira o fio que revela o logo. */
 export const PROMISE_LINE = {x1: 100, x2: 840, y: 1130, width: 10};
 
-export const LOGO = {cx: 540, cy: 676, width: 570};
+export const LOGO = {cx: 540, cy: 676, width: 620};
 
 export const TOP_RULE = {y: 280, x1: 100, x2: 980};

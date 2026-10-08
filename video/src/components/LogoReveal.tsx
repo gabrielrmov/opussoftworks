@@ -3,7 +3,7 @@ import {interpolate, interpolateColors, Img, staticFile, useCurrentFrame} from '
 import {C, FONT, LOGO_ASSETS, TYPE} from '../brand';
 import {CLAMP, EASE_IN_OUT, EASE_OUT, clamp01, lerp, prog} from '../lib/anim';
 import {Cubic, cubicLength, pt, segsLength, segsToD, straight} from '../lib/geometry';
-import {INF_BOX, INF_FROM_CROSS, INF_FROM_RIGHT, INF_RIGHT_POINT, infinityToScreen, placeInfinity} from '../lib/infinity';
+import {INF_BOX, INF_FROM_CROSS, INF_FROM_RIGHT, INF_RIGHT_POINT, INF_STROKE, infinityToScreen, placeInfinity} from '../lib/infinity';
 import {Stage} from './Stage';
 
 type Props = {
@@ -19,11 +19,10 @@ type Props = {
   url: string;
 };
 
-const SYMBOL_STROKE = 36; // espessura do traço do símbolo (unidades locais)
 
 export const LogoReveal: React.FC<Props> = ({cx, cy, width, leadIn, wordmarkY, sloganY, ctaY, slogan, url}) => {
   const frame = useCurrentFrame();
-  const s = width / INF_BOX.drawnWidth;
+  const s = width / INF_BOX.width;
 
   // Caminho da linha: sublinhado → curva de entrada → contorno do infinito
   const R = infinityToScreen(cx, cy, width)(INF_RIGHT_POINT);
@@ -65,7 +64,7 @@ export const LogoReveal: React.FC<Props> = ({cx, cy, width, leadIn, wordmarkY, s
                 d={loopLocal}
                 fill="none"
                 stroke="#fff"
-                strokeWidth={64}
+                strokeWidth={INF_STROKE * 1.6}
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 pathLength={1}
@@ -81,9 +80,9 @@ export const LogoReveal: React.FC<Props> = ({cx, cy, width, leadIn, wordmarkY, s
         >
           <g mask="url(#opus-symbol-mask)">
             {LOGO_ASSETS.symbol ? (
-              <image href={staticFile(LOGO_ASSETS.symbol)} x={0} y={0} width={INF_BOX.width} height={INF_BOX.height} preserveAspectRatio="xMidYMid meet" />
+              <image href={staticFile(LOGO_ASSETS.symbol)} x={0} y={0} width={INF_BOX.width} height={INF_BOX.height} />
             ) : (
-              <path d={symbolD} fill="none" stroke={C.coral} strokeWidth={SYMBOL_STROKE} strokeLinejoin="round" />
+              <path d={symbolD} fill="none" stroke={C.coral} strokeWidth={INF_STROKE} strokeLinejoin="round" />
             )}
           </g>
         </g>

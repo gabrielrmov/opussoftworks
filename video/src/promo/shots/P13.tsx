@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
 import {C, FONT} from '../../brand';
 import {AnimatedCircle} from '../../components/AnimatedCircle';
-import {InfinityShape} from '../../components/InfinityShape';
+import {OpusSymbol} from '../../components/OpusSymbol';
 import {Stage} from '../../components/Stage';
 import {EASE_IN_OUT, prog} from '../../lib/anim';
 import {At} from '../kit/At';
@@ -24,7 +24,7 @@ export const P13: React.FC<{dur: number}> = ({dur}) => {
           <AnimatedCircle cx={540} cy={900} r={330} delay={0} duration={24} strokeWidth={3} opacity={0.5} />
           <AnimatedCircle cx={540} cy={900} r={460} delay={4} duration={24} strokeWidth={3} opacity={0.32} />
           <AnimatedCircle cx={540} cy={900} r={600} delay={8} duration={24} strokeWidth={3} opacity={0.2} />
-          <InfinityShape cx={540} cy={800} width={400} strokeWidth={40} progress={prog(f, 6, 30, EASE_IN_OUT)} />
+          <OpusSymbol cx={540} cy={790} width={470} progress={prog(f, 6, 30, EASE_IN_OUT)} />
         </Stage>
         <At y={1060} style={{transform: `scale(${punch})`}}>
           <KineticText text="OpusSoftWorks" size={104} weight={700} mode="blur" delay={30} stagger={0.6} />

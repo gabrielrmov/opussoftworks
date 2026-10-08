@@ -41,19 +41,27 @@ em `src/lib/layout.ts`. As fontes Exo 2 e Rubik estão em `public/fonts/`
 
 ## Logo oficial
 
-O repositório não tem o arquivo do logo da OPUS, então o símbolo e o
-wordmark foram reconstruídos a partir do storyboard. Para usar o arquivo
-original, coloque-o em `public/brand/` e preencha `LOGO_ASSETS` em
-`src/brand.ts`: o `LogoReveal` passa a usar o arquivo, com a mesma máscara.
+O símbolo usa o arquivo oficial `public/brand/opus-simbolo.png` (recortado com
+fundo transparente a partir do PNG enviado), sem recolorir nem distorcer. A
+linha central do infinito em `src/lib/infinity.ts` foi medida nesse arquivo,
+então o traço coral que desenha o símbolo e a máscara de revelação
+(`OpusSymbol`, `LogoReveal`) seguem exatamente a forma do logo. O wordmark
+"OpusSoftWorks" continua tipografado em Exo 2 (não há arquivo do wordmark);
+para usar um, preencha `LOGO_ASSETS.wordmark` em `src/brand.ts`.
 
 ## Promo (OpusPromo)
 
 Segundo filme, no ritmo da referência enviada (promo da CENDAP): 15 planos curtos,
 tipografia cinética letra a letra, painéis de cor, explosão de raios, cursor
 clicando em elementos de interface, mockups de notebook/celular e assinatura
-final. 1080×1920 · 30 fps · 45 s. Código em `src/promo/` (kit em
+final. 1080×1920 · 30 fps · ~62 s. Código em `src/promo/` (kit em
 `src/promo/kit/`, planos em `src/promo/shots/`, ordem e duração em
 `src/promo/timing.ts`).
+
+Cada plano tem pausas de leitura (`holds` em `timing.ts`): quando um texto
+termina de entrar, o tempo do plano desacelera para 15% por alguns frames, para
+que dê tempo de ler. Para dar mais ou menos tempo a um texto, ajuste o `len`
+da pausa correspondente.
 
 Os textos vêm do storyboard: "Toda empresa quer crescer.", "Mas crescer sem
 direção custa caro.", "O que falta não é fazer mais. É direção.", as três frentes

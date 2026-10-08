@@ -16,19 +16,19 @@ const BASE = 1006;
 export const P04: React.FC<{dur: number}> = ({dur}) => {
   const f = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const strike = prog(f, 20, 7, EASE_OUT) * (1 - prog(f, 30, 4));
-  const hLine = prog(f, 48, 10, EASE_OUT);
-  const vLine = prog(f, 50, 10, EASE_OUT);
-  const notes = prog(f, 58, 8);
-  const box = snap(f, fps, 62);
+  const strike = prog(f, 20, 7, EASE_OUT) * (1 - prog(f, 36, 4));
+  const hLine = prog(f, 54, 10, EASE_OUT);
+  const vLine = prog(f, 56, 10, EASE_OUT);
+  const notes = prog(f, 64, 8);
+  const box = snap(f, fps, 68);
   return (
     <Shot bg={C.white} dur={dur}>
-      <AbsoluteFill style={exitStyle(f, 80, 10, 'zoom', '62% 50%')}>
+      <AbsoluteFill style={exitStyle(f, 86, 10, 'zoom', '62% 50%')}>
         <At y={800}>
-          <KineticText text="O que falta" size={62} family={FONT.text} weight={500} color={C.g700} mode="rise" delay={0} stagger={1} exitAt={28} exitMode="up" />
+          <KineticText text="O que falta" size={62} family={FONT.text} weight={500} color={C.g700} mode="rise" delay={0} stagger={1} exitAt={34} exitMode="up" />
         </At>
         <At y={910}>
-          <KineticText text="não é fazer mais." size={96} delay={5} stagger={1} exitAt={30} exitMode="drop" exitStagger={0.3} />
+          <KineticText text="não é fazer mais." size={96} delay={5} stagger={1} exitAt={36} exitMode="drop" exitStagger={0.3} />
         </At>
         <div style={{position: 'absolute', left: 398, top: 912, width: 522 * strike, height: 10, borderRadius: 5, background: C.coral}} />
 
@@ -48,8 +48,8 @@ export const P04: React.FC<{dur: number}> = ({dur}) => {
         </div>
 
         <div style={{position: 'absolute', left: LEFT, top: 960, transform: 'translateY(-50%)', display: 'flex', alignItems: 'flex-end', gap: 36}}>
-          <KineticText text="É" size={150} delay={44} />
-          <WeightMorph text="direção." size={150} from={200} to={800} start={47} duration={20} color={C.coral} />
+          <KineticText text="É" size={150} delay={50} />
+          <WeightMorph text="direção." size={150} from={200} to={800} start={53} duration={20} color={C.coral} />
         </div>
         {box > 0.01 && (
           <div
@@ -75,7 +75,7 @@ export const P04: React.FC<{dur: number}> = ({dur}) => {
           </div>
         )}
       </AbsoluteFill>
-      <AbsoluteFill style={{background: C.coral, opacity: prog(f, 84, 6)}} />
+      <AbsoluteFill style={{background: C.coral, opacity: prog(f, 90, 6)}} />
     </Shot>
   );
 };

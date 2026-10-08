@@ -17,7 +17,7 @@ export const P03: React.FC<{dur: number}> = ({dur}) => {
       <AbsoluteFill style={exitStyle(f, 50, 10, 'whipUp')}>
         <Glow x={540} y={960} size={900} opacity={0.12} />
         <Glow x={100} y={1700} size={500} opacity={0.2} />
-        <IconTile glyph="infinity" x={190} y={1460} size={230} delay={2} rot={-10} blur={10} drift={0.8} />
+        <IconTile glyph="infinity" x={190} y={1460} size={230} delay={2} rot={-10} blur={10} drift={0.8} variant="white" />
         <IconTile glyph="plus" x={900} y={520} size={110} delay={5} rot={12} blur={3} drift={0.4} />
         <IconTile glyph="cursor" x={860} y={1310} size={130} delay={8} rot={8} variant="white" drift={0.6} />
         <IconTile glyph="code" x={180} y={520} size={92} delay={6} rot={-8} blur={6} variant="white" drift={0.5} />

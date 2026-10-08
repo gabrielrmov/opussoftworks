@@ -1,5 +1,5 @@
 import React from 'react';
-import {InfinityShape} from '../../components/InfinityShape';
+import {OpusSymbol} from '../../components/OpusSymbol';
 
 export type GlyphName =
   | 'trend'
@@ -88,7 +88,7 @@ export const Glyph: React.FC<{name: GlyphName; size: number; color: string; stro
         <line x1="16" y1="33" x2="34" y2="33" />
       </>
     )}
-    {name === 'infinity' && <InfinityShape cx={30} cy={30} width={52} color={color} strokeWidth={strokeWidth * 1.1} />}
+    {name === 'infinity' && <OpusSymbol cx={30} cy={30} width={58} />}
     {name === 'cursor' && <path d="M17 10 L17 46 L26 37 L32 50 L38 47 L32 34 L44 34 Z" fill={color} />}
   </svg>
 );

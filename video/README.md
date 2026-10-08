@@ -1,19 +1,20 @@
 # Vídeo promocional — Opus Softworks
 
 Vídeo vertical (9:16, 1080×1920), 30s a 60fps, feito com [Remotion](https://www.remotion.dev/).
-Usa a mesma paleta (onyx + cobalt), as fontes (Inter + Space Grotesk) e a copy do site.
+Segue a identidade do site publicado (opussoftworks.com.br): fundo claro
+pontilhado, laranja `#ff6039`, wordmark OpusSoftWorks, seção navy com brilho
+laranja e rodapé escuro. Fontes Inter + Instrument Serif, e a copy é a do site.
 
 ## Roteiro
 
 | Tempo | Cena | Conteúdo |
 | --- | --- | --- |
-| 0–4s | Hook | "Resultado não é sorte. É entrega." |
-| 3,5–7,5s | Problema | Três fornecedores que não conversam → uma operação só |
-| 7–11,5s | 01 Tráfego pago | Gráfico de desempenho + lead, CPL, ROAS |
-| 11–15,5s | 02 Gestão | Painel com vendas, estoque, financeiro, contratos |
-| 15–19,5s | 03 Sites | Site → clique no WhatsApp → "novo lead recebido" |
-| 19–24,5s | Processo | Diagnóstico → Plano → Execução → Resultado |
-| 24–30s | CTA | Wordmark, "Diagnóstico gratuito", opussoftworks.com.br |
+| 0–4s | Hero | "Resultado não é sorte. É entrega." + CTAs |
+| 3,4–7,9s | Frentes | Foco alternando Tráfego → Sistemas → Sites |
+| 7,3–15,3s | Soluções | Os três cards (01, 02, 03) empilhando |
+| 14,7–19,7s | Processo | "Clareza antes de velocidade." com fundo ASCII |
+| 19,1–24,6s | Método | Zoom em OPUS SOFTWORKS → "Um método, resultado visível." |
+| 24–30s | Fechamento | "Vamos elevar o próximo passo?" + opussoftworks.com.br |
 
 ## Como usar
 
@@ -30,7 +31,7 @@ instalado: `REMOTION_BROWSER_EXECUTABLE=/caminho/do/chrome npm run render`.
 
 - `src/OpusPromo.tsx` — timeline das cenas e transições (duração total calculada)
 - `src/theme.ts` — cores, fontes e helper `s()` (segundos → frames)
-- `src/components.tsx` — fundo animado, wordmark, cards e ícones
+- `src/components.tsx` — fundo pontilhado, wordmark, pílula de navegação
 - `src/scenes/` — uma cena por arquivo
 
 O vídeo não tem trilha sonora; adicione com `<Audio src={staticFile("trilha.mp3")} />`

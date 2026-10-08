@@ -1,130 +1,134 @@
-import { Easing, useCurrentFrame } from "remotion";
-import { ramp, rise, useEnter } from "../anim";
-import { Eyebrow } from "../components";
-import { C, FONT_DISPLAY, FONT_UI } from "../theme";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, random, useCurrentFrame } from "remotion";
+import { blurIn, useEnter } from "../anim";
+import { DotPaper, Eyebrow } from "../components";
+import { C, SANS } from "../theme";
 
 const STEPS = [
-  { title: "Diagnóstico", deliverable: "Relatório de oportunidades" },
-  { title: "Plano de ação", deliverable: "Cronograma com responsáveis" },
-  { title: "Execução", deliverable: "Acompanhamento semanal" },
-  { title: "Resultado", deliverable: "O que mudou, em número" },
+  {
+    title: "Diagnóstico",
+    n: "01",
+    lead: "Antes de propor, a gente entende.",
+    body: "Mergulhamos na operação, nas metas, nos números e nos gargalos para identificar o que realmente precisa ser resolvido.",
+  },
+  {
+    title: "Estratégia",
+    n: "02",
+    lead: "Prioridade antes de execução.",
+    body: "Definimos o que atacar primeiro, onde investir e quais indicadores vão mostrar, na prática, se estamos no caminho certo.",
+  },
 ];
 
-const FIRST = 50;
-const GAP = 46;
-const ROW_H = 220;
+const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=<>/\\[]{}()_-:;.";
+const glyph = (seed: string) => GLYPHS[Math.floor(random(seed) * GLYPHS.length)];
+
+const HEADLINE = "Clareza antes de velocidade.";
 
 export const Process: React.FC = () => {
   const frame = useCurrentFrame();
-  const head = useEnter(4);
-  const title = useEnter(12);
-  const line = ramp(frame, FIRST, FIRST + GAP * (STEPS.length - 1), [0, 1], Easing.inOut(Easing.quad));
+  const eyebrow = useEnter(6);
 
   return (
-    <AbsoluteFill style={{ padding: "250px 80px 0" }}>
-      <Eyebrow style={rise(head, 20)}>Como funciona</Eyebrow>
-      <div
-        style={{
-          marginTop: 34,
-          fontFamily: FONT_DISPLAY,
-          fontWeight: 600,
-          fontSize: 82,
-          lineHeight: 1.06,
-          letterSpacing: "-0.035em",
-          color: C.ivory,
-          ...rise(title, 50),
-        }}
-      >
-        Do diagnóstico
-        <br />
-        ao resultado.
-      </div>
+    <DotPaper>
+      <AsciiField />
+      <AbsoluteFill style={{ padding: "330px 70px 0", textAlign: "center", alignItems: "center" }}>
+        <Eyebrow style={blurIn(eyebrow, 16, 6)}>Como trabalhamos</Eyebrow>
+        <h2
+          style={{
+            margin: "34px 0 0",
+            fontFamily: SANS,
+            fontWeight: 600,
+            fontSize: 96,
+            lineHeight: 1.04,
+            letterSpacing: "-0.05em",
+            color: C.ink,
+            maxWidth: 900,
+          }}
+        >
+          <Scramble text={HEADLINE} start={12} frame={frame} />
+        </h2>
 
-      <div style={{ position: "relative", marginTop: 90 }}>
-        <div
-          style={{
-            position: "absolute",
-            left: 43,
-            top: 44,
-            width: 4,
-            height: ROW_H * (STEPS.length - 1),
-            borderRadius: 2,
-            backgroundColor: "rgba(255,255,255,0.08)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            left: 43,
-            top: 44,
-            width: 4,
-            height: ROW_H * (STEPS.length - 1) * line,
-            borderRadius: 2,
-            backgroundColor: C.cobalt,
-            boxShadow: `0 0 24px ${C.cobalt}`,
-          }}
-        />
-        {STEPS.map((step, i) => (
-          <Step key={step.title} n={i + 1} {...step} delay={FIRST + i * GAP} top={i * ROW_H} />
-        ))}
-      </div>
+        <div style={{ marginTop: 80, display: "flex", flexDirection: "column", gap: 28, width: "100%", textAlign: "left" }}>
+          {STEPS.map((step, i) => (
+            <StepCard key={step.n} {...step} delay={70 + i * 34} />
+          ))}
+        </div>
+      </AbsoluteFill>
+    </DotPaper>
+  );
+};
+
+/** Texto que "decodifica" de caracteres aleatórios pro texto final, como o fundo ASCII do site. */
+const Scramble: React.FC<{ text: string; start: number; frame: number }> = ({ text, start, frame }) => {
+  const tick = Math.floor(frame / 3);
+  return (
+    <>
+      {text.split("").map((ch, i) => {
+        const resolveAt = start + i * 1.6 + 10;
+        if (ch === " " || frame >= resolveAt) return <span key={i}>{ch}</span>;
+        if (frame < start + i * 0.8) return <span key={i} style={{ opacity: 0 }}>{ch}</span>;
+        return (
+          <span key={i} style={{ color: C.orange }}>
+            {glyph(`h-${i}-${tick}`)}
+          </span>
+        );
+      })}
+    </>
+  );
+};
+
+/** Faixa de caracteres que se embaralham — eco da seção "Como trabalhamos" do site. */
+const AsciiField: React.FC = () => {
+  const frame = useCurrentFrame();
+  const tick = Math.floor(frame / 4);
+  const rows = 30;
+  const cols = 56;
+  return (
+    <AbsoluteFill
+      style={{
+        top: 760,
+        fontFamily: SANS,
+        fontSize: 26,
+        lineHeight: "38px",
+        letterSpacing: "0.22em",
+        textAlign: "center",
+        color: "#d4d4d4",
+        whiteSpace: "pre",
+        overflow: "hidden",
+        maskImage: "linear-gradient(180deg, transparent, black 25%, black 70%, transparent)",
+        WebkitMaskImage: "linear-gradient(180deg, transparent, black 25%, black 70%, transparent)",
+      }}
+    >
+      {Array.from({ length: rows }).map((_, r) => (
+        <div key={r}>
+          {Array.from({ length: cols })
+            .map((__, c) => (random(`v-${r}-${c}`) < 0.55 ? glyph(`a-${r}-${c}-${tick + ((r * 7 + c) % 5)}`) : " "))
+            .join("")}
+        </div>
+      ))}
     </AbsoluteFill>
   );
 };
 
-const Step: React.FC<{ n: number; title: string; deliverable: string; delay: number; top: number }> = ({
-  n,
-  title,
-  deliverable,
-  delay,
-  top,
-}) => {
-  const p = useEnter(delay, 14);
-  const active = useEnter(delay, 200);
+const StepCard: React.FC<(typeof STEPS)[number] & { delay: number }> = ({ title, n, lead, body, delay }) => {
+  const p = useEnter(delay, 18);
   return (
-    <div style={{ position: "absolute", top, left: 0, right: 0, display: "flex", gap: 40 }}>
-      <div
-        style={{
-          width: 90,
-          height: 90,
-          borderRadius: 45,
-          flexShrink: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontFamily: FONT_DISPLAY,
-          fontWeight: 600,
-          fontSize: 38,
-          color: C.white,
-          backgroundColor: active > 0.5 ? C.cobalt : C.button,
-          border: `2px solid ${active > 0.5 ? C.cobalt : C.line}`,
-          transform: `scale(${0.6 + p * 0.4})`,
-          boxShadow: active > 0.5 ? `0 0 40px rgba(82,102,235,0.55)` : "none",
-        }}
-      >
-        {n}
+    <div
+      style={{
+        backgroundColor: C.white,
+        border: `1px solid ${C.border}`,
+        borderRadius: 36,
+        padding: "48px 52px",
+        fontFamily: SANS,
+        boxShadow: "0 20px 50px rgba(0,0,0,0.06)",
+        ...blurIn(p, 60, 10),
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "baseline", gap: 18 }}>
+        <span style={{ fontSize: 44, fontWeight: 600, letterSpacing: "-0.035em", color: C.ink }}>{title}</span>
+        <span style={{ fontSize: 30, fontWeight: 500, color: C.orange }}>{n}</span>
       </div>
-      <div style={{ ...rise(p, 30), paddingTop: 6 }}>
-        <div style={{ fontFamily: FONT_DISPLAY, fontWeight: 600, fontSize: 58, letterSpacing: "-0.03em", color: C.ivory }}>
-          {title}
-        </div>
-        <div
-          style={{
-            marginTop: 14,
-            display: "inline-block",
-            padding: "10px 22px",
-            borderRadius: 999,
-            border: `1px solid ${C.line}`,
-            backgroundColor: C.card,
-            fontFamily: FONT_UI,
-            fontSize: 28,
-            color: C.ash,
-          }}
-        >
-          {deliverable}
-        </div>
-      </div>
+      <div style={{ marginTop: 22, fontSize: 36, fontWeight: 500, color: C.ink }}>{lead}</div>
+      <div style={{ marginTop: 14, fontSize: 32, lineHeight: 1.45, color: C.muted }}>{body}</div>
     </div>
   );
 };

@@ -2,52 +2,46 @@ import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
 import { fade } from "@remotion/transitions/fade";
 import { slide } from "@remotion/transitions/slide";
 import { linearTiming, TransitionSeries } from "@remotion/transitions";
-import { Background, Wordmark } from "./components";
+import { NavPill } from "./components";
 import { s } from "./theme";
-import { Hook } from "./scenes/Hook";
-import { Problem } from "./scenes/Problem";
-import { Traffic } from "./scenes/Traffic";
-import { Management } from "./scenes/Management";
-import { Website } from "./scenes/Website";
+import { Hero } from "./scenes/Hero";
+import { Fronts } from "./scenes/Fronts";
+import { Solutions } from "./scenes/Solutions";
 import { Process } from "./scenes/Process";
-import { Outro } from "./scenes/Outro";
+import { Method } from "./scenes/Method";
+import { Closing } from "./scenes/Closing";
 
-// Timeline (60fps). Cada transição sobrepõe as cenas vizinhas por T frames.
-const T = 30;
+// Timeline (60fps) seguindo a ordem do site. Cada transição sobrepõe as
+// cenas vizinhas por T frames.
+const T = 36;
 const SCENES = [
-  { id: "hook", Component: Hook, duration: s(4) },
-  { id: "problem", Component: Problem, duration: s(4) },
-  { id: "traffic", Component: Traffic, duration: s(4.5) },
-  { id: "management", Component: Management, duration: s(4.5) },
-  { id: "website", Component: Website, duration: s(4.5) },
-  { id: "process", Component: Process, duration: s(5.5) },
-  { id: "outro", Component: Outro, duration: s(6) },
+  { id: "hero", Component: Hero, duration: s(4) },
+  { id: "fronts", Component: Fronts, duration: s(4.5) },
+  { id: "solutions", Component: Solutions, duration: s(8) },
+  { id: "process", Component: Process, duration: s(5) },
+  { id: "method", Component: Method, duration: s(5.5) },
+  { id: "closing", Component: Closing, duration: s(6) },
 ];
 
 export const PROMO_DURATION =
   SCENES.reduce((sum, scene) => sum + scene.duration, 0) - T * (SCENES.length - 1); // 1800 = 30s
 
-const OUTRO_START = PROMO_DURATION - SCENES[SCENES.length - 1].duration;
+const startOf = (index: number) =>
+  SCENES.slice(0, index).reduce((sum, scene) => sum + scene.duration - T, 0);
+const METHOD_START = startOf(SCENES.findIndex((sc) => sc.id === "method"));
 
 const timing = linearTiming({ durationInFrames: T, easing: Easing.inOut(Easing.cubic) });
-const transitionFor = (nextId: string) =>
-  ["management", "website", "traffic"].includes(nextId)
-    ? slide({ direction: "from-right" })
-    : fade();
 
 export const OpusPromo: React.FC = () => {
   const frame = useCurrentFrame();
-  // Assinatura discreta no topo; some quando o outro (com o logo grande) entra.
-  const headerOpacity =
-    interpolate(frame, [20, 50], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) *
-    interpolate(frame, [OUTRO_START - 10, OUTRO_START + 15], [1, 0], {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-    });
+  // A pílula de navegação acompanha as seções claras e sai antes do zoom.
+  const navOpacity = interpolate(frame, [METHOD_START + 60, METHOD_START + 90], [1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill>
-      <Background />
       <TransitionSeries>
         {SCENES.flatMap(({ id, Component, duration }, i) => {
           const items = [
@@ -55,11 +49,12 @@ export const OpusPromo: React.FC = () => {
               <Component />
             </TransitionSeries.Sequence>,
           ];
-          if (i < SCENES.length - 1) {
+          const next = SCENES[i + 1];
+          if (next) {
             items.push(
               <TransitionSeries.Transition
                 key={`${id}-t`}
-                presentation={transitionFor(SCENES[i + 1].id)}
+                presentation={next.id === "solutions" ? slide({ direction: "from-bottom" }) : fade()}
                 timing={timing}
               />,
             );
@@ -67,9 +62,11 @@ export const OpusPromo: React.FC = () => {
           return items;
         })}
       </TransitionSeries>
-      <div style={{ position: "absolute", top: 120, left: 80, opacity: headerOpacity }}>
-        <Wordmark size={40} />
-      </div>
+      {navOpacity > 0 && (
+        <AbsoluteFill style={{ opacity: navOpacity }}>
+          <NavPill />
+        </AbsoluteFill>
+      )}
     </AbsoluteFill>
   );
 };

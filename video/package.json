@@ -6,15 +6,19 @@
   "scripts": {
     "studio": "remotion studio",
     "render": "remotion render OpusLaunch out/opus-launch.mp4",
-    "render:locucao": "remotion render OpusLaunch out/opus-launch-locucao.mp4 --props='{\"locucao\":true}'",
     "render:promo": "remotion render OpusPromo out/opus-promo.mp4",
-    "music": "python3 scripts/make-music.py out/trilha.wav && ffmpeg -y -i out/trilha.wav -af loudnorm=I=-16:TP=-1.5:LRA=11 -c:a libmp3lame -b:a 192k public/audio/trilha.mp3"
+    "stills": "bash scripts/contact-sheet.sh",
+    "audio": "python3 scripts/make-audio.py"
   },
   "dependencies": {
     "@fontsource/instrument-serif": "5.3.0",
     "@fontsource/inter": "5.3.0",
     "@remotion/cli": "4.0.534",
     "@remotion/fonts": "4.0.534",
+    "@remotion/google-fonts": "4.0.534",
+    "@remotion/layout-utils": "4.0.534",
+    "@remotion/motion-blur": "4.0.534",
+    "@remotion/paths": "4.0.534",
     "@remotion/transitions": "4.0.534",
     "react": "19.2.3",
     "react-dom": "19.2.3",

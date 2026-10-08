@@ -3,7 +3,9 @@ import { Config } from "@remotion/cli/config";
 Config.setVideoImageFormat("jpeg");
 Config.setJpegQuality(92);
 Config.setCodec("h264");
-Config.setCrf(16);
+Config.setCrf(18);
+// bt709 → yuv420p em faixa de TV, o que Instagram/TikTok esperam.
+Config.setColorSpace("bt709");
 Config.setPixelFormat("yuv420p");
 Config.setOverwriteOutput(true);
 

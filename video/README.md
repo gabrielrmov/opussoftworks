@@ -2,83 +2,80 @@
 
 Vídeos verticais (9:16, 1080×1920) feitos com [Remotion](https://www.remotion.dev/),
 na linguagem do site publicado (opussoftworks.com.br): fundo off-white
-pontilhado, tipografia sans forte em preto, laranja `#ff6039` como única ênfase.
+pontilhado, tipografia sans forte em preto, coral `#ff6039` como única ênfase.
 
 | Composição | Duração | FPS | O que é |
 | --- | --- | --- | --- |
-| `OpusLaunch` | 30s (900 frames) | 30 | Vídeo de lançamento, com trilha |
+| `OpusLaunch` | 30s (900 frames) | 30 | Lançamento: câmera seguindo a linha coral, com trilha e efeitos |
 | `OpusPromo` | 30s (1800 frames) | 60 | Promo que percorre as seções do site, sem áudio |
 
-## OpusLaunch — roteiro
+## OpusLaunch — "a linha coral"
 
-| Tempo | Cena (`src/launch/`) | Texto na tela |
+Não há cortes: uma câmera virtual (`src/launch/Camera.tsx`) anda, dá zoom e
+faz pan por um canvas grande, seguindo uma única linha coral
+(`CoralLine.tsx`) que nunca some. O motion blur (`@remotion/motion-blur`) só
+liga nos frames em que a câmera está se movendo.
+
+| Frames | Bloco | O que a linha faz |
 | --- | --- | --- |
-| 0–3s | `Intro` | OPUS SOFTWORKS (máscara + linha de medida) |
-| 3–7s | `Statement` | Resultado não é ~~sorte~~ (perde foco). **É entrega.** |
-| 7–13s | `Pillars` | Tráfego. Sistemas. Sites. — blocos ligados por linhas com dados |
-| 13–18s | `Pillars` | Três frentes. Uma estratégia. — os blocos se alinham numa estrutura |
-| 18–24s | `Method` | Diagnóstico → Estratégia → Implementação → Otimização (ritmo crescente) |
-| 24–28s | `Outcome` | Venda mais. Opere melhor. Cresça com clareza. |
-| 28–30s | `CTA` | Vamos elevar o próximo passo? / Falar com um especialista ↗ |
+| 0–60 | `Hook` | sobe pela direita desde o frame 0 e risca "sorte." |
+| 60–120 | `Hook` | vira o sublinhado de "É entrega." e sai do quadro |
+| 120–270 | `Pillars` | passa pelos 3 pilares (anúncio + leads, painel, celular) |
+| 270–360 | `System` | câmera abre: os três ligados, dados correndo pela linha |
+| 360–510 | `Method` | fica vertical e vira a timeline das 4 etapas |
+| 510–660 | `Outcome` | vira a curva de crescimento (sem números) |
+| 660–780 | `Logo` | câmera recua mostrando o caminho inteiro; a linha fecha a pílula do wordmark |
+| 780–900 | `CTA` | a pílula vira o contorno do botão; 4s parado, só o pulso |
 
-As transições (`src/launch/lineMask.tsx`) são uma máscara que sobe atrás de
-uma linha laranja enquanto a cena anterior perde o foco. Cada transição dura
-12 frames e fica centrada na virada de cena, então os cortes caem exatamente
-em 3s, 7s, 18s, 24s e 28s.
+**Tudo que é tempo está em `src/launch/timeline.ts`**: beats das entradas,
+keyframes da câmera, quanto da linha está desenhado em cada frame e os efeitos
+sonoros. A geometria do canvas fica em `layout.ts`. A regra é 120 BPM →
+1 beat = 15 frames; use `beat(n)` para manter tudo no tempo da música.
 
-### Trilha
+Layout: o foco da câmera é o centro da safe zone (220 px livres no topo, 380
+embaixo, 140 na direita), todo texto tem 44 px ou mais na tela e o wordmark é
+um componente só (`Wordmark.tsx`), igual ao do site.
 
-`public/audio/trilha.mp3` é gerada por `scripts/make-music.py` (numpy):
-eletrônica minimalista a 120 BPM. Uma batida dura 0,5s, ou seja, 15 frames,
-então os acentos coincidem com as cenas:
-o impacto de 5s cai no "É entrega.", o arpejo entra com as linhas dos
-pilares, os hi-hats aceleram no Método e um riser leva ao Outcome. Para
-mexer na trilha, edite o script e rode `npm run music` (precisa de Python 3
-com numpy e de ffmpeg).
+### Fonte
 
-### Locução
+Inter Tight via `@remotion/google-fonts` (`font.ts`), identificada comparando
+o hero e o wordmark do site publicado. O render baixa a fonte do Google Fonts,
+então precisa de acesso a `fonts.gstatic.com`.
 
-Grave a locução em `public/audio/locucao.mp3` (30s, começando no 0:00) e
-renderize com `npm run render:locucao`. A trilha cai para 35% automaticamente.
-Marcação sugerida:
+### Áudio
 
-| Tempo | Fala |
-| --- | --- |
-| 0:03–0:07 | Resultado não é sorte. É entrega. ("É entrega" no impacto de 0:05) |
-| 0:07–0:12 | A Opus conecta tráfego, sistemas e sites |
-| 0:12–0:18 | para transformar atenção em vendas, operações em controle e decisões em crescimento. |
-| 0:18–0:24 | Primeiro, clareza. Depois, estratégia. E então, execução que continua melhorando. |
-| 0:24–0:28 | Porque sua empresa não precisa de mais uma ferramenta. Precisa de um sistema que funcione. |
-| 0:28–0:30 | Opus SoftWorks. |
+- `public/music.mp3`: trilha eletrônica minimalista a 120 BPM, gerada por
+  `scripts/make-audio.py`. Entra forte no frame 0, pausa durante o zoom out
+  (22–23,5 s) e volta no impacto do logo (frame 705). Normalizada em
+  -14 LUFS. **É um placeholder procedural**: para usar uma trilha licenciada,
+  basta substituir o arquivo (mesmo nome, 30 s, 120 BPM).
+- `public/sfx/`: `whoosh` (viradas de câmera), `tick` (palavras e etapas),
+  `click` (clique e toque nos pilares), `glitch` ("sorte.") e `impact`
+  ("Resultado", "É entrega." e o logo). Os momentos estão em `SFX`, em
+  `timeline.ts`.
 
-O texto tem cerca de 70 palavras, o que dá umas 26s em ritmo natural, então
-fica justo. Entre 24s e 28s são 16 palavras em 4s; se soar corrido, encurte
-para "Sua empresa não precisa de mais uma ferramenta. Precisa de um sistema."
+Para regenerar: `npm run audio` (Python 3 com numpy e ffmpeg).
 
 ## Como usar
 
 ```bash
 npm install
-npm run studio          # preview/edição no navegador
-npm run render          # out/opus-launch.mp4
-npm run render:locucao  # out/opus-launch-locucao.mp4 (com public/audio/locucao.mp3)
-npm run render:promo    # out/opus-promo.mp4
+npm run studio   # preview/edição no navegador
+npm run stills   # stills de revisão + out/contact-sheet.png
+npm run render   # out/opus-launch.mp4 (H.264, CRF 18, yuv420p bt709)
+npm run render:promo
 ```
+
+`npm run stills` aceita frames: `npm run stills -- 0 90 720`.
 
 Se o Remotion não conseguir baixar o Chromium (rede restrita), aponte pra um já
 instalado: `REMOTION_BROWSER_EXECUTABLE=/caminho/do/chrome npm run render`.
 
-Para publicar em Instagram/TikTok, converta para faixa de cor padrão (TV):
-
-```bash
-ffmpeg -i out/opus-launch.mp4 -vf scale=in_range=pc:out_range=tv -pix_fmt yuv420p \
-  -c:v libx264 -crf 17 -c:a aac -b:a 192k -movflags +faststart out/opus-launch-final.mp4
-```
-
 ## Estrutura
 
-- `src/launch/` — composição de lançamento (cenas, transição, `OpusLaunch.tsx`)
+- `src/launch/` — composição de lançamento (`OpusLaunch.tsx`, `timeline.ts`,
+  `layout.ts`, câmera, linha e um componente por bloco)
 - `src/scenes/` + `src/OpusPromo.tsx` — composição promo
-- `src/theme.ts` — cores amostradas do site, fontes e helper `s()`
-- `src/components.tsx` — fundo pontilhado, wordmark, pílula de navegação
-- `scripts/make-music.py` — gerador da trilha
+- `src/theme.ts` — cores amostradas do site
+- `scripts/make-audio.py` — trilha e efeitos
+- `scripts/contact-sheet.sh` — stills de revisão e contact sheet

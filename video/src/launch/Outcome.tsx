@@ -1,54 +1,45 @@
-import { AbsoluteFill, Easing, useCurrentFrame } from "remotion";
-import { ramp } from "../anim";
-import { C, SANS } from "../theme";
-import { MaskRise } from "./shared";
+import { useCurrentFrame } from "remotion";
+import { C } from "../theme";
+import { FONT } from "./font";
+import { OUTCOME_L } from "./layout";
+import { pop, popStyle } from "./motion";
+import { OUTCOME_LINES } from "./timeline";
 
-const LINES: { text: string; accent?: boolean }[] = [
-  { text: "Venda mais." },
-  { text: "Opere melhor." },
-  { text: "Cresça com clareza.", accent: true },
+// Sem números: a curva de crescimento é a própria linha coral (ver layout).
+const ROWS = [
+  { text: "Venda mais.", at: OUTCOME_LINES[0] },
+  { text: "Opere melhor.", at: OUTCOME_LINES[1] },
+  { text: "Cresça com", at: OUTCOME_LINES[2], accent: true },
+  { text: "clareza.", at: OUTCOME_LINES[2] + 4, accent: true },
 ];
-
-// Curva de progresso discreta que se desenha ao fundo.
-const CURVE = "M 90 1640 C 300 1620, 420 1560, 560 1500 S 860 1330, 990 1240";
-const CURVE_LEN = 1100;
 
 export const Outcome: React.FC = () => {
   const frame = useCurrentFrame();
-  const draw = ramp(frame, 6, 120, [0, 1], Easing.inOut(Easing.quad));
-
   return (
-    <AbsoluteFill>
-      <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
-        <path d={CURVE} fill="none" stroke={C.ink} strokeOpacity={0.12} strokeWidth={4} />
-        <path
-          d={CURVE}
-          fill="none"
-          stroke={C.orange}
-          strokeWidth={5}
-          strokeLinecap="round"
-          strokeDasharray={CURVE_LEN}
-          strokeDashoffset={CURVE_LEN * (1 - draw)}
-        />
-      </svg>
-
-      <AbsoluteFill style={{ justifyContent: "center", padding: "0 90px 220px" }}>
-        {LINES.map((line, i) => (
+    <>
+      {ROWS.map((row, i) => {
+        const p = pop(frame, row.at, 14);
+        return (
           <div
-            key={line.text}
+            key={row.text}
             style={{
-              fontFamily: SANS,
-              fontWeight: 600,
-              fontSize: 112,
-              lineHeight: 1.08,
-              letterSpacing: "-0.058em",
-              color: line.accent ? C.orange : C.ink,
+              position: "absolute",
+              left: OUTCOME_L.textX,
+              top: OUTCOME_L.rows[i],
+              transform: "translateY(-50%)",
+              fontFamily: FONT,
+              fontWeight: 700,
+              fontSize: OUTCOME_L.size,
+              letterSpacing: "-0.05em",
+              lineHeight: 1,
+              whiteSpace: "nowrap",
+              color: row.accent ? C.orange : C.ink,
             }}
           >
-            <MaskRise delay={10 + i * 22}>{line.text}</MaskRise>
+            <span style={{ display: "inline-block", transformOrigin: "left bottom", ...popStyle(p, 1.15, 50) }}>{row.text}</span>
           </div>
-        ))}
-      </AbsoluteFill>
-    </AbsoluteFill>
+        );
+      })}
+    </>
   );
 };

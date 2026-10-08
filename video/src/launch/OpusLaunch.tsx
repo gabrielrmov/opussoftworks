@@ -1,66 +1,72 @@
-import { AbsoluteFill, Easing, Html5Audio, interpolate, staticFile, useCurrentFrame } from "remotion";
-import { linearTiming, TransitionSeries } from "@remotion/transitions";
-import { DotPaper } from "../components";
-import { lineMask } from "./lineMask";
-import { CropMarks } from "./shared";
-import { Intro } from "./Intro";
-import { Statement } from "./Statement";
-import { Pillars } from "./Pillars";
+import { CameraMotionBlur } from "@remotion/motion-blur";
+import { AbsoluteFill, Html5Audio, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { Background } from "./Background";
+import { Camera, camAt, CamProvider, camSpeed } from "./Camera";
+import { CoralLine } from "./CoralLine";
+import { CTA } from "./CTA";
+import { Hook } from "./Hook";
+import { Logo } from "./Logo";
 import { Method } from "./Method";
 import { Outcome } from "./Outcome";
-import { CTA } from "./CTA";
+import { Pillars } from "./Pillars";
+import { SystemTitle } from "./System";
+import { SFX } from "./timeline";
 
-export const LAUNCH_FPS = 30;
+export { DURATION as LAUNCH_DURATION, FPS as LAUNCH_FPS } from "./timeline";
 
-// Tempos do roteiro (em segundos). Cada transição de T frames fica centrada
-// na virada de cena, então a primeira e a última cena ganham T/2 e as do meio T.
-const T = 12;
-const BEATS = [
-  { id: "intro", Component: Intro, from: 0, to: 3 },
-  { id: "statement", Component: Statement, from: 3, to: 7 },
-  { id: "pillars", Component: Pillars, from: 7, to: 18 },
-  { id: "method", Component: Method, from: 18, to: 24 },
-  { id: "outcome", Component: Outcome, from: 24, to: 28 },
-  { id: "cta", Component: CTA, from: 28, to: 30 },
-];
+/** Tudo que está "no mundo": um canvas grande que a câmera percorre. */
+const Canvas: React.FC = () => (
+  <div style={{ position: "relative", width: 7400, height: 4400 }}>
+    <Hook />
+    <Pillars />
+    <Method />
+    <Outcome />
+    <CTA />
+    <Logo />
+    <CoralLine />
+  </div>
+);
 
-const SCENES = BEATS.map((b, i) => ({
-  ...b,
-  duration: (b.to - b.from) * LAUNCH_FPS + (i > 0 ? T / 2 : 0) + (i < BEATS.length - 1 ? T / 2 : 0),
-}));
-
-export const LAUNCH_DURATION = 30 * LAUNCH_FPS; // 900
-
-const timing = linearTiming({ durationInFrames: T, easing: Easing.inOut(Easing.cubic) });
-
-export type OpusLaunchProps = {
-  /** Toca public/audio/locucao.mp3 por cima e abaixa a trilha (ducking). */
-  locucao: boolean;
+/** Um frame da cena (fundo + câmera + sobreposições). Opaco, por causa do motion blur. */
+const Scene: React.FC = () => {
+  const frame = useCurrentFrame();
+  const cam = camAt(frame);
+  return (
+    <CamProvider value={cam}>
+      <AbsoluteFill style={{ overflow: "hidden" }}>
+        <Background />
+        <Camera cam={cam}>
+          <Canvas />
+        </Camera>
+        <SystemTitle />
+      </AbsoluteFill>
+    </CamProvider>
+  );
 };
 
-export const OpusLaunch: React.FC<OpusLaunchProps> = ({ locucao }) => {
-  const frame = useCurrentFrame();
-  const marks = interpolate(frame, [0, 12], [0, 0.25], { extrapolateRight: "clamp" });
+// O motion blur renderiza a cena várias vezes; só liga quando a câmera anda.
+const BLUR_SPEED = 3;
 
+export const OpusLaunch: React.FC = () => {
+  const frame = useCurrentFrame();
+  const moving = camSpeed(frame) > BLUR_SPEED;
   return (
     <AbsoluteFill>
-      <DotPaper />
-      <CropMarks opacity={marks} />
-      <TransitionSeries>
-        {SCENES.flatMap(({ id, Component, duration }, i) => {
-          const items = [
-            <TransitionSeries.Sequence key={id} durationInFrames={duration}>
-              <Component />
-            </TransitionSeries.Sequence>,
-          ];
-          if (i < SCENES.length - 1) {
-            items.push(<TransitionSeries.Transition key={`${id}-t`} presentation={lineMask()} timing={timing} />);
-          }
-          return items;
-        })}
-      </TransitionSeries>
-      <Html5Audio src={staticFile("audio/trilha.mp3")} volume={locucao ? 0.35 : 1} />
-      {locucao && <Html5Audio src={staticFile("audio/locucao.mp3")} />}
+      {moving ? (
+        <CameraMotionBlur shutterAngle={200} samples={7}>
+          <Scene />
+        </CameraMotionBlur>
+      ) : (
+        <Scene />
+      )}
+
+      {/* Áudio fica fora do blur (senão tocaria uma vez por amostra). */}
+      <Html5Audio src={staticFile("music.mp3")} volume={0.9} />
+      {SFX.map((s, i) => (
+        <Sequence key={i} from={s.f} durationInFrames={45} layout="none">
+          <Html5Audio src={staticFile(`sfx/${s.file}`)} volume={s.volume ?? 0.85} />
+        </Sequence>
+      ))}
     </AbsoluteFill>
   );
 };

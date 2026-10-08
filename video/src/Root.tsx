@@ -6,7 +6,7 @@ import { FPS, HEIGHT, WIDTH } from "./theme";
 export const RemotionRoot: React.FC = () => {
   return (
     <>
-      {/* Lançamento: roteiro de 6 cenas, 30fps, com trilha */}
+      {/* Lançamento: câmera seguindo a linha coral, 30fps, com trilha e efeitos */}
       <Composition
         id="OpusLaunch"
         component={OpusLaunch}
@@ -14,7 +14,6 @@ export const RemotionRoot: React.FC = () => {
         fps={LAUNCH_FPS}
         width={WIDTH}
         height={HEIGHT}
-        defaultProps={{ locucao: false }}
       />
       {/* Promo institucional: percorre as seções do site, 60fps */}
       <Composition

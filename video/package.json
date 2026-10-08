@@ -8,15 +8,17 @@
     "render": "remotion render OpusLaunch out/opus-launch.mp4",
     "render:promo": "remotion render OpusPromo out/opus-promo.mp4",
     "capture": "node scripts/capture-site.mjs",
-    "qa": "node scripts/qa-stills.mjs && python3 scripts/qa.py"
+    "crop": "python3 scripts/crop-site.py",
+    "stills": "bash scripts/contact-sheet.sh",
+    "sfx": "python3 scripts/make-sfx.py",
+    "qa": "python3 scripts/qa.py"
   },
   "dependencies": {
-    "@fontsource/instrument-serif": "5.3.0",
-    "@fontsource/inter": "5.3.0",
-    "@fontsource/inter-tight": "5.3.0",
-    "@fontsource/jetbrains-mono": "5.3.0",
     "@remotion/cli": "4.0.534",
     "@remotion/fonts": "4.0.534",
+    "@remotion/layout-utils": "4.0.534",
+    "@remotion/motion-blur": "4.0.534",
+    "@remotion/noise": "4.0.534",
     "@remotion/paths": "4.0.534",
     "@remotion/transitions": "4.0.534",
     "react": "19.2.3",

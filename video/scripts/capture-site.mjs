@@ -63,10 +63,26 @@ const meta = await page.evaluate(() => {
     pageHeight: document.documentElement.scrollHeight,
     rects: {
       hero: rect(document.querySelector("#conteudo > *:first-child")),
+      // cabeçalho da seção: "Onde a OPUS SOFTWORKS entra" → "Três frentes, uma mesma estratégia."
+      solucoesHeader: rect(document.querySelector("#solucoes > div:first-of-type")),
       tresFrentes: rect(document.querySelector("#solucoes h2")),
       card01: rect(card01),
       vendaE: rect(card01?.querySelector("strong")),
     },
+    // os três cards e o trecho em negrito de cada um
+    cards: [...document.querySelectorAll("#solucoes .rounded-2xl")].slice(0, 3).map((c) => ({
+      card: rect(c),
+      title: c.querySelector("h3")?.textContent ?? null,
+      emphasis: rect(c.querySelector("strong")),
+      emphasisText: c.querySelector("strong")?.textContent ?? null,
+      // uma caixa por linha do negrito (pode quebrar em duas)
+      emphasisLines: [...(c.querySelector("strong")?.getClientRects() ?? [])].map((r) => ({
+        x: r.left + window.scrollX,
+        y: r.top + window.scrollY,
+        w: r.width,
+        h: r.height,
+      })),
+    })),
     vendaEText: card01?.querySelector("strong")?.textContent ?? null,
   };
 });

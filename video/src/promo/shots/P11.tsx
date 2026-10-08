@@ -1,12 +1,11 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
 import {C, FONT} from '../../brand';
-import {AnimatedLine} from '../../components/AnimatedLine';
-import {Stage} from '../../components/Stage';
 import {EASE_IN, EASE_OUT, prog} from '../../lib/anim';
 import {At} from '../kit/At';
 import {pulse} from '../kit/fx';
 import {KineticText} from '../kit/KineticText';
+import {Underline} from '../kit/Marks';
 
 /** 11 — "Resultado não é sorte." cai; um painel coral bate com "É entrega." gigante. */
 export const P11: React.FC<{dur: number}> = () => {
@@ -45,11 +44,10 @@ export const P11: React.FC<{dur: number}> = () => {
           <KineticText text="É" size={210} color={C.white} mode="slam" delay={56} />
         </At>
         <At y={1000}>
-          <KineticText text="entrega." size={190} color={C.white} mode="slam" delay={60} stagger={1.3} />
+          <Underline start={74} color={C.white} thickness={14} gap={40}>
+            <KineticText text="entrega." size={190} color={C.white} mode="slam" delay={60} stagger={1.3} />
+          </Underline>
         </At>
-        <Stage>
-          <AnimatedLine d="M150 1135 C 380 1185, 700 1180, 935 1118" draw={[72, 14]} width={14} color={C.white} />
-        </Stage>
       </AbsoluteFill>
     </AbsoluteFill>
   );

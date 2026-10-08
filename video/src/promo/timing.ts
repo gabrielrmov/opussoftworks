@@ -13,7 +13,7 @@ export const SHOTS: ShotDef[] = [
   {name: '01 · Toda empresa quer crescer', dur: 66, holds: [{at: 44, len: 30}]},
   {name: '02 · Sem direção custa caro', dur: 98, holds: [{at: 25, len: 16}, {at: 54, len: 26}, {at: 84, len: 26}]},
   {name: '03 · Conheça a OpusSoftWorks', dur: 60, holds: [{at: 32, len: 30}]},
-  {name: '04 · É direção', dur: 96, holds: [{at: 31, len: 26}, {at: 78, len: 32}]},
+  {name: '04 · É direção', dur: 104, holds: [{at: 31, len: 26}, {at: 89, len: 32}]},
   {name: '05 · Três frentes', dur: 42, holds: [{at: 26, len: 24}]},
   {name: '06 · Tráfego', dur: 102, holds: [{at: 86, len: 30}]},
   {name: '07 · Sistemas', dur: 102, holds: [{at: 80, len: 30}]},

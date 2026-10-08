@@ -25,7 +25,20 @@ export const P03: React.FC<{dur: number}> = ({dur}) => {
           <KineticText text="Conheça a" size={52} family={FONT.text} weight={400} color={C.g500} mode="blur" delay={6} stagger={1} />
         </At>
         <At y={990} style={{filter: `blur(${(1 - sharp) * 14}px)`}}>
-          <WeightMorph text="OpusSoftWorks" size={112} from={300} to={800} start={12} duration={18} spacingFrom={0.35} spacingTo={-0.01} />
+          <WeightMorph
+            text="OpusSoftWorks"
+            parts={[
+              {text: 'Opus', color: C.coral, to: 800},
+              {text: 'SoftWorks', to: 600},
+            ]}
+            size={112}
+            from={300}
+            to={800}
+            start={12}
+            duration={18}
+            spacingFrom={0.35}
+            spacingTo={-0.01}
+          />
         </At>
       </AbsoluteFill>
       <AbsoluteFill style={{background: C.coral, opacity: 1 - prog(f, 0, 10)}} />

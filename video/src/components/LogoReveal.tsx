@@ -119,7 +119,10 @@ export const LogoReveal: React.FC<Props> = ({cx, cy, width, leadIn, wordmarkY, s
         {LOGO_ASSETS.wordmark ? (
           <Img src={staticFile(LOGO_ASSETS.wordmark)} style={{height: 92}} />
         ) : (
-          <div style={{...TYPE.display, fontWeight: 700, fontSize: 92, color: C.graphite, letterSpacing: '-0.005em'}}>OpusSoftWorks</div>
+          <div style={{...TYPE.display, fontSize: 92, letterSpacing: '-0.005em'}}>
+            <span style={{fontWeight: 700, color: C.coral}}>Opus</span>
+            <span style={{fontWeight: 500, color: C.graphite}}>SoftWorks</span>
+          </div>
         )}
       </div>
 

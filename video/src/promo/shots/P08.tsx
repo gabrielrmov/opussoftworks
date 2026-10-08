@@ -5,7 +5,7 @@ import {AnimatedCircle} from '../../components/AnimatedCircle';
 import {Stage} from '../../components/Stage';
 import {CLAMP, EASE_IN_OUT, clamp01, lerp, prog} from '../../lib/anim';
 import {Cursor} from '../kit/Cursor';
-import {Glare, Laptop, Phone, SiteScreen} from '../kit/Devices';
+import {Glare, Laptop, laptopScreenWidth, Phone, phoneScreenWidth, SiteScreen} from '../kit/Devices';
 import {exitStyle, snap} from '../kit/fx';
 import {Shot} from '../kit/Shot';
 import {FrontLabel} from './Labels';
@@ -62,7 +62,7 @@ export const P08: React.FC<{dur: number}> = ({dur}) => {
             }}
           >
             <Laptop width={720}>
-              <SiteScreen variant="desktop" progress={desktop} />
+              <SiteScreen variant="desktop" progress={desktop} screenWidth={laptopScreenWidth(720)} />
               <Glare t={prog(f, 72, 20)} />
             </Laptop>
           </div>
@@ -78,7 +78,7 @@ export const P08: React.FC<{dur: number}> = ({dur}) => {
           }}
         >
           <Phone width={PHONE_W}>
-            <SiteScreen variant="mobile" progress={mobile} />
+            <SiteScreen variant="mobile" progress={mobile} screenWidth={phoneScreenWidth(PHONE_W)} />
             <Glare t={prog(f, 16, 18)} />
           </Phone>
         </div>
@@ -87,9 +87,9 @@ export const P08: React.FC<{dur: number}> = ({dur}) => {
           keys={[
             {f: 74, x: 260, y: 1220},
             {f: 92, x: 430, y: 820},
-            {f: 104, x: 440, y: 760},
-            {f: 116, x: 445, y: 820},
-            {f: 128, x: 450, y: 760},
+            {f: 104, x: 600, y: 700},
+            {f: 116, x: 610, y: 760},
+            {f: 128, x: 620, y: 700},
           ]}
           vanish={132}
         />

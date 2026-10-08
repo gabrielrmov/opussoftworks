@@ -119,6 +119,8 @@ export const KineticText: React.FC<Props> = ({
 /** Texto cuja espessura e espaçamento mudam (fonte variável). */
 export const WeightMorph: React.FC<{
   text: string;
+  /** Trechos com cor própria (ex.: "Opus" coral + "SoftWorks" grafite). `to` = peso final do trecho. */
+  parts?: {text: string; color?: string; to?: number}[];
   size: number;
   from: number;
   to: number;
@@ -128,7 +130,7 @@ export const WeightMorph: React.FC<{
   spacingFrom?: number;
   spacingTo?: number;
   style?: React.CSSProperties;
-}> = ({text, size, from, to, start, duration, color = C.graphite, spacingFrom = 0, spacingTo = 0, style}) => {
+}> = ({text, parts, size, from, to, start, duration, color = C.graphite, spacingFrom = 0, spacingTo = 0, style}) => {
   const frame = useCurrentFrame();
   const t = prog(frame, start, duration);
   return (
@@ -145,7 +147,13 @@ export const WeightMorph: React.FC<{
         ...style,
       }}
     >
-      {text}
+      {parts
+        ? parts.map((p) => (
+            <span key={p.text} style={{color: p.color ?? color, fontWeight: Math.round(from + ((p.to ?? to) - from) * t)}}>
+              {p.text}
+            </span>
+          ))
+        : text}
     </div>
   );
 };

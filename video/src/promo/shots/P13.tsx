@@ -27,7 +27,16 @@ export const P13: React.FC<{dur: number}> = ({dur}) => {
           <OpusSymbol cx={540} cy={790} width={470} progress={prog(f, 6, 30, EASE_IN_OUT)} />
         </Stage>
         <At y={1060} style={{transform: `scale(${punch})`}}>
-          <KineticText text="OpusSoftWorks" size={104} weight={700} mode="blur" delay={30} stagger={0.6} />
+          <KineticText
+            segments={[
+              {text: 'Opus', color: C.coral, weight: 700},
+              {text: 'SoftWorks', weight: 500},
+            ]}
+            size={104}
+            mode="blur"
+            delay={30}
+            stagger={0.6}
+          />
         </At>
         <At y={1160}>
           <KineticText text="Estratégia, aliada à execução." size={42} family={FONT.text} weight={400} color={C.g700} mode="rise" delay={44} stagger={0.4} />

@@ -3,6 +3,7 @@ import {Img, staticFile} from 'remotion';
 import {C, FONT, SITE_SCREENSHOTS} from '../../brand';
 import {OpusSymbol} from '../../components/OpusSymbol';
 import {Glyph, GlyphName} from './Glyph';
+import {REAL_SITE_WIDTH, RealSite} from './RealSite';
 import {Skel} from './UI';
 
 /** Celular com tela recortada; aceita rotação 3D. */
@@ -29,6 +30,10 @@ export const Phone: React.FC<{width: number; children: React.ReactNode; style?: 
     </div>
   );
 };
+
+/** Largura útil da tela de cada aparelho (descontada a moldura). */
+export const phoneScreenWidth = (w: number) => w * (1 - 0.09);
+export const laptopScreenWidth = (w: number) => w * (1 - 0.044);
 
 /** Notebook: tela + base. */
 export const Laptop: React.FC<{width: number; children: React.ReactNode; style?: React.CSSProperties}> = ({width, children, style}) => {
@@ -58,7 +63,10 @@ const Brand: React.FC<{scale: number}> = ({scale}) => (
     <svg width={36 * scale} height={24 * scale} style={{overflow: 'visible'}}>
       <OpusSymbol cx={18 * scale} cy={12 * scale} width={36 * scale} />
     </svg>
-    <span style={{fontFamily: FONT.title, fontWeight: 700, fontSize: 17 * scale, color: C.graphite}}>OpusSoftWorks</span>
+    <span style={{fontFamily: FONT.title, fontSize: 17 * scale}}>
+      <span style={{fontWeight: 700, color: C.coral}}>Opus</span>
+      <span style={{fontWeight: 500, color: C.graphite}}>SoftWorks</span>
+    </span>
   </div>
 );
 
@@ -108,7 +116,12 @@ export const Glare: React.FC<{t: number}> = ({t}) =>
  * Tela do site rolando (`progress` 0..1). Usa o print real quando configurado em
  * SITE_SCREENSHOTS; senão, a página-modelo desenhada em código.
  */
-export const SiteScreen: React.FC<{variant: 'desktop' | 'mobile'; progress?: number}> = ({variant, progress = 0}) => {
+export const SiteScreen: React.FC<{variant: 'desktop' | 'mobile'; progress?: number; screenWidth: number; maxScroll?: number}> = ({
+  variant,
+  progress = 0,
+  screenWidth,
+  maxScroll,
+}) => {
   const desk = variant === 'desktop';
   const shot = desk ? SITE_SCREENSHOTS.desktop : SITE_SCREENSHOTS.mobile;
   if (shot) {
@@ -119,11 +132,16 @@ export const SiteScreen: React.FC<{variant: 'desktop' | 'mobile'; progress?: num
       </div>
     );
   }
-  return <MockSite desk={desk} scroll={progress * (desk ? 96 : 330)} />;
+  const zoom = screenWidth / REAL_SITE_WIDTH[variant];
+  return (
+    <div style={{position: 'absolute', left: 0, top: 0, transform: `scale(${zoom})`, transformOrigin: '0 0'}}>
+      <RealSite variant={variant} scroll={progress * (maxScroll ?? (desk ? 330 : 1050))} />
+    </div>
+  );
 };
 
-/** Página-modelo da OPUS desenhada em código (desktop ou mobile). `scroll` em px. */
-const MockSite: React.FC<{desk: boolean; scroll: number}> = ({desk, scroll}) => {
+/** Página-modelo genérica (não usada desde a réplica do site real; mantida como alternativa). */
+export const MockSite: React.FC<{desk: boolean; scroll: number}> = ({desk, scroll}) => {
   const s = desk ? 1.4 : 1;
   return (
     <div style={{position: 'absolute', inset: 0, transform: `translateY(${-scroll}px)`}}>

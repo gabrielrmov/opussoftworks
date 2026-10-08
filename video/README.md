@@ -58,10 +58,11 @@ final. 1080×1920 · 30 fps · ~64 s. Código em `src/promo/` (kit em
 `src/promo/kit/`, planos em `src/promo/shots/`, ordem e duração em
 `src/promo/timing.ts`).
 
-No plano "Sites", as telas do notebook e do celular rolam um print do site.
-Para usar o site real, salve prints da página inteira (desktop ~1440 px de
-largura e celular ~390 px) em `public/brand/site/` e preencha
-`SITE_SCREENSHOTS` em `src/brand.ts`; sem prints, aparece uma página-modelo.
+No plano "Sites", as telas do notebook e do celular mostram o site real
+(opussoftworks.com.br) reproduzido em código a partir do print enviado
+(`src/promo/kit/RealSite.tsx`, fonte Inter Tight). Para trocar por prints da
+página inteira, salve-os em `public/brand/site/` e preencha `SITE_SCREENSHOTS`
+em `src/brand.ts`.
 
 Cada plano tem pausas de leitura (`holds` em `timing.ts`): quando um texto
 termina de entrar, o tempo do plano desacelera para 15% por alguns frames, para

@@ -1,12 +1,11 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
 import {C, FONT} from '../../brand';
-import {AnimatedLine} from '../../components/AnimatedLine';
-import {Stage} from '../../components/Stage';
 import {At} from '../kit/At';
 import {exitStyle} from '../kit/fx';
 import {Glow, IconTile} from '../kit/IconTile';
 import {KineticText} from '../kit/KineticText';
+import {Underline} from '../kit/Marks';
 import {Shot} from '../kit/Shot';
 
 /** 01 — Gancho: "Toda empresa quer crescer." com ícones de crescimento flutuando. */
@@ -25,11 +24,10 @@ export const P01: React.FC<{dur: number}> = ({dur}) => {
           <KineticText text="Toda empresa" size={62} family={FONT.text} weight={500} mode="rise" delay={4} stagger={1} />
         </At>
         <At y={1005}>
-          <KineticText text="quer crescer." size={118} color={C.coral} delay={12} stagger={1.6} />
+          <Underline start={34} thickness={11} gap={26}>
+            <KineticText text="quer crescer." size={118} color={C.coral} delay={12} stagger={1.6} />
+          </Underline>
         </At>
-        <Stage>
-          <AnimatedLine d="M200 1108 C 420 1150, 690 1150, 880 1092" draw={[30, 14]} width={12} />
-        </Stage>
       </AbsoluteFill>
     </Shot>
   );

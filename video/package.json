@@ -2,11 +2,13 @@
   "name": "opus-promo-video",
   "version": "1.0.0",
   "private": true,
-  "description": "Vídeo promocional 9:16 (30s, 60fps) da Opus Softworks, feito com Remotion",
+  "description": "Vídeos verticais (9:16) da Opus SoftWorks feitos com Remotion: lançamento (30s/30fps) e promo institucional (30s/60fps)",
   "scripts": {
     "studio": "remotion studio",
-    "render": "remotion render OpusPromo out/opus-promo.mp4",
-    "still": "remotion still OpusPromo out/thumb.png --frame=1700"
+    "render": "remotion render OpusLaunch out/opus-launch.mp4",
+    "render:locucao": "remotion render OpusLaunch out/opus-launch-locucao.mp4 --props='{\"locucao\":true}'",
+    "render:promo": "remotion render OpusPromo out/opus-promo.mp4",
+    "music": "python3 scripts/make-music.py out/trilha.wav && ffmpeg -y -i out/trilha.wav -af loudnorm=I=-16:TP=-1.5:LRA=11 -c:a libmp3lame -b:a 192k public/audio/trilha.mp3"
   },
   "dependencies": {
     "@fontsource/instrument-serif": "5.3.0",

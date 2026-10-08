@@ -8,7 +8,8 @@
     "render": "remotion render OpusLaunch out/opus-launch.mp4",
     "render:promo": "remotion render OpusPromo out/opus-promo.mp4",
     "stills": "bash scripts/contact-sheet.sh",
-    "audio": "python3 scripts/make-audio.py"
+    "audio": "python3 scripts/make-audio.py",
+    "qa": "python3 scripts/qa.py"
   },
   "dependencies": {
     "@fontsource/instrument-serif": "5.3.0",

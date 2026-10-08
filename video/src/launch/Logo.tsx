@@ -1,37 +1,28 @@
+import React from "react";
 import { interpolate, useCurrentFrame } from "remotion";
-import { CTA_L, LOGO_L, toWorld } from "./layout";
+import { LOGO_L, SCREEN_FOCUS, toWorld, WORDMARK } from "./layout";
 import { ease, pop } from "./motion";
-import { CTA_AT, LOGO } from "./timeline";
-import { Wordmark } from "./Wordmark";
+import { LOGO } from "./timeline";
+import { WordmarkSVG } from "./Wordmark";
 
 /**
- * O wordmark do site nasce quando a linha fecha a pílula (impacto) e
- * depois encolhe pro topo do CTA — é o mesmo elemento até o fim.
+ * A linha chega e escreve o wordmark grande (~78% da largura); no impacto
+ * ele ganha cor e, em seguida, encolhe e sobe pro topo do CTA — é o mesmo
+ * elemento do começo ao fim.
  */
 export const Logo: React.FC = () => {
   const frame = useCurrentFrame();
-  const a = pop(frame, LOGO.closed, 13);
-  const b = pop(frame, LOGO.closed + 4, 13);
-  // No CTA ele fica a 96 px na tela (escala da câmera 0.8): 120 no mundo.
-  const target = toWorld(500, CTA_L.wordmarkSy);
-  const m = ease(frame, LOGO.hold, CTA_AT);
-  const cy = interpolate(m, [0, 1], [LOGO_L.cy, target.y]);
-  if (frame < LOGO.closed - 1) return null;
-  const st = (p: number): React.CSSProperties => ({
-    opacity: Math.min(1, p * 2),
-    transform: `scale(${1.3 - 0.3 * p})`,
-    filter: `blur(${Math.max(0, 1 - p * 1.6) * 12}px)`,
-  });
+  if (frame < LOGO.drawFrom - 1) return null;
+  const draw = ease(frame, LOGO.move + 8, LOGO.impact);
+  const fill = ease(frame, LOGO.impact - 2, LOGO.impact + 4);
+  const punch = pop(frame, LOGO.impact, 12);
+  const m = ease(frame, LOGO.shrinkFrom, LOGO.shrinkTo);
+  const top = toWorld(SCREEN_FOCUS.x, WORDMARK.ctaSy);
+  const y = interpolate(m, [0, 1], [toWorld(SCREEN_FOCUS.x, WORDMARK.revealSy).y, top.y]);
+  const size = interpolate(m, [0, 1], [WORDMARK.revealSize, WORDMARK.ctaSize]) * (frame >= LOGO.impact ? 1.08 - 0.08 * punch : 1);
   return (
-    <div
-      style={{
-        position: "absolute",
-        left: LOGO_L.cx,
-        top: cy,
-        transform: "translate(-50%, -50%)",
-      }}
-    >
-      <Wordmark size={LOGO_L.size} opusStyle={st(a)} restStyle={st(b)} />
-    </div>
+    <svg width={7800} height={4600} viewBox="0 0 7800 4600" style={{ position: "absolute", left: 0, top: 0, overflow: "visible" }}>
+      <WordmarkSVG x={LOGO_L.x} y={y} size={size} draw={draw} fill={fill} />
+    </svg>
   );
 };

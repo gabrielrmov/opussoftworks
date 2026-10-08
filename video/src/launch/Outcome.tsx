@@ -1,3 +1,4 @@
+import React from "react";
 import { useCurrentFrame } from "remotion";
 import { C } from "../theme";
 import { FONT } from "./font";

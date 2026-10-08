@@ -1,3 +1,4 @@
+import React from "react";
 import { AbsoluteFill, random, useCurrentFrame } from "remotion";
 import { C } from "../theme";
 import { useCam } from "./Camera";

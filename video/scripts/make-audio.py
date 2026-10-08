@@ -2,14 +2,13 @@
 
 Trilha eletrônica minimalista a 120 BPM: 1 beat = 0,5 s = 15 frames a 30fps,
 então os compassos batem com os keyframes de src/launch/timeline.ts.
-Entra forte no frame 0 (sem fade-in). Mapa (em segundos):
-  0–4    Hook       kick 4x4 + baixo + stab de acorde no 0
-  4–9    Pilares    + arpejo em 16avos
-  9–12   Sistema    + pad abrindo
-  12–17  Método     + hi-hats em 16avos e palmas, riser até 17
-  17–22  Outcome    tudo, filtro aberto
-  22–23,5 Zoom out  bateria sai, riser → volta no 23,5 (logo, frame 705)
-  23,5–30 Logo/CTA  groove de novo, acorde final no 29,5
+Curva de energia (em segundos):
+  0–4    punch      kick + baixo + palmas + stab no frame 0, sem fade-in
+  4–17   groove     contínuo: + hats e arpejo
+  17–23  build      riser, filtro abrindo, rufo acelerando
+  23     drop       stab + crash junto com o impacto do logo (frame 690)
+  23–25  cheio
+  25–30  limpo      kick, baixo e pad; hit final em 29 s
 
 Uso: python3 scripts/make-audio.py  (precisa de numpy e ffmpeg)
 """
@@ -138,6 +137,8 @@ DUR = 30.0
 N = int(SR * DUR)
 L = np.zeros(N)
 R = np.zeros(N)
+DROP = 23.0
+END_HIT = 29.0
 
 
 def add(sig, start, gain=1.0, pan=0.0):
@@ -149,22 +150,16 @@ def add(sig, start, gain=1.0, pan=0.0):
     R[i : i + len(sig)] += sig * gain * (1 + min(pan, 0))
 
 
-def section(t):
-    """Quais camadas tocam no tempo t."""
-    drums = not (22.0 <= t < 23.5) and t < 29.5
-    return {
-        "drums": drums,
-        "arp": 4.0 <= t < 22.0 or 23.5 <= t < 29.5,
-        "hat16": 12.0 <= t < 22.0,
-        "clap": 12.0 <= t < 22.0 or 23.5 <= t < 26.0,
-    }
-
-
 CHORDS = [[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]]  # Am F C G, 2 s cada
 
 
 def chord_at(t):
     return CHORDS[int(t // 2.0) % 4]
+
+
+def build(t):
+    """0→1 ao longo do build (17–23 s)."""
+    return float(np.clip((t - 17.0) / (DROP - 17.0), 0, 1))
 
 
 def kick():
@@ -174,35 +169,9 @@ def kick():
     return body + 0.08 * highpass(rng.standard_normal(n), 2500) * env(n, 0.0003, 0.003)
 
 
-K = kick()
-for b in range(int(DUR / BEAT)):
-    t = b * BEAT
-    if section(t)["drums"]:
-        add(K, t, 0.95 if b % 4 == 0 else 0.85)
-
-# Baixo em colcheias (mais forte no contratempo, efeito de sidechain)
-for k in range(int(DUR / (BEAT / 2))):
-    t = k * BEAT / 2
-    if not section(t)["drums"]:
-        continue
-    root = chord_at(t)[0] - 24
-    n = int(BEAT / 2 * SR * 0.92)
-    sig = lowpass(np.sin(2 * np.pi * midi(root) * t_of(n)) + 0.35 * saw(midi(root), n), 380)
-    add(sig * env(n, 0.006, 0.12, s=0.35), t, 0.36 if k % 2 else 0.22)
-
-
 def hat(length=0.045):
     n = int(length * SR)
     return highpass(rng.standard_normal(n), 7000) * env(n, 0.0004, length / 4)
-
-
-for k in range(int(DUR / (BEAT / 4))):
-    t = k * BEAT / 4
-    sec = section(t)
-    if sec["drums"] and k % 4 == 2:
-        add(hat(0.06), t, 0.22, pan=0.2)
-    if sec["hat16"] and k % 4 != 2:
-        add(hat(), t, 0.09 + 0.05 * ((t - 12) / 10), pan=-0.2)
 
 
 def clap():
@@ -212,63 +181,136 @@ def clap():
     return noise * e
 
 
+def snare(length=0.12):
+    n = int(length * SR)
+    t = t_of(n)
+    return (0.6 * highpass(rng.standard_normal(n), 1500) + 0.4 * np.sin(2 * np.pi * 190 * t)) * env(n, 0.0005, length / 3)
+
+
+def crash():
+    n = int(2.5 * SR)
+    return highpass(rng.standard_normal(n), 4500) * env(n, 0.002, 0.9)
+
+
+def stab(t0, gain, length=0.9):
+    n = int(length * SR)
+    sig = sum(saw(midi(m + 12), n, 0.006) for m in chord_at(t0)) / 3
+    sig += 0.5 * sum(saw(midi(m), n, 0.004) for m in chord_at(t0)) / 3
+    add(lowpass(sig, 4200) * env(n, 0.002, length / 3), t0, gain)
+
+
+K = kick()
 CL = clap()
+
+# Bateria
 for b in range(int(DUR / BEAT)):
     t = b * BEAT
-    if section(t)["clap"] and b % 2 == 1:
-        add(CL, t, 0.24)
+    if t >= END_HIT + 0.01:
+        break
+    if DROP - 0.5 <= t < DROP:  # meio beat de suspense antes do drop (o riser segura)
+        continue
+    clean = t >= 25.0
+    add(K, t, 1.0 if t < 4 or DROP <= t < 25 else (0.8 if clean else 0.9))
+    if b % 2 == 1 and not clean and t < DROP - 0.5:
+        add(CL, t, 0.3 if t < 4 else 0.22)
+    if b % 2 == 1 and DROP <= t < 25:
+        add(CL, t, 0.3)
 
+# Baixo (colcheias, mais forte no contratempo)
+for k in range(int(DUR / (BEAT / 2))):
+    t = k * BEAT / 2
+    if t >= END_HIT or DROP - 0.5 <= t < DROP:
+        continue
+    root = chord_at(t)[0] - 24
+    n = int(BEAT / 2 * SR * 0.92)
+    sig = lowpass(np.sin(2 * np.pi * midi(root) * t_of(n)) + 0.35 * saw(midi(root), n), 380 + 300 * build(t))
+    add(sig * env(n, 0.006, 0.12, s=0.35), t, (0.38 if k % 2 else 0.24) * (0.85 if t >= 25 else 1))
+
+# Hats: contratempo a partir de 4 s; 16avos no build e no drop; leves no fim
+for k in range(int(DUR / (BEAT / 4))):
+    t = k * BEAT / 4
+    if t >= END_HIT:
+        continue
+    pos = k % 4
+    if 4.0 <= t < DROP - 0.5 and pos == 2:
+        add(hat(0.06), t, 0.2, pan=0.2)
+    if (17.0 <= t < DROP - 0.5 or DROP <= t < 25) and pos != 2:
+        add(hat(), t, 0.06 + 0.08 * build(t) + (0.08 if t >= DROP else 0), pan=-0.2)
+    if t >= 25 and pos == 2:
+        add(hat(0.05), t, 0.1, pan=0.2)
+
+# Rufo acelerando no fim do build (21–22,5 s)
+t = 21.0
+while t < DROP - 0.5:
+    step = BEAT / 2 if t < 21.75 else BEAT / 4 if t < 22.25 else BEAT / 8
+    add(snare(), t, 0.12 + 0.18 * (t - 21.0) / 1.5)
+    t += step
+
+# Arpejo: groove + build (filtro abrindo) + drop; some na parte limpa
 ARP = [0, 7, 12, 7, 15, 12, 7, 3]
 for k in range(int(DUR / (BEAT / 4))):
     t = k * BEAT / 4
-    if not section(t)["arp"]:
+    if not (4.0 <= t < 25.0) or DROP - 0.5 <= t < DROP:
         continue
     note = chord_at(t)[0] + 12 + ARP[k % len(ARP)]
     n = int(0.16 * SR)
-    bright = 1600 + 3200 * np.clip((t - 4) / 16, 0, 1)
+    bright = 1400 + 1200 * np.clip((t - 4) / 13, 0, 1) + 5000 * build(t)
     sig = lowpass(saw(midi(note), n, 0.003), bright) * env(n, 0.002, 0.06)
     pan = 0.4 if k % 2 else -0.4
-    add(sig, t, 0.075, pan)
-    add(sig, t + 0.375, 0.03, -pan)
+    g = 0.07 + 0.03 * build(t)
+    add(sig, t, g, pan)
+    add(sig, t + 0.375, g * 0.4, -pan)
 
+# Pad: o tempo todo; abre no build e fica limpo no fim
 for c in range(15):
     start = c * 2.0
     length = 2.3
     n = int(length * SR)
     sig = sum(saw(midi(m), n, 0.005) for m in chord_at(start)) / 3
-    open_ = 0.3 + 0.7 * np.clip((start - 9) / 10, 0, 1)
-    sig = lowpass(sig, 500 + 2600 * open_)
+    tt = start + t_of(n)
+    cut = 600 + 1200 * np.clip((tt - 4) / 13, 0, 1) + 4000 * np.clip((tt - 17) / 6, 0, 1)
+    cut = np.where(tt >= 25, 1800, cut)
+    sig = lowpass(sig, cut)
     e = np.minimum(1, t_of(n) / 0.05) * np.clip((length - t_of(n)) / 0.3, 0, 1)
-    add(sig * e, start, 0.11 + 0.06 * open_)
+    add(sig * e, start, 0.12 + (0.05 if 17 <= start < 25 else 0))
 
+# Riser (17 → 23 s)
+n = int((DROP - 17.0) * SR)
+x = t_of(n) / (DROP - 17.0)
+add(lowpass(rng.standard_normal(n), 300 + 9000 * x**2) * x**2.2, 17.0, 0.42)
 
-def stab(t0, gain):
-    n = int(0.9 * SR)
-    sig = sum(saw(midi(m + 12), n, 0.006) for m in chord_at(t0)) / 3
-    add(lowpass(sig, 3500) * env(n, 0.002, 0.25), t0, gain)
+# Acentos: punch no 0, drop no 23, hit final no 29
+stab(0.0, 0.45)
+stab(DROP, 0.5)
+add(crash(), DROP, 0.18)
+stab(END_HIT, 0.45, length=1.0)
+add(K, END_HIT, 1.0)
+add(crash(), END_HIT, 0.14)
 
-
-stab(0.0, 0.35)
-stab(23.5, 0.35)
-stab(29.5, 0.3)
-
-for a, b in ((16.0, 17.0), (22.0, 23.5)):
-    n = int((b - a) * SR)
-    x = t_of(n) / (b - a)
-    add(lowpass(rng.standard_normal(n), 300 + 7000 * x**2) * x**2, a, 0.32)
-
-# Master: saturação suave, ataque de 5 ms (sem fade-in), cauda curta no fim
-mix = np.tanh(np.stack([L, R], axis=1) * 1.25)
+# Automação de volume: dá a curva de energia (punch → groove → build → drop → limpo).
 t = t_of(N)
+AUTOMATION = [(0, 1.0), (3.9, 1.0), (4.1, 0.62), (17.0, 0.62), (DROP - 0.05, 1.25), (25.0, 1.15), (25.3, 0.5), (END_HIT - 0.05, 0.5), (END_HIT, 1.0), (DUR, 1.0)]
+gain = np.interp(t, [p[0] for p in AUTOMATION], [p[1] for p in AUTOMATION])
+# o build sobe em curva exponencial, não linear
+in_build = (t >= 17.0) & (t < DROP)
+gain[in_build] = 0.62 * (1.25 / 0.62) ** (((t[in_build] - 17.0) / (DROP - 17.0)) ** 1.6)
+
+# Master: saturação suave, ataque de 5 ms, cauda até o fim
+mix = np.tanh(np.stack([L, R], axis=1) * gain[:, None] * 1.1)
 mix *= np.clip(t / 0.005, 0, 1)[:, None]
-mix *= np.clip((DUR - t) / 0.45, 0, 1)[:, None]
+mix *= np.clip((DUR - t) / 0.25, 0, 1)[:, None]
 mix = normalize_peak(mix, 0.9)
 tmp = os.path.join(ROOT, "out", "music.wav")
 os.makedirs(os.path.dirname(tmp), exist_ok=True)
 write_wav(tmp, mix)
+
+# Normaliza em -14 LUFS sem achatar a curva: mede, aplica ganho fixo e limita o pico.
+meas = subprocess.run(["ffmpeg", "-hide_banner", "-i", tmp, "-af", "ebur128", "-f", "null", "-"], capture_output=True, text=True).stderr
+integrated = float(meas.split("Integrated loudness:")[1].split("I:")[1].split("LUFS")[0])
+gain_db = -14.0 - integrated
 subprocess.run(
-    ["ffmpeg", "-loglevel", "error", "-y", "-i", tmp, "-af", "loudnorm=I=-14:TP=-1.0:LRA=9", "-ar", "44100",
-     "-c:a", "libmp3lame", "-b:a", "256k", os.path.join(ROOT, "public", "music.mp3")],
+    ["ffmpeg", "-loglevel", "error", "-y", "-i", tmp, "-af", f"volume={gain_db:.2f}dB,alimiter=limit=0.78:level=false",
+     "-ar", "44100", "-c:a", "libmp3lame", "-b:a", "256k", os.path.join(ROOT, "public", "music.mp3")],
     check=True,
 )
-print("ok: public/music.mp3 + public/sfx/*.wav")
+print(f"ok: public/music.mp3 (ganho {gain_db:+.1f} dB) + public/sfx/*.wav")

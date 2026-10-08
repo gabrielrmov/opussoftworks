@@ -1,3 +1,4 @@
+import React from "react";
 import { interpolate, useCurrentFrame } from "remotion";
 import { C } from "../theme";
 import { useCam } from "./Camera";
@@ -8,6 +9,7 @@ import { PILLAR_AT, SISTEMAS, SITES, TRAFEGO } from "./timeline";
 
 const TITLES = ["Tráfego", "Sistemas", "Sites"];
 const { ui } = PILLARS_L;
+const MUTED = "#4a4a4a"; // texto secundário com contraste alto
 
 const card: React.CSSProperties = {
   position: "absolute",
@@ -19,23 +21,44 @@ const card: React.CSSProperties = {
   color: C.ink,
 };
 
+type IconName = "traffic" | "grid" | "site";
+const ICONS: Record<IconName, React.ReactNode> = {
+  traffic: <path d="M3 17 L9.5 10.5 L13.5 14.5 L21 6 M15 6 L21 6 L21 12" />,
+  grid: (
+    <>
+      <rect x="3" y="3" width="7.5" height="7.5" rx="1.2" />
+      <rect x="13.5" y="3" width="7.5" height="7.5" rx="1.2" />
+      <rect x="3" y="13.5" width="7.5" height="7.5" rx="1.2" />
+      <rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.2" />
+    </>
+  ),
+  site: (
+    <>
+      <rect x="5" y="2.5" width="14" height="19" rx="2.5" />
+      <path d="M10 18.5 L14 18.5" />
+    </>
+  ),
+};
+const ICON_OF: IconName[] = ["traffic", "grid", "site"];
+
 export const Pillars: React.FC = () => {
   const frame = useCurrentFrame();
   const cam = useCam();
-  // Quando a câmera abre, os micro-UIs viram silhueta (o texto deles ficaria < 44 px).
-  const uiOpacity = interpolate(cam.s, [0.4, 0.75], [0.14, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  // Quando a câmera abre, o mockup vira um ícone grande (o texto dele ficaria ilegível).
+  const toIcon = interpolate(cam.s, [0.45, 0.8], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   return (
     <>
       {PILLARS_L.cx.map((cx, i) => {
-        const p = pop(frame, PILLAR_AT[i], 15);
+        const p = pop(frame, PILLAR_AT[i] - 6, 15);
         const node = pop(frame, PILLAR_AT[i] + 10, 12);
+        const left = cx - ui.w / 2;
         return (
           <div key={TITLES[i]}>
             <div
               style={{
                 position: "absolute",
-                left: cx - ui.w / 2,
+                left,
                 top: PILLARS_L.titleY,
                 transform: "translateY(-50%)",
                 display: "flex",
@@ -58,14 +81,35 @@ export const Pillars: React.FC = () => {
               >
                 {TITLES[i]}
               </span>
-              <span style={{ fontSize: 56, fontWeight: 600, color: C.orange, ...popStyle(pop(frame, PILLAR_AT[i] + 4), 1.2, 20) }}>
+              <span style={{ fontSize: 56, fontWeight: 600, color: C.orange, ...popStyle(pop(frame, PILLAR_AT[i] - 2), 1.2, 20) }}>
                 0{i + 1}
               </span>
             </div>
-            <div style={{ position: "absolute", left: cx - ui.w / 2, top: ui.top, width: ui.w, height: ui.h, opacity: uiOpacity }}>
-              {i === 0 && <TrafficUI />}
-              {i === 1 && <SystemsUI />}
-              {i === 2 && <SitesUI />}
+            <div style={{ position: "absolute", left, top: ui.top, width: ui.w, height: ui.h }}>
+              <div style={{ position: "absolute", inset: 0, opacity: 1 - toIcon }}>
+                {i === 0 && <TrafficUI />}
+                {i === 1 && <SystemsUI />}
+                {i === 2 && <SitesUI />}
+              </div>
+              {toIcon > 0 && (
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    borderRadius: 120,
+                    backgroundColor: C.ink,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    opacity: toIcon,
+                    transform: `scale(${0.85 + 0.15 * toIcon})`,
+                  }}
+                >
+                  <svg width={480} height={480} viewBox="0 0 24 24" fill="none" stroke={C.white} strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                    {ICONS[ICON_OF[i]]}
+                  </svg>
+                </div>
+              )}
             </div>
             {/* Nó do pilar na linha coral */}
             <div
@@ -78,7 +122,7 @@ export const Pillars: React.FC = () => {
                 borderRadius: 26,
                 backgroundColor: C.paper,
                 border: `10px solid ${C.orange}`,
-                transform: `scale(${node * (1 + 0.15 * beatPulse(frame))})`,
+                transform: `scale(${node * (1 + 0.15 * beatPulse(frame)) * (1 + 2 * toIcon)})`,
               }}
             />
           </div>
@@ -88,51 +132,71 @@ export const Pillars: React.FC = () => {
   );
 };
 
-/* ---------------- Tráfego: anúncio → clique → leads subindo ---------------- */
+/* ---------- Tráfego: anúncio da Opus → clique → contatos chegando (sem números) ---------- */
+const LEADS = ["Instagram", "Google", "WhatsApp"];
+
 const TrafficUI: React.FC = () => {
   const frame = useCurrentFrame();
-  const t0 = PILLAR_AT[0];
-  const adIn = pop(frame, t0 - 12, 16);
+  const adIn = pop(frame, PILLAR_AT[0] - 12, 16);
   const move = ease(frame, TRAFEGO.cursorFrom, TRAFEGO.click - 1);
   const pressed = frame >= TRAFEGO.click && frame < TRAFEGO.click + 5;
   const ripple = ease(frame, TRAFEGO.click, TRAFEGO.click + 14);
-  const counterIn = pop(frame, TRAFEGO.click, 14);
-  const count = Math.round(interpolate(ease(frame, TRAFEGO.countFrom, TRAFEGO.countTo), [0, 1], [0, 48]));
-  const bump = frame > TRAFEGO.countFrom && frame < TRAFEGO.countTo ? beatPulse(frame * 3) : 0;
 
   return (
     <>
-      <div style={{ ...card, left: 0, top: 0, width: ui.w, height: 470, padding: 40, ...popStyle(adIn, 1.08, 60) }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
-          <div style={{ width: 76, height: 76, borderRadius: 38, backgroundColor: C.ink }} />
+      <div style={{ ...card, left: 0, top: 0, width: ui.w, height: 540, padding: 36, ...popStyle(adIn, 1.06, 60) }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+          <div
+            style={{
+              width: 72,
+              height: 72,
+              borderRadius: 36,
+              backgroundColor: C.ink,
+              color: C.orange,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 40,
+              fontWeight: 700,
+            }}
+          >
+            O
+          </div>
           <div>
-            <div style={{ fontSize: 48, fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.05 }}>Sua marca</div>
-            <div style={{ fontSize: 44, color: "#3d3d3d", lineHeight: 1.1 }}>Patrocinado</div>
+            <div style={{ fontSize: 38, fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.1 }}>Opus SoftWorks</div>
+            <div style={{ fontSize: 32, color: MUTED, lineHeight: 1.15 }}>Patrocinado</div>
           </div>
         </div>
+        {/* Criativo do anúncio: a headline do site */}
         <div
           style={{
-            marginTop: 28,
-            height: 150,
-            borderRadius: 24,
-            background: "linear-gradient(120deg, #e9e9e9, #dcdcdc)",
-            position: "relative",
-            overflow: "hidden",
+            marginTop: 26,
+            height: 250,
+            borderRadius: 28,
+            backgroundColor: C.ink,
+            padding: "0 40px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            fontSize: 64,
+            fontWeight: 700,
+            letterSpacing: "-0.045em",
+            lineHeight: 1.04,
           }}
         >
-          <div style={{ position: "absolute", left: 40, top: 40, width: 220, height: 22, borderRadius: 11, backgroundColor: "#c9c9c9" }} />
-          <div style={{ position: "absolute", left: 40, top: 80, width: 340, height: 22, borderRadius: 11, backgroundColor: "#c9c9c9" }} />
-          <div style={{ position: "absolute", right: 40, top: 30, width: 90, height: 90, borderRadius: 20, backgroundColor: "#c9c9c9" }} />
+          <span style={{ color: C.white }}>Resultado não é sorte.</span>
+          <span style={{ color: C.orange }}>É entrega.</span>
         </div>
-        <div style={{ marginTop: 28, display: "flex", justifyContent: "flex-end" }}>
+        <div style={{ marginTop: 26, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ fontSize: 32, color: MUTED }}>opussoftworks.com.br</span>
           <div
             style={{
               position: "relative",
-              padding: "22px 44px",
+              padding: "18px 34px",
               borderRadius: 999,
               backgroundColor: C.ink,
               color: C.white,
-              fontSize: 46,
+              fontSize: 36,
               fontWeight: 600,
               transform: `scale(${pressed ? 0.92 : 1})`,
             }}
@@ -154,39 +218,34 @@ const TrafficUI: React.FC = () => {
         </div>
       </div>
 
-      <div
-        style={{
-          ...card,
-          left: 0,
-          top: 510,
-          width: ui.w,
-          height: 300,
-          padding: "0 48px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          ...popStyle(counterIn, 1.1, 60),
-        }}
-      >
-        <div style={{ fontSize: 60, fontWeight: 600, letterSpacing: "-0.03em" }}>Leads</div>
-        <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-          <svg width={70} height={70} viewBox="0 0 24 24" style={{ transform: `translateY(${-bump * 8}px)` }}>
-            <path d="M12 20 L12 5 M5 11 L12 4 L19 11" stroke={C.orange} strokeWidth={3} fill="none" strokeLinecap="round" />
-          </svg>
+      {/* Contatos chegando depois do clique */}
+      {LEADS.map((source, i) => {
+        const p = pop(frame, TRAFEGO.leadsFrom + i * 4, 15);
+        return (
           <div
+            key={source}
             style={{
-              fontSize: 170,
-              fontWeight: 700,
-              letterSpacing: "-0.05em",
-              fontVariantNumeric: "tabular-nums",
-              lineHeight: 1,
-              transform: `scale(${1 + bump * 0.06})`,
+              ...card,
+              left: 0,
+              top: 566 + i * 94,
+              width: ui.w,
+              height: 82,
+              borderRadius: 24,
+              padding: "0 30px",
+              display: "flex",
+              alignItems: "center",
+              gap: 20,
+              opacity: Math.min(1, p * 2),
+              transform: `translateY(${(1 - Math.min(1, p)) * 40}px)`,
             }}
           >
-            {count}
+            <span style={{ width: 20, height: 20, borderRadius: 10, backgroundColor: C.orange, flexShrink: 0 }} />
+            <span style={{ fontSize: 36, fontWeight: 600, letterSpacing: "-0.02em" }}>Novo contato</span>
+            <span style={{ fontSize: 32, color: MUTED }}>via {source}</span>
+            <span style={{ marginLeft: "auto", fontSize: 32, color: MUTED }}>agora</span>
           </div>
-        </div>
-      </div>
+        );
+      })}
 
       {/* Cursor */}
       <svg
@@ -195,9 +254,9 @@ const TrafficUI: React.FC = () => {
         viewBox="0 0 24 24"
         style={{
           position: "absolute",
-          left: interpolate(move, [0, 1], [820, 660]),
-          top: interpolate(move, [0, 1], [700, 384]),
-          opacity: ease(frame, TRAFEGO.cursorFrom - 6, TRAFEGO.cursorFrom + 2) * (1 - ease(frame, TRAFEGO.click + 12, TRAFEGO.click + 20)),
+          left: interpolate(move, [0, 1], [780, 686]),
+          top: interpolate(move, [0, 1], [660, 439]),
+          opacity: ease(frame, TRAFEGO.cursorFrom - 6, TRAFEGO.cursorFrom + 2) * (1 - ease(frame, TRAFEGO.click + 10, TRAFEGO.click + 18)),
           transform: `scale(${pressed ? 0.85 : 1})`,
           filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.3))",
         }}
@@ -208,47 +267,49 @@ const TrafficUI: React.FC = () => {
   );
 };
 
-/* ---------------- Sistemas: linhas de tabela entrando + barras crescendo ---------------- */
-const ROWS = ["Vendas", "Estoque", "Financeiro"];
+/* ---------- Sistemas: painel com os módulos, linhas entrando e barras crescendo ---------- */
+const MODULES = [
+  { name: "Vendas", status: "Atualizado" },
+  { name: "Estoque", status: "Em dia" },
+  { name: "Financeiro", status: "Conciliado" },
+  { name: "Contratos", status: "Assinados" },
+];
 const BARS = [0.42, 0.6, 0.5, 0.74, 0.66, 0.92];
 
 const SystemsUI: React.FC = () => {
   const frame = useCurrentFrame();
   const boxIn = pop(frame, PILLAR_AT[1] - 12, 16);
   return (
-    <div style={{ ...card, left: 0, top: 0, width: ui.w, height: ui.h, padding: 44, ...popStyle(boxIn, 1.06, 60) }}>
+    <div style={{ ...card, left: 0, top: 0, width: ui.w, height: ui.h, padding: 36, ...popStyle(boxIn, 1.05, 60) }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <span style={{ fontSize: 56, fontWeight: 700, letterSpacing: "-0.03em" }}>Painel</span>
-        <span style={{ display: "flex", gap: 10 }}>
-          {[0, 1, 2].map((i) => (
-            <span key={i} style={{ width: 16, height: 16, borderRadius: 8, backgroundColor: C.ink, opacity: 0.25 }} />
-          ))}
-        </span>
+        <span style={{ fontSize: 48, fontWeight: 700, letterSpacing: "-0.03em" }}>Painel da operação</span>
       </div>
-      <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 16 }}>
-        {ROWS.map((label, i) => {
+      <div style={{ marginTop: 22, display: "flex", flexDirection: "column", gap: 12 }}>
+        {MODULES.map((m, i) => {
           const p = pop(frame, SISTEMAS.rowsFrom + i * 4, 15);
-          const check = pop(frame, SISTEMAS.rowsFrom + 10 + i * 4, 12);
+          const check = pop(frame, SISTEMAS.rowsFrom + 8 + i * 4, 12);
           return (
             <div
-              key={label}
+              key={m.name}
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-between",
-                padding: "18px 26px",
+                gap: 20,
+                height: 104,
+                padding: "0 24px",
                 borderRadius: 24,
-                backgroundColor: "#f2f2f2",
+                backgroundColor: "#f3f3f3",
                 opacity: Math.min(1, p * 2),
-                transform: `translateX(${(1 - p) * 160}px)`,
+                transform: `translateX(${(1 - Math.min(1, p)) * 160}px)`,
               }}
             >
-              <span style={{ fontSize: 52, fontWeight: 600, letterSpacing: "-0.03em" }}>{label}</span>
+              <span style={{ fontSize: 46, fontWeight: 600, letterSpacing: "-0.03em" }}>{m.name}</span>
+              <span style={{ marginLeft: "auto", fontSize: 32, fontWeight: 500, color: MUTED }}>{m.status}</span>
               <span
                 style={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: 30,
+                  width: 56,
+                  height: 56,
+                  borderRadius: 28,
                   backgroundColor: C.ink,
                   display: "flex",
                   alignItems: "center",
@@ -256,7 +317,7 @@ const SystemsUI: React.FC = () => {
                   transform: `scale(${check})`,
                 }}
               >
-                <svg width={34} height={34} viewBox="0 0 24 24">
+                <svg width={32} height={32} viewBox="0 0 24 24">
                   <path d="M4 12.5 L9.5 18 L20 6" stroke={C.white} strokeWidth={3.2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
@@ -264,7 +325,10 @@ const SystemsUI: React.FC = () => {
           );
         })}
       </div>
-      <div style={{ marginTop: 30, height: 250, display: "flex", alignItems: "flex-end", gap: 22 }}>
+      <div style={{ marginTop: 24, display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
+        <span style={{ fontSize: 34, fontWeight: 600 }}>Visão da semana</span>
+      </div>
+      <div style={{ marginTop: 14, height: 150, display: "flex", alignItems: "flex-end", gap: 20 }}>
         {BARS.map((h, i) => {
           const g = pop(frame, SISTEMAS.barsFrom + i * 3, 13);
           return (
@@ -273,7 +337,7 @@ const SystemsUI: React.FC = () => {
               style={{
                 flex: 1,
                 height: `${h * 100 * g}%`,
-                borderRadius: "16px 16px 6px 6px",
+                borderRadius: "14px 14px 6px 6px",
                 backgroundColor: i === BARS.length - 1 ? C.orange : C.ink,
                 opacity: i === BARS.length - 1 ? 1 : 0.85,
               }}
@@ -285,31 +349,21 @@ const SystemsUI: React.FC = () => {
   );
 };
 
-/* ---------------- Sites: celular carregando + botão tocado ---------------- */
+/* ---------- Sites: celular carregando a página e o botão sendo tocado ---------- */
+const FEATURES = ["Resposta rápida", "Atendimento no WhatsApp"];
+
 const SitesUI: React.FC = () => {
   const frame = useCurrentFrame();
   const phoneIn = pop(frame, PILLAR_AT[2] - 12, 16);
   const loading = ease(frame, SITES.loadFrom, SITES.loaded);
-  const loaded = pop(frame, SITES.loaded, 15);
-  const shimmer = ((frame - SITES.loadFrom) / 14) % 1;
+  const parts = [0, 1, 2, 3].map((i) => pop(frame, SITES.loaded - 6 + i * 4, 15));
   const finger = ease(frame, SITES.tap - 10, SITES.tap);
   const pressed = frame >= SITES.tap && frame < SITES.tap + 5;
   const tapped = frame >= SITES.tap;
   const ripple = ease(frame, SITES.tap, SITES.tap + 16);
-  const PW = 540;
-
-  const skeleton = (w: string, h: number, mt: number) => (
-    <div style={{ marginTop: mt, width: w, height: h, borderRadius: h / 2, backgroundColor: "#e6e6e6", overflow: "hidden", position: "relative" }}>
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent)",
-          transform: `translateX(${(shimmer * 2 - 1) * 120}%)`,
-        }}
-      />
-    </div>
-  );
+  const toast = pop(frame, SITES.sent, 14);
+  const PW = 780;
+  const appear = (p: number): React.CSSProperties => ({ opacity: Math.min(1, p * 2), transform: `translateY(${(1 - Math.min(1, p)) * 30}px)` });
 
   return (
     <div
@@ -319,84 +373,101 @@ const SitesUI: React.FC = () => {
         top: 0,
         width: PW,
         height: ui.h,
-        borderRadius: 76,
+        borderRadius: 80,
         backgroundColor: C.ink,
-        padding: 20,
+        padding: 18,
         boxShadow: "0 40px 90px rgba(0,0,0,0.18)",
-        ...popStyle(phoneIn, 1.08, 80),
+        ...popStyle(phoneIn, 1.06, 80),
       }}
     >
-      <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: 58, backgroundColor: C.white, overflow: "hidden", fontFamily: FONT }}>
-        <div style={{ position: "absolute", top: 18, left: "50%", marginLeft: -60, width: 120, height: 30, borderRadius: 15, backgroundColor: C.ink }} />
-        {/* Barra de carregamento */}
-        <div style={{ position: "absolute", top: 70, left: 0, height: 8, width: `${loading * 100}%`, backgroundColor: C.orange, opacity: 1 - loaded }} />
-        <div style={{ padding: "100px 40px 0" }}>
-          {loaded < 0.5 ? (
-            <>
-              {skeleton("70%", 56, 0)}
-              {skeleton("100%", 24, 30)}
-              {skeleton("85%", 24, 16)}
-              {skeleton("100%", 200, 30)}
-            </>
-          ) : (
-            <div style={{ ...popStyle(loaded, 1.05, 30) }}>
-              <div style={{ fontSize: 60, fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 1.02, color: C.ink }}>
-                Sua
-                <br />
-                empresa
-              </div>
-              <div style={{ marginTop: 24, height: 22, width: "100%", borderRadius: 11, backgroundColor: "#e6e6e6" }} />
-              <div style={{ marginTop: 14, height: 22, width: "80%", borderRadius: 11, backgroundColor: "#e6e6e6" }} />
-              <div style={{ marginTop: 30, height: 150, borderRadius: 26, background: "linear-gradient(120deg, #ececec, #dedede)" }} />
-            </div>
-          )}
+      <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: 64, backgroundColor: C.white, overflow: "hidden", fontFamily: FONT, color: C.ink }}>
+        {/* Barra do navegador */}
+        <div style={{ position: "absolute", top: 26, left: 40, right: 40, height: 64, borderRadius: 32, backgroundColor: "#f1f1f1", display: "flex", alignItems: "center", padding: "0 28px", fontSize: 32, color: MUTED }}>
+          suaempresa.com.br
+        </div>
+        <div style={{ position: "absolute", top: 98, left: 40, height: 6, width: `${loading * (PW - 116)}px`, borderRadius: 3, backgroundColor: C.orange, opacity: 1 - parts[0] }} />
+        <div style={{ position: "absolute", top: 130, left: 48, right: 48 }}>
+          <div style={{ fontSize: 76, fontWeight: 700, letterSpacing: "-0.05em", lineHeight: 1.0, ...appear(parts[0]) }}>
+            Sua empresa
+            <br />
+            vendendo 24h
+          </div>
+          <div style={{ marginTop: 22, fontSize: 34, lineHeight: 1.3, color: MUTED, ...appear(parts[1]) }}>
+            Seu cliente encontra, entende e chama — a qualquer hora.
+          </div>
           <div
             style={{
               position: "relative",
-              marginTop: 40,
-              height: 110,
-              borderRadius: 55,
+              marginTop: 34,
+              height: 112,
+              borderRadius: 56,
               backgroundColor: tapped ? C.orange : C.ink,
               color: C.white,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 46,
+              fontSize: 44,
               fontWeight: 600,
-              opacity: loaded,
-              transform: `scale(${pressed ? 0.93 : 1})`,
+              ...appear(parts[2]),
+              transform: `${appear(parts[2]).transform} scale(${pressed ? 0.94 : 1})`,
             }}
           >
-            Orçamento
+            Pedir orçamento
             {ripple > 0 && ripple < 1 && (
-              <span
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  borderRadius: 55,
-                  border: `5px solid ${C.orange}`,
-                  transform: `scale(${1 + ripple * 0.3})`,
-                  opacity: 1 - ripple,
-                }}
-              />
+              <span style={{ position: "absolute", inset: 0, borderRadius: 56, border: `5px solid ${C.orange}`, transform: `scale(${1 + ripple * 0.25})`, opacity: 1 - ripple }} />
             )}
           </div>
+          <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 14, ...appear(parts[3]) }}>
+            {FEATURES.map((f) => (
+              <div key={f} style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 32, fontWeight: 500 }}>
+                <svg width={34} height={34} viewBox="0 0 24 24">
+                  <path d="M4 12.5 L9.5 18 L20 6" stroke={C.orange} strokeWidth={3.2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                {f}
+              </div>
+            ))}
+          </div>
         </div>
-        {/* Dedo tocando */}
+        {/* Dedo tocando o botão */}
         <div
           style={{
             position: "absolute",
-            left: 202,
-            top: interpolate(finger, [0, 1], [760, 532]),
+            left: 324,
+            top: interpolate(finger, [0, 1], [700, 434]),
             width: 96,
             height: 96,
             borderRadius: 48,
             backgroundColor: "rgba(23,23,23,0.28)",
             border: "4px solid rgba(23,23,23,0.5)",
-            opacity: finger * (1 - ease(frame, SITES.tap + 10, SITES.tap + 20)),
+            opacity: finger * (1 - ease(frame, SITES.tap + 10, SITES.tap + 18)),
             transform: `scale(${pressed ? 0.8 : 1})`,
           }}
         />
+        {/* Confirmação */}
+        <div
+          style={{
+            position: "absolute",
+            left: 40,
+            right: 40,
+            bottom: 34,
+            height: 96,
+            borderRadius: 30,
+            backgroundColor: C.ink,
+            color: C.white,
+            display: "flex",
+            alignItems: "center",
+            gap: 18,
+            padding: "0 30px",
+            fontSize: 36,
+            fontWeight: 600,
+            ...popStyle(toast, 1.08, 40),
+          }}
+        >
+          <svg width={40} height={40} viewBox="0 0 24 24">
+            <path d="M4 12.5 L9.5 18 L20 6" stroke={C.orange} strokeWidth={3.2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          Pedido enviado
+        </div>
       </div>
     </div>
   );

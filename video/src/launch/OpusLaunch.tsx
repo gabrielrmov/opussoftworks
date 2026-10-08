@@ -1,9 +1,10 @@
+import React from "react";
 import { CameraMotionBlur } from "@remotion/motion-blur";
 import { AbsoluteFill, Html5Audio, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { Background } from "./Background";
 import { Camera, camAt, CamProvider, camSpeed } from "./Camera";
 import { CoralLine } from "./CoralLine";
-import { CTA } from "./CTA";
+import { CTA_Block } from "./CTA";
 import { Hook } from "./Hook";
 import { Logo } from "./Logo";
 import { Method } from "./Method";
@@ -16,12 +17,12 @@ export { DURATION as LAUNCH_DURATION, FPS as LAUNCH_FPS } from "./timeline";
 
 /** Tudo que está "no mundo": um canvas grande que a câmera percorre. */
 const Canvas: React.FC = () => (
-  <div style={{ position: "relative", width: 7400, height: 4400 }}>
+  <div style={{ position: "relative", width: 7800, height: 4600 }}>
     <Hook />
     <Pillars />
     <Method />
     <Outcome />
-    <CTA />
+    <CTA_Block />
     <Logo />
     <CoralLine />
   </div>
@@ -44,27 +45,39 @@ const Scene: React.FC = () => {
   );
 };
 
-// Ducking: a música abaixa por alguns frames em cada impacto, pra o efeito
-// aparecer sem estourar o pico.
-const IMPACTS = SFX.filter((s) => s.file === "impact.wav").map((s) => s.f);
-const musicVolume = (f: number) => {
-  const duck = Math.max(0, ...IMPACTS.map((i) => (f >= i - 1 ? Math.exp(-(f - i + 1) / 9) : 0)));
-  return MUSIC_VOLUME * (1 - 0.65 * duck);
+// Ducking: a música abaixa um pouco em cada efeito (mais e por mais tempo
+// nos impactos), pra o efeito aparecer sem estourar o pico.
+// Calibrado pra saída final ficar com pico real abaixo de -1 dBFS.
+const MUSIC_VOLUME = 0.95;
+const SFX_VOLUME: Record<string, number> = { "tick.wav": 0.3, "click.wav": 0.42, "whoosh.wav": 0.45, "glitch.wav": 0.42, "impact.wav": 0.4 };
+const DUCK: Record<string, { amount: number; tau: number }> = {
+  "impact.wav": { amount: 0.65, tau: 22 },
+  "tick.wav": { amount: 0.35, tau: 3 },
+  "click.wav": { amount: 0.35, tau: 3 },
+  "glitch.wav": { amount: 0.35, tau: 3 },
 };
-// Ajustados pra mixagem final ficar em ~-14 LUFS com pico real abaixo de -1 dBFS.
-const MUSIC_VOLUME = 0.92;
-const SFX_VOLUME: Record<string, number> = { "tick.wav": 0.32, "click.wav": 0.45, "whoosh.wav": 0.4, "glitch.wav": 0.45, "impact.wav": 0.45 };
+const musicVolume = (f: number) => {
+  let duck = 0;
+  for (const s of SFX) {
+    const d = DUCK[s.file];
+    if (d && f >= s.f - 1) duck = Math.max(duck, d.amount * Math.exp(-(f - s.f + 1) / d.tau));
+  }
+  return MUSIC_VOLUME * (1 - duck);
+};
 
 // O motion blur renderiza a cena várias vezes; só liga quando a câmera anda.
 const BLUR_SPEED = 3;
 
 export const OpusLaunch: React.FC = () => {
   const frame = useCurrentFrame();
-  const moving = camSpeed(frame) > BLUR_SPEED;
+  const speed = camSpeed(frame);
+  const moving = speed.total > BLUR_SPEED;
+  // Em zoom forte o blur radial apagaria o texto: obturador mais fechado.
+  const shutter = speed.zoomDominant ? 45 : 90;
   return (
     <AbsoluteFill>
       {moving ? (
-        <CameraMotionBlur shutterAngle={200} samples={7}>
+        <CameraMotionBlur shutterAngle={shutter} samples={5}>
           <Scene />
         </CameraMotionBlur>
       ) : (

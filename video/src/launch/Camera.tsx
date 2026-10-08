@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from "react";
 import { interpolate } from "remotion";
 import { SCREEN_FOCUS } from "./layout";
-import { EASE } from "./motion";
+import { CAMERA_EASE } from "./motion";
 import { CAMERA, CAMERA_STILL_FROM } from "./timeline";
 
 export type Cam = { x: number; y: number; s: number };
@@ -14,7 +14,7 @@ export const camAt = (frame: number): Cam => {
     const a = CAMERA[i];
     const b = CAMERA[i + 1];
     if (frame <= b.f) {
-      const t = EASE(interpolate(frame, [a.f, b.f], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }));
+      const t = CAMERA_EASE(interpolate(frame, [a.f, b.f], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }));
       cam = {
         x: a.x + (b.x - a.x) * t,
         y: a.y + (b.y - a.y) * t,
@@ -36,7 +36,7 @@ export const camSpeed = (frame: number) => {
   const b = camAt(frame);
   const pan = Math.hypot(b.x - a.x, b.y - a.y) * b.s;
   const zoom = Math.abs(Math.log(b.s / a.s)) * 900;
-  return pan + zoom;
+  return { total: pan + zoom, zoomDominant: zoom > pan };
 };
 
 const CamContext = createContext<Cam>({ x: 0, y: 0, s: 1 });

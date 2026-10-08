@@ -8,7 +8,7 @@
     "render": "remotion render src/index.ts OpusLaunchFilm out/opus-launch-film.mp4",
     "still": "remotion still src/index.ts OpusLaunchFilm out/still.png",
     "typecheck": "tsc --noEmit",
-    "render:promo": "remotion render src/index.ts OpusPromo out/opus-promo.mp4"
+    "render:promo": "remotion render src/index.ts OpusPromo out/opus-promo.mp4 --crf=23"
   },
   "dependencies": {
     "@remotion/cli": "4.0.534",

@@ -54,7 +54,7 @@ para usar um, preencha `LOGO_ASSETS.wordmark` em `src/brand.ts`.
 Segundo filme, no ritmo da referência enviada (promo da CENDAP): 15 planos curtos,
 tipografia cinética letra a letra, painéis de cor, explosão de raios, cursor
 clicando em elementos de interface, mockups de notebook/celular e assinatura
-final. 1080×1920 · 30 fps · ~64 s. Código em `src/promo/` (kit em
+final. 1080×1920 · 30 fps · ~60 s. Código em `src/promo/` (kit em
 `src/promo/kit/`, planos em `src/promo/shots/`, ordem e duração em
 `src/promo/timing.ts`).
 
@@ -63,6 +63,12 @@ No plano "Sites", as telas do notebook e do celular mostram o site real
 (`src/promo/kit/RealSite.tsx`, fonte Inter Tight). Para trocar por prints da
 página inteira, salve-os em `public/brand/site/` e preencha `SITE_SCREENSHOTS`
 em `src/brand.ts`.
+
+Acabamento: motion blur real (`CameraMotionBlur`, 10 amostras), transições
+desenhadas entre planos (`TransitionSeries` + `src/promo/kit/Transitions.tsx`),
+fundo vivo com partículas e paralaxe (`kit/Ambient.tsx`) e câmera contínua que
+seguem o tempo real do plano. O render leva ~15–20 min; use `--crf=23` para um
+arquivo leve (~9 MB).
 
 Cada plano tem pausas de leitura (`holds` em `timing.ts`): quando um texto
 termina de entrar, o tempo do plano desacelera para 15% por alguns frames, para

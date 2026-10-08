@@ -1,27 +1,51 @@
 import React from "react";
 import { interpolate, useCurrentFrame } from "remotion";
-import { LOGO_L, SCREEN_FOCUS, toWorld, WORDMARK } from "./layout";
-import { ease, enter } from "./motion";
+import { SANS } from "./font";
+import { COLOR, SCREEN_FOCUS, toWorld, WM_MASK_BOTTOM_SY, WORDMARK } from "./layout";
+import { ease, enter, IN_OUT } from "./motion";
 import { LOGO } from "./timeline";
-import { WordmarkSVG } from "./Wordmark";
+
+/** O wordmark do site: "Opus" coral em negrito + "SoftWorks" em preto. */
+export const Wordmark: React.FC<{ size: number }> = ({ size }) => (
+  <span style={{ fontFamily: SANS, fontSize: size, lineHeight: 1, letterSpacing: "-0.03em", whiteSpace: "nowrap" }}>
+    <span style={{ fontWeight: 800, color: COLOR.coral }}>Opus</span>
+    <span style={{ fontWeight: 500, color: COLOR.ink }}>SoftWorks</span>
+  </span>
+);
 
 /**
- * A linha chega e escreve o wordmark grande (~78% da largura); no impacto
- * ele ganha cor com um tranco curto e sobe pro topo do CTA — é o mesmo
- * elemento do começo ao fim.
+ * A linha assenta num patamar e vira a linha de base; o wordmark sobe de
+ * trás dela (a borda da máscara é a própria linha). Depois ele viaja pro
+ * topo do CTA, encolhendo, enquanto a linha recolhe.
  */
 export const Logo: React.FC = () => {
   const frame = useCurrentFrame();
-  if (frame < LOGO.drawFrom - 1) return null;
-  const draw = ease(frame, LOGO.move + 8, LOGO.impact);
-  const fill = ease(frame, LOGO.impact - 2, LOGO.impact + 3);
-  const m = ease(frame, LOGO.shrinkFrom, LOGO.shrinkTo);
-  const y = interpolate(m, [0, 1], [toWorld(SCREEN_FOCUS.x, WORDMARK.revealSy).y, toWorld(SCREEN_FOCUS.x, WORDMARK.ctaSy).y]);
-  const punch = frame >= LOGO.impact ? 1.06 - 0.06 * enter(frame, LOGO.impact, 6) : 1;
-  const size = interpolate(m, [0, 1], [WORDMARK.revealSize, WORDMARK.ctaSize]) * punch;
+  if (frame < LOGO.reveal - 1) return null;
+  const S = WORDMARK.revealSize;
+  const center = toWorld(SCREEN_FOCUS.x, WORDMARK.revealSy);
+  const maskBottom = toWorld(0, WM_MASK_BOTTOM_SY).y;
+  const h = 2 * (maskBottom - center.y); // máscara simétrica em volta do centro
+  const up = enter(frame, LOGO.reveal, 22);
+  const m = ease(frame, LOGO.moveFrom, LOGO.moveTo, IN_OUT);
+  const y = interpolate(m, [0, 1], [center.y, toWorld(0, WORDMARK.ctaSy).y]);
+  const scale = interpolate(m, [0, 1], [1, WORDMARK.ctaSize / S]);
   return (
-    <svg width={1} height={1} style={{ position: "absolute", left: 0, top: 0, overflow: "visible" }}>
-      <WordmarkSVG x={LOGO_L.x} y={y} size={size} draw={draw} fill={fill} />
-    </svg>
+    <div
+      style={{
+        position: "absolute",
+        left: center.x,
+        top: y,
+        height: h,
+        transform: `translate(-50%, -50%) scale(${scale})`,
+        overflow: "hidden",
+        display: "flex",
+        alignItems: "center",
+        padding: "0 20px",
+      }}
+    >
+      <div style={{ transform: `translateY(${(1 - up) * 130}%)` }}>
+        <Wordmark size={S} />
+      </div>
+    </div>
   );
 };

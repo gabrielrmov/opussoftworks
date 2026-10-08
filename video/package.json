@@ -7,8 +7,6 @@
     "studio": "remotion studio",
     "render": "remotion render OpusLaunch out/opus-launch.mp4",
     "render:promo": "remotion render OpusPromo out/opus-promo.mp4",
-    "capture": "node scripts/capture-site.mjs",
-    "crop": "python3 scripts/crop-site.py",
     "stills": "bash scripts/contact-sheet.sh",
     "sfx": "python3 scripts/make-sfx.py",
     "qa": "python3 scripts/qa.py"
@@ -18,7 +16,6 @@
     "@remotion/fonts": "4.0.534",
     "@remotion/layout-utils": "4.0.534",
     "@remotion/motion-blur": "4.0.534",
-    "@remotion/noise": "4.0.534",
     "@remotion/paths": "4.0.534",
     "@remotion/transitions": "4.0.534",
     "react": "19.2.3",
@@ -27,7 +24,6 @@
   },
   "devDependencies": {
     "@types/react": "19.0.8",
-    "playwright-core": "1.56.1",
     "typescript": "7.0.2"
   }
 }

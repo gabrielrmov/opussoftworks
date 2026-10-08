@@ -1,65 +1,41 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { COLOR, HOOK_L } from "./layout";
-import { rise, slam } from "./motion";
+import { Mask } from "./reveal";
 import { HOOK } from "./timeline";
 import { sans } from "./type";
 
 const face = sans(700);
 
-/** Linha centrada no x do bloco, posicionada pelo centro vertical. */
-const Row: React.FC<{ y: number; style?: React.CSSProperties; children: React.ReactNode }> = ({ y, style, children }) => (
-  <div
-    style={{
-      position: "absolute",
-      left: 0,
-      top: y,
-      width: HOOK_L.cx * 2,
-      transform: "translateY(-50%)",
-      textAlign: "center",
-      ...face,
-      fontSize: HOOK_L.size,
-      lineHeight: 1,
-      color: COLOR.ink,
-      whiteSpace: "nowrap",
-      ...style,
-    }}
-  >
-    {children}
-  </div>
+const Row: React.FC<{ y: number; size?: number; color?: string; children: React.ReactNode }> = ({ y, size = HOOK_L.size, color = COLOR.ink, children }) => (
+  <div style={{ position: "absolute", left: HOOK_L.x0, top: y - size / 2, ...face, fontSize: size, lineHeight: 1, color, whiteSpace: "nowrap" }}>{children}</div>
 );
 
-const Word: React.FC<{ at: number; children: React.ReactNode }> = ({ at, children }) => {
-  const frame = useCurrentFrame();
-  return <span style={{ display: "inline-block", ...rise(frame, at, 36) }}>{children}</span>;
-};
-
 /**
- * "Resultado não é sorte. É entrega." — palavra por palavra no beat.
- * A linha risca "sorte." (que acinzenta e sai seco) e fecha o retângulo
- * em volta de "É entrega.", que entra com slam.
+ * "Resultado / não é / sorte." linha a linha, subindo de trás da máscara.
+ * A linha coral risca "sorte." (que acinzenta e sai) e fecha a caixa em
+ * volta de "É entrega.". Tudo sai antes de a câmera partir.
  */
 export const Hook: React.FC = () => {
   const frame = useCurrentFrame();
-  if (frame > HOOK.boxClosed + 30) return null;
+  if (frame > HOOK.moveFrom + 6) return null;
+  const x = HOOK.exit;
   return (
     <>
       <Row y={HOOK_L.rows.resultado}>
-        <span style={{ display: "inline-block", transform: `scale(${slam(frame, HOOK.resultado, 0.08)})` }}>Resultado</span>
+        <Mask at={HOOK.resultado} out={x} dur={18}>Resultado</Mask>
       </Row>
       <Row y={HOOK_L.rows.naoE}>
-        <Word at={HOOK.nao}>não</Word> <Word at={HOOK.e}>é</Word>
+        <Mask at={HOOK.naoE} out={x + 2}>não é</Mask>
       </Row>
-      {frame < HOOK.sorteOut && (
-        <Row y={HOOK_L.rows.sorte} style={{ color: frame >= HOOK.grey ? COLOR.grey : COLOR.ink }}>
-          <Word at={HOOK.sorte}>sorte.</Word>
-        </Row>
-      )}
-      {frame >= HOOK.entrega && (
-        <Row y={HOOK_L.entrega.y} style={{ fontSize: HOOK_L.entrega.size, letterSpacing: "-0.05em", color: COLOR.coral }}>
-          <span style={{ display: "inline-block", transform: `scale(${slam(frame, HOOK.entrega)})` }}>É entrega.</span>
-        </Row>
-      )}
+      <Row y={HOOK_L.rows.sorte} color={frame >= HOOK.grey ? COLOR.grey : COLOR.ink}>
+        <Mask at={HOOK.sorte} out={HOOK.sorteOut}>sorte.</Mask>
+      </Row>
+      <Row y={HOOK_L.entrega.y} size={HOOK_L.entrega.size}>
+        <Mask at={HOOK.entrega} out={x + 4} dur={20} style={{ letterSpacing: "-0.05em" }}>
+          É entrega.
+        </Mask>
+      </Row>
     </>
   );
 };

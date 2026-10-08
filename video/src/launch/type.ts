@@ -1,5 +1,5 @@
 import { fitText, measureText } from "@remotion/layout-utils";
-import { MONO, SANS, SERIF } from "./font";
+import { SANS } from "./font";
 
 /**
  * Estilos de texto do site + medição com @remotion/layout-utils.
@@ -9,11 +9,8 @@ export type Face = { fontFamily: string; fontWeight: number; fontStyle?: "italic
 
 /** Títulos do site: Inter Tight com tracking negativo. */
 export const sans = (fontWeight = 700, letterSpacing = "-0.045em"): Face => ({ fontFamily: SANS, fontWeight, letterSpacing });
-/** Display do site (h2 do CTA final): Instrument Serif. */
-export const serif = (italic = true): Face => ({ fontFamily: SERIF, fontWeight: 400, letterSpacing: "-0.01em", ...(italic ? { fontStyle: "italic" as const } : {}) });
 /** Eyebrow do site: maiúsculas espaçadas, coral. */
 export const eyebrow: Face = { fontFamily: SANS, fontWeight: 500, letterSpacing: "0.14em" };
-export const mono: Face = { fontFamily: MONO, fontWeight: 500, letterSpacing: "0em" };
 
 const extra = (f: Face) => (f.fontStyle ? { fontStyle: f.fontStyle } : undefined);
 

@@ -1,0 +1,25 @@
+{
+  "name": "opus-promo-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vídeo promocional 9:16 (30s, 60fps) da Opus Softworks, feito com Remotion",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render OpusPromo out/opus-promo.mp4",
+    "still": "remotion still OpusPromo out/thumb.png --frame=1700"
+  },
+  "dependencies": {
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/space-grotesk": "5.3.0",
+    "@remotion/cli": "4.0.534",
+    "@remotion/fonts": "4.0.534",
+    "@remotion/transitions": "4.0.534",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.534"
+  },
+  "devDependencies": {
+    "@types/react": "19.0.8",
+    "typescript": "7.0.2"
+  }
+}

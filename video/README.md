@@ -6,95 +6,80 @@ pontilhado, tipografia sans forte em preto, coral `#ff6039` como única ênfase.
 
 | Composição | Duração | FPS | O que é |
 | --- | --- | --- | --- |
-| `OpusLaunch` | 30s (900 frames) | 30 | Lançamento: câmera seguindo a linha coral, com trilha e efeitos |
+| `OpusLaunch` | 30s (900 frames) | 30 | Lançamento: site real + tipografia, cortes secos no beat |
 | `OpusPromo` | 30s (1800 frames) | 60 | Promo que percorre as seções do site, sem áudio |
 
-## OpusLaunch — "a linha coral"
+## OpusLaunch
 
-Não há cortes: uma câmera virtual (`src/launch/Camera.tsx`) anda, dá zoom e
-faz pan por um canvas grande, seguindo uma única linha coral
-(`CoralLine.tsx`). O motion blur (`@remotion/motion-blur`) só liga nos frames
-em que a câmera se move (obturador de 90°, 45° nos zooms).
+Direção "anti-IA": material real do site, copy do site, cortes secos no beat e
+acabamento de filmado. Tudo que é tempo está em **`src/timeline.ts`** (120 BPM,
+1 beat = 15 frames; o módulo valida que todo corte cai em múltiplo de 15).
 
-| Frames | Bloco | O que acontece |
+| Frames | Cena | Fundo |
 | --- | --- | --- |
-| 0–60 | `Hook` | "Resultado" entra em 1.15→1; a linha sobe pela direita e risca "sorte.", que sai em glitch |
-| 60–120 | `Hook` | o risco vira o topo do retângulo de "É entrega." (24 px de respiro) e a linha sai pela direita |
-| 120–270 | `Pillars` | anúncio da Opus → clique → contatos chegando; painel com Vendas, Estoque, Financeiro e Contratos; celular com "Sua empresa vendendo 24h" e "Pedir orçamento" |
-| 270–345 | `System` | zoom out: os mockups viram três ícones grandes ligados pela linha |
-| 345–495 | `Method` | a linha desce durante o movimento e vira a timeline; uma etapa acende por beat |
-| 495–660 | `Outcome` | "Venda mais. / Opere melhor. / Cresça com clareza." e a curva de crescimento, sem números |
-| 660–720 | `Logo` | rolagem até o CTA; a linha escreve o wordmark (78% da largura), impacto no frame 690 |
-| 720–780 | `CTA` | o wordmark sobe pro topo; a linha sai dele e fecha o contorno do botão |
-| 780–900 | `CTA` | parado, só o pulso do botão |
+| 0–60 | "Resultado / não é / sorte." — uma palavra por beat; "sorte." apaga e é riscada à mão | off-white |
+| 60–120 | "É / entrega." com slam e deriva de zoom | coral |
+| 120–315 | o site real num celular, rolando hero → "Três frentes" → card 01; círculo de caneta em "Venda é." e push-in até 3.4× | off-white + pontos |
+| 315–420 | "Lead não é / *resultado.*" + "Venda é." | azul-marinho |
+| 420–570 | método: 4 cortes (45/30/45/30 frames) com numeral vazado, nome e subtítulo do site | off-white / preto / off-white / coral |
+| 570–645 | "Sua empresa / não precisa / de mais uma / ferramenta." — "ferramenta." riscada | off-white |
+| 645–735 | "Precisa de um / sistema que / *funcione.*" | coral |
+| 735–900 | assinatura: wordmark, "Estratégia, aliada à execução.", botão e URL | off-white + pontos |
 
-**Tudo que é tempo está em `src/launch/timeline.ts`**: beats das entradas,
-keyframes da câmera (movimentos de no máximo 15 frames, com o conteúdo
-seguinte entrando durante o movimento), quanto da linha está desenhado em
-cada frame e os efeitos sonoros. A geometria está em `layout.ts`.
-
-Regras de layout:
-
-- o foco da câmera é o centro horizontal do quadro e o centro vertical da
-  safe zone (220 px livres no topo, 380 embaixo);
-- cada bloco é centrado pelo bounding box do próprio conteúdo, com no máximo
-  860 px de largura. Com a "respiração" da câmera (+3%), sobram 96 px ou mais
-  de cada lado;
-- texto de 32 px ou mais na tela (mockups incluídos);
-- o wordmark é um elemento só (`Wordmark.tsx`), igual ao do site.
-
-### Fonte
-
-Inter Tight via `@remotion/google-fonts` (`font.ts`), identificada comparando
-o hero e o wordmark do site publicado. O render baixa a fonte do Google Fonts,
-então precisa de acesso a `fonts.gstatic.com`.
+- **Site real:** `public/site/opus-390.png` é um screenshot full page feito
+  pelo Playwright (390×844, deviceScaleFactor 3, página rolada inteira antes),
+  com `npm run capture`. `opus-390.json` guarda as posições reais
+  (getBoundingClientRect) usadas no círculo e no push-in. O header e o botão
+  do WhatsApp são fixos no site: são capturados à parte e sobrepostos fixos na
+  tela do celular. Pra capturar de outro endereço: `SITE_URL=... npm run capture`.
+- **Copy:** toda tirada do site (`lib/landing-content.ts`,
+  `components/landing/process.tsx` e `final-cta.tsx`).
+- **Tipografia:** Inter Tight 500/700/800, Instrument Serif (normal e itálica)
+  e JetBrains Mono, locais via `@fontsource` (`public/fonts`).
+- **Larguras:** `scripts/measure-text.py` mede cada frase com as fontes e grava
+  `src/launch/metrics.json`, que posiciona os riscos e sublinhados de caneta.
+  Isso também prova que nada passa da margem de 84 px.
+- **Acabamento:** grão `feTurbulence` com seed por frame (opacidade 0,09,
+  multiply), câmera na mão (soma de senos) e vinheta leve (`src/launch/fx.tsx`).
+  Traços de caneta: `src/launch/pen.tsx`.
 
 ### Áudio
 
-- `public/music.mp3`: trilha procedural a 120 BPM, gerada por
-  `scripts/make-audio.py`. A curva de energia é: punch (0–4 s), groove (4–17 s),
-  build com riser, filtro abrindo e rufo (17–23 s), drop no 23 s junto com o
-  logo, parte limpa (25–30 s) e um hit final no 29 s. A música sozinha fica
-  em -14 LUFS. **É um placeholder**: para usar uma trilha licenciada, troque o
-  arquivo mantendo o nome.
-- `public/sfx/`: `tick` (palavras e etapas), `whoosh` (movimentos de câmera),
-  `click`, `glitch` e `impact` ("Resultado", "É entrega." e o logo). Os
-  momentos ficam em `SFX`, no `timeline.ts`.
-- A mixagem acontece em `OpusLaunch.tsx`: ducking da música em cada efeito.
-  A saída fica com pico real abaixo de -1 dBFS.
-
-Para regenerar: `npm run audio` (Python 3 com numpy e ffmpeg).
+Slot pronto, sem música gerada: coloque a trilha em `public/music.mp3`.
+`HAS_MUSIC` detecta o arquivo sozinho (`getStaticFiles`). Se o primeiro beat
+não estiver no início do arquivo, ajuste `MUSIC_FIRST_BEAT_MS` em
+`src/timeline.ts`: o áudio é cortado ali para esse beat cair no frame 0.
 
 ### QA
 
-`npm run qa` extrai um frame a cada 0,5 s do MP4 renderizado e gera:
+`npm run qa` renderiza um still a cada 0,5 s (`scripts/qa-stills.mjs`) e gera
+`out/qa/contact-sheet.png` (10×6) e `out/qa/report.txt` com:
 
-- `out/qa/contact-sheet.png`, uma grade 10×6;
-- `out/qa/report.txt`, com conteúdo a menos de 64 px das bordas e a
-  ocupação de cada frame (alerta abaixo de 25%).
+- (a) os extremos do texto contra a margem de 84 px;
+- (b) o desvio do círculo de caneta em relação ao centro de "Venda é."
+  (`out/qa/circle-check.png`);
+- (d) os cortes em múltiplos de 15.
 
 ## Como usar
 
 ```bash
 npm install
 npm run studio   # preview/edição no navegador
-npm run stills   # stills avulsos + out/contact-sheet.png
-npm run qa       # QA do MP4: out/qa/contact-sheet.png + report.txt
+npm run capture  # screenshot do site real (Playwright) → public/site/
+npm run qa       # stills a cada 0,5 s + out/qa/contact-sheet.png + report.txt
 npm run render   # out/opus-launch.mp4 (H.264, CRF 18, yuv420p bt709)
 npm run render:promo
 ```
-
-`npm run stills` aceita frames: `npm run stills -- 0 90 720`.
 
 Se o Remotion não conseguir baixar o Chromium (rede restrita), aponte pra um já
 instalado: `REMOTION_BROWSER_EXECUTABLE=/caminho/do/chrome npm run render`.
 
 ## Estrutura
 
-- `src/launch/` — composição de lançamento (`OpusLaunch.tsx`, `timeline.ts`,
-  `layout.ts`, câmera, linha e um componente por bloco)
+- `src/timeline.ts` — todos os tempos do OpusLaunch
+- `src/launch/` — composição de lançamento (`OpusLaunch.tsx`, cenas em `scenes/`, caneta, acabamento)
 - `src/scenes/` + `src/OpusPromo.tsx` — composição promo
 - `src/theme.ts` — cores amostradas do site
-- `scripts/make-audio.py` — trilha e efeitos
-- `scripts/contact-sheet.sh` — stills avulsos e contact sheet
-- `scripts/qa.py` — QA do MP4 (contact sheet 10×6 e checagens)
+- `scripts/capture-site.mjs` — captura do site com Playwright
+- `scripts/measure-text.py` — larguras das frases → `src/launch/metrics.json`
+- `scripts/qa-stills.mjs` + `scripts/qa.py` — QA (stills, contact sheet 10×6, checagens)

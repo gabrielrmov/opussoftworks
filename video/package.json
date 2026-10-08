@@ -7,17 +7,16 @@
     "studio": "remotion studio",
     "render": "remotion render OpusLaunch out/opus-launch.mp4",
     "render:promo": "remotion render OpusPromo out/opus-promo.mp4",
-    "stills": "bash scripts/contact-sheet.sh",
-    "audio": "python3 scripts/make-audio.py",
-    "qa": "python3 scripts/qa.py"
+    "capture": "node scripts/capture-site.mjs",
+    "qa": "node scripts/qa-stills.mjs && python3 scripts/qa.py"
   },
   "dependencies": {
     "@fontsource/instrument-serif": "5.3.0",
     "@fontsource/inter": "5.3.0",
+    "@fontsource/inter-tight": "5.3.0",
+    "@fontsource/jetbrains-mono": "5.3.0",
     "@remotion/cli": "4.0.534",
     "@remotion/fonts": "4.0.534",
-    "@remotion/google-fonts": "4.0.534",
-    "@remotion/motion-blur": "4.0.534",
     "@remotion/paths": "4.0.534",
     "@remotion/transitions": "4.0.534",
     "react": "19.2.3",
@@ -26,6 +25,7 @@
   },
   "devDependencies": {
     "@types/react": "19.0.8",
+    "playwright-core": "1.56.1",
     "typescript": "7.0.2"
   }
 }

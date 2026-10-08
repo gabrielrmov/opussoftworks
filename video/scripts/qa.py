@@ -24,6 +24,8 @@ FRAMES = os.path.join(OUT, "frames")
 STEP = 15  # 0,5 s a 30 fps
 EDGE = 64
 os.makedirs(FRAMES, exist_ok=True)
+for old in os.listdir(FRAMES):  # frames de um QA anterior não podem entrar no relatório
+    os.remove(os.path.join(FRAMES, old))
 
 subprocess.run(
     ["ffmpeg", "-loglevel", "error", "-y", "-i", VIDEO, "-vf", f"select='not(mod(n\\,{STEP}))'", "-vsync", "vfr",

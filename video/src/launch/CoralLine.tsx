@@ -16,8 +16,9 @@ const handify = (d: string, seed: string, step = 36, amp = 2.4) => {
   const pts: [number, number][] = [];
   for (let i = 0; i <= n; i++) {
     const l = (len * i) / n;
-    const p = getPointAtLength(d, l)!;
-    const t = getTangentAtLength(d, l)!;
+    const p = getPointAtLength(d, l);
+    const t = getTangentAtLength(d, l);
+    if (!p || !t) continue; // trecho degenerado: sem ponto/tangente
     const off = noise2D(seed, l / 260, 0) * amp + noise2D(seed, l / 55, 9) * amp * 0.35;
     pts.push([p.x - t.y * off, p.y + t.x * off]);
   }

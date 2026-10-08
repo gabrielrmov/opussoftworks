@@ -130,9 +130,10 @@ export const TOOL_L = {
 };
 
 /* ------------------------------ Logo + CTA ------------------------------ */
-// O wordmark nasce no alto da tela (y 480), com ~78% da largura, escrito
-// pela linha; a pergunta e a URL entram embaixo dele. Câmera fixa até o fim.
-export const WORDMARK = { revealSize: 116, revealW: 839, revealSy: 480, ctaSize: 80, ctaSy: 430 };
+// O wordmark nasce no centro da tela, com ~78% da largura, escrito pela
+// linha; depois sobe pro topo do CTA e o título, o botão e a URL entram
+// embaixo dele (bloco centrado na safe zone). Câmera fixa até o fim.
+export const WORDMARK = { revealSize: 116, revealW: 839, revealSy: 860, ctaSize: 92, ctaSy: 520 };
 export const LOGO_L = { x: MX, y: TOOL_L.funcioneFocusY + 1350 };
 
 export const toWorld = (sx: number, sy: number) => ({
@@ -140,10 +141,10 @@ export const toWorld = (sx: number, sy: number) => ({
   y: LOGO_L.y + (sy - SCREEN_FOCUS.y),
 });
 export const CTA_L = {
-  questionSy: [700, 820],
+  questionSy: [780, 900],
   questionSize: 104,
-  button: { sy: 1030, w: 800, h: 136, text: 48 },
-  urlSy: 1190,
+  button: { sy: 1110, w: 800, h: 136, text: 48 },
+  urlSy: 1270,
   urlSize: 44,
 };
 
@@ -206,7 +207,8 @@ const SEGMENTS: { name: string; d: string }[] = [
   ...METHOD_L.steps.map((y, i) => ({ name: `step${i}`, d: `L ${LX} ${y}` })),
   { name: "toolEnd", d: `L ${LX} ${TOOL_L.rows[3] + 120}` },
   { name: "funcioneEnd", d: `L ${LX} ${TOOL_L.bottom}` },
-  { name: "logoAnchor", d: `L ${LX} ${WM_LEFT.y - 140} C ${LX} ${WM_LEFT.y - 60} ${WM_LEFT.x} ${WM_LEFT.y - 60} ${WM_LEFT.x} ${WM_LEFT.y}` },
+  // o wordmark nasce no centro, logo à direita da linha: ela desce reta até a altura dele
+  { name: "logoAnchor", d: `L ${LX} ${WM_LEFT.y}` },
 ];
 
 export const LINE_PATH = SEGMENTS.map((s) => s.d).join(" ");

@@ -24,7 +24,7 @@ export const SHOTS: ShotDef[] = [
   {name: '12 · Estratégia, aliada à execução', dur: 90, holds: [{at: 56, len: 30}]},
   {name: '13 · Marca', dur: 120, holds: [{at: 66, len: 26}]},
   {name: '14 · Site', dur: 80, holds: [{at: 44, len: 26}]},
-  {name: '15 · Símbolo', dur: 104, holds: []},
+  {name: '15 · Símbolo', dur: 116, holds: []},
 ];
 
 /** Duração final (frames de vídeo) de um plano, contando as pausas. */
@@ -47,12 +47,12 @@ export type TransitionKind = 'zoom' | 'slideUp' | 'slideLeft' | 'bar' | 'circle'
 export const TRANSITIONS: Record<number, {kind: TransitionKind; frames: number; spring?: boolean}> = {
   0: {kind: 'zoom', frames: 16},
   2: {kind: 'slideUp', frames: 18, spring: true},
-  5: {kind: 'bar', frames: 20},
+  5: {kind: 'bar', frames: 26},
   6: {kind: 'circle', frames: 20},
   7: {kind: 'zoom', frames: 16},
   8: {kind: 'slideLeft', frames: 18, spring: true},
   9: {kind: 'circle', frames: 20},
-  12: {kind: 'bar', frames: 18},
+  12: {kind: 'bar', frames: 26},
   13: {kind: 'fade', frames: 12},
 };
 

@@ -50,7 +50,7 @@ const GrainLayer: React.FC = () => {
 /** Promo OPUS SOFTWORKS: 15 planos com transições desenhadas, motion blur e pausas de leitura. */
 export const OpusPromo: React.FC = () => (
   <AbsoluteFill style={{background: C.white}}>
-    <CameraMotionBlur shutterAngle={180} samples={6}>
+    <CameraMotionBlur shutterAngle={180} samples={10}>
       <TransitionSeries>
         {SHOTS.flatMap((s, i) => {
           const Shot = COMPONENTS[i];

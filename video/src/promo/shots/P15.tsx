@@ -9,14 +9,14 @@ import {LogoShine} from '../kit/Extras';
 /** 15 — Assinatura: o símbolo se desenha, recebe um brilho e fica parado nos 2 segundos finais. */
 export const P15: React.FC<{dur: number}> = () => {
   const f = useCurrentFrame();
-  const s = lerp(0.9, 1, prog(f, 0, 24, EASE_OUT));
+  const s = lerp(0.9, 1, prog(f, 12, 24, EASE_OUT));
   return (
     <AbsoluteFill style={{background: C.white}}>
       <AbsoluteFill style={{transform: `scale(${s})`}}>
         <Stage>
-          <OpusSymbol cx={540} cy={960} width={460} progress={prog(f, 0, 22, EASE_IN_OUT)} />
+          <OpusSymbol cx={540} cy={960} width={460} progress={prog(f, 12, 22, EASE_IN_OUT)} />
         </Stage>
-        <LogoShine cx={540} cy={960} width={460} frame={f} start={24} duration={18} />
+        <LogoShine cx={540} cy={960} width={460} frame={f} start={36} duration={18} />
       </AbsoluteFill>
     </AbsoluteFill>
   );

@@ -109,14 +109,14 @@ export const LINE_PROGRESS: { f: number; at: string }[] = [
   { f: LOGO.closeFrom, at: "pillStart" },
 ];
 
-/** Efeitos sonoros (arquivo em public/sfx/, frame de início). */
+/** Efeitos sonoros (arquivo em public/sfx/, frame de início, volume opcional — padrão em OpusLaunch.tsx). */
 export const SFX: { file: string; f: number; volume?: number }[] = [
-  { file: "impact.wav", f: HOOK.resultado, volume: 0.7 },
+  { file: "impact.wav", f: HOOK.resultado },
   { file: "tick.wav", f: HOOK.nao },
   { file: "tick.wav", f: HOOK.e },
   { file: "glitch.wav", f: HOOK.sorte },
   { file: "impact.wav", f: HOOK.entrega },
-  { file: "whoosh.wav", f: beat(4) - 4, volume: 0.5 },
+  { file: "whoosh.wav", f: beat(4) - 4, volume: 0.3 },
   { file: "whoosh.wav", f: beat(7) - 2 },
   { file: "click.wav", f: TRAFEGO.click },
   { file: "whoosh.wav", f: beat(10) - 2 },
@@ -134,6 +134,6 @@ export const SFX: { file: string; f: number; volume?: number }[] = [
   { file: "whoosh.wav", f: beat(44) - 2 },
   { file: "whoosh.wav", f: beat(46) - 2 },
   { file: "impact.wav", f: LOGO.closed },
-  { file: "whoosh.wav", f: beat(50) - 2, volume: 0.6 },
+  { file: "whoosh.wav", f: beat(50) - 2, volume: 0.32 },
   { file: "tick.wav", f: CTA_AT },
 ];

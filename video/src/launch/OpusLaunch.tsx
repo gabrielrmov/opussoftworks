@@ -44,6 +44,17 @@ const Scene: React.FC = () => {
   );
 };
 
+// Ducking: a música abaixa por alguns frames em cada impacto, pra o efeito
+// aparecer sem estourar o pico.
+const IMPACTS = SFX.filter((s) => s.file === "impact.wav").map((s) => s.f);
+const musicVolume = (f: number) => {
+  const duck = Math.max(0, ...IMPACTS.map((i) => (f >= i - 1 ? Math.exp(-(f - i + 1) / 9) : 0)));
+  return MUSIC_VOLUME * (1 - 0.65 * duck);
+};
+// Ajustados pra mixagem final ficar em ~-14 LUFS com pico real abaixo de -1 dBFS.
+const MUSIC_VOLUME = 0.92;
+const SFX_VOLUME: Record<string, number> = { "tick.wav": 0.32, "click.wav": 0.45, "whoosh.wav": 0.4, "glitch.wav": 0.45, "impact.wav": 0.45 };
+
 // O motion blur renderiza a cena várias vezes; só liga quando a câmera anda.
 const BLUR_SPEED = 3;
 
@@ -61,10 +72,10 @@ export const OpusLaunch: React.FC = () => {
       )}
 
       {/* Áudio fica fora do blur (senão tocaria uma vez por amostra). */}
-      <Html5Audio src={staticFile("music.mp3")} volume={0.9} />
+      <Html5Audio src={staticFile("music.mp3")} volume={musicVolume} />
       {SFX.map((s, i) => (
         <Sequence key={i} from={s.f} durationInFrames={45} layout="none">
-          <Html5Audio src={staticFile(`sfx/${s.file}`)} volume={s.volume ?? 0.85} />
+          <Html5Audio src={staticFile(`sfx/${s.file}`)} volume={s.volume ?? SFX_VOLUME[s.file] ?? 0.5} />
         </Sequence>
       ))}
     </AbsoluteFill>

@@ -41,10 +41,10 @@ describe("RLS de membros", () => {
 
   it("anon não lê nem escreve", async () => {
     await comoUsuario(db, null);
-    expect(await linhas()).toHaveLength(0);
+    await expect(linhas()).rejects.toThrow(/permission denied/);
     await expect(
       db.exec("insert into membros (email, papel) values ('x@x.com', 'admin')"),
-    ).rejects.toThrow();
+    ).rejects.toThrow(/permission denied/);
   });
 
   it("e-mail com caixa diferente é reconhecido", async () => {

@@ -42,6 +42,24 @@ permitiria obter um token com um e-mail autorizado. Por isso:
 3. Em **URIs de redirecionamento autorizados**, cole a *Callback URL* mostrada na página do provedor Google no Supabase.
 4. Copie o *Client ID* e o *Client Secret* e cole no provedor Google do Supabase. Esses segredos ficam **só no Supabase**, nunca no repositório.
 
+### Configurações OBRIGATÓRIAS (a confiança na claim `email` depende delas)
+
+O acesso é decidido por `auth.jwt() ->> 'email'`. Qualquer conta logada pode
+chamar `auth.updateUser({ email })`; se a troca de e-mail fosse confirmada
+automaticamente, um token poderia carregar um e-mail da lista que ainda não fez
+cadastro (por exemplo, o segundo fundador antes do primeiro login), com acesso de
+admin. Confirme no painel do Supabase e marque cada item:
+
+- [ ] **Confirm email** LIGADO (Authentication → Providers → Email / Sign In / Providers).
+- [ ] **Secure email change** LIGADO.
+- [ ] **Allow anonymous sign-ins** DESLIGADO.
+- [ ] **Manual linking** DESLIGADO.
+- [ ] Cadastro por e-mail/senha DESLIGADO.
+- [ ] Somente o provedor **Google** LIGADO.
+
+**Os DOIS fundadores devem fazer login uma vez logo após o seed** (passo c), para
+que o e-mail de cada um já esteja vinculado a uma conta real.
+
 ## e. URLs de redirecionamento
 
 Em **Authentication → URL Configuration**:
@@ -86,6 +104,8 @@ Em **Settings → Secrets and variables → Actions → Variables** (aba *Variab
 
 São valores públicos por design. Sem elas o build ainda funciona (vazias), mas o login não.
 
+Depois de criar as variáveis, faça um novo deploy (as variáveis são embutidas no build).
+
 ## i. Deploy
 
 O workflow `.github/workflows/pages.yml` só roda em push na branch `redesign`.
@@ -102,6 +122,19 @@ Toda nova tabela deve:
 4. ter políticas usando `public.eh_membro()` / `public.eh_admin()`.
 
 Use `0003_endurecer_privilegios.sql` como modelo.
+
+**PORTÃO OBRIGATÓRIO:** antes de criar a primeira tabela de dados, adicione uma
+migration com:
+
+```sql
+alter default privileges for role postgres in schema public
+  revoke truncate, references, trigger on tables from anon, authenticated;
+alter default privileges for role postgres in schema public
+  revoke all on tables from anon;
+```
+
+O `TRUNCATE` não é barrado pelo RLS, então sem isso uma tabela nova nasceria
+truncável por `anon`/`authenticated`. Essa migration ainda não existe.
 
 ## k. Avisos operacionais
 

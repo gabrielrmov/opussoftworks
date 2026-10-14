@@ -45,3 +45,6 @@ _to_delete/
 # arquivos de trabalho / lixo local (não fazem parte do site)
 Claude outputs/
 _tmp_*
+
+# seed real do painel (e-mails reais dos admins: nunca versionar)
+supabase/seed.sql

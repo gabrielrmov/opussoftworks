@@ -40,6 +40,8 @@ export async function adicionarMembro(email: string, papel: Papel): Promise<void
 }
 
 export async function definirAtivo(id: string, ativo: boolean): Promise<void> {
-  const { error } = await cliente().from("membros").update({ ativo }).eq("id", id);
+  const { data, error } = await cliente().from("membros").update({ ativo }).eq("id", id).select("id");
   if (error) throw error;
+  // RLS filtrando a linha (ou id inexistente) devolve sucesso com 0 linhas.
+  if (!data || data.length === 0) throw { code: "42501", message: "nenhuma linha afetada" };
 }

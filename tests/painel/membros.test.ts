@@ -5,7 +5,8 @@ import { adicionarMembro, definirAtivo, listarMembros, mensagemDeErro } from "@/
 vi.mock("@/lib/supabase/client");
 
 const insert = vi.fn();
-const eq = vi.fn();
+const selectUpd = vi.fn();
+const eq = vi.fn(() => ({ select: selectUpd }));
 const update = vi.fn(() => ({ eq }));
 const order = vi.fn();
 const select = vi.fn(() => ({ order }));
@@ -14,7 +15,7 @@ const from = vi.fn(() => ({ insert, update, select }));
 beforeEach(() => {
   vi.clearAllMocks();
   insert.mockResolvedValue({ error: null });
-  eq.mockResolvedValue({ error: null });
+  selectUpd.mockResolvedValue({ data: [{ id: "id-1" }], error: null });
   order.mockResolvedValue({ data: [], error: null });
   vi.mocked(getSupabase).mockReturnValue({ from } as never);
 });
@@ -38,8 +39,20 @@ describe("membros", () => {
     expect(eq).toHaveBeenCalledWith("id", "id-1");
   });
 
+  it("definirAtivo com 0 linhas afetadas vira erro de permissão", async () => {
+    selectUpd.mockResolvedValue({ data: [], error: null });
+    const erro = await definirAtivo("id-1", false).catch((e: unknown) => e);
+    expect(mensagemDeErro(erro)).toBe("Você não tem permissão para fazer isso.");
+    selectUpd.mockResolvedValue({ data: null, error: null });
+    await expect(definirAtivo("id-1", true)).rejects.toBeTruthy();
+  });
+
+  it("definirAtivo resolve quando uma linha é atualizada", async () => {
+    await expect(definirAtivo("id-1", true)).resolves.toBeUndefined();
+  });
+
   it("erro do banco vira mensagem em português", async () => {
-    eq.mockResolvedValue({ error: { code: "23514", message: "Operacao negada: nao pode ficar sem ultimo admin ativo" } });
+    selectUpd.mockResolvedValue({ data: null, error: { code: "23514", message: "Operacao negada: nao pode ficar sem ultimo admin ativo" } });
     const erro = await definirAtivo("id-1", false).catch((e: unknown) => e);
     expect(mensagemDeErro(erro)).toBe("É preciso manter pelo menos um admin ativo.");
   });

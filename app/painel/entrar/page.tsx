@@ -1,16 +1,46 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { entrarComGoogle } from "@/lib/painel/use-acesso";
+import { entrarComGoogle, useAcesso } from "@/lib/painel/use-acesso";
+
+const MSG_NAO_AUTORIZADA = "Esta conta Google não está autorizada a acessar o painel.";
+const MSG_GENERICA = "Não foi possível entrar. Tente novamente.";
+
+// Nunca exibe o texto vindo da URL (controlável por terceiros): só mensagens fixas.
+function mensagemDeErro(): string | null {
+  const consultas = [
+    new URLSearchParams(window.location.search),
+    new URLSearchParams(window.location.hash.replace(/^#/, "")),
+  ];
+  let presente = false;
+  for (const p of consultas) {
+    const erro = p.get("error");
+    const descricao = p.get("error_description");
+    const codigo = p.get("error_code");
+    if (!erro && !descricao && !codigo) continue;
+    presente = true;
+    const texto = `${erro ?? ""} ${descricao ?? ""} ${codigo ?? ""}`.toLowerCase();
+    if (/acesso restrito|access_denied|hook/.test(texto)) return MSG_NAO_AUTORIZADA;
+  }
+  return presente ? MSG_GENERICA : null;
+}
 
 export default function EntrarPage() {
   const [erro, setErro] = useState<string | null>(null);
+  const acesso = useAcesso();
 
   // Lido em efeito: o prerender estático não tem window.
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setErro(params.get("error_description") || params.get("error"));
+    setErro(mensagemDeErro());
   }, []);
+
+  async function entrar() {
+    try {
+      await entrarComGoogle();
+    } catch {
+      setErro(MSG_GENERICA);
+    }
+  }
 
   return (
     <main className="mx-auto max-w-sm px-6 py-24 text-center">
@@ -24,8 +54,9 @@ export default function EntrarPage() {
       )}
       <button
         type="button"
-        onClick={() => void entrarComGoogle()}
-        className="mt-8 w-full rounded-md bg-[#FF6039] px-4 py-3 text-sm font-semibold text-white"
+        onClick={() => void entrar()}
+        disabled={acesso.estado === "nao-configurado"}
+        className="mt-8 w-full rounded-md bg-[#FF6039] px-4 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
       >
         Entrar com Google
       </button>

@@ -48,8 +48,11 @@ Em **Authentication → URL Configuration**:
 
 - **Site URL**: `https://opussoftworks.com.br`
 - **Redirect URLs**:
-  - `https://opussoftworks.com.br/painel`
-  - `http://localhost:3000/painel`
+  - `https://opussoftworks.com.br/painel**`
+  - `http://localhost:3000/painel**`
+
+O login usa o fluxo **PKCE**: o Supabase acrescenta um parâmetro de consulta ao
+`redirectTo`, por isso o curinga `**` é necessário (sem ele o retorno é rejeitado).
 
 ## f. Hook "Before User Created"
 
@@ -113,7 +116,9 @@ Precisa do projeto real. Marque cada item:
 
 - [ ] Login com e-mail autorizado entra em `/painel`.
 - [ ] E-mail fora da lista é bloqueado no cadastro (hook) ou vê "sem acesso".
-- [ ] O retorno do OAuth cai em `/painel?code=...` e a guarda **não** manda de volta para `/painel/entrar` antes de o Supabase terminar a troca do código (risco conhecido: confirmar).
+- [ ] O retorno do OAuth (PKCE) cai em `/painel?code=...` e a guarda **não** manda de volta para `/painel/entrar` antes de o Supabase terminar a troca do código (risco conhecido: confirmar).
+- [ ] Teste com **duas** contas Google: uma permitida (entra em `/painel`) e uma bloqueada (volta para `/painel/entrar` com a mensagem "Esta conta Google não está autorizada a acessar o painel.").
+- [ ] Abra `https://opussoftworks.com.br/painel` e `/painel/entrar` DIRETO no navegador em produção e confirme que carregam (primeira rota aninhada do site).
 - [ ] Revogar um membro remove o acesso na próxima requisição.
 - [ ] Um `membro` não vê o item "Membros".
 - [ ] Adicionar o mesmo e-mail duas vezes mostra "Este e-mail já está na lista."

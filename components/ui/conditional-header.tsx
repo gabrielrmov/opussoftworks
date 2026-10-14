@@ -10,7 +10,7 @@ import Header from "@/components/ui/header";
 // agora é a landing page pronta (a partir do PDF do usuário), que já vem
 // com seu próprio SiteHeader claro.
 const HIDE_HEADER_ON_EXACT = ["/"];
-const HIDE_HEADER_ON_PREFIX = ["/hero-banner-preview"];
+const HIDE_HEADER_ON_PREFIX = ["/hero-banner-preview", "/painel"];
 
 export default function ConditionalHeader() {
   const pathname = usePathname();

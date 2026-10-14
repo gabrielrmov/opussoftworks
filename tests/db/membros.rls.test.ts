@@ -75,4 +75,58 @@ describe("RLS de membros", () => {
     const r = await db.query<{ ativo: boolean }>("select ativo from membros where email='dani@x.com'");
     expect(r.rows[0].ativo).toBe(false);
   });
+
+  it("admin revogado não lê, não insere e não altera", async () => {
+    await db.exec("insert into membros (email, papel, ativo) values ('dora@x.com', 'admin', true)");
+    await comoAdminDoBanco(db);
+    await db.exec("update membros set ativo=false where email='ana@x.com'");
+    await comoUsuario(db, "ana@x.com");
+    expect(await linhas()).toHaveLength(0);
+    await expect(
+      db.exec("insert into membros (email, papel) values ('novo@x.com', 'membro')"),
+    ).rejects.toThrow(/row-level security/);
+    // Sem política aplicável a linha fica invisível: o update afeta 0 linhas.
+    const up = await db.query("update membros set papel='admin' where email='beto@x.com'");
+    expect(up.affectedRows).toBe(0);
+    const del = await db.query("delete from membros where email='beto@x.com'");
+    expect(del.affectedRows).toBe(0);
+    await comoAdminDoBanco(db);
+    const r = await db.query<{ papel: string }>("select papel from membros where email='beto@x.com'");
+    expect(r.rows[0].papel).toBe("membro");
+  });
+
+  it("revogação no meio da sessão vale na próxima requisição da mesma identidade", async () => {
+    await db.exec("insert into membros (email, papel, ativo) values ('dora@x.com', 'admin', true)");
+    await comoUsuario(db, "ana@x.com");
+    expect(await linhas()).toHaveLength(4);
+    const antes = await db.query("update membros set papel='membro' where email='beto@x.com'");
+    expect(antes.affectedRows).toBe(1);
+
+    await comoAdminDoBanco(db);
+    await db.exec("update membros set ativo=false where email='ana@x.com'");
+    await comoUsuario(db, "ana@x.com");
+
+    expect(await linhas()).toHaveLength(0);
+    await expect(
+      db.exec("insert into membros (email, papel) values ('novo@x.com', 'membro')"),
+    ).rejects.toThrow(/row-level security/);
+    const depois = await db.query("update membros set papel='admin' where email='beto@x.com'");
+    expect(depois.affectedRows).toBe(0);
+  });
+
+  it("eh_membro() e eh_admin() respeitam ativo, papel e caixa", async () => {
+    await db.exec("insert into membros (email, papel, ativo) values ('rui@x.com', 'admin', false)");
+    async function como(email: string) {
+      await comoUsuario(db, email);
+      const r = await db.query<{ m: boolean; a: boolean }>(
+        "select public.eh_membro() as m, public.eh_admin() as a",
+      );
+      return r.rows[0];
+    }
+    expect(await como("BETO@x.com")).toEqual({ m: true, a: false });
+    expect(await como("ana@x.com")).toEqual({ m: true, a: true });
+    expect(await como("caio@x.com")).toEqual({ m: false, a: false });
+    expect(await como("rui@x.com")).toEqual({ m: false, a: false });
+    expect(await como("zeca@x.com")).toEqual({ m: false, a: false });
+  });
 });

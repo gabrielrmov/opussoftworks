@@ -11,6 +11,7 @@ export async function novoBanco(): Promise<PGlite> {
   await db.exec(`
     create role anon nologin;
     create role authenticated nologin;
+    create role supabase_auth_admin nologin;
     create schema auth;
     create function auth.jwt() returns jsonb language sql stable as
       $$ select nullif(current_setting('request.jwt.claims', true), '')::jsonb $$;
@@ -20,6 +21,9 @@ export async function novoBanco(): Promise<PGlite> {
     grant usage on schema public to anon, authenticated;
     alter default privileges in schema public
       grant all on tables to anon, authenticated;
+    -- Como no Supabase: funcoes novas ja nascem executaveis por anon/authenticated.
+    alter default privileges in schema public
+      grant execute on functions to anon, authenticated;
   `);
   const arquivos = readdirSync(MIGRATIONS)
     .filter((f) => f.endsWith(".sql"))

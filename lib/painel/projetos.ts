@@ -1,4 +1,4 @@
-import { ErroDeValidacao, exigirCliente } from "@/lib/painel/erros";
+import { CODIGO_NAO_SALVO, ErroDeValidacao, exigirCliente } from "@/lib/painel/erros";
 
 export type TipoProjeto = "site" | "sistema" | "trafego" | "outro";
 export type StatusProjeto = "planejado" | "em_andamento" | "em_revisao" | "pausado" | "concluido";
@@ -84,12 +84,14 @@ export function validarProjeto(dados: DadosProjeto): DadosProjeto {
 }
 
 export function hojeEmSaoPaulo(agora: Date = new Date()): string {
-  return new Intl.DateTimeFormat("en-CA", {
+  const partes = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/Sao_Paulo",
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
-  }).format(agora);
+  }).formatToParts(agora);
+  const valor = (tipo: string) => partes.find((p) => p.type === tipo)?.value ?? "";
+  return `${valor("year").padStart(4, "0")}-${valor("month").padStart(2, "0")}-${valor("day").padStart(2, "0")}`;
 }
 
 export function estaAtrasado(p: Pick<Projeto, "prazo" | "status">, hoje: string): boolean {
@@ -98,7 +100,7 @@ export function estaAtrasado(p: Pick<Projeto, "prazo" | "status">, hoje: string)
 
 // RLS filtrando a linha (ou id inexistente) devolve sucesso com 0 linhas.
 function exigirLinhaAfetada(data: unknown[] | null) {
-  if (!data || data.length === 0) throw { code: "42501", message: "nenhuma linha afetada" };
+  if (!data || data.length === 0) throw { code: CODIGO_NAO_SALVO, message: "nenhuma linha afetada" };
 }
 
 export async function listarProjetos(): Promise<Projeto[]> {

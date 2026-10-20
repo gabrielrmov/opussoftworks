@@ -1,6 +1,16 @@
-import { ErroDeValidacao, exigirCliente as cliente, mensagemDeErro } from "@/lib/painel/erros";
+import {
+  ErroDeValidacao,
+  exigirCliente as cliente,
+  mensagemDeErro as mensagemGenerica,
+} from "@/lib/painel/erros";
 
-export { ErroDeValidacao, mensagemDeErro };
+export { ErroDeValidacao };
+
+// Na lista de membros, violação de unicidade só pode ser o e-mail repetido.
+export function mensagemDeErro(erro: unknown): string {
+  if ((erro as { code?: unknown } | null)?.code === "23505") return "Este e-mail já está na lista.";
+  return mensagemGenerica(erro);
+}
 
 export type Papel = "admin" | "membro";
 export type Membro = { id: string; email: string; papel: Papel; ativo: boolean };

@@ -174,13 +174,13 @@ describe("criarProjeto", () => {
 });
 
 describe("atualizarProjeto e apagarProjeto", () => {
-  it("zero linhas afetadas vira erro de permissão", async () => {
+  it("zero linhas afetadas vira erro neutro (não de permissão)", async () => {
     selectAtualizar.mockResolvedValue({ data: [], error: null });
     const e1 = await atualizarProjeto("p-1", valido).catch((e: unknown) => e);
-    expect(mensagemDeErro(e1)).toBe("Você não tem permissão para fazer isso.");
+    expect(mensagemDeErro(e1)).toBe("O projeto não foi salvo: ele pode ter sido apagado ou seu acesso mudou.");
     selectApagar.mockResolvedValue({ data: [], error: null });
     const e2 = await apagarProjeto("p-1").catch((e: unknown) => e);
-    expect(mensagemDeErro(e2)).toBe("Você não tem permissão para fazer isso.");
+    expect(mensagemDeErro(e2)).toBe("O projeto não foi salvo: ele pode ter sido apagado ou seu acesso mudou.");
     selectApagar.mockResolvedValue({ data: null, error: null });
     await expect(apagarProjeto("p-1")).rejects.toBeTruthy();
   });
@@ -260,5 +260,11 @@ describe("mensagemDeErro", () => {
     vi.mocked(getSupabase).mockReturnValue(null);
     const erro = await listarProjetos().catch((e: unknown) => e);
     expect(mensagemDeErro(erro)).toBe("Painel ainda não configurado.");
+  });
+});
+
+describe("mensagens genéricas de erro", () => {
+  it("23505 em projetos é genérico; o texto de e-mail fica em membros", () => {
+    expect(mensagemDeErro({ code: "23505", message: "duplicate key" })).toBe("Esse registro já existe.");
   });
 });

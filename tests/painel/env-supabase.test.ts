@@ -72,4 +72,26 @@ describe("validarEnvSupabase", () => {
     expect(r.ok).toBe(true);
     expect(r.url).toBe(URL_OK);
   });
+
+  it("aceita a URL com barra no final e a devolve sem a barra", () => {
+    const r = validarEnvSupabase({ url: `${URL_OK}/`, key: PUBLISHABLE });
+    expect(r.ok).toBe(true);
+    expect(r.url).toBe(URL_OK);
+  });
+
+  it("URL recusada: o aviso diz o que está diferente, sem imprimir o valor", () => {
+    const comCaminho = `${URL_OK}/rest/v1/`;
+    const r = validarEnvSupabase({ url: comCaminho, key: PUBLISHABLE });
+    expect(r.ok).toBe(false);
+    const aviso = r.avisos.join(" ");
+    expect(aviso).toMatch(/caminho/i);
+    expect(aviso).not.toContain("rest/v1");
+    expect(aviso).not.toContain("abcdefghijklmnopqrst");
+
+    const painel = validarEnvSupabase({ url: "https://supabase.com/dashboard/project/abcdefghijklmnopqrst", key: PUBLISHABLE });
+    expect(painel.avisos.join(" ")).toMatch(/não termina em \.supabase\.co/i);
+
+    const curto = validarEnvSupabase({ url: "https://abc.supabase.co", key: PUBLISHABLE });
+    expect(curto.avisos.join(" ")).toMatch(/3 caracteres/);
+  });
 });

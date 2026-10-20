@@ -34,9 +34,26 @@ function classificarChave(valor) {
   return "desconhecida";
 }
 
+// Dica sobre o que está diferente numa URL recusada, SEM repetir o valor (ele pode ser uma
+// chave colada no lugar errado): só descreve o formato.
+function dicaDaUrl(u) {
+  const dicas = [];
+  if (!u.startsWith("https://")) dicas.push("não começa com https://");
+  const resto = u.replace(/^https?:\/\//, "");
+  const host = resto.split("/")[0];
+  if (resto.includes("/")) dicas.push("tem um caminho depois do domínio");
+  if (!host.endsWith(".supabase.co")) dicas.push("o domínio não termina em .supabase.co");
+  else {
+    const ref = host.slice(0, -".supabase.co".length);
+    if (ref.length !== 20) dicas.push(`o código do projeto tem ${ref.length} caracteres (esperado 20)`);
+  }
+  return dicas.length ? ` (${dicas.join("; ")})` : "";
+}
+
 // Retorna { ok, url, key, avisos }. Os avisos nunca contêm o valor recebido.
 export function validarEnvSupabase({ url = "", key = "" } = {}) {
-  const u = String(url ?? "").trim();
+  // Uma barra no fim é inofensiva e comum ao copiar a URL: aceita e remove.
+  const u = String(url ?? "").trim().replace(/\/+$/, "");
   const k = String(key ?? "").trim();
   const nenhum = { ok: false, url: "", key: "" };
 
@@ -47,7 +64,7 @@ export function validarEnvSupabase({ url = "", key = "" } = {}) {
   if (!k) avisos.push("NEXT_PUBLIC_SUPABASE_ANON_KEY está vazia");
 
   if (u && !URL_PROJETO.test(u)) {
-    avisos.push("NEXT_PUBLIC_SUPABASE_URL não é uma URL de projeto (https://<20 caracteres>.supabase.co)");
+    avisos.push(`NEXT_PUBLIC_SUPABASE_URL não é uma URL de projeto (https://<20 caracteres>.supabase.co)${dicaDaUrl(u)}`);
   }
   if (k) {
     const tipo = classificarChave(k);

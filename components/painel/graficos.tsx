@@ -30,7 +30,7 @@ export function BarrasSemanais({ semanas }: { semanas: ResumoPainel["entregasPor
         ))}
       </div>
       <div className="pn-barras-area">
-        <svg className="pn-graf" viewBox="0 0 560 150" preserveAspectRatio="none" focusable="false">
+        <svg className="pn-graf" viewBox="0 0 560 150" focusable="false">
           <line x1="0" y1={BASE} x2="560" y2={BASE} />
           <line x1="0" y1="100" x2="560" y2="100" strokeDasharray="3 5" />
           <line x1="0" y1="50" x2="560" y2="50" strokeDasharray="3 5" />

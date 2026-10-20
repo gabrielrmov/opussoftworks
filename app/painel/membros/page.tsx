@@ -57,80 +57,96 @@ function Gestao({ meuEmail }: { meuEmail?: string }) {
 
   return (
     <>
-      <h1 className="text-2xl font-semibold">Membros</h1>
+      <div className="pn-cab">
+        <div>
+          <h1 className="pn-h1">Membros</h1>
+          <p className="pn-sub">Quem pode entrar no painel e com qual papel.</p>
+        </div>
+      </div>
 
-      <form onSubmit={aoAdicionar} className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-end">
-        <div className="flex flex-col gap-1">
-          <label htmlFor="novo-email" className="text-sm font-medium">E-mail</label>
+      <form onSubmit={aoAdicionar} className="pn-cartao pn-novo-membro">
+        <div className="pn-campo">
+          <label htmlFor="novo-email">E-mail</label>
           <input
             id="novo-email"
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded-md border border-[#161616]/20 bg-white px-3 py-2 text-sm sm:w-72"
+            className="pn-input"
           />
         </div>
-        <div className="flex flex-col gap-1">
-          <label htmlFor="novo-papel" className="text-sm font-medium">Papel</label>
+        <div className="pn-campo">
+          <label htmlFor="novo-papel">Papel</label>
           <select
             id="novo-papel"
             value={papel}
             onChange={(e) => setPapel(e.target.value as Papel)}
-            className="rounded-md border border-[#161616]/20 bg-white px-3 py-2 text-sm"
+            className="pn-input"
           >
             <option value="membro">Membro</option>
             <option value="admin">Admin</option>
           </select>
         </div>
-        <button
-          type="submit"
-          disabled={ocupado}
-          className="rounded-md bg-[#FF6039] px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
-        >
+        <button type="submit" disabled={ocupado} className="pn-btn">
           Adicionar
         </button>
       </form>
 
       {erro && (
-        <p role="alert" className="mt-4 text-sm font-medium text-[#B3261E]">
+        <p role="alert" className="pn-alerta">
           {erro}
         </p>
       )}
 
-      <div className="mt-6">
+      <div>
         {membros === null ? (
-          <p role="status" className="text-sm text-[#161616]/60">Carregando…</p>
+          <p role="status" className="pn-mudo">Carregando…</p>
         ) : membros.length === 0 ? (
-          <p className="text-sm text-[#161616]/60">Nenhum membro cadastrado.</p>
+          <p className="pn-mudo">Nenhum membro cadastrado.</p>
         ) : (
-          <ul className="divide-y divide-[#161616]/10 rounded-md border border-[#161616]/10 bg-white">
-            {membros.map((m) => {
-              const proprio = m.email.toLowerCase() === meu;
-              const bloqueado = proprio && m.ativo;
-              return (
-                <li key={m.id} className="flex flex-wrap items-center gap-3 px-4 py-3 text-sm">
-                  <span className="min-w-0 flex-1 break-all font-medium">{m.email}</span>
-                  <span className="text-[#161616]/70">{m.papel === "admin" ? "Admin" : "Membro"}</span>
-                  <span className="text-[#161616]/70">{m.ativo ? "Ativo" : "Inativo"}</span>
-                  <button
-                    type="button"
-                    disabled={ocupado || bloqueado}
-                    aria-describedby={bloqueado ? `aviso-${m.id}` : undefined}
-                    onClick={() => void executar(() => definirAtivo(m.id, !m.ativo))}
-                    className="rounded-md border border-[#161616]/20 px-3 py-1.5 font-medium disabled:opacity-50"
-                  >
-                    {m.ativo ? "Desativar" : "Ativar"}
-                  </button>
-                  {bloqueado && (
-                    <span id={`aviso-${m.id}`} className="w-full text-xs text-[#161616]/60">
-                      Você não pode desativar a si mesmo.
+          <div className="pn-cartao pn-tab">
+            <div className="pn-lin pn-lin-m pn-lin-cab" aria-hidden="true">
+              <span>E-mail</span>
+              <span>Papel</span>
+              <span>Estado</span>
+              <span />
+            </div>
+            <ul className="pn-linhas">
+              {membros.map((m, i) => {
+                const proprio = m.email.toLowerCase() === meu;
+                const bloqueado = proprio && m.ativo;
+                return (
+                  <li key={m.id} className="pn-lin pn-lin-m">
+                    <span className="pn-resp">
+                      <span className={`pn-av pn-av-p${i % 2 ? " pn-av-g" : ""}`} aria-hidden="true">
+                        {m.email.charAt(0).toUpperCase()}
+                      </span>
+                      <span className="pn-resp-t">{m.email}</span>
                     </span>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+                    <span className="pn-lin-tipo">{m.papel === "admin" ? "Admin" : "Membro"}</span>
+                    <span className={`pn-lin-st pn-st${m.ativo ? " pn-st-o" : ""}`}>{m.ativo ? "Ativo" : "Inativo"}</span>
+                    <div className="pn-lin-acoes">
+                      <button
+                        type="button"
+                        className="pn-ed"
+                        disabled={ocupado || bloqueado}
+                        aria-describedby={bloqueado ? `aviso-${m.id}` : undefined}
+                        onClick={() => void executar(() => definirAtivo(m.id, !m.ativo))}
+                      >
+                        {m.ativo ? "Desativar" : "Ativar"}
+                      </button>
+                    </div>
+                    {bloqueado && (
+                      <p id={`aviso-${m.id}`} className="pn-lin-aviso">
+                        Você não pode desativar a si mesmo.
+                      </p>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         )}
       </div>
     </>

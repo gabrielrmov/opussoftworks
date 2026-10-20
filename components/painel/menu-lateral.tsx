@@ -81,7 +81,7 @@ export function MenuLateral({ papel }: { papel: "admin" | "membro" }) {
     <nav aria-label="Menu do painel" className="pn-nav">
       <ul>
         {item("/painel", "Visão geral")}
-        {comLink.map(({ nome, href }) => item(href as string, nome))}
+        {comLink.map(({ nome, href }) => (href ? item(href, nome) : null))}
         {emBreve.length > 0 && (
           <li className="pn-rot">
             Em breve

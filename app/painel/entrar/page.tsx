@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Simbolo } from "@/components/painel/marca";
 import { entrarComGoogle, useAcesso } from "@/lib/painel/use-acesso";
 
 const MSG_NAO_AUTORIZADA = "Esta conta Google não está autorizada a acessar o painel.";
@@ -43,23 +44,28 @@ export default function EntrarPage() {
   }
 
   return (
-    <main className="mx-auto max-w-sm px-6 py-24 text-center">
-      <h1 className="text-2xl font-semibold">Painel Opus</h1>
-      <p className="mt-2 text-sm text-[#161616]/70">Acesso restrito à equipe.</p>
-      {erro && (
-        <div role="alert" className="mt-6 rounded-md border border-[#161616]/20 p-3 text-left text-sm">
-          <p className="font-semibold">Não foi possível entrar</p>
-          <p className="mt-1 break-words text-[#161616]/70">{erro}</p>
+    <main className="pn-centro">
+      <div className="pn-cartao pn-entrar">
+        <div className="pn-entrar-marca">
+          <Simbolo />
         </div>
-      )}
-      <button
-        type="button"
-        onClick={() => void entrar()}
-        disabled={acesso.estado === "nao-configurado"}
-        className="mt-8 w-full rounded-md bg-[#FF6039] px-4 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
-      >
-        Entrar com Google
-      </button>
+        <h1 className="pn-entrar-t">Painel Opus</h1>
+        <p className="pn-sub">Acesso restrito à equipe.</p>
+        {erro && (
+          <div role="alert" className="pn-erro pn-entrar-erro">
+            <p className="pn-erro-t">Não foi possível entrar</p>
+            <p className="pn-erro-d">{erro}</p>
+          </div>
+        )}
+        <button
+          type="button"
+          onClick={() => void entrar()}
+          disabled={acesso.estado === "nao-configurado"}
+          className="pn-btn pn-entrar-btn"
+        >
+          Entrar com Google
+        </button>
+      </div>
     </main>
   );
 }

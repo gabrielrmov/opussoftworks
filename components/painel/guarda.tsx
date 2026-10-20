@@ -2,14 +2,20 @@
 
 import { useEffect, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
+import { Simbolo } from "./marca";
 import { sair, useAcesso } from "@/lib/painel/use-acesso";
 
 function Aviso({ titulo, texto, children }: { titulo: string; texto?: string; children?: ReactNode }) {
   return (
-    <div role="status" className="mx-auto max-w-md px-6 py-24 text-center">
-      <h1 className="text-xl font-semibold">{titulo}</h1>
-      {texto && <p className="mt-2 text-sm text-[#161616]/70">{texto}</p>}
-      {children}
+    <div className="pn-centro">
+      <div role="status" className="pn-cartao pn-entrar">
+        <div className="pn-entrar-marca">
+          <Simbolo />
+        </div>
+        <h1 className="pn-entrar-t">{titulo}</h1>
+        {texto && <p className="pn-sub">{texto}</p>}
+        {children}
+      </div>
     </div>
   );
 }
@@ -19,7 +25,7 @@ function BotaoSair() {
     <button
       type="button"
       onClick={() => void sair()}
-      className="mt-6 rounded-md border border-[#161616]/20 px-4 py-2 text-sm font-medium"
+      className="pn-btn pn-btn-sec pn-entrar-btn"
     >
       Sair
     </button>
@@ -57,8 +63,10 @@ export function Guarda({ papel, children }: { papel?: "admin"; children: ReactNo
       return <Aviso titulo="Painel ainda não configurado" />;
     default:
       return (
-        <div role="status" aria-label="Carregando" className="py-24 text-center text-sm text-[#161616]/60">
-          Carregando…
+        <div className="pn-centro">
+          <div role="status" aria-label="Carregando" className="pn-mudo">
+            Carregando…
+          </div>
         </div>
       );
   }

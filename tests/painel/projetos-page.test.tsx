@@ -78,8 +78,10 @@ describe("página de projetos", () => {
     expect(q.getByText("Em andamento")).toBeTruthy();
     expect(q.getByText(/10\/10\/2026/)).toBeTruthy();
     expect(q.getByText("ana@exemplo.test")).toBeTruthy();
-    const outro = screen.getByRole("heading", { name: "Tráfego Gama" }).closest("li")!;
+    const outro = screen.getByRole("heading", { name: "Sistema Beta" }).closest("li")!;
     expect(within(outro).getByText("—")).toBeTruthy();
+    const fora = screen.getByRole("heading", { name: "Tráfego Gama" }).closest("li")!;
+    expect(within(fora).getByText("Fora da equipe ativa")).toBeTruthy();
   });
 
   it("estado vazio: Nenhum projeto ainda", async () => {
@@ -224,6 +226,10 @@ describe("página de projetos", () => {
     render(<ProjetosPage />);
     expect(await screen.findByRole("heading", { name: "Site Alfa" })).toBeTruthy();
     expect(within(screen.getByRole("region", { name: "Equipe" })).getByText(/Não foi possível/)).toBeTruthy();
+    const alfa = screen.getByRole("heading", { name: "Site Alfa" }).closest("li")!;
+    await waitFor(() => expect(within(alfa).getByText("Indisponível")).toBeTruthy());
+    const beta = screen.getByRole("heading", { name: "Sistema Beta" }).closest("li")!;
+    expect(within(beta).getByText("—")).toBeTruthy();
   });
 
   it("carga antiga que chega depois de uma nova não sobrescreve a lista", async () => {

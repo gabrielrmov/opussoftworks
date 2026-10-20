@@ -33,6 +33,7 @@ function Gestao({ admin }: { admin: boolean }) {
   const [projetos, setProjetos] = useState<Projeto[] | null>(null);
   const [equipe, setEquipe] = useState<MembroEquipe[]>([]);
   const [erroEquipe, setErroEquipe] = useState(false);
+  const [equipeCarregada, setEquipeCarregada] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [falhouCarga, setFalhouCarga] = useState(false);
   const [filtro, setFiltro] = useState("");
@@ -62,7 +63,11 @@ function Gestao({ admin }: { admin: boolean }) {
     void carregar();
     let ativo = true;
     listarEquipe().then(
-      (e) => ativo && setEquipe(e),
+      (e) => {
+        if (!ativo) return;
+        setEquipe(e);
+        setEquipeCarregada(true);
+      },
       () => ativo && setErroEquipe(true),
     );
     return () => {
@@ -105,7 +110,12 @@ function Gestao({ admin }: { admin: boolean }) {
 
   const hoje = hojeEmSaoPaulo();
   const visiveis = (projetos ?? []).filter((p) => !filtro || p.status === filtro);
-  const emailDe = (id: string | null) => equipe.find((m) => m.id === id)?.email ?? "—";
+  const emailDe = (id: string | null) => {
+    if (!id) return "—";
+    if (erroEquipe) return "Indisponível";
+    if (!equipeCarregada) return "…";
+    return equipe.find((m) => m.id === id)?.email ?? "Fora da equipe ativa";
+  };
   const rotulo = <T extends { valor: string; rotulo: string }>(lista: T[], v: string) =>
     lista.find((i) => i.valor === v)?.rotulo ?? v;
 

@@ -1,0 +1,433 @@
+/* Painel interno: tudo escopado em .pn-raiz, nada vaza para o site público. */
+.pn-raiz {
+  --pn-coral: #ff6039;
+  --pn-coral-suave: #ff603918;
+  --pn-ok: #2e9e63;
+  --pn-aten: #e0a81e;
+  --pn-bg: #f4f4f0;
+  --pn-lateral: #141414;
+  --pn-lateral-2: #1f1f1f;
+  --pn-lateral-txt: #a9a9a4;
+  --pn-cartao: #ffffff;
+  --pn-borda: #e7e7e1;
+  --pn-txt: #161616;
+  --pn-mudo: #6d6d68;
+  --pn-trilho: #eeeee9;
+  --pn-barra: #161616;
+  --pn-sombra: 0 1px 2px rgba(20, 20, 20, 0.05), 0 10px 28px -12px rgba(20, 20, 20, 0.1);
+  --pn-campo: #f7f7f3;
+
+  min-height: 100vh;
+  background: var(--pn-bg);
+  color: var(--pn-txt);
+  font-family: var(--font-intertight, "Inter Tight"), system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  transition: background 0.2s, color 0.2s;
+}
+.pn-raiz[data-tema="escuro"] {
+  --pn-bg: #0e0e0f;
+  --pn-lateral: #0a0a0a;
+  --pn-lateral-2: #171718;
+  --pn-lateral-txt: #8e8e89;
+  --pn-cartao: #161617;
+  --pn-borda: #252527;
+  --pn-txt: #f3f3ef;
+  --pn-mudo: #8f8f8a;
+  --pn-trilho: #232325;
+  --pn-barra: #e9e9e4;
+  --pn-sombra: 0 1px 0 rgba(255, 255, 255, 0.02) inset, 0 12px 30px -14px rgba(0, 0, 0, 0.6);
+  --pn-campo: #1c1c1e;
+  color-scheme: dark;
+}
+.pn-raiz *,
+.pn-raiz *::before,
+.pn-raiz *::after {
+  box-sizing: border-box;
+}
+.pn-raiz :focus-visible {
+  outline: 2px solid var(--pn-coral);
+  outline-offset: 2px;
+}
+
+.pn-num {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* casca */
+.pn-app {
+  display: grid;
+  grid-template-columns: 248px 1fr;
+  min-height: 100vh;
+}
+.pn-lateral {
+  background: var(--pn-lateral);
+  color: #fff;
+  padding: 22px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  border-right: 1px solid #1b1b1b;
+}
+.pn-marca {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 2px 10px 24px;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+.pn-marca svg {
+  width: 32px;
+  height: 19px;
+  flex: none;
+}
+.pn-marca b {
+  font-weight: 700;
+}
+.pn-marca span {
+  color: var(--pn-coral);
+}
+
+.pn-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pn-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  color: var(--pn-lateral-txt);
+  font-size: 14.5px;
+  text-decoration: none;
+  position: relative;
+  transition: 0.15s;
+}
+.pn-nav-item svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+a.pn-nav-item:hover,
+.pn-nav-item.pn-ativo {
+  background: var(--pn-lateral-2);
+  color: #fff;
+}
+.pn-nav-item.pn-ativo::before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--pn-coral);
+}
+.pn-nav-item.pn-breve {
+  cursor: default;
+  opacity: 0.4;
+}
+.pn-nav-item.pn-breve {
+  gap: 10px;
+  font-size: 14px;
+}
+.pn-nav-item.pn-breve small {
+  margin-left: auto;
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+.pn-rot {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6f6f6b;
+  padding: 20px 12px 6px;
+}
+
+.pn-usuario {
+  margin-top: auto;
+  border-top: 1px solid #242424;
+  padding: 14px 8px 0;
+  font-size: 13px;
+  color: var(--pn-lateral-txt);
+}
+.pn-usuario-lin {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  word-break: break-all;
+}
+.pn-av {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--pn-coral);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  font-size: 13px;
+  flex: none;
+}
+.pn-av-g {
+  background: #3a3a3a;
+}
+.pn-av-p {
+  width: 24px;
+  height: 24px;
+  font-size: 11px;
+}
+.pn-sair {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  font: inherit;
+  cursor: pointer;
+  color: #fff;
+  opacity: 0.65;
+}
+.pn-sair:hover {
+  opacity: 1;
+}
+
+.pn-col {
+  min-width: 0;
+}
+.pn-topo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 44px;
+  border-bottom: 1px solid var(--pn-borda);
+  position: sticky;
+  top: 0;
+  background: color-mix(in srgb, var(--pn-bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  z-index: 5;
+}
+.pn-espaco {
+  flex: 1;
+}
+.pn-conteudo {
+  padding: 30px 44px 70px;
+  max-width: 1280px;
+}
+
+/* botões */
+.pn-ic {
+  appearance: none;
+  cursor: pointer;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 10px;
+  border: 1px solid var(--pn-borda);
+  background: var(--pn-cartao);
+  color: var(--pn-txt);
+}
+.pn-ic svg {
+  width: 18px;
+  height: 18px;
+}
+.pn-ic .pn-ic-sol {
+  display: none;
+}
+.pn-raiz[data-tema="escuro"] .pn-ic .pn-ic-sol {
+  display: block;
+}
+.pn-raiz[data-tema="escuro"] .pn-ic .pn-ic-lua {
+  display: none;
+}
+.pn-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  border: 0;
+  background: var(--pn-coral);
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 14.5px;
+  text-decoration: none;
+  box-shadow: 0 6px 16px -8px var(--pn-coral);
+}
+.pn-btn:hover {
+  filter: brightness(0.96);
+}
+.pn-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.pn-btn-sec {
+  background: var(--pn-cartao);
+  color: var(--pn-txt);
+  border: 1px solid var(--pn-borda);
+  box-shadow: none;
+}
+
+/* tipografia e cartão */
+.pn-h1 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  line-height: 1.1;
+}
+.pn-sub {
+  margin: 6px 0 0;
+  color: var(--pn-mudo);
+}
+.pn-cab {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+.pn-tit {
+  margin: 0 0 2px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.pn-nota {
+  margin: 0 0 16px;
+  color: var(--pn-mudo);
+  font-size: 13px;
+}
+.pn-cartao {
+  background: var(--pn-cartao);
+  border: 1px solid var(--pn-borda);
+  border-radius: 16px;
+  box-shadow: var(--pn-sombra);
+  padding: 20px 22px;
+}
+.pn-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--pn-trilho);
+  color: var(--pn-mudo);
+}
+.pn-tag-c {
+  background: var(--pn-coral-suave);
+  color: var(--pn-coral);
+}
+.pn-mudo {
+  color: var(--pn-mudo);
+}
+.pn-coral {
+  color: var(--pn-coral);
+}
+
+/* campos */
+.pn-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--pn-mudo);
+  font-weight: 500;
+}
+.pn-input {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--pn-txt);
+  background: var(--pn-campo);
+  border: 1px solid var(--pn-borda);
+  border-radius: 10px;
+  padding: 11px 13px;
+  outline: none;
+  width: 100%;
+}
+.pn-input:focus {
+  border-color: var(--pn-coral);
+  box-shadow: 0 0 0 3px var(--pn-coral-suave);
+}
+.pn-dois {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 1000px) {
+  .pn-app {
+    grid-template-columns: 1fr;
+  }
+  .pn-lateral {
+    position: static;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 12px;
+  }
+  .pn-marca {
+    padding: 0 10px 0 0;
+    flex: 1;
+  }
+  .pn-nav {
+    order: 3;
+    width: 100%;
+  }
+  .pn-nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .pn-rot,
+  .pn-nav-item.pn-breve {
+    display: none;
+  }
+  .pn-nav-item.pn-ativo::before {
+    display: none;
+  }
+  /* diferente do modelo: o Sair continua acessível no celular */
+  .pn-usuario {
+    margin: 0;
+    order: 2;
+    border-top: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pn-usuario-lin {
+    margin: 0;
+  }
+  .pn-usuario-lin span:not(.pn-av) {
+    display: none;
+  }
+  .pn-topo {
+    padding: 12px 16px;
+  }
+  .pn-conteudo {
+    padding: 22px 16px 60px;
+  }
+  .pn-cab {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .pn-dois {
+    grid-template-columns: 1fr;
+  }
+}

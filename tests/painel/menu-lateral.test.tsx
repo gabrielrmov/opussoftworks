@@ -51,6 +51,21 @@ describe("MenuLateral", () => {
       pathnameAtual.valor = "/painel";
     }
   });
+
+  it("ícones são aria-hidden", () => {
+    render(<MenuLateral papel="admin" />);
+    const icones = document.querySelectorAll("nav svg");
+    expect(icones.length).toBeGreaterThanOrEqual(6);
+    icones.forEach((i) => expect(i.getAttribute("aria-hidden")).toBe("true"));
+  });
+
+  it("Membros fica sob o rótulo Administração só para admin", () => {
+    const { unmount } = render(<MenuLateral papel="membro" />);
+    expect(screen.queryByText("Administração")).toBeNull();
+    unmount();
+    render(<MenuLateral papel="admin" />);
+    expect(screen.getByText("Administração")).toBeTruthy();
+  });
 });
 
 describe("Casca", () => {
@@ -65,5 +80,15 @@ describe("Casca", () => {
     expect(screen.getByText("a@b.com")).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Sair" }));
     expect(sair).toHaveBeenCalledTimes(1);
+  });
+
+  it("renderiza acaoTopo e o botão Alternar tema na barra superior", () => {
+    render(
+      <Casca papel="membro" email="a@b.com" acaoTopo={<button type="button">Novo</button>}>
+        <p>x</p>
+      </Casca>,
+    );
+    expect(screen.getByRole("button", { name: "Novo" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Alternar tema" })).toBeTruthy();
   });
 });

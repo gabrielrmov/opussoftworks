@@ -42,7 +42,7 @@ describe("/painel (visão geral)", () => {
     vi.mocked(contarEmAndamento).mockResolvedValue(1);
     render(<PainelPage />);
     await waitFor(() => expect(screen.getByText("1 em andamento")).toBeTruthy());
-    expect(screen.getAllByText("Em breve")).toHaveLength(3);
+    expect(within(screen.getByRole("main")).getAllByText("Em breve")).toHaveLength(3);
     for (const area of ["Clientes e comercial", "Financeiro", "Campanhas"]) {
       expect(screen.getByRole("heading", { name: area })).toBeTruthy();
     }

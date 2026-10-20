@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import { SCRIPT_TEMA } from "@/lib/painel/tema";
+import "./painel.css";
 
 export const metadata = {
   title: "Painel",
@@ -6,5 +8,10 @@ export const metadata = {
 };
 
 export default function PainelLayout({ children }: { children: ReactNode }) {
-  return <div className="font-intertight min-h-screen bg-[#FAFAFA] text-[#161616]">{children}</div>;
+  return (
+    <div className="pn-raiz" data-tema="claro" suppressHydrationWarning>
+      <script dangerouslySetInnerHTML={{ __html: SCRIPT_TEMA }} />
+      {children}
+    </div>
+  );
 }

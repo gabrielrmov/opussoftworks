@@ -3,35 +3,60 @@
 import type { ReactNode } from "react";
 import { sair } from "@/lib/painel/use-acesso";
 import { MenuLateral } from "./menu-lateral";
+import { AlternarTema } from "./tema";
 
 export function Casca({
   papel,
   email,
+  acaoTopo,
   children,
 }: {
   papel: "admin" | "membro";
   email?: string;
+  acaoTopo?: ReactNode;
   children: ReactNode;
 }) {
+  const inicial = email ? email.trim().charAt(0).toUpperCase() : "";
   return (
-    <div className="flex min-h-screen flex-col md:flex-row">
-      <aside className="flex flex-col gap-6 border-b border-[#161616]/10 p-4 md:w-64 md:shrink-0 md:justify-between md:border-b-0 md:border-r">
-        <div>
-          <p className="px-3 pb-4 text-base font-semibold">Painel Opus</p>
-          <MenuLateral papel={papel} />
+    <div className="pn-app">
+      <aside className="pn-lateral">
+        <div className="pn-marca">
+          <svg aria-hidden="true" viewBox="0 0 60 36" fill="none">
+            <path
+              d="M30 18C24 8 14 4 9 9s-1 15 8 15c7 0 10-6 13-6s6 6 13 6c9 0 13-10 8-15s-15-1-21 9Z"
+              stroke="#FF6039"
+              strokeWidth="5"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <div>
+            <b>Opus</b>
+            <span>SoftWorks</span>
+          </div>
         </div>
-        <div className="px-3 text-sm">
-          {email && <p className="break-all text-[#161616]/70">{email}</p>}
-          <button
-            type="button"
-            onClick={() => void sair()}
-            className="mt-2 rounded-md border border-[#161616]/20 px-3 py-1.5 text-sm font-medium"
-          >
+        <MenuLateral papel={papel} />
+        <div className="pn-usuario">
+          <div className="pn-usuario-lin">
+            {inicial && (
+              <span className="pn-av" aria-hidden="true">
+                {inicial}
+              </span>
+            )}
+            {email && <span>{email}</span>}
+          </div>
+          <button type="button" className="pn-sair" onClick={() => void sair()}>
             Sair
           </button>
         </div>
       </aside>
-      <main className="flex-1 p-6 md:p-10">{children}</main>
+      <div className="pn-col">
+        <div className="pn-topo">
+          <div className="pn-espaco" />
+          <AlternarTema />
+          {acaoTopo}
+        </div>
+        <main className="pn-conteudo">{children}</main>
+      </div>
     </div>
   );
 }

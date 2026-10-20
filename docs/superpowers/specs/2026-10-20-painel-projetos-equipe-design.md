@@ -38,7 +38,10 @@ Antes da primeira tabela de dados. No Supabase, tabelas novas nascem com `TRUNCA
 
 - revogar `truncate`, `references`, `trigger` em tabelas futuras de `anon` e `authenticated`;
 - revogar todos os privilégios em tabelas futuras de `anon`;
-- revogar `execute` em funções futuras de `anon`.
+- revogar `execute` em funções futuras de `anon`. Isso remove só o grant **direto** de `anon`:
+  por padrão do Postgres, funções novas ainda nascem executáveis por `PUBLIC`, então cada função
+  nova deve revogar `execute` de `public, anon` explicitamente (como a 0005). Um revoke global de
+  `PUBLIC` foi rejeitado por afetar extensões e outros schemas.
 
 Não altera objetos que já existem (`membros` já foi endurecida na migração 0003).
 
@@ -150,6 +153,7 @@ trabalho da equipe; exportação.
   cobre ambos.
 - **`ALTER DEFAULT PRIVILEGES ... FOR ROLE postgres`:** só afeta objetos criados por `postgres`
   (o papel do SQL Editor). Objetos criados por outro papel não herdam; documentado no runbook.
+- **Funções novas:** os privilégios padrão não tiram `PUBLIC`; toda função nova precisa de `revoke execute ... from public, anon` na própria migração.
 - **Responsável como chave para `membros`:** apagar um membro deixa o projeto sem responsável
   (não apaga o projeto).
 - **Fuso do "atrasado":** a data de "hoje" é calculada com `Intl` no fuso `America/Sao_Paulo`,

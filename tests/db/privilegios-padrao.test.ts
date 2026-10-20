@@ -34,13 +34,17 @@ describe("privilégios padrão (0004)", () => {
     }
   });
 
-  it("função criada depois da 0004 não é executável por anon", async () => {
+  it("função criada depois da 0004 não recebe execute direto para anon (PUBLIC exige revoke explícito)", async () => {
     await db.exec(
       "create function public.qualquer_fn() returns int language sql as $$ select 1 $$",
     );
+    // Lê o ACL cru: has_function_privilege também contaria o execute herdado de PUBLIC.
     const r = await db.query<{ anon: boolean; auth: boolean }>(
-      `select has_function_privilege('anon', 'public.qualquer_fn()', 'EXECUTE') as anon,
-              has_function_privilege('authenticated', 'public.qualquer_fn()', 'EXECUTE') as auth`,
+      `select
+         coalesce(bool_or(a.grantee = 'anon'::regrole), false) as anon,
+         coalesce(bool_or(a.grantee = 'authenticated'::regrole), false) as auth
+       from pg_proc p, aclexplode(p.proacl) a
+       where p.oid = 'public.qualquer_fn()'::regprocedure and a.privilege_type = 'EXECUTE'`,
     );
     expect(r.rows[0].anon).toBe(false);
     expect(r.rows[0].auth).toBe(true);

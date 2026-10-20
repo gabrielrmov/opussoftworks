@@ -12,9 +12,7 @@ alter default privileges for role postgres in schema public
 alter default privileges for role postgres in schema public
   revoke execute on functions from anon;
 
--- Funções novas nascem com execute para PUBLIC (que inclui anon), e um padrão
--- restrito a um schema só ACRESCENTA ao padrão global: para tirar o PUBLIC é
--- preciso revogar no padrão global (sem "in schema"). authenticated segue com
--- o grant padrão do Supabase.
-alter default privileges for role postgres
-  revoke execute on functions from public;
+-- Atenção: o padrão acima só tira o grant DIRETO de anon. Por padrão do Postgres,
+-- funções novas ainda nascem com execute para PUBLIC (que inclui anon). Revogar
+-- isso globalmente afetaria extensões e outros schemas, então toda função nova
+-- deve fazer `revoke execute ... from public, anon` explicitamente (como a 0005).

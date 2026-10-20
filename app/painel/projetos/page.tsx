@@ -34,6 +34,7 @@ function Gestao({ admin }: { admin: boolean }) {
   const [equipe, setEquipe] = useState<MembroEquipe[]>([]);
   const [erroEquipe, setErroEquipe] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
+  const [falhouCarga, setFalhouCarga] = useState(false);
   const [filtro, setFiltro] = useState("");
   const [form, setForm] = useState<{ projeto?: Projeto } | null>(null);
   const [erroForm, setErroForm] = useState<string | undefined>();
@@ -48,11 +49,12 @@ function Gestao({ admin }: { admin: boolean }) {
       const lista = await listarProjetos();
       if (minha !== requisicao.current) return;
       setProjetos(lista);
+      setFalhouCarga(false);
       setErro(null);
     } catch (e) {
       if (minha !== requisicao.current) return;
       setErro(mensagemDeErro(e));
-      setProjetos((atual) => atual ?? []);
+      setFalhouCarga(true);
     }
   }, []);
 
@@ -158,7 +160,19 @@ function Gestao({ admin }: { admin: boolean }) {
       </div>
 
       <div className="mt-4">
-        {projetos === null ? (
+        {projetos === null && falhouCarga ? (
+          <button
+            type="button"
+            onClick={() => {
+              setFalhouCarga(false);
+              setErro(null);
+              void carregar();
+            }}
+            className={botao}
+          >
+            Tentar novamente
+          </button>
+        ) : projetos === null ? (
           <p role="status" className="text-sm text-[#161616]/60">Carregando…</p>
         ) : projetos.length === 0 ? (
           <p className="text-sm text-[#161616]/60">Nenhum projeto ainda.</p>

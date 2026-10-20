@@ -125,8 +125,9 @@ export function ProjetoForm({ inicial, equipe, salvando, onSalvar, onCancelar, e
         </button>
         <button
           type="button"
+          disabled={salvando}
           onClick={onCancelar}
-          className="rounded-md border border-[#161616]/20 px-4 py-2 text-sm font-medium"
+          className="rounded-md border border-[#161616]/20 px-4 py-2 text-sm font-medium disabled:opacity-50"
         >
           Cancelar
         </button>

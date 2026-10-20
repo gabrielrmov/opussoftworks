@@ -260,4 +260,52 @@ describe("página de projetos", () => {
     expect((await q.findByRole("alert")).textContent).toBe("Você não tem permissão para fazer isso.");
     expect(screen.getByRole("form", { name: "Projeto" })).toBeTruthy();
   });
+
+  it("falha na carga mostra o erro mapeado e NÃO mostra 'Nenhum projeto ainda.'", async () => {
+    vi.mocked(listarProjetos).mockRejectedValue({ code: "42501", message: "permission denied" });
+    render(<ProjetosPage />);
+    expect((await screen.findByRole("alert")).textContent).toBe("Você não tem permissão para fazer isso.");
+    expect(screen.queryByText("Nenhum projeto ainda.")).toBeNull();
+    expect(screen.queryByRole("status")).toBeNull();
+  });
+
+  it("Tentar novamente recarrega e mostra a lista", async () => {
+    vi.mocked(listarProjetos).mockRejectedValueOnce({ code: "42501", message: "x" });
+    render(<ProjetosPage />);
+    await screen.findByRole("alert");
+    fireEvent.click(screen.getByRole("button", { name: "Tentar novamente" }));
+    expect(await screen.findByRole("heading", { name: "Site Alfa" })).toBeTruthy();
+    expect(screen.queryByRole("alert")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Tentar novamente" })).toBeNull();
+  });
+
+  it("Cancelar fica desabilitado enquanto salva", async () => {
+    const d = deferida<void>();
+    vi.mocked(criarProjeto).mockReturnValue(d.promessa);
+    render(<ProjetosPage />);
+    await screen.findByRole("heading", { name: "Site Alfa" });
+    fireEvent.click(screen.getByRole("button", { name: "Novo projeto" }));
+    const q = within(screen.getByRole("form", { name: "Projeto" }));
+    fireEvent.change(q.getByLabelText("Nome"), { target: { value: "N" } });
+    fireEvent.change(q.getByLabelText("Cliente"), { target: { value: "C" } });
+    fireEvent.click(q.getByRole("button", { name: "Salvar" }));
+    await waitFor(() => expect((q.getByRole("button", { name: "Cancelar" }) as HTMLButtonElement).disabled).toBe(true));
+    await act(async () => d.resolver());
+    await waitFor(() => expect(screen.queryByRole("form", { name: "Projeto" })).toBeNull());
+  });
+
+  it("falha ao salvar mantém o formulário com os valores digitados", async () => {
+    vi.mocked(criarProjeto).mockRejectedValue({ code: "42501", message: "x" });
+    render(<ProjetosPage />);
+    await screen.findByRole("heading", { name: "Site Alfa" });
+    fireEvent.click(screen.getByRole("button", { name: "Novo projeto" }));
+    const q = within(screen.getByRole("form", { name: "Projeto" }));
+    fireEvent.change(q.getByLabelText("Nome"), { target: { value: "Meu nome" } });
+    fireEvent.change(q.getByLabelText("Cliente"), { target: { value: "Meu cliente" } });
+    fireEvent.click(q.getByRole("button", { name: "Salvar" }));
+    expect((await q.findByRole("alert")).textContent).toBe("Você não tem permissão para fazer isso.");
+    expect((q.getByLabelText("Nome") as HTMLInputElement).value).toBe("Meu nome");
+    expect((q.getByLabelText("Cliente") as HTMLInputElement).value).toBe("Meu cliente");
+    expect((q.getByRole("button", { name: "Cancelar" }) as HTMLButtonElement).disabled).toBe(false);
+  });
 });

@@ -149,8 +149,9 @@ Limites desse portão (valem para todo módulo novo):
 - Tabelas com colunas `serial`/`identity` também precisam revogar de `anon` o uso
   das suas SEQUENCES (o Supabase concede por padrão). A tabela `projetos` usa ids
   `uuid`, então ainda não importa.
-- `criado_em` pode ser editado por um membro (problema menor conhecido); decida por
-  módulo se vale travar com um trigger.
+- `criado_em` e `atualizado_em` são controlados por um gatilho `BEFORE INSERT OR
+  UPDATE` (modelo em `0005_projetos.sql`): o cliente não consegue forjá-los. Este é
+  agora o padrão para novas tabelas.
 
 ## Módulo Projetos e equipe
 
@@ -171,7 +172,32 @@ select count(*) from pg_policies
 select relrowsecurity, relforcerowsecurity from pg_class
   where oid = 'public.projetos'::regclass;                                    -- true, true
 select has_function_privilege('anon', 'public.equipe()', 'EXECUTE');          -- false
+select has_table_privilege('authenticated', 'public.projetos', 'REFERENCES'); -- false
+select has_table_privilege('authenticated', 'public.projetos', 'TRIGGER');    -- false
 ```
+
+   Cada consulta deve devolver o valor indicado no comentário. Se a 0005 disser
+   "already exists", ela já foi aplicada (o script é atômico: nada fica pela metade).
+
+   **Confirme também que a 0004 fez efeito** (ela só vale para objetos criados pelo
+   papel `postgres`, o do SQL Editor):
+
+```sql
+select current_user;   -- esperado: postgres
+select defaclrole::regrole, defaclobjtype, defaclacl
+from pg_default_acl
+where defaclnamespace = 'public'::regnamespace and defaclrole = 'postgres'::regrole;
+```
+
+   Como ler o resultado da segunda consulta:
+   - a linha com `defaclobjtype = r` (tabelas) **não** pode ter nenhuma entrada
+     começando com `anon=`, e a entrada de `authenticated` não pode conter as letras
+     `D`, `x` nem `t`;
+   - a linha com `defaclobjtype = f` (funções) **não** pode ter entrada `anon=`.
+
+   Se a consulta não devolver nenhuma linha, ou ainda aparecerem entradas de `anon`,
+   a 0004 não fez nada (provavelmente foi executada por outro papel). Nesse caso
+   **não crie tabelas de dados ainda**: peça ajuda a quem mantém o painel.
 
 4. **Aceite manual** (marque cada item):
 

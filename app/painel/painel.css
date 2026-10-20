@@ -479,11 +479,6 @@ a.pn-nav-item:hover,
 .pn-erro p {
   margin: 0 0 12px;
 }
-.pn-aviso-equipe {
-  margin: -8px 0 12px;
-  font-size: 13px;
-  color: var(--pn-mudo);
-}
 
 /* gráfico de barras semanais */
 .pn-barras-valores,

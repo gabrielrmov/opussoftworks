@@ -202,6 +202,20 @@ describe("/painel (visão geral)", () => {
     expect(screen.queryByRole("alert")).toBeNull();
   });
 
+  it("falha só da equipe: o cartão Carga por pessoa mostra só o aviso, sem 'Sem responsável' e sem linhas 'N projetos'", async () => {
+    vi.mocked(listarEquipe).mockRejectedValue(new Error("x"));
+    const { container } = render(<PainelPage />);
+    await screen.findByTestId("kpi-andamento");
+    expect(screen.getByText("Não foi possível carregar a equipe.")).toBeTruthy();
+    expect(screen.queryByText("Sem responsável")).toBeNull();
+    expect(screen.queryByText(/\d+ projetos?$/)).toBeNull();
+    expect(container.querySelector(".pn-emp")).toBeNull();
+    expect(screen.queryByText("Planejado e pausado")).toBeNull();
+    expect(screen.getByRole("heading", { name: "Entregas por semana" })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Agenda da semana" })).toBeTruthy();
+    expect(screen.getByTestId("kpi-revisao")).toBeTruthy();
+  });
+
   it("resposta antiga não sobrescreve a nova", async () => {
     const primeira = deferido<Projeto[]>();
     const segunda = deferido<Projeto[]>();

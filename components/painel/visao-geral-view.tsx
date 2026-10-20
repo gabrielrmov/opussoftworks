@@ -195,8 +195,11 @@ export function VisaoGeralView({
             <section className="pn-cartao">
               <h2 className="pn-tit">Carga por pessoa</h2>
               <p className="pn-nota">Projetos abertos de cada um, por status.</p>
-              {avisoEquipe && <p className="pn-aviso-equipe">{avisoEquipe}</p>}
-              <CargaPorPessoa pessoas={resumo.cargaPorPessoa} />
+              {avisoEquipe ? (
+                <p className="pn-mudo">{avisoEquipe}</p>
+              ) : (
+                <CargaPorPessoa pessoas={resumo.cargaPorPessoa} />
+              )}
             </section>
           </div>
 

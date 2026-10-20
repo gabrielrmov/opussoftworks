@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { CHAVE_TEMA, SCRIPT_TEMA, lerTema, salvarTema } from "@/lib/painel/tema";
 
@@ -48,12 +49,44 @@ describe("tema", () => {
     expect(() => salvarTema("escuro")).not.toThrow();
   });
 
-  it("SCRIPT_TEMA executa sem erro quando localStorage lança e deixa data-tema claro", () => {
-    const pai = { dataset: { tema: "claro" } as Record<string, string> };
-    const script = { parentElement: pai };
-    vi.stubGlobal("localStorage", armazenamentoQueLanca());
-    vi.stubGlobal("document", { currentScript: script });
-    expect(() => new Function(SCRIPT_TEMA)()).not.toThrow();
-    expect(pai.dataset.tema).toBe("claro");
+  describe("SCRIPT_TEMA (jsdom)", () => {
+    function rodar(valor: string | null) {
+      const raiz = document.createElement("div");
+      raiz.className = "pn-raiz";
+      raiz.setAttribute("data-tema", "claro");
+      const script = document.createElement("script");
+      raiz.appendChild(script);
+      vi.stubGlobal("localStorage", armazenamento(valor === null ? {} : { [CHAVE_TEMA]: valor }));
+      Object.defineProperty(document, "currentScript", { value: script, configurable: true });
+      try {
+        new Function(SCRIPT_TEMA)();
+      } finally {
+        delete (document as unknown as Record<string, unknown>).currentScript;
+      }
+      return raiz.getAttribute("data-tema");
+    }
+
+    it("aplica escuro salvo", () => {
+      expect(rodar("escuro")).toBe("escuro");
+    });
+
+    it("valor inválido vira claro", () => {
+      expect(rodar("roxo")).toBe("claro");
+    });
+
+    it("não lança e deixa claro quando localStorage lança", () => {
+      const raiz = document.createElement("div");
+      raiz.setAttribute("data-tema", "claro");
+      const script = document.createElement("script");
+      raiz.appendChild(script);
+      vi.stubGlobal("localStorage", armazenamentoQueLanca());
+      Object.defineProperty(document, "currentScript", { value: script, configurable: true });
+      try {
+        expect(() => new Function(SCRIPT_TEMA)()).not.toThrow();
+      } finally {
+        delete (document as unknown as Record<string, unknown>).currentScript;
+      }
+      expect(raiz.getAttribute("data-tema")).toBe("claro");
+    });
   });
 });

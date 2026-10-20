@@ -113,23 +113,19 @@ export function VisaoGeralView({
 }: {
   resumo: ResumoPainel;
   saudacao: string;
-  dataTexto?: string;
+  dataTexto: string;
   avisoEquipe?: string;
 }) {
   const hoje = resumo.agendaSemana.find((d) => d.hoje)?.data ?? "";
   const vazio = resumo.total === 0;
   const fracao = resumo.total > 0 ? resumo.emAndamento / resumo.total : 0;
-  const atrasos = resumo.atrasados.slice(0, 3).map((p) => p.diasDeAtraso);
 
   let rodapeVencido: string;
-  if (atrasos.length === 0) rodapeVencido = "Nenhum projeto atrasado";
+  if (resumo.atrasados.length === 0) rodapeVencido = "Nenhum projeto atrasado";
   else {
-    const mais = resumo.atrasados.length - atrasos.length;
-    const base = listaE(atrasos.map(String)) + (mais > 0 ? `, +${mais}` : "");
+    const maior = Math.max(...resumo.atrasados.map((p) => p.diasDeAtraso));
     rodapeVencido =
-      atrasos.length === 1 && mais === 0
-        ? `Atrasado há ${dias(atrasos[0])}`
-        : `Atrasados há ${base} dias`;
+      resumo.atrasados.length === 1 ? `Atrasado há ${dias(maior)}` : `O mais antigo há ${dias(maior)}`;
   }
 
   const proxima = resumo.proximaEntrega;
@@ -144,7 +140,7 @@ export function VisaoGeralView({
         <div>
           <h1 className="pn-h1">{saudacao}</h1>
           <p className="pn-sub">
-            {dataTexto ? `${dataTexto} · ` : ""}
+            {`${dataTexto} · `}
             aqui está o que precisa da sua atenção
           </p>
         </div>

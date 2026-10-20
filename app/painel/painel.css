@@ -72,6 +72,7 @@
   position: sticky;
   top: 0;
   height: 100vh;
+  overflow-y: auto;
   border-right: 1px solid #1b1b1b;
 }
 .pn-marca {
@@ -1022,6 +1023,7 @@ a.pn-nav-item:hover,
   .pn-lateral {
     position: static;
     height: auto;
+    overflow-y: visible;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;

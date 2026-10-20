@@ -93,7 +93,7 @@ describe("VisaoGeralView", () => {
     expect(within(kpi("andamento")).getByText("de 5")).toBeTruthy();
     expect(within(kpi("andamento")).getByText("40% da carteira")).toBeTruthy();
     expect(within(kpi("vencido")).getByText("2")).toBeTruthy();
-    expect(within(kpi("vencido")).getByText("Atrasados há 3 e 1 dias")).toBeTruthy();
+    expect(within(kpi("vencido")).getByText("O mais antigo há 3 dias")).toBeTruthy();
     expect(within(kpi("entregas")).getByText("2")).toBeTruthy();
     expect(within(kpi("entregas")).getByText("Próxima: amanhã · Padaria Trigo")).toBeTruthy();
     expect(within(kpi("revisao")).getByText("1")).toBeTruthy();
@@ -114,6 +114,24 @@ describe("VisaoGeralView", () => {
     render(viewDe(PROJETOS.filter((p) => !["Site institucional", "Sistema de agendamento"].includes(p.nome))));
     expect(screen.queryByTestId("faixa-atencao")).toBeNull();
     expect(screen.getByText("Nenhum projeto atrasado")).toBeTruthy();
+  });
+
+  it("rodapé de vencidos: singular, plural e mais de 3", () => {
+    const atrasado = (nome: string, prazo: string) => projeto({ nome, prazo });
+    const rodape = (projetos: Projeto[]) => {
+      render(viewDe(projetos));
+      const t = screen.getByTestId("kpi-vencido").textContent ?? "";
+      cleanup();
+      return t;
+    };
+    expect(rodape([atrasado("A", "2026-10-19")])).toContain("Atrasado há 1 dia");
+    expect(rodape([atrasado("A", "2026-10-19")])).not.toContain("1 dias");
+    expect(rodape([atrasado("A", "2026-10-19"), atrasado("B", "2026-10-19")])).toContain("O mais antigo há 1 dia");
+    expect(rodape([atrasado("A", "2026-10-15"), atrasado("B", "2026-10-19")])).toContain("O mais antigo há 5 dias");
+    const cinco = ["2026-10-19", "2026-10-18", "2026-10-10", "2026-10-17", "2026-10-16"].map((d, i) =>
+      atrasado(`P${i}`, d),
+    );
+    expect(rodape(cinco)).toContain("O mais antigo há 10 dias");
   });
 
   it("sem projetos mostra a chamada para criar o primeiro", () => {
@@ -216,24 +234,23 @@ describe("/painel (visão geral)", () => {
     expect(screen.getByTestId("kpi-revisao")).toBeTruthy();
   });
 
-  it("resposta antiga não sobrescreve a nova", async () => {
+  it("Tentar novamente volta a Carregando e ignora resposta da tentativa anterior", async () => {
     const primeira = deferido<Projeto[]>();
     const segunda = deferido<Projeto[]>();
-    const terceira = deferido<Projeto[]>();
     vi.mocked(listarProjetos)
       .mockReturnValueOnce(primeira.promessa)
-      .mockReturnValueOnce(segunda.promessa)
-      .mockReturnValueOnce(terceira.promessa);
+      .mockReturnValueOnce(segunda.promessa);
     render(<PainelPage />);
     await act(async () => primeira.reject(new Error("falhou")));
     const tentar = await screen.findByRole("button", { name: "Tentar novamente" });
-    fireEvent.click(tentar); // segunda requisição
-    fireEvent.click(screen.getByRole("button", { name: "Tentar novamente" })); // terceira
-    await act(async () => terceira.resolve(PROJETOS));
+    fireEvent.click(tentar); // segunda requisição: volta a "Carregando…" e some o botão
+    expect(screen.getByRole("status").textContent).toBe("Carregando…");
+    expect(screen.queryByRole("button", { name: "Tentar novamente" })).toBeNull();
+    expect(listarProjetos).toHaveBeenCalledTimes(2);
+    await act(async () => segunda.resolve(PROJETOS));
     expect(await screen.findByTestId("kpi-andamento")).toBeTruthy();
-    await act(async () => segunda.reject(new Error("atrasada")));
-    expect(screen.getByTestId("kpi-andamento")).toBeTruthy();
     expect(screen.queryByRole("alert")).toBeNull();
+    expect(listarProjetos).toHaveBeenCalledTimes(2);
   });
 
   it("sem projetos no banco mostra a chamada de criar (só depois de carregar)", async () => {

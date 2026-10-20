@@ -114,6 +114,9 @@ function Gestao({ admin }: { admin: boolean }) {
     setSalvando(true);
     try {
       await acao();
+      setErro(null);
+      // Mantém salvando/emVoo até a recarga terminar, para bloquear envio duplicado.
+      await carregar();
     } catch (e) {
       aoFalhar(mensagemDeErro(e));
       return false;
@@ -121,8 +124,6 @@ function Gestao({ admin }: { admin: boolean }) {
       emVoo.current = false;
       setSalvando(false);
     }
-    setErro(null);
-    await carregar();
     return true;
   }
 

@@ -85,12 +85,14 @@ describe("textoRelativo", () => {
 
 describe("saudacao", () => {
   it("por faixa de hora", () => {
+    expect(saudacao(0)).toBe("Boa noite");
     expect(saudacao(4)).toBe("Boa noite");
     expect(saudacao(5)).toBe("Bom dia");
     expect(saudacao(11)).toBe("Bom dia");
     expect(saudacao(12)).toBe("Boa tarde");
     expect(saudacao(17)).toBe("Boa tarde");
     expect(saudacao(18)).toBe("Boa noite");
+    expect(saudacao(23)).toBe("Boa noite");
   });
 });
 
@@ -266,6 +268,21 @@ describe("resumirProjetos", () => {
       total: 2,
     });
     expect(resumirProjetos([projeto({ responsavel_id: ana.id })], [ana], HOJE).cargaPorPessoa).toHaveLength(1);
+  });
+
+  it("agendaSemana quando hoje é domingo termina em hoje", () => {
+    const r = resumirProjetos([], [], "2026-10-25");
+    expect(r.agendaSemana.map((d) => d.data)).toEqual([
+      "2026-10-19",
+      "2026-10-20",
+      "2026-10-21",
+      "2026-10-22",
+      "2026-10-23",
+      "2026-10-24",
+      "2026-10-25",
+    ]);
+    expect(r.agendaSemana.map((d) => d.hoje)).toEqual([false, false, false, false, false, false, true]);
+    expect(r.agendaSemana[6].diaSemana).toBe("Dom");
   });
 
   it("agendaSemana tem 7 dias de segunda a domingo e marca hoje", () => {

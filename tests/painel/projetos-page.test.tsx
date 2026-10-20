@@ -443,4 +443,24 @@ describe("página de projetos", () => {
     await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
     expect(document.activeElement).toBe(editar);
   });
+
+  it("segundo clique em Salvar durante a recarga não duplica o projeto", async () => {
+    const recarga = deferida<Projeto[]>();
+    vi.mocked(listarProjetos).mockResolvedValueOnce(projetos).mockReturnValueOnce(recarga.promessa);
+    render(<ProjetosPage />);
+    await screen.findByRole("heading", { name: "Site Alfa" });
+    fireEvent.click(screen.getByRole("button", { name: "Novo projeto" }));
+    const q = within(screen.getByRole("form", { name: "Projeto" }));
+    fireEvent.change(q.getByLabelText("Nome"), { target: { value: "N" } });
+    fireEvent.change(q.getByLabelText("Cliente"), { target: { value: "C" } });
+    fireEvent.click(q.getByRole("button", { name: "Salvar" }));
+    await waitFor(() => expect(listarProjetos).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect((q.getByRole("button", { name: "Salvar" }) as HTMLButtonElement).disabled).toBe(true));
+    fireEvent.click(q.getByRole("button", { name: "Salvar" }));
+    fireEvent.submit(screen.getByRole("form", { name: "Projeto" }));
+    expect(criarProjeto).toHaveBeenCalledTimes(1);
+    await act(async () => recarga.resolver(projetos));
+    await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+    expect(criarProjeto).toHaveBeenCalledTimes(1);
+  });
 });

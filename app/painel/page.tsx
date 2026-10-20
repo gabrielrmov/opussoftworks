@@ -93,7 +93,14 @@ function Conteudo() {
     return (
       <div role="alert" className="pn-erro">
         <p>{estado.mensagem}</p>
-        <button type="button" className="pn-btn pn-btn-sec" onClick={() => void carregar()}>
+        <button
+          type="button"
+          className="pn-btn pn-btn-sec"
+          onClick={() => {
+            setEstado({ tipo: "carregando" });
+            void carregar();
+          }}
+        >
           Tentar novamente
         </button>
       </div>

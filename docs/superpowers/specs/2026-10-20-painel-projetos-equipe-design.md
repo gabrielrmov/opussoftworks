@@ -149,8 +149,9 @@ trabalho da equipe; exportação.
 ## Riscos e pontos de atenção
 
 - **Primeira tabela de dados:** se a 0004 não for aplicada antes, `TRUNCATE` ficaria exposto a
-  `authenticated`; por isso a 0005 também revoga explicitamente (defesa em duas camadas) e o teste
-  cobre ambos.
+  `authenticated`; por isso a 0005 também revoga explicitamente (defesa em duas camadas). Os privilégios
+  padrão (0004) são testados; os revokes explícitos da 0005 são cinto e suspensório e não
+  têm teste separado.
 - **`ALTER DEFAULT PRIVILEGES ... FOR ROLE postgres`:** só afeta objetos criados por `postgres`
   (o papel do SQL Editor). Objetos criados por outro papel não herdam; documentado no runbook.
 - **Funções novas:** os privilégios padrão não tiram `PUBLIC`; toda função nova precisa de `revoke execute ... from public, anon` na própria migração.

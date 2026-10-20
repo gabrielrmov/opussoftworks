@@ -3,12 +3,13 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Casca } from "@/components/painel/casca";
 import { MenuLateral } from "@/components/painel/menu-lateral";
-import PainelPage from "@/app/painel/page";
-import { sair, useAcesso } from "@/lib/painel/use-acesso";
+import { sair } from "@/lib/painel/use-acesso";
 
 vi.mock("@/lib/painel/use-acesso");
+vi.mock("@/lib/painel/projetos", () => ({ contarEmAndamento: vi.fn().mockResolvedValue(0) }));
+const pathnameAtual = vi.hoisted(() => ({ valor: "/painel" }));
 vi.mock("next/navigation", () => ({
-  usePathname: () => "/painel",
+  usePathname: () => pathnameAtual.valor,
   useRouter: () => ({ replace: vi.fn() }),
 }));
 
@@ -26,10 +27,29 @@ describe("MenuLateral", () => {
     expect(screen.getByRole("link", { name: "Membros" }).getAttribute("href")).toBe("/painel/membros");
   });
 
-  it("áreas sem página não são links", () => {
+  it("Projetos e equipe é um link para /painel/projetos", () => {
     render(<MenuLateral papel="membro" />);
-    expect(screen.queryByRole("link", { name: /Financeiro/ })).toBeNull();
-    expect(screen.getByText("Financeiro")).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Projetos e equipe" }).getAttribute("href")).toBe("/painel/projetos");
+  });
+
+  it("Clientes e comercial, Financeiro e Campanhas continuam não-links com 'em breve'", () => {
+    render(<MenuLateral papel="membro" />);
+    for (const nome of ["Clientes e comercial", "Financeiro", "Campanhas"]) {
+      expect(screen.queryByRole("link", { name: new RegExp(nome) })).toBeNull();
+      expect(screen.getByText(nome).closest("li")?.getAttribute("aria-disabled")).toBe("true");
+    }
+    expect(screen.getAllByText("em breve")).toHaveLength(3);
+  });
+
+  it("item ativo tem aria-current em /painel/projetos", () => {
+    pathnameAtual.valor = "/painel/projetos";
+    try {
+      render(<MenuLateral papel="membro" />);
+      expect(screen.getByRole("link", { name: "Projetos e equipe" }).getAttribute("aria-current")).toBe("page");
+      expect(screen.getByRole("link", { name: "Visão geral" }).getAttribute("aria-current")).toBeNull();
+    } finally {
+      pathnameAtual.valor = "/painel";
+    }
   });
 });
 
@@ -45,18 +65,5 @@ describe("Casca", () => {
     expect(screen.getByText("a@b.com")).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Sair" }));
     expect(sair).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe("/painel", () => {
-  afterEach(cleanup);
-
-  it("os quatro cartões de área aparecem com 'Em breve'", () => {
-    vi.mocked(useAcesso).mockReturnValue({ estado: "ok", papel: "membro", email: "a@b.com" });
-    render(<PainelPage />);
-    expect(screen.getAllByText("Em breve")).toHaveLength(4);
-    for (const area of ["Projetos e equipe", "Clientes e comercial", "Financeiro", "Campanhas"]) {
-      expect(screen.getByRole("heading", { name: area })).toBeTruthy();
-    }
   });
 });

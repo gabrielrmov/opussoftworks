@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AREAS } from "@/lib/painel/areas";
 
-const AREAS_EM_BREVE = ["Projetos e equipe", "Clientes e comercial", "Financeiro", "Campanhas"];
 
 function Ativo({ ativo }: { ativo: boolean }) {
   return <span aria-hidden className={`h-1.5 w-1.5 rounded-full ${ativo ? "bg-[#FF6039]" : "bg-transparent"}`} />;
@@ -32,7 +32,10 @@ export function MenuLateral({ papel }: { papel: "admin" | "membro" }) {
     <nav aria-label="Menu do painel">
       <ul className="flex flex-col gap-1">
         {item("/painel", "Visão geral")}
-        {AREAS_EM_BREVE.map((nome) => (
+        {AREAS.map(({ nome, href }) =>
+          href ? (
+            item(href, nome)
+          ) : (
           <li
             key={nome}
             aria-disabled="true"
@@ -44,7 +47,8 @@ export function MenuLateral({ papel }: { papel: "admin" | "membro" }) {
             </span>
             <span className="text-xs">em breve</span>
           </li>
-        ))}
+          ),
+        )}
         {papel === "admin" && item("/painel/membros", "Membros")}
       </ul>
     </nav>

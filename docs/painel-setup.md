@@ -123,8 +123,8 @@ Toda nova tabela deve:
 
 Use `0003_endurecer_privilegios.sql` como modelo.
 
-**PORTÃO OBRIGATÓRIO:** antes de criar a primeira tabela de dados, adicione uma
-migration com:
+**PORTÃO OBRIGATÓRIO (FEITO pela migration `0004_privilegios_padrao.sql`):** antes
+de criar a primeira tabela de dados, era preciso uma migration com:
 
 ```sql
 alter default privileges for role postgres in schema public
@@ -134,7 +134,53 @@ alter default privileges for role postgres in schema public
 ```
 
 O `TRUNCATE` não é barrado pelo RLS, então sem isso uma tabela nova nasceria
-truncável por `anon`/`authenticated`. Essa migration ainda não existe.
+truncável por `anon`/`authenticated`. A 0004 já faz isso; ela precisa estar
+aplicada antes de qualquer tabela nova.
+
+Limites desse portão (valem para todo módulo novo):
+
+- O `alter default privileges ... for role postgres` só afeta objetos criados por
+  `postgres` (o papel do SQL Editor). Objetos criados por outro papel (por exemplo
+  `supabase_admin`) **não** herdam. Por isso toda tabela nova continua revogando
+  explicitamente e usando `eh_membro()`/`eh_admin()` nas políticas.
+- Toda **função** nova deve fazer `revoke execute ... from public, anon` de forma
+  explícita: os privilégios padrão da 0004 não conseguem tirar o `execute` que o
+  `PUBLIC` recebe por padrão, e um `revoke` global foi rejeitado.
+- Tabelas com colunas `serial`/`identity` também precisam revogar de `anon` o uso
+  das suas SEQUENCES (o Supabase concede por padrão). A tabela `projetos` usa ids
+  `uuid`, então ainda não importa.
+- `criado_em` pode ser editado por um membro (problema menor conhecido); decida por
+  módulo se vale travar com um trigger.
+
+## Módulo Projetos e equipe
+
+A ordem importa.
+
+1. **Aplique as migrations ANTES de publicar o código**, no SQL Editor do Supabase,
+   nesta ordem: `0004_privilegios_padrao.sql` e depois `0005_projetos.sql`. Nada
+   quebra: a tela antiga não usa a tabela.
+2. **Só então** faça o push/deploy (ver seção i).
+3. **Verificações únicas** no SQL Editor, depois de aplicar (apenas `select`s):
+
+```sql
+select has_table_privilege('anon', 'public.projetos', 'SELECT');              -- false
+select has_table_privilege('authenticated', 'public.projetos', 'TRUNCATE');   -- false
+select has_table_privilege('authenticated', 'public.projetos', 'SELECT');     -- true
+select count(*) from pg_policies
+  where schemaname = 'public' and tablename = 'projetos';                     -- 4
+select relrowsecurity, relforcerowsecurity from pg_class
+  where oid = 'public.projetos'::regclass;                                    -- true, true
+select has_function_privilege('anon', 'public.equipe()', 'EXECUTE');          -- false
+```
+
+4. **Aceite manual** (marque cada item):
+
+- [ ] Criar um projeto pela tela `/painel/projetos`.
+- [ ] Editar esse projeto.
+- [ ] Um `admin` vê o botão "Apagar"; um `membro` comum não vê.
+- [ ] Um projeto com `prazo` no passado mostra o texto "atrasado".
+- [ ] A lista da equipe mostra apenas membros ativos.
+- [ ] A visão geral mostra "N em andamento" no cartão de Projetos e equipe.
 
 ## k. Avisos operacionais
 

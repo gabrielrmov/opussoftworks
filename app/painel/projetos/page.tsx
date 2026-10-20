@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Casca } from "@/components/painel/casca";
+import { Gaveta } from "@/components/painel/gaveta";
 import { useAcesso } from "@/lib/painel/use-acesso";
 import { Guarda } from "@/components/painel/guarda";
 import { ProjetoForm } from "@/components/painel/projeto-form";
@@ -19,9 +20,21 @@ import {
   type DadosProjeto,
   type MembroEquipe,
   type Projeto,
+  type StatusProjeto,
 } from "@/lib/painel/projetos";
 
-const botao = "rounded-md border border-[#161616]/20 px-3 py-1.5 text-sm font-medium disabled:opacity-50";
+const ORDEM_FILTRO: StatusProjeto[] = ["em_andamento", "em_revisao", "planejado", "pausado", "concluido"];
+
+function normalizar(texto: string): string {
+  return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+
+function classeStatus(status: StatusProjeto): string {
+  if (status === "em_andamento") return "pn-st pn-st-a";
+  if (status === "em_revisao") return "pn-st pn-st-r";
+  if (status === "concluido") return "pn-st pn-st-o";
+  return "pn-st";
+}
 
 function formatarPrazo(prazo: string | null): string {
   if (!prazo) return "Sem prazo";
@@ -36,13 +49,15 @@ function Gestao({ admin }: { admin: boolean }) {
   const [equipeCarregada, setEquipeCarregada] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [falhouCarga, setFalhouCarga] = useState(false);
-  const [filtro, setFiltro] = useState("");
+  const [filtro, setFiltro] = useState<StatusProjeto | "">("");
+  const [busca, setBusca] = useState("");
   const [form, setForm] = useState<{ projeto?: Projeto } | null>(null);
   const [erroForm, setErroForm] = useState<string | undefined>();
   const [salvando, setSalvando] = useState(false);
   const [confirmando, setConfirmando] = useState<string | null>(null);
   const requisicao = useRef(0);
   const emVoo = useRef(false);
+  const novoRef = useRef<HTMLButtonElement>(null);
 
   const carregar = useCallback(async () => {
     const minha = ++requisicao.current;
@@ -74,6 +89,11 @@ function Gestao({ admin }: { admin: boolean }) {
       ativo = false;
     };
   }, [carregar]);
+
+  // Lido no efeito (não no render) para não afetar o prerender estático.
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("novo") === "1") setForm({});
+  }, []);
 
   async function executar(acao: () => Promise<void>, aoFalhar: (msg: string) => void): Promise<boolean> {
     if (emVoo.current) return false;
@@ -109,7 +129,13 @@ function Gestao({ admin }: { admin: boolean }) {
   }
 
   const hoje = hojeEmSaoPaulo();
-  const visiveis = (projetos ?? []).filter((p) => !filtro || p.status === filtro);
+  const termo = normalizar(busca);
+  const visiveis = (projetos ?? []).filter(
+    (p) =>
+      (!filtro || p.status === filtro) &&
+      (!termo || normalizar(p.nome).includes(termo) || normalizar(p.cliente).includes(termo)),
+  );
+  const vencidos = (projetos ?? []).filter((p) => estaAtrasado(p, hoje)).length;
   const emailDe = (id: string | null) => {
     if (!id) return "—";
     if (erroEquipe) return "Indisponível";
@@ -121,55 +147,82 @@ function Gestao({ admin }: { admin: boolean }) {
 
   return (
     <>
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-semibold">Projetos</h1>
+      <div className="pn-cab">
+        <div>
+          <h1 className="pn-h1">Projetos</h1>
+          {projetos && (
+            <p className="pn-sub">
+              {projetos.length} {projetos.length === 1 ? "projeto" : "projetos"} · {vencidos} com prazo vencido
+            </p>
+          )}
+        </div>
         <button
+          ref={novoRef}
           type="button"
           disabled={salvando}
           onClick={() => {
             setErroForm(undefined);
             setForm({});
           }}
-          className="rounded-md bg-[#FF6039] px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+          className="pn-btn"
         >
           Novo projeto
         </button>
       </div>
 
-      {form && (
-        <ProjetoForm
-          key={form.projeto?.id ?? "novo"}
-          inicial={form.projeto}
-          equipe={equipe}
-          salvando={salvando}
-          erro={erroForm}
-          onSalvar={(d) => void aoSalvar(d)}
-          onCancelar={() => setForm(null)}
-        />
-      )}
+      <Gaveta
+        aberta={form !== null}
+        titulo={form?.projeto ? "Editar projeto" : "Novo projeto"}
+        bloqueada={salvando}
+        onFechar={() => setForm(null)}
+        acionador={form?.projeto ? undefined : novoRef}
+      >
+        {form && (
+          <ProjetoForm
+            key={form.projeto?.id ?? "novo"}
+            inicial={form.projeto}
+            equipe={equipe}
+            salvando={salvando}
+            erro={erroForm}
+            onSalvar={(d) => void aoSalvar(d)}
+            onCancelar={() => setForm(null)}
+          />
+        )}
+      </Gaveta>
 
       {erro && (
-        <p role="alert" className="mt-4 text-sm font-medium text-[#B3261E]">
+        <p role="alert" className="pn-alerta">
           {erro}
         </p>
       )}
 
-      <div className="mt-6 flex items-center gap-2">
-        <label htmlFor="filtro-status" className="text-sm font-medium">Filtrar por status</label>
-        <select
-          id="filtro-status"
-          value={filtro}
-          onChange={(e) => setFiltro(e.target.value)}
-          className="rounded-md border border-[#161616]/20 bg-white px-3 py-2 text-sm"
-        >
-          <option value="">Todos</option>
-          {STATUS.map((s) => (
-            <option key={s.valor} value={s.valor}>{s.rotulo}</option>
+      <div className="pn-barra-filtros">
+        <div role="group" aria-label="Filtrar por status" className="pn-seg">
+          <button type="button" aria-pressed={filtro === ""} onClick={() => setFiltro("")}>
+            Todos
+          </button>
+          {ORDEM_FILTRO.map((v) => (
+            <button key={v} type="button" aria-pressed={filtro === v} onClick={() => setFiltro(v)}>
+              {rotulo(STATUS, v)}
+            </button>
           ))}
-        </select>
+        </div>
+        <div className="pn-busca">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-3.5-3.5" />
+          </svg>
+          <input
+            type="search"
+            aria-label="Buscar por nome ou cliente"
+            placeholder="Buscar por nome ou cliente"
+            value={busca}
+            onChange={(e) => setBusca(e.target.value)}
+          />
+        </div>
       </div>
 
-      <div className="mt-4">
+      <div className="pn-tabela-area">
         {projetos === null && falhouCarga ? (
           <button
             type="button"
@@ -178,83 +231,107 @@ function Gestao({ admin }: { admin: boolean }) {
               setErro(null);
               void carregar();
             }}
-            className={botao}
+            className="pn-btn pn-btn-sec"
           >
             Tentar novamente
           </button>
         ) : projetos === null ? (
-          <p role="status" className="text-sm text-[#161616]/60">Carregando…</p>
+          <p role="status" className="pn-mudo">Carregando…</p>
         ) : projetos.length === 0 ? (
-          <p className="text-sm text-[#161616]/60">Nenhum projeto ainda.</p>
+          <p className="pn-mudo">Nenhum projeto ainda.</p>
         ) : visiveis.length === 0 ? (
-          <p className="text-sm text-[#161616]/60">Nenhum projeto com esse status.</p>
+          <p className="pn-mudo">{termo ? "Nenhum projeto encontrado." : "Nenhum projeto com esse status."}</p>
         ) : (
-          <ul className="grid gap-3">
-            {visiveis.map((p) => (
-              <li
-                key={p.id}
-                className="grid gap-x-6 gap-y-1 rounded-md border border-[#161616]/10 bg-white px-4 py-3 text-sm md:grid-cols-[2fr_1.5fr_1fr_1.2fr_1.2fr_1.5fr_auto] md:items-center"
-              >
-                <h2 className="font-semibold">{p.nome}</h2>
-                <span>{p.cliente}</span>
-                <span className="text-[#161616]/70">{rotulo(TIPOS, p.tipo)}</span>
-                <span className="text-[#161616]/70">{rotulo(STATUS, p.status)}</span>
-                <span>
-                  {formatarPrazo(p.prazo)}
-                  {estaAtrasado(p, hoje) && (
-                    <span className="ml-2 font-medium text-[#B3261E]">atrasado</span>
-                  )}
-                </span>
-                <span className="break-all text-[#161616]/70">{emailDe(p.responsavel_id)}</span>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    disabled={salvando}
-                    onClick={() => {
-                      setErroForm(undefined);
-                      setForm({ projeto: p });
-                    }}
-                    className={botao}
-                  >
-                    Editar
-                  </button>
-                  {admin &&
-                    (confirmando === p.id ? (
-                      <>
-                        <button
-                          type="button"
-                          disabled={salvando}
-                          onClick={() => void aoApagar(p.id)}
-                          className={`${botao} text-[#B3261E]`}
-                        >
-                          Confirmar exclusão
-                        </button>
-                        <button type="button" disabled={salvando} onClick={() => setConfirmando(null)} className={botao}>
-                          Cancelar
-                        </button>
-                      </>
-                    ) : (
-                      <button type="button" disabled={salvando} onClick={() => setConfirmando(p.id)} className={botao}>
-                        Apagar
+          <div className="pn-cartao pn-tab">
+            <div className="pn-lin pn-lin-cab" aria-hidden="true">
+              <span>Projeto</span>
+              <span>Tipo</span>
+              <span>Prazo</span>
+              <span>Status</span>
+              <span>Responsável</span>
+              <span />
+            </div>
+            <ul className="pn-linhas">
+              {visiveis.map((p) => {
+                const email = emailDe(p.responsavel_id);
+                const temEmail = p.responsavel_id !== null && email.includes("@");
+                const atrasado = estaAtrasado(p, hoje);
+                return (
+                  <li key={p.id} className="pn-lin">
+                    <div className="pn-lin-p">
+                      <h2>{p.nome}</h2>
+                      <small>{p.cliente}</small>
+                    </div>
+                    <span className="pn-lin-tipo">{rotulo(TIPOS, p.tipo)}</span>
+                    <span className={`pn-num pn-lin-prazo${atrasado ? " pn-atr" : ""}`}>
+                      {formatarPrazo(p.prazo)}
+                      {atrasado && <span className="pn-atr-t">atrasado</span>}
+                    </span>
+                    <span className={`pn-lin-st ${classeStatus(p.status)}`}>{rotulo(STATUS, p.status)}</span>
+                    <span className="pn-resp">
+                      {temEmail && (
+                        <span className="pn-av pn-av-p" aria-hidden="true">
+                          {email.charAt(0).toUpperCase()}
+                        </span>
+                      )}
+                      <span className="pn-resp-t">{email}</span>
+                    </span>
+                    <div className="pn-lin-acoes">
+                      <button
+                        type="button"
+                        className="pn-ed"
+                        disabled={salvando}
+                        onClick={() => {
+                          setErroForm(undefined);
+                          setForm({ projeto: p });
+                        }}
+                      >
+                        Editar
                       </button>
-                    ))}
-                </div>
-              </li>
-            ))}
-          </ul>
+                      {admin &&
+                        (confirmando === p.id ? (
+                          <>
+                            <button
+                              type="button"
+                              className="pn-ed pn-ed-perigo"
+                              disabled={salvando}
+                              onClick={() => void aoApagar(p.id)}
+                            >
+                              Confirmar exclusão
+                            </button>
+                            <button type="button" className="pn-ed" disabled={salvando} onClick={() => setConfirmando(null)}>
+                              Cancelar
+                            </button>
+                          </>
+                        ) : (
+                          <button type="button" className="pn-ed" disabled={salvando} onClick={() => setConfirmando(p.id)}>
+                            Apagar
+                          </button>
+                        ))}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         )}
       </div>
 
-      <section aria-labelledby="equipe-titulo" className="mt-8">
-        <h2 id="equipe-titulo" className="text-lg font-semibold">Equipe</h2>
+      <section aria-labelledby="equipe-titulo" className="pn-equipe">
+        <h2 id="equipe-titulo" className="pn-tit">Equipe</h2>
         {erroEquipe ? (
-          <p className="mt-2 text-sm text-[#161616]/60">Não foi possível carregar a equipe.</p>
+          <p className="pn-mudo">Não foi possível carregar a equipe.</p>
         ) : (
-          <ul className="mt-2 text-sm">
-            {equipe.map((m) => (
-              <li key={m.id} className="flex gap-3 py-1">
-                <span className="break-all">{m.email}</span>
-                <span className="text-[#161616]/60">{m.papel === "admin" ? "Admin" : "Membro"}</span>
+          <ul className="pn-eq">
+            {equipe.map((m, i) => (
+              <li key={m.id} className="pn-pe">
+                <span className={`pn-av${i % 2 ? " pn-av-g" : ""}`} aria-hidden="true">
+                  {m.email.charAt(0).toUpperCase()}
+                </span>
+                <div>
+                  <span className="pn-pe-email">{m.email}</span>
+                  <small>{m.papel === "admin" ? "Admin" : "Membro"}</small>
+                </div>
               </li>
             ))}
           </ul>

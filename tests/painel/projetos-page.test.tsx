@@ -98,12 +98,93 @@ describe("página de projetos", () => {
     expect(screen.queryByText(/permission denied/)).toBeNull();
   });
 
-  it("filtro por status mostra só os do status", async () => {
+  it("filtro segmentado marca aria-pressed e filtra", async () => {
     render(<ProjetosPage />);
     await screen.findByRole("heading", { name: "Site Alfa" });
-    fireEvent.change(screen.getByLabelText("Filtrar por status"), { target: { value: "planejado" } });
+    const grupo = screen.getByRole("group", { name: "Filtrar por status" });
+    const todos = within(grupo).getByRole("button", { name: "Todos" });
+    expect(todos.getAttribute("aria-pressed")).toBe("true");
+    const planejado = within(grupo).getByRole("button", { name: "Planejado" });
+    expect(planejado.getAttribute("aria-pressed")).toBe("false");
+    fireEvent.click(planejado);
+    expect(planejado.getAttribute("aria-pressed")).toBe("true");
+    expect(todos.getAttribute("aria-pressed")).toBe("false");
     expect(screen.queryByRole("heading", { name: "Site Alfa" })).toBeNull();
     expect(screen.getByRole("heading", { name: "Tráfego Gama" })).toBeTruthy();
+    fireEvent.click(todos);
+    expect(screen.getByRole("heading", { name: "Site Alfa" })).toBeTruthy();
+  });
+
+  it("busca ignora acentos e caixa e filtra por cliente", async () => {
+    render(<ProjetosPage />);
+    await screen.findByRole("heading", { name: "Site Alfa" });
+    const busca = screen.getByLabelText("Buscar por nome ou cliente");
+    fireEvent.change(busca, { target: { value: "TRAFEGO" } });
+    expect(screen.getByRole("heading", { name: "Tráfego Gama" })).toBeTruthy();
+    expect(screen.queryByRole("heading", { name: "Site Alfa" })).toBeNull();
+    fireEvent.change(busca, { target: { value: "cliente b" } });
+    expect(screen.getByRole("heading", { name: "Sistema Beta" })).toBeTruthy();
+    expect(screen.queryByRole("heading", { name: "Tráfego Gama" })).toBeNull();
+    fireEvent.change(busca, { target: { value: "zzz" } });
+    expect(screen.getByText("Nenhum projeto encontrado.")).toBeTruthy();
+  });
+
+  it("contagem do cabeçalho mostra projetos e vencidos", async () => {
+    render(<ProjetosPage />);
+    await screen.findByRole("heading", { name: "Site Alfa" });
+    expect(screen.getByText("3 projetos · 1 com prazo vencido")).toBeTruthy();
+  });
+
+  it("?novo=1 abre a gaveta vazia", async () => {
+    window.history.pushState({}, "", "/painel/projetos?novo=1");
+    try {
+      render(<ProjetosPage />);
+      const dialogo = await screen.findByRole("dialog", { name: "Novo projeto" });
+      expect((within(dialogo).getByLabelText("Nome") as HTMLInputElement).value).toBe("");
+    } finally {
+      window.history.pushState({}, "", "/");
+    }
+  });
+
+  it("sem ?novo=1 a gaveta começa fechada", async () => {
+    render(<ProjetosPage />);
+    await screen.findByRole("heading", { name: "Site Alfa" });
+    expect(screen.queryByRole("dialog")).toBeNull();
+  });
+
+  it("abrir Editar de outro projeto não herda valores do anterior", async () => {
+    render(<ProjetosPage />);
+    const a = (await screen.findByRole("heading", { name: "Site Alfa" })).closest("li")!;
+    fireEvent.click(within(a).getByRole("button", { name: "Editar" }));
+    let q = within(screen.getByRole("form", { name: "Projeto" }));
+    fireEvent.change(q.getByLabelText("Nome"), { target: { value: "digitado" } });
+    fireEvent.click(q.getByRole("button", { name: "Cancelar" }));
+    expect(screen.queryByRole("dialog")).toBeNull();
+    const b = screen.getByRole("heading", { name: "Sistema Beta" }).closest("li")!;
+    fireEvent.click(within(b).getByRole("button", { name: "Editar" }));
+    q = within(screen.getByRole("form", { name: "Projeto" }));
+    expect((q.getByLabelText("Nome") as HTMLInputElement).value).toBe("Sistema Beta");
+    expect((q.getByLabelText("Cliente") as HTMLInputElement).value).toBe("Cliente B");
+    expect((q.getByLabelText("Status") as HTMLSelectElement).value).toBe("concluido");
+    expect(screen.getByRole("dialog", { name: "Editar projeto" })).toBeTruthy();
+  });
+
+  it("Cancelar e Esc ficam bloqueados enquanto salva", async () => {
+    const d = deferida<void>();
+    vi.mocked(criarProjeto).mockReturnValue(d.promessa);
+    render(<ProjetosPage />);
+    await screen.findByRole("heading", { name: "Site Alfa" });
+    fireEvent.click(screen.getByRole("button", { name: "Novo projeto" }));
+    const q = within(screen.getByRole("form", { name: "Projeto" }));
+    fireEvent.change(q.getByLabelText("Nome"), { target: { value: "N" } });
+    fireEvent.change(q.getByLabelText("Cliente"), { target: { value: "C" } });
+    fireEvent.click(q.getByRole("button", { name: "Salvar" }));
+    await waitFor(() => expect((q.getByRole("button", { name: "Cancelar" }) as HTMLButtonElement).disabled).toBe(true));
+    fireEvent.keyDown(document, { key: "Escape" });
+    fireEvent.click(screen.getByTestId("gaveta-fundo"));
+    expect(screen.getByRole("dialog")).toBeTruthy();
+    await act(async () => d.resolver());
+    await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
   });
 
   it("prazo vencido e não concluído mostra 'atrasado'", async () => {

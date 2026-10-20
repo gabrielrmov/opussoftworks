@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { NovoProjetoLink } from "@/components/painel/novo-projeto-link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Casca } from "@/components/painel/casca";
 import { Guarda } from "@/components/painel/guarda";
@@ -120,9 +120,9 @@ function VisaoGeral() {
       papel={acesso.papel}
       email={acesso.email}
       acaoTopo={
-        <Link href="/painel/projetos?novo=1" className="pn-btn">
+        <NovoProjetoLink className="pn-btn">
           Novo projeto
-        </Link>
+        </NovoProjetoLink>
       }
     >
       <Conteudo />

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { NovoProjetoLink } from "@/components/painel/novo-projeto-link";
 import type { ReactNode } from "react";
 import type { ResumoPainel } from "@/lib/painel/resumo";
 import { textoRelativo } from "@/lib/painel/resumo";
@@ -153,9 +154,9 @@ export function VisaoGeralView({
         <section className="pn-cartao pn-vazio">
           <h2 className="pn-tit">Nenhum projeto ainda.</h2>
           <p className="pn-nota">Cadastre o primeiro projeto para ver prazos, carga da equipe e a agenda da semana aqui.</p>
-          <Link href="/painel/projetos?novo=1" className="pn-btn">
+          <NovoProjetoLink className="pn-btn">
             Criar o primeiro projeto
-          </Link>
+          </NovoProjetoLink>
         </section>
       ) : (
         <>

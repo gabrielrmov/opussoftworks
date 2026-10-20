@@ -30,7 +30,9 @@ export function Gaveta({ aberta, titulo, bloqueada, onFechar, acionador, childre
 
   useEffect(() => {
     if (!aberta) return;
-    const anterior = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    // Capturado na abertura: acionador (se houver) ou o elemento que tinha foco.
+    const retorno: HTMLElement | null =
+      acionadorRef.current?.current ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
     const overflowAnterior = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
@@ -39,12 +41,20 @@ export function Gaveta({ aberta, titulo, bloqueada, onFechar, acionador, childre
 
     function aoTeclar(ev: KeyboardEvent) {
       if (ev.key === "Escape") {
-        if (!bloqueadaRef.current) onFecharRef.current();
+        if (ev.defaultPrevented || bloqueadaRef.current) return;
+        // Esc em seletores nativos (select, data) só fecha o popup deles.
+        const alvo = ev.target instanceof Element ? ev.target : null;
+        if (alvo?.closest('select, input[type="date"]')) return;
+        onFecharRef.current();
         return;
       }
       if (ev.key !== "Tab" || !painel.current) return;
       const itens = Array.from(painel.current.querySelectorAll<HTMLElement>(FOCAVEIS));
-      if (itens.length === 0) return;
+      if (itens.length === 0) {
+        ev.preventDefault();
+        painel.current.focus();
+        return;
+      }
       const primeiroItem = itens[0];
       const ultimo = itens[itens.length - 1];
       const ativo = document.activeElement;
@@ -64,9 +74,7 @@ export function Gaveta({ aberta, titulo, bloqueada, onFechar, acionador, childre
     return () => {
       document.removeEventListener("keydown", aoTeclar);
       document.body.style.overflow = overflowAnterior;
-      const alvo = acionadorRef.current?.current;
-      if (alvo && alvo.isConnected) alvo.focus();
-      else if (anterior && anterior.isConnected) anterior.focus();
+      if (retorno && retorno.isConnected) retorno.focus();
     };
   }, [aberta]);
 
@@ -82,7 +90,7 @@ export function Gaveta({ aberta, titulo, bloqueada, onFechar, acionador, childre
           if (!bloqueada) onFechar();
         }}
       />
-      <div ref={painel} role="dialog" aria-modal="true" aria-labelledby={idTitulo} className="pn-gav">
+      <div ref={painel} role="dialog" aria-modal="true" aria-labelledby={idTitulo} tabIndex={-1} className="pn-gav">
         <header className="pn-gav-cab">
           <h2 id={idTitulo} className="pn-gav-tit">
             {titulo}

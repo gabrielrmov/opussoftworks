@@ -2,6 +2,7 @@
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import ProjetosPage from "@/app/painel/projetos/page";
+import { NovoProjetoLink } from "@/components/painel/novo-projeto-link";
 import {
   apagarProjeto,
   atualizarProjeto,
@@ -394,5 +395,52 @@ describe("página de projetos", () => {
     expect((q.getByLabelText("Nome") as HTMLInputElement).value).toBe("Meu nome");
     expect((q.getByLabelText("Cliente") as HTMLInputElement).value).toBe("Meu cliente");
     expect((q.getByRole("button", { name: "Cancelar" }) as HTMLButtonElement).disabled).toBe(false);
+  });
+
+  it("atalho Novo projeto com a página já aberta abre a gaveta vazia", async () => {
+    window.history.pushState({}, "", "/painel/projetos");
+    try {
+      render(
+        <>
+          <NovoProjetoLink>Atalho novo</NovoProjetoLink>
+          <ProjetosPage />
+        </>,
+      );
+      await screen.findByRole("heading", { name: "Site Alfa" });
+      expect(screen.queryByRole("dialog")).toBeNull();
+      fireEvent.click(screen.getByText("Atalho novo"));
+      const dialogo = await screen.findByRole("dialog", { name: "Novo projeto" });
+      expect((within(dialogo).getByLabelText("Nome") as HTMLInputElement).value).toBe("");
+    } finally {
+      window.history.pushState({}, "", "/");
+    }
+  });
+
+  it("?novo=1 é removido da URL depois de abrir", async () => {
+    window.history.pushState({}, "", "/painel/projetos?novo=1");
+    try {
+      render(<ProjetosPage />);
+      await screen.findByRole("dialog", { name: "Novo projeto" });
+      expect(window.location.search).toBe("");
+    } finally {
+      window.history.pushState({}, "", "/");
+    }
+  });
+
+  it("foco volta para Novo projeto e para Editar ao fechar", async () => {
+    render(<ProjetosPage />);
+    const item = (await screen.findByRole("heading", { name: "Site Alfa" })).closest("li")!;
+    const novo = screen.getByRole("button", { name: "Novo projeto" });
+    novo.focus();
+    fireEvent.click(novo);
+    fireEvent.keyDown(document, { key: "Escape" });
+    await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+    expect(document.activeElement).toBe(novo);
+    const editar = within(item).getByRole("button", { name: "Editar" });
+    editar.focus();
+    fireEvent.click(editar);
+    fireEvent.click(within(screen.getByRole("form", { name: "Projeto" })).getByRole("button", { name: "Cancelar" }));
+    await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+    expect(document.activeElement).toBe(editar);
   });
 });

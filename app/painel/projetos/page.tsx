@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Casca } from "@/components/painel/casca";
+import { EVENTO_NOVO_PROJETO } from "@/components/painel/novo-projeto-link";
 import { Gaveta } from "@/components/painel/gaveta";
 import { useAcesso } from "@/lib/painel/use-acesso";
 import { Guarda } from "@/components/painel/guarda";
@@ -92,7 +93,19 @@ function Gestao({ admin }: { admin: boolean }) {
 
   // Lido no efeito (não no render) para não afetar o prerender estático.
   useEffect(() => {
-    if (new URLSearchParams(window.location.search).get("novo") === "1") setForm({});
+    function abrirNovo() {
+      setErroForm(undefined);
+      setForm({});
+    }
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("novo") === "1") {
+      abrirNovo();
+      // Evita reabrir ao recarregar.
+      url.searchParams.delete("novo");
+      window.history.replaceState(window.history.state, "", url.pathname + url.search + url.hash);
+    }
+    window.addEventListener(EVENTO_NOVO_PROJETO, abrirNovo);
+    return () => window.removeEventListener(EVENTO_NOVO_PROJETO, abrirNovo);
   }, []);
 
   async function executar(acao: () => Promise<void>, aoFalhar: (msg: string) => void): Promise<boolean> {
@@ -254,7 +267,7 @@ function Gestao({ admin }: { admin: boolean }) {
             <ul className="pn-linhas">
               {visiveis.map((p) => {
                 const email = emailDe(p.responsavel_id);
-                const temEmail = p.responsavel_id !== null && email.includes("@");
+                const temEmail = p.responsavel_id !== null && equipe.some((m) => m.id === p.responsavel_id);
                 const atrasado = estaAtrasado(p, hoje);
                 return (
                   <li key={p.id} className="pn-lin">

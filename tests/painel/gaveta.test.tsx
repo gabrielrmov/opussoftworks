@@ -105,4 +105,49 @@ describe("Gaveta", () => {
     );
     expect(document.body.style.overflow).toBe("");
   });
+
+  it("Tab dá a volta dentro do diálogo (frente e trás)", () => {
+    montar();
+    const fechar = screen.getByRole("button", { name: "Fechar" });
+    const salvar = screen.getByText("Salvar");
+    salvar.focus();
+    fireEvent.keyDown(document, { key: "Tab" });
+    expect(document.activeElement).toBe(fechar);
+    fireEvent.keyDown(document, { key: "Tab", shiftKey: true });
+    expect(document.activeElement).toBe(salvar);
+  });
+
+  it("Tab sem focáveis foca o painel", () => {
+    render(
+      <Gaveta aberta titulo="T" bloqueada onFechar={() => {}}>
+        <p>sem campos</p>
+      </Gaveta>,
+    );
+    // Fechar fica desabilitado quando bloqueada e não há outros focáveis.
+    fireEvent.keyDown(document, { key: "Tab" });
+    expect(document.activeElement).toBe(screen.getByRole("dialog"));
+  });
+
+  it("Esc em select ou data não fecha; em campo de texto fecha", () => {
+    const fechar = vi.fn();
+    render(
+      <Gaveta aberta titulo="T" bloqueada={false} onFechar={fechar}>
+        <select aria-label="S" />
+        <input type="date" aria-label="D" />
+        <input aria-label="Texto" />
+      </Gaveta>,
+    );
+    fireEvent.keyDown(screen.getByLabelText("S"), { key: "Escape" });
+    fireEvent.keyDown(screen.getByLabelText("D"), { key: "Escape" });
+    expect(fechar).not.toHaveBeenCalled();
+    fireEvent.keyDown(screen.getByLabelText("Texto"), { key: "Escape" });
+    expect(fechar).toHaveBeenCalledTimes(1);
+  });
+
+  it("restaura a rolagem do corpo ao desmontar aberta", () => {
+    const { unmount } = montar();
+    expect(document.body.style.overflow).toBe("hidden");
+    unmount();
+    expect(document.body.style.overflow).toBe("");
+  });
 });

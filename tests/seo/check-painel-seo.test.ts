@@ -46,3 +46,23 @@ describe("verificar", () => {
     expect(p.some((x) => x.includes("robots.txt"))).toBe(true);
   });
 });
+
+describe("verificar: chave secreta no build", () => {
+  const SECRETA = "sb_secret_" + "A1b2C3d4E5f6G7h8I9j0K1_-L2m3N4o";
+
+  it("acusa uma chave sb_secret_ gravada em um arquivo js do build", () => {
+    const dir = fixture();
+    fs.mkdirSync(path.join(dir, "_next"));
+    fs.writeFileSync(path.join(dir, "_next", "app.js"), `let t="${SECRETA}";`);
+    const problemas = verificar(dir);
+    expect(problemas.some((p) => /_next[\\/]app\.js.*chave secreta/.test(p))).toBe(true);
+    expect(problemas.join(" ")).not.toContain(SECRETA);
+  });
+
+  it("não acusa o prefixo sb_secret_ usado como código da biblioteca (sem chave)", () => {
+    const dir = fixture();
+    fs.mkdirSync(path.join(dir, "_next"));
+    fs.writeFileSync(path.join(dir, "_next", "lib.js"), 'e.startsWith("sb_publishable_")||e.startsWith("sb_secret_")');
+    expect(verificar(dir)).toEqual([]);
+  });
+});

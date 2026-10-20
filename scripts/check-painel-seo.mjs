@@ -42,7 +42,27 @@ export function verificar(outDir) {
   if (robots === null || !/^Disallow:\s*\/painel\b/im.test(robots)) {
     problemas.push("robots.txt sem Disallow: /painel");
   }
+  problemas.push(...chavesSecretasNoBuild(outDir));
   return problemas;
+}
+
+// Rede de segurança: tudo em out/ é público. Chave secreta do Supabase no build = vazamento.
+// O código da biblioteca só traz o prefixo ("sb_secret_") sem sufixo; uma chave real tem ~31.
+const CHAVE_SECRETA = /sb_secret_[A-Za-z0-9_-]{20,}/;
+function chavesSecretasNoBuild(outDir) {
+  const achados = [];
+  const percorrer = (dir) => {
+    if (!fs.existsSync(dir)) return;
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) percorrer(p);
+      else if (/\.(html|js|json|txt|xml|map)$/i.test(e.name) && CHAVE_SECRETA.test(fs.readFileSync(p, "utf8"))) {
+        achados.push(`${path.relative(outDir, p)}: contém uma chave secreta do Supabase (sb_secret_...)`);
+      }
+    }
+  };
+  percorrer(outDir);
+  return achados;
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {

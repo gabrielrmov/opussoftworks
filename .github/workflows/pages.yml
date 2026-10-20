@@ -26,10 +26,14 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
-      - run: pnpm build
+      # Só repassa ao build as variáveis públicas do Supabase se forem válidas (URL do projeto +
+      # Publishable key). Uma chave secreta colada na variável errada NÃO vai para o site.
+      - name: Validar variáveis públicas do Supabase
         env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+          KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+        run: node scripts/preparar-env-supabase.mjs
+      - run: pnpm build
       - run: pnpm check:painel-seo
       - uses: actions/upload-pages-artifact@v3
         with:

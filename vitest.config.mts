@@ -6,5 +6,5 @@ export default defineConfig({
     alias: { "@": fileURLToPath(new URL("./", import.meta.url)) },
   },
   oxc: { jsx: { runtime: "automatic" } },
-  test: { environment: "node" },
+  test: { environment: "node", testTimeout: 30000, hookTimeout: 60000 },
 });

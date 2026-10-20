@@ -20,20 +20,26 @@ create table public.projetos (
 create index projetos_status_idx on public.projetos (status);
 create index projetos_prazo_idx on public.projetos (prazo);
 
--- atualizado_em sempre reflete o último update, qualquer que seja o valor enviado.
-create function public.projetos_atualizar_data() returns trigger
+-- Carimbos de data controlados pelo banco: o cliente não consegue forjá-los.
+-- atualizado_em é sempre now(); criado_em é now() no insert e imutável no update.
+create function public.projetos_carimbar_datas() returns trigger
 language plpgsql set search_path = public as $$
 begin
-  new.atualizado_em = now();
+  new.atualizado_em := now();
+  if tg_op = 'INSERT' then
+    new.criado_em := now();
+  else
+    new.criado_em := old.criado_em;
+  end if;
   return new;
 end;
 $$;
 
-revoke all on function public.projetos_atualizar_data() from public, anon, authenticated;
+revoke all on function public.projetos_carimbar_datas() from public, anon, authenticated;
 
-create trigger projetos_atualizar_data
-  before update on public.projetos
-  for each row execute function public.projetos_atualizar_data();
+create trigger projetos_carimbar_datas
+  before insert or update on public.projetos
+  for each row execute function public.projetos_carimbar_datas();
 
 -- Defesa em duas camadas (além do padrão da 0004): o RLS não governa
 -- truncate/references/trigger.

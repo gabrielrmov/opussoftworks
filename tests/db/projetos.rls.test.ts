@@ -53,19 +53,51 @@ describe("RLS de projetos", () => {
     expect(r.rows[0].status).toBe("em_andamento");
   });
 
-  it("atualizado_em muda no update", async () => {
-    // O insert não dispara o gatilho de update: dá para plantar uma data antiga.
-    await comoAdminDoBanco(db);
-    await db.exec(`
-      insert into projetos (nome, cliente, tipo, atualizado_em)
-      values ('Site A', 'Cliente A', 'site', now() - interval '1 day')
-    `);
+  it("atualizado_em enviado pelo cliente é sobrescrito", async () => {
     await comoUsuario(db, "beto@x.com");
-    expect((await db.query("update projetos set nome = 'Site B'")).affectedRows).toBe(1);
+    await db.exec(NOVO);
+    expect(
+      (await db.query("update projetos set nome = 'Site B', atualizado_em = '2000-01-01'")).affectedRows,
+    ).toBe(1);
     const r = await db.query<{ recente: boolean }>(
       "select atualizado_em > now() - interval '1 hour' as recente from projetos",
     );
     expect(r.rows[0].recente).toBe(true);
+  });
+
+  it("criado_em não pode ser alterado por update", async () => {
+    await comoUsuario(db, "beto@x.com");
+    await db.exec(NOVO);
+    const antes = await db.query<{ criado_em: string }>("select criado_em::text from projetos");
+    await db.query("update projetos set criado_em = '2000-01-01'");
+    const depois = await db.query<{ criado_em: string }>("select criado_em::text from projetos");
+    expect(depois.rows[0].criado_em).toBe(antes.rows[0].criado_em);
+  });
+
+  it("criado_em e atualizado_em enviados no insert são ignorados", async () => {
+    await comoUsuario(db, "beto@x.com");
+    await db.exec(`
+      insert into projetos (nome, cliente, tipo, criado_em, atualizado_em)
+      values ('Site A', 'Cliente A', 'site', '2000-01-01', '2000-01-01')
+    `);
+    const r = await db.query<{ ok: boolean }>(
+      `select criado_em > now() - interval '1 hour'
+          and atualizado_em > now() - interval '1 hour' as ok from projetos`,
+    );
+    expect(r.rows[0].ok).toBe(true);
+  });
+
+  it("membro (não superusuário) atribui um responsável com sucesso", async () => {
+    await comoAdminDoBanco(db);
+    const ana = await db.query<{ id: string }>("select id from membros where email = 'ana@x.com'");
+    await comoUsuario(db, "beto@x.com");
+    const ins = await db.query(
+      "insert into projetos (nome, cliente, tipo, responsavel_id) values ('Site A', 'Cliente A', 'site', $1)",
+      [ana.rows[0].id],
+    );
+    expect(ins.affectedRows).toBe(1);
+    const r = await db.query<{ responsavel_id: string }>("select responsavel_id from projetos");
+    expect(r.rows).toEqual([{ responsavel_id: ana.rows[0].id }]);
   });
 
   it("membro revogado no meio da sessão perde a escrita", async () => {

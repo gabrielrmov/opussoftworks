@@ -1,4 +1,5 @@
 import { CAMPANHAS, LIMITES_PADRAO, montarMensagem, numeroDoLead } from './prospeccao.js';
+import { varrerGoogleMaps } from './extractors.js';
 
 // Enriquecimento: abre o site de cada lead (fetch, sem aba) e descobre redes,
 // contatos, pixels de tráfego e plataforma. Processa todo lead com analise === 'pendente'.
@@ -196,7 +197,11 @@ chrome.runtime.onMessage.addListener((msg) => {
   if (msg?.tipo === 'enriquecer') processarPendentes();
 });
 
-chrome.runtime.onStartup.addListener(processarPendentes);
+chrome.runtime.onStartup.addListener(async () => {
+  const { busca } = await store.get('busca');
+  if (busca?.ativo) await store.set({ busca: { ...busca, ativo: false, erro: 'A pesquisa foi interrompida porque o Chrome foi fechado.' } });
+  processarPendentes();
+});
 
 
 // ---------- Prospecção automática pelo WhatsApp (WA-AKG) ----------
@@ -409,3 +414,73 @@ chrome.runtime.onMessage.addListener((msg, _remetente, responder) => {
 
 // Clicar no ícone abre o painel lateral: fica preso ao navegador e continua aberto ao trocar de aba.
 chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(() => {});
+
+// ---------- Pesquisa automática no Google Maps ----------
+// Abre uma aba do Maps, pesquisa "nicho em cidade" para cada nicho e junta os leads (a varredura em si
+// é a mesma do botão "Buscar leads"). Estado em chrome.storage ('busca'): o painel só mostra o andamento.
+
+let pesquisando = false;
+const pausa = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function abrirNaAba(tabId, url) {
+  return new Promise((resolve) => {
+    let comecou = false;
+    const fim = () => {
+      chrome.tabs.onUpdated.removeListener(ouvir);
+      clearTimeout(limite);
+      resolve();
+    };
+    // Só vale o "complete" depois do "loading" da nova página (evita pegar o da página anterior).
+    const ouvir = (id, mud) => {
+      if (id !== tabId) return;
+      if (mud.status === 'loading') comecou = true;
+      if (mud.status === 'complete' && comecou) fim();
+    };
+    const limite = setTimeout(fim, 30000);
+    chrome.tabs.onUpdated.addListener(ouvir);
+    chrome.tabs.update(tabId, { url });
+  });
+}
+
+async function pesquisarNichos({ cidade, nichos, maximo = 40 }) {
+  if (pesquisando) return;
+  pesquisando = true;
+  const antes = ((await store.get('leads')).leads || []).length;
+  await store.set({ busca: { ativo: true, cidade, nichos, indice: 0, atual: nichos[0], maximo }, scan: null });
+  // O service worker dorme após ~30 s parado; este "pulso" o mantém acordado durante a pesquisa.
+  const pulso = setInterval(() => store.get('busca'), 20000);
+  let aba = null;
+  let erro = '';
+  try {
+    // Aba em primeiro plano: o Maps só carrega mais resultados ao rolar uma aba visível.
+    aba = await chrome.tabs.create({ url: 'about:blank', active: true });
+    for (let i = 0; i < nichos.length; i++) {
+      const { busca } = await store.get('busca');
+      if (busca?.cancelar) break;
+      await store.set({ busca: { ...busca, indice: i, atual: nichos[i] } });
+      await abrirNaAba(aba.id, `https://www.google.com/maps/search/${encodeURIComponent(`${nichos[i]} em ${cidade}`)}?hl=pt-BR`);
+      await chrome.scripting.executeScript({ target: { tabId: aba.id }, func: varrerGoogleMaps, args: [maximo] });
+      // Pausa entre nichos (não parece rajada), mas dá para parar a qualquer momento.
+      for (let ms = 3000 + Math.random() * 4000; ms > 0 && i < nichos.length - 1; ms -= 500) {
+        await pausa(500);
+        if ((await store.get('busca')).busca?.cancelar) break;
+      }
+    }
+  } catch (e) {
+    erro = `A pesquisa parou: ${e.message}`;
+  } finally {
+    clearInterval(pulso);
+    if (aba) chrome.tabs.remove(aba.id).catch(() => {});
+    const { busca } = await store.get('busca');
+    const depois = ((await store.get('leads')).leads || []).length;
+    // O "scan" do último nicho fica como estava; limpa para não mostrar erro/andamento antigo.
+    await store.set({ scan: null, busca: { ...busca, ativo: false, fim: true, erro, novos: Math.max(0, depois - antes) } });
+    pesquisando = false;
+    processarPendentes(); // (uma mensagem enviada pelo próprio background não chegaria ao ouvinte dele)
+  }
+}
+
+chrome.runtime.onMessage.addListener((msg) => {
+  if (msg?.tipo === 'pesquisar' && Array.isArray(msg.nichos) && msg.nichos.length && msg.cidade) pesquisarNichos(msg);
+  if (msg?.tipo === 'pararPesquisa') store.get('busca').then(({ busca }) => busca && store.set({ busca: { ...busca, cancelar: true } }));
+});

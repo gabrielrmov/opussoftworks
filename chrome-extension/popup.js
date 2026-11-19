@@ -1,5 +1,15 @@
 import { varrerGoogleMaps, capturarPagina } from './extractors.js';
-import { CAMPANHAS, LIMITES_PADRAO, montarMensagem, numeroDoLead, perfilLocarion, textosPersonalizados } from './prospeccao.js';
+import {
+  CAMPANHAS,
+  LIMITES_PADRAO,
+  PONTUACAO_MINIMA,
+  montarMensagem,
+  numeroDoLead,
+  perfilLocarion,
+  qualificadoPara,
+  qualificar,
+  textosPersonalizados,
+} from './prospeccao.js';
 
 const $ = (id) => document.getElementById(id);
 const store = chrome.storage.local;
@@ -12,6 +22,9 @@ let ultimoScan = null;
 let loteAnalise = 0;
 let envio = null;
 let wa = null;
+let busca = null;
+let soQualificadosFiltro = false;
+let pesquisa = { cidade: '', escolhidos: ['restaurante', 'clínica de estética', 'academia', 'pousada'], extras: [] };
 const selecionados = new Set();
 
 const ICONES = {
@@ -25,6 +38,7 @@ const ICONES = {
   email: '<svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>',
   face: '<svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
   mapa: '<svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+  lupa: '<svg viewBox="0 0 24 24"><path d="m21 21-4.3-4.3"/><circle cx="11" cy="11" r="7"/><path d="M11 8v6M8 11h6"/></svg>',
   config: '<svg viewBox="0 0 24 24"><path d="M12.2 2h-.4a2 2 0 0 0-2 2v.2a2 2 0 0 1-1 1.7l-.4.3a2 2 0 0 1-2 0l-.2-.1a2 2 0 0 0-2.7.7l-.2.4a2 2 0 0 0 .7 2.7l.2.1a2 2 0 0 1 1 1.7v.5a2 2 0 0 1-1 1.7l-.2.1a2 2 0 0 0-.7 2.7l.2.4a2 2 0 0 0 2.7.7l.2-.1a2 2 0 0 1 2 0l.4.3a2 2 0 0 1 1 1.7v.2a2 2 0 0 0 2 2h.4a2 2 0 0 0 2-2v-.2a2 2 0 0 1 1-1.7l.4-.3a2 2 0 0 1 2 0l.2.1a2 2 0 0 0 2.7-.7l.2-.4a2 2 0 0 0-.7-2.7l-.2-.1a2 2 0 0 1-1-1.7v-.5a2 2 0 0 1 1-1.7l.2-.1a2 2 0 0 0 .7-2.7l-.2-.4a2 2 0 0 0-2.7-.7l-.2.1a2 2 0 0 1-2 0l-.4-.3a2 2 0 0 1-1-1.7V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>',
   fechar: '<svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
   check: '<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>',
@@ -127,6 +141,11 @@ const iniciais = (nome) =>
     .map((p) => p[0].toUpperCase())
     .join('') || '•';
 
+const minimoQualificado = () => Number(wa?.pontuacaoMinima ?? PONTUACAO_MINIMA);
+const soQualificadosAtivo = () => wa?.soQualificados !== false;
+const COR_VERTENTE = { opus: 'sites', locarion: 'locarion', videomaker: 'videomaker' };
+const NOME_CURTO = { opus: 'Sites', locarion: 'Locarion', videomaker: 'Videomaker' };
+
 const ROTULO_PROSPECCAO = { enviado: '✓ mensagem enviada', 'na fila': 'na fila do WhatsApp', 'sem whatsapp': 'sem WhatsApp', erro: 'erro no envio' };
 
 // O avatar mostra a seleção (✓); clicar em qualquer parte do card seleciona.
@@ -162,6 +181,10 @@ function itemLead(l) {
     l.analise === 'pendente' && tag('analisando…', 'neutra'),
     semSite(l) && tag(situacao.toLowerCase(), 'quente'),
     sinais.length ? tag(`anuncia · ${sinais.join(' + ')}`) : semTrafego(l) && tag('sem tráfego', 'quente'),
+    ...qualificadoPara(l, minimoQualificado()).map((c) => {
+      const q = qualificar(l, c, minimoQualificado());
+      return Object.assign(tag(`★ ${NOME_CURTO[c]}`, `qual ${COR_VERTENTE[c]}`), { title: `${CAMPANHAS[c].nome}: ${q.pontos} pontos\n${q.motivos.join(' · ')}` });
+    }),
     perfil === 'obra' && tag('locadora de obra', 'quente'),
     perfil === 'talvez' && tag('locadora a confirmar', 'neutra'),
     l.prospeccao && tag(`${ROTULO_PROSPECCAO[l.prospeccao] || l.prospeccao}${l.prospeccao === 'enviado' && l.campanha ? ` · ${CAMPANHAS[l.campanha]?.nome}` : ''}`, `prospeccao ${l.prospeccao.replace(/\s/g, '-')}`),
@@ -217,7 +240,9 @@ function itemLead(l) {
 
 const locadora = (l) => perfilLocarion(l) !== 'fora';
 const visiveis = () =>
-  leads.filter((l) => (filtro === 'sem-site' ? semSite(l) : filtro === 'sem-trafego' ? semTrafego(l) : filtro === 'locadora' ? locadora(l) : true));
+  leads
+    .filter((l) => (filtro === 'sem-site' ? semSite(l) : filtro === 'sem-trafego' ? semTrafego(l) : filtro === 'locadora' ? locadora(l) : true))
+    .filter((l) => !soQualificadosFiltro || qualificadoPara(l, minimoQualificado()).length);
 
 function render() {
   $('n-todos').textContent = leads.length;
@@ -233,9 +258,11 @@ function render() {
   $('btn-csv').disabled = !lista.length;
   $('btn-csv').lastChild.textContent = filtro && lista.length ? ` Exportar ${lista.length} para planilha` : ' Exportar planilha';
   $('btn-limpar').disabled = !leads.length;
+  $('btn-qualificados').setAttribute('aria-pressed', String(soQualificadosFiltro));
   renderSelecao(lista);
   renderProgresso();
   renderEnvio();
+  renderPesquisa();
 }
 
 // ---------- Seleção e prospecção ----------
@@ -246,7 +273,7 @@ function renderSelecao(lista) {
   for (const id of selecionados) if (!leads.some((l) => l.id === id)) selecionados.delete(id);
   const candidatos = lista.filter(prospectavel);
   const todos = candidatos.length > 0 && candidatos.every((l) => selecionados.has(l.id));
-  $('selecao').hidden = !lista.length;
+  $('selecao').hidden = !leads.length;
   $('btn-selecionar').textContent = todos ? 'Desmarcar todos' : `Selecionar todos com WhatsApp (${candidatos.length})`;
   $('btn-selecionar').disabled = !candidatos.length;
   $('selecao-texto').textContent = selecionados.size
@@ -259,6 +286,11 @@ function renderSelecao(lista) {
   $('btn-csv').hidden = Boolean(n);
   $('escolha-titulo').textContent = `Prospectar ${n} lead${n > 1 ? 's' : ''} pelo WhatsApp · escolha a vertente`;
 }
+
+$('btn-qualificados').addEventListener('click', () => {
+  soQualificadosFiltro = !soQualificadosFiltro;
+  render();
+});
 
 $('btn-selecionar').addEventListener('click', () => {
   const candidatos = visiveis().filter(prospectavel);
@@ -274,8 +306,19 @@ function prospectar(campanha) {
     $('teste-resultado').textContent = 'Conecte o WA-AKG para enviar.';
     return;
   }
-  const alvos = [...selecionados].map((id) => leads.find((l) => l.id === id)).filter((l) => l && prospectavel(l));
-  if (!alvos.length) return;
+  const selecionadosOk = [...selecionados].map((id) => leads.find((l) => l.id === id)).filter((l) => l && prospectavel(l));
+  const minimo = minimoQualificado();
+  // Por padrão só segue quem passa da pontuação mínima da vertente escolhida.
+  const alvos = soQualificadosAtivo() ? selecionadosOk.filter((l) => qualificar(l, campanha, minimo).qualificado) : selecionadosOk;
+  const deFora = selecionadosOk.length - alvos.length;
+  if (!alvos.length) {
+    aviso(
+      `${selecionadosOk.length === 1 ? 'O lead selecionado não é' : `Nenhum dos ${selecionadosOk.length} selecionados é`} qualificado para ${CAMPANHAS[campanha].nome} (mínimo ${minimo} pontos). ` +
+        'Mude a pontuação mínima na engrenagem ou desligue "Enviar só para leads qualificados".',
+      true,
+    );
+    return;
+  }
   const lim = { ...LIMITES_PADRAO, ...wa.limites };
   const idSessao = wa.sessoes?.[campanha] || wa.sessao;
   const nomeNumero = wa.sessoesNome?.[idSessao] || (idSessao === wa.sessao ? wa.sessaoNome : '') || idSessao;
@@ -283,6 +326,7 @@ function prospectar(campanha) {
   const ok = confirm(
     `Enviar "${CAMPANHAS[campanha].nome}" para ${alvos.length} lead${alvos.length > 1 ? 's' : ''} pelo WhatsApp?\n` +
       `Número que envia: ${nomeNumero}\n\n` +
+      (deFora ? `${deFora} dos ${selecionadosOk.length} selecionados ficaram de fora por não serem qualificados (mínimo ${minimo} pontos).\n\n` : '') +
       (foraDoPerfil ? `Atenção: ${foraDoPerfil} deles não parecem locadora de equipamento de obra.\n\n` : '') +
       `Um envio a cada ${Math.round((lim.intervaloMin / 60) * 10) / 10}–${Math.round((lim.intervaloMax / 60) * 10) / 10} min, até ${lim.porDia} por dia. ` +
       'Continua mesmo com a extensão fechada (o Chrome precisa ficar aberto).',
@@ -333,6 +377,8 @@ function preencherConfig() {
   opcoesSessao(wa?.sessao ? [{ id: wa.sessao, nome: wa.sessaoNome || wa.sessao }] : [], wa?.sessao, 'Preencha endereço e chave');
   $('wa-chave').value = wa?.chave || '';
   $('wa-seuNome').value = wa?.seuNome || '';
+  $('so-qualificados').checked = wa?.soQualificados !== false;
+  $('pont-minima').value = wa?.pontuacaoMinima ?? PONTUACAO_MINIMA;
   sessoesEdit = { ...wa?.sessoes };
   const nomes = { ...wa?.sessoesNome, ...(wa?.sessao ? { [wa.sessao]: wa.sessaoNome || wa.sessao } : {}) };
   listaSessoes = [...new Set([wa?.sessao, ...Object.values(sessoesEdit)].filter(Boolean))].map((id) => ({ id, nome: nomes[id] || id }));
@@ -342,10 +388,12 @@ function preencherConfig() {
   atualizarPrevia();
 }
 
-// Aceita "wa.site.com", "ttps://wa.site.com" etc.: sempre vira https://host, sem barra no fim.
+// Aceita "wa.site.com", "ttps://wa.site.com" etc.: vira https://host, sem barra no fim.
+// Servidor no próprio computador (localhost) fica em http, que é como ele responde.
 function normalizarUrl(valor) {
-  const host = valor.trim().replace(/^[a-z]*:\/*|^\/+/i, '').replace(/\/+$/, '');
-  return host ? `https://${host}` : '';
+  const host = valor.trim().replace(/^[a-z]*:\/\/+|^\/+/i, '').replace(/\/+$/, '');
+  if (!host) return '';
+  return /^(localhost|127\.0\.0\.1)(:\d+)?$/i.test(host) ? `http://${host}` : `https://${host}`;
 }
 
 function lerConfig() {
@@ -365,6 +413,8 @@ function lerConfig() {
     sessaoNome: $('wa-sessao').selectedOptions[0]?.dataset.nome || '',
     chave: $('wa-chave').value.trim(),
     seuNome: $('wa-seuNome').value.trim(),
+    soQualificados: $('so-qualificados').checked,
+    pontuacaoMinima: Math.min(100, Math.max(0, Number($('pont-minima').value) || PONTUACAO_MINIMA)),
     sessoes: Object.fromEntries(Object.entries(sessoesEdit).filter(([, id]) => id && id !== $('wa-sessao').value)),
     sessoesNome: Object.fromEntries(listaSessoes.map((s) => [s.id, s.nome])),
     textos,
@@ -527,8 +577,22 @@ function aviso(texto, erro = false) {
 
 function renderProgresso() {
   const s = ultimoScan;
-  $('btn-acao').disabled = Boolean(s?.ativo) || !/^https?:/.test(aba?.url || '');
-  aviso(s?.erro || '', true);
+  $('btn-acao').disabled = Boolean(s?.ativo || busca?.ativo) || !/^https?:/.test(aba?.url || '');
+  const resumo =
+    busca && !busca.ativo && (busca.erro || busca.fim)
+      ? busca.erro || `Pesquisa ${busca.cancelar ? 'parada' : 'concluída'}: ${busca.novos} leads novos (${busca.cancelar ? `${busca.indice + 1} de ${busca.nichos.length}` : busca.nichos.length} nicho${busca.nichos.length === 1 ? '' : 's'} em ${busca.cidade}).`
+      : '';
+  aviso(s?.erro || resumo, Boolean(s?.erro || busca?.erro));
+  if (busca?.ativo) {
+    const dentro = s?.ativo ? Math.min(1, (s.total || 0) / (busca.maximo || 40)) : 0;
+    return progresso(
+      busca.cancelar
+        ? 'Parando… termina o nicho atual e fecha a aba do Maps'
+        : `Pesquisando "${busca.atual}" em ${busca.cidade}… nicho ${busca.indice + 1} de ${busca.nichos.length} · ${leads.length} leads`,
+      (busca.indice + dentro) / busca.nichos.length,
+      { parar: true },
+    );
+  }
   if (s?.ativo) return progresso(`Lendo o Maps… ${s.total} empresas`, s.total / MAX_MAPS, { parar: true });
 
   const pendentes = leads.filter((l) => l.analise === 'pendente').length;
@@ -571,6 +635,7 @@ $('btn-acao').addEventListener('click', async () => {
 });
 
 $('btn-parar').addEventListener('click', async () => {
+  if (busca?.ativo) chrome.runtime.sendMessage({ tipo: 'pararPesquisa' });
   const { scan } = await store.get('scan');
   await store.set({ scan: { ...scan, cancelar: true } });
 });
@@ -594,12 +659,76 @@ document.querySelectorAll('.bloco').forEach((b) =>
 );
 
 chrome.storage.onChanged.addListener((mudancas, area) => {
-  if (area !== 'local' || !(mudancas.scan || mudancas.leads || mudancas.envio || mudancas.wa)) return;
+  if (area !== 'local' || !(mudancas.scan || mudancas.leads || mudancas.envio || mudancas.wa || mudancas.busca)) return;
   if (mudancas.wa) wa = mudancas.wa.newValue;
+  if (mudancas.busca) {
+    busca = mudancas.busca.newValue;
+    // Ao terminar uma pesquisa, mostra só os leads qualificados para facilitar a escolha.
+    if (busca?.fim && !mudancas.busca.oldValue?.fim) soQualificadosFiltro = true;
+  }
   if (mudancas.envio) envio = mudancas.envio.newValue;
   if (mudancas.scan) ultimoScan = mudancas.scan.newValue;
   if (mudancas.leads) leads = mudancas.leads.newValue || [];
   render();
+});
+
+// ---------- Pesquisa automática (Videomaker) ----------
+// Pesquisa "nicho em cidade" no Maps, um nicho por vez, numa aba própria (o background cuida disso).
+
+const NICHOS = ['restaurante', 'clínica de estética', 'academia', 'pousada', 'imobiliária', 'barbearia', 'salão de beleza', 'clínica odontológica', 'pet shop', 'hamburgueria'];
+const salvarPesquisa = () => store.set({ pesquisaConfig: pesquisa });
+
+function renderPesquisa() {
+  const ocupado = Boolean(busca?.ativo);
+  $('btn-pesquisa').disabled = ocupado;
+  $('pesq-nichos').replaceChildren(
+    ...[...NICHOS, ...pesquisa.extras].map((n) => {
+      const b = el('button', { type: 'button', className: 'chip', textContent: n });
+      b.setAttribute('aria-pressed', String(pesquisa.escolhidos.includes(n)));
+      b.addEventListener('click', () => {
+        pesquisa.escolhidos = pesquisa.escolhidos.includes(n) ? pesquisa.escolhidos.filter((x) => x !== n) : [...pesquisa.escolhidos, n];
+        salvarPesquisa();
+        renderPesquisa();
+      });
+      return b;
+    }),
+  );
+  const n = pesquisa.escolhidos.length;
+  comIcone($('btn-pesquisar'), 'busca', ` Pesquisar ${n} nicho${n === 1 ? '' : 's'}`);
+  $('btn-pesquisar').disabled = ocupado || !n || !$('pesq-cidade').value.trim();
+}
+
+$('btn-pesquisa').addEventListener('click', () => {
+  const aberto = $('pesquisa').hidden;
+  $('pesquisa').hidden = !aberto;
+  $('btn-pesquisa').setAttribute('aria-expanded', String(aberto));
+  if (aberto) $('pesq-cidade').focus();
+});
+
+$('pesq-cidade').addEventListener('input', () => {
+  pesquisa.cidade = $('pesq-cidade').value.trim();
+  salvarPesquisa();
+  renderPesquisa();
+});
+
+function adicionarNicho() {
+  const n = $('pesq-outro').value.trim().toLowerCase();
+  if (!n) return;
+  if (![...NICHOS, ...pesquisa.extras].includes(n)) pesquisa.extras.push(n);
+  if (!pesquisa.escolhidos.includes(n)) pesquisa.escolhidos.push(n);
+  $('pesq-outro').value = '';
+  salvarPesquisa();
+  renderPesquisa();
+}
+$('btn-outro').addEventListener('click', adicionarNicho);
+$('pesq-outro').addEventListener('keydown', (e) => e.key === 'Enter' && adicionarNicho());
+
+$('btn-pesquisar').addEventListener('click', () => {
+  const cidade = $('pesq-cidade').value.trim();
+  if (!cidade || !pesquisa.escolhidos.length) return;
+  chrome.runtime.sendMessage({ tipo: 'pesquisar', cidade, nichos: [...pesquisa.escolhidos], maximo: 40 });
+  $('pesquisa').hidden = true;
+  $('btn-pesquisa').setAttribute('aria-expanded', 'false');
 });
 
 // ---------- Aba de trabalho ----------
@@ -623,11 +752,15 @@ chrome.tabs.onUpdated.addListener((id, mudanca) => {
   comIcone($('btn-fechar-config'), 'fechar');
   comIcone($('btn-csv'), 'baixar', ' Exportar planilha');
   await atualizarAba();
-  const dados = await store.get(['leads', 'scan', 'envio', 'wa']);
+  comIcone($('btn-pesquisa'), 'lupa', ' Pesquisar leads de vídeo');
+  const dados = await store.get(['leads', 'scan', 'envio', 'wa', 'busca', 'pesquisaConfig']);
   leads = dados.leads || [];
   ultimoScan = dados.scan;
   envio = dados.envio;
   wa = dados.wa;
+  busca = dados.busca;
+  pesquisa = { ...pesquisa, ...dados.pesquisaConfig };
+  $('pesq-cidade').value = pesquisa.cidade || '';
   render();
   if (leads.some((l) => l.analise === 'pendente')) chrome.runtime.sendMessage({ tipo: 'enriquecer' });
 })();

@@ -100,6 +100,54 @@ export function montarMensagem(l, wa = {}, campanha = 'opus') {
     .trim();
 }
 
+// ---------- Qualificação ----------
+// Pontua o lead de 0 a 100 para cada vertente. Sem celular o lead não é alcançável pelo WhatsApp:
+// a pontuação fica limitada a 40 e ele nunca passa do mínimo.
+export const PONTUACAO_MINIMA = 60;
+
+const ehCelular = (l) => /^55\d{2}9\d{8}$/.test(numeroDoLead(l));
+const NICHO_VISUAL = /restaurante|lanchonete|hamburguer|pizzaria|cafe|padaria|confeitaria|buffet|estetica|beleza|salao|barbearia|spa\b|clinica|odonto|dentista|academia|crossfit|pilates|pousada|hotel|resort|imobiliaria|construtora|loja|moda|joalheria|otica|pet\b|pet shop|veterinar|studio|fotograf|evento|escola|concessionaria|oficina/;
+
+export function qualificar(l, campanha = 'opus', minimo = PONTUACAO_MINIMA) {
+  const nota = parseFloat(String(l.nota).replace(',', '.')) || 0;
+  const aval = Number(l.avaliacoes) || 0;
+  const celular = ehCelular(l);
+  const itens = []; // [pontos, motivo]
+  const soma = (ok, pts, motivo) => ok && itens.push([pts, motivo]);
+
+  soma(celular, campanha === 'locarion' ? 20 : campanha === 'videomaker' ? 20 : 25, 'tem celular/WhatsApp');
+  if (campanha === 'videomaker') {
+    soma(nota >= 4.5, 25, `nota ${l.nota}`) || soma(nota >= 4, 12, `nota ${l.nota}`);
+    soma(aval >= 100, 25, `${aval} avaliações`) || soma(aval >= 30, 15, `${aval} avaliações`) || soma(aval >= 10, 6, `${aval} avaliações`);
+    soma(Boolean(l.instagram), 15, 'tem Instagram');
+    soma(l.siteStatus === 'no ar', 5, 'site no ar');
+    soma(temTrafego(l), 5, 'já investe em anúncio');
+    soma(NICHO_VISUAL.test(normalizar(`${l.categoria} ${l.nome}`)), 5, 'nicho que vive de imagem');
+  } else if (campanha === 'locarion') {
+    const perfil = perfilLocarion(l);
+    // Quem não é locadora de equipamento não é público do Locarion, qualquer que seja o resto da pontuação.
+    if (perfil === 'fora') return { pontos: 0, qualificado: false, motivos: ['não parece locadora de equipamento'] };
+    soma(perfil === 'obra', 40, 'locadora de obra') || soma(perfil === 'talvez', 15, 'locadora a confirmar');
+    soma(aval >= 30, 15, `${aval} avaliações`) || soma(aval >= 10, 8, `${aval} avaliações`);
+    soma(nota >= 4, 10, `nota ${l.nota}`);
+    soma(l.siteStatus === 'no ar', 10, 'site no ar');
+    soma(Boolean(l.instagram), 5, 'tem Instagram');
+  } else {
+    soma(semSiteLead(l), 30, l.siteStatus === 'fora do ar' ? 'site fora do ar' : 'sem site');
+    soma(l.analise === 'ok' && !temTrafego(l), 20, 'sem tráfego pago');
+    soma(nota >= 4.3, 10, `nota ${l.nota}`);
+    soma(aval >= 30, 15, `${aval} avaliações`) || soma(aval >= 10, 7, `${aval} avaliações`);
+  }
+
+  const bruto = itens.reduce((s, [pts]) => s + pts, 0);
+  const pontos = Math.min(100, celular ? bruto : Math.min(bruto, 40));
+  return { pontos, qualificado: pontos >= minimo, motivos: itens.map(([, m]) => m) };
+}
+
+// Vertentes para as quais o lead passa do mínimo.
+export const qualificadoPara = (l, minimo = PONTUACAO_MINIMA) =>
+  Object.keys(CAMPANHAS).filter((c) => qualificar(l, c, minimo).qualificado);
+
 export function numeroDoLead(l) {
   const bruto = (l.whatsapp && l.whatsapp.match(/wa\.me\/(\d+)/)?.[1]) || (l.telefone || '').split(',')[0];
   const d = String(bruto || '').replace(/\D/g, '');

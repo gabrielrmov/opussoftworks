@@ -31,10 +31,29 @@ Fora do Maps, o botão vira **Analisar esta página** (site, Instagram ou link n
 3. Selecione, clique em **Locarion** e confirme. Locadora de obra recebe a mensagem direta sobre o sistema; a "a confirmar" recebe antes a pergunta se aluga equipamento de obra.
 4. Cada lead guarda a vertente enviada (aparece no card e na planilha) e nunca recebe uma segunda mensagem, de nenhuma vertente.
 
+### Pesquisa automática de leads (Videomaker)
+Em vez de pesquisar no Maps à mão, clique em **Pesquisar leads de vídeo**, informe a **cidade** e marque os **nichos** (restaurante, clínica de estética, academia, pousada, imobiliária… ou adicione outro, como advocacia). A extensão abre uma aba do Maps em primeiro plano, pesquisa "nicho em cidade" um de cada vez (até 40 empresas por nicho, com pausa entre eles), analisa os sites e fecha a aba no fim. Dá para **Parar** a qualquer momento. Ao terminar, a lista mostra só os qualificados.
+
+### Qualificação: mensagem só para os melhores leads
+Cada lead recebe uma pontuação de 0 a 100 **por vertente** (etiquetas ★ no card; passe o mouse para ver os motivos). Lead sem celular fica limitado a 40 pontos e nunca passa. O mínimo padrão é 60.
+- **Videomaker:** reputação (nota), nº de avaliações, celular, Instagram, site no ar, já anuncia e nicho que vive de imagem.
+- **Locarion:** ser locadora de obra (decisivo: quem não é locadora de equipamento tem 0), celular, avaliações, nota, site e Instagram.
+- **Sites e tráfego:** celular, não ter site (ou estar fora do ar), não anunciar, nota e avaliações.
+
+Ao clicar em um botão de envio, só os selecionados qualificados para **aquela vertente** recebem; a confirmação diz quantos ficaram de fora. Na engrenagem, em **Quem recebe**, dá para mudar a pontuação mínima ou desligar a regra. O botão **★ Só qualificados** filtra a lista.
+
 ### Vertente Videomaker (oferecer vídeo)
 1. No Maps, pesquise negócios que vivem de imagem, por exemplo `restaurante`, `clínica de estética`, `academia`, `pousada`, `imobiliária`, `barbearia` + cidade.
 2. Selecione e clique em **Videomaker**. A apresentação vira "Meu nome é X, sou videomaker" (campo **Seu nome** na engrenagem), sem citar a Opus.
 3. Quem tem Instagram achado no site recebe a mensagem que cita o @ da empresa; os demais recebem a geral, sobre reels, vídeo institucional e conteúdo para redes. As duas são editáveis na aba **Videomaker**.
+
+### Sem Google Cloud: WA-AKG no próprio Mac
+Se não quiser manter servidor na nuvem (nem conta de faturamento), rode o WA-AKG no Mac, em `http://localhost:3000`. O Mac precisa estar ligado e acordado durante os envios (o Chrome também, por causa da fila).
+1. Instale o [Docker Desktop](https://www.docker.com/products/docker-desktop/) (versão "Apple chip") e abra-o uma vez.
+2. No Terminal: `bash /Users/macdegabriel/Projetos/opussoftworks/chrome-extension/servidor-local/iniciar.sh`. O primeiro build leva de 5 a 15 minutos; o login do painel aparece no fim (e fica em `~/wa-akg-local/.env`).
+3. Abra `http://localhost:3000`, entre, crie a sessão e leia o QR code, como no passo da nuvem.
+4. Na extensão, use `http://localhost:3000` como endereço do servidor.
+5. Para religar depois de reiniciar o Mac: abra o Docker Desktop (os contêineres sobem sozinhos) ou rode o `iniciar.sh` de novo. Para o Mac não dormir durante os envios: `caffeinate -dimsu`.
 
 ### Um número para cada vertente
 O WA-AKG aceita vários números no mesmo servidor, cada um como uma sessão. O **número padrão** (Opus) envia **Sites e tráfego** e **Locarion**; para o **Videomaker** use outro:

@@ -6,7 +6,9 @@
 // background para analisar os sites.
 export async function varrerGoogleMaps(max) {
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-  const feed = document.querySelector('div[role="feed"]');
+  // Numa aba recém-aberta a lista demora a aparecer: espera até 15 s antes de desistir.
+  let feed = null;
+  for (let i = 0; i < 30 && !(feed = document.querySelector('div[role="feed"]')); i++) await sleep(500);
   if (!feed) {
     await chrome.storage.local.set({
       scan: { ativo: false, erro: 'Abra uma pesquisa no Maps (ex: "dentista em Curitiba") e tente de novo.' },

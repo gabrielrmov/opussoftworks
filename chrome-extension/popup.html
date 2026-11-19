@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Opus Leads</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <img src="icons/icon-48.png" alt="" width="26" height="26" />
+      <h1><b>Opus</b><span>Leads</span></h1>
+      <button id="btn-config" class="icone" title="WhatsApp e mensagens" aria-label="WhatsApp e mensagens"></button>
+      <button id="btn-limpar" class="icone perigo" title="Apagar todos os leads" aria-label="Apagar todos os leads"></button>
+    </header>
+
+    <nav class="placar" aria-label="Filtrar leads">
+      <button class="bloco ativo" data-filtro="">
+        <strong id="n-todos">0</strong>
+        <span>leads</span>
+      </button>
+      <button class="bloco" data-filtro="sem-site">
+        <strong id="n-sem-site">0</strong>
+        <span>sem site</span>
+      </button>
+      <button class="bloco" data-filtro="sem-trafego">
+        <strong id="n-sem-trafego">0</strong>
+        <span>sem tráfego</span>
+      </button>
+      <button class="bloco" data-filtro="locadora">
+        <strong id="n-locadora">0</strong>
+        <span>locadoras</span>
+      </button>
+    </nav>
+
+    <section class="acao">
+      <button id="btn-acao" class="principal"></button>
+      <button id="btn-pesquisa" class="pesquisa-abrir" aria-expanded="false"></button>
+      <div id="pesquisa" class="pesquisa" hidden>
+        <label>Cidade <input id="pesq-cidade" type="text" placeholder="ex: Goiânia" autocomplete="off" /></label>
+        <div>
+          <span class="rotulo">Nichos para pesquisar</span>
+          <div id="pesq-nichos" class="chips"></div>
+        </div>
+        <div class="novo-nicho">
+          <input id="pesq-outro" type="text" placeholder="Outro nicho (ex: advocacia)" autocomplete="off" />
+          <button id="btn-outro" class="secundario pequeno" type="button">Adicionar</button>
+        </div>
+        <p class="dica">Até 40 empresas por nicho. A extensão abre uma aba do Maps, pesquisa um nicho de cada vez e a fecha no fim. Deixe essa aba à frente até terminar.</p>
+        <button id="btn-pesquisar" class="principal videomaker"></button>
+      </div>
+      <div id="progresso" class="progresso" hidden>
+        <div class="trilho"><div id="barra" class="barra"></div></div>
+        <div class="progresso-texto">
+          <span id="status-texto"></span>
+          <button id="btn-parar" class="link" hidden>Parar</button>
+        </div>
+      </div>
+      <div id="envio" class="envio" hidden>
+        <span class="envio-ponto"></span>
+        <span id="envio-texto"></span>
+        <button id="btn-parar-envio" class="link">Parar</button>
+      </div>
+      <p id="aviso" class="aviso" hidden></p>
+    </section>
+
+    <div id="selecao" class="selecao" hidden>
+      <button id="btn-selecionar" class="link-suave"></button>
+      <button id="btn-qualificados" class="chip" aria-pressed="false" title="Mostrar só os leads com boa pontuação para alguma vertente">★ Só qualificados</button>
+      <span id="selecao-texto"></span>
+    </div>
+
+    <ul id="lista"></ul>
+
+    <ol id="vazio" class="vazio">
+      <li>Abra o <b>Google Maps</b> e pesquise, ex: <em>dentista em Curitiba</em></li>
+      <li>Clique em <b>Buscar leads</b> aqui na extensão</li>
+      <li>Para vender o <b>Locarion</b>, pesquise <em>locadora de equipamentos para construção em Goiânia</em></li>
+      <li>Para oferecer <b>vídeo</b>, pesquise negócios visuais: <em>restaurante</em>, <em>clínica de estética</em>, <em>academia</em>, <em>pousada</em>, <em>imobiliária</em> + cidade</li>
+      <li>Selecione os leads e escolha a vertente do envio pelo WhatsApp</li>
+    </ol>
+
+    <footer>
+      <div id="envio-escolha" class="escolha" hidden>
+        <p id="escolha-titulo"></p>
+        <div class="escolha-botoes">
+          <button id="btn-prospectar-opus" class="principal">Sites e tráfego</button>
+          <button id="btn-prospectar-locarion" class="principal locarion">Locarion</button>
+          <button id="btn-prospectar-videomaker" class="principal videomaker">Videomaker</button>
+        </div>
+      </div>
+      <button id="btn-csv" class="secundario"></button>
+    </footer>
+
+    <!-- Configuração do WhatsApp (WA-AKG) e das mensagens -->
+    <section id="config" class="folha" hidden aria-label="WhatsApp e mensagens">
+      <div class="folha-topo">
+        <h2>WhatsApp e mensagens</h2>
+        <button id="btn-fechar-config" class="icone" title="Fechar" aria-label="Fechar"></button>
+      </div>
+
+      <div class="folha-corpo">
+        <fieldset>
+          <legend>Servidor WA-AKG</legend>
+          <label>Endereço <input id="wa-url" type="url" placeholder="https://wa.seudominio.com" autocomplete="off" /></label>
+          <div class="duas">
+            <label>Chave de API <input id="wa-chave" type="password" autocomplete="off" /></label>
+            <label>Número padrão (Opus) <select id="wa-sessao"></select></label>
+          </div>
+          <div class="linha-teste">
+            <button id="btn-testar" class="secundario pequeno">Testar conexão</button>
+            <span id="teste-resultado"></span>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Mensagens</legend>
+          <label>Seu nome (para se apresentar) <input id="wa-seuNome" type="text" placeholder="ex: Gabriel" autocomplete="off" /></label>
+          <p class="dica">
+            Em cada vertente, a extensão escolhe o modelo pelo que achou no lead. Variáveis: <code>{saudacao}</code> <code>{nome}</code> <code>{empresa}</code>
+            <code>{apresentacao}</code> <code>{instagram}</code> <code>{categoria}</code>
+          </p>
+          <div class="abas" role="tablist" aria-label="Vertente das mensagens">
+            <button type="button" data-vertente="opus" class="ativa" role="tab">Sites e tráfego</button>
+            <button type="button" data-vertente="locarion" role="tab">Locarion</button>
+            <button type="button" data-vertente="videomaker" role="tab">Videomaker</button>
+          </div>
+          <label class="numero-vertente">Número que envia esta vertente <select id="wa-sessao-vertente"></select></label>
+          <div id="msg-campos"></div>
+          <div class="previa">
+            <span>Prévia com o primeiro lead</span>
+            <p id="previa"></p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Quem recebe</legend>
+          <label class="check"><input id="so-qualificados" type="checkbox" /> Enviar só para leads qualificados</label>
+          <label>Pontuação mínima (0 a 100) <input id="pont-minima" type="number" min="0" max="100" step="5" /></label>
+          <p class="dica">
+            Cada vertente pontua o lead de um jeito: reputação e nº de avaliações, se tem celular e Instagram, se o site está no ar
+            e o que ele ainda não tem (site, anúncios). Lead sem celular nunca passa. Passe o mouse na etiqueta ★ do card para ver os motivos.
+          </p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Ritmo de envio</legend>
+          <div class="tres">
+            <label>Intervalo mín. (s) <input id="lim-intervaloMin" type="number" min="20" step="10" /></label>
+            <label>Intervalo máx. (s) <input id="lim-intervaloMax" type="number" min="30" step="10" /></label>
+            <label>Máx. por dia <input id="lim-porDia" type="number" min="1" max="300" /></label>
+          </div>
+          <p class="dica">Envios espaçados e em pouca quantidade por dia reduzem o risco de o WhatsApp bloquear o número.</p>
+        </fieldset>
+      </div>
+
+      <div class="folha-rodape">
+        <button id="btn-padrao" class="link-suave">Restaurar mensagens padrão</button>
+        <button id="btn-salvar" class="principal">Salvar</button>
+      </div>
+    </section>
+
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+# WA-AKG no seu Mac: banco MariaDB + app. Só responde neste computador (127.0.0.1:3000).
+services:
+  db:
+    image: mariadb:10.11
+    container_name: wa-akg-db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MARIADB_DATABASE: wa_akg
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    container_name: wa-akg-app
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      DATABASE_URL: mysql://root:${DB_PASSWORD}@db:3306/wa_akg
+      AUTH_SECRET: ${AUTH_SECRET}
+      BASE_URL: http://localhost:3000
+      NEXTAUTH_URL: http://localhost:3000
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: 0.0.0.0
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+      NEXT_PUBLIC_API_URL: http://localhost:3000/api
+      BAILEYS_LOG_LEVEL: error
+      NEXT_PUBLIC_SWAGGER_ENABLED: "false"
+      TZ: America/Sao_Paulo
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - app_data:/app/data
+      - uploads_data:/app/uploads
+
+volumes:
+  mysql_data:
+  app_data:
+  uploads_data:
